@@ -1,0 +1,270 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #ffffff;
+  color: #111;
+  line-height: 1.5;
+}
+
+/* ========== HEADER - 93% transparent ========== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: rgba(255, 255, 255, 0.07); /* 93% transparent */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  background: #2d5a27;
+  border-radius: 50% 50% 50% 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 22px;
+}
+
+.logo-icon .check {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  background: #4a7c3f;
+  color: white;
+  font-size: 11px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.dammy {
+  font-family: 'Pacifico', cursive;
+  font-size: 22px;
+  color: #2d5a27;
+  font-weight: 400;
+}
+
+.social {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a7c3f;
+  letter-spacing: 0.5px;
+  margin-top: -2px;
+}
+
+/* Header right */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.theme-toggle,
+.menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  padding: 6px;
+}
+
+.menu-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.menu-btn span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #333;
+  border-radius: 2px;
+}
+
+/* ========== HERO ========== */
+.hero {
+  padding: 140px 24px 80px;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: clamp(2.8rem, 8vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 28px;
+}
+
+.hero h1 .black {
+  color: #111;
+}
+
+.hero h1 .green {
+  color: #4a7c3f;
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  color: #666;
+  max-width: 480px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+/* Buttons */
+.hero-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #4a7c3f;
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 16px 36px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: #3d6a34;
+}
+
+.btn-secondary {
+  display: inline-block;
+  color: #111;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 14px 32px;
+  border: 1.5px solid #ddd;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+
+.btn-secondary:hover {
+  border-color: #999;
+}
+
+/* ========== GREEN BANNER ========== */
+.green-banner {
+  background: #4a7c3f;
+  color: white;
+  padding: 18px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.banner-content {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 1px;
+  animation: scroll 30s linear infinite;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ========== STATS ========== */
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 600px;
+  margin: 60px auto 80px;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.stat-card {
+  padding: 40px 20px;
+  text-align: center;
+  border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.stat-card:nth-child(2n) {
+  border-right: none;
+}
+
+.stat-card:nth-child(3),
+.stat-card:nth-child(4) {
+  border-bottom: none;
+}
+
+.stat-number {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #4a7c3f;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #777;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2.6rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .header {
+    padding: 0 16px;
+  }
+}
