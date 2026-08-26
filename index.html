@@ -423,7 +423,7 @@ body{
 .get-started .arrow{
     margin-left:15px;
 
-    font-size:28px;
+    font-size:18px;
 
     font-weight:400;
 }
@@ -438,10 +438,10 @@ body{
 
     color:#000;
 
-    border:2px solid #e4e4e4;
+    border:1.5px solid #e4e4e4;
 
     box-shadow:
-        0 2px 5px rgba(0,0,0,.04);
+        0 1.5px 3px rgba(0,0,0,.04);
 }
 
 .browse:hover{
@@ -926,7 +926,371 @@ body{
     }
 
 }
+/* =========================================================
+   SERVICES SECTION
+========================================================= */
 
+.services{
+    width:100%;
+
+    padding:78px 26px 80px;
+
+    background:#fff;
+}
+
+
+/* SERVICES INTRO */
+
+.services-header{
+    width:100%;
+    max-width:100%;
+
+    margin:0 auto 48px;
+}
+
+.services-label{
+    margin-bottom:10px;
+
+    color:#438600;
+
+    font-size:12px;
+
+    line-height:1;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+}
+
+.services-title{
+    margin:0;
+
+    color:#000;
+
+    font-size:32px;
+
+    line-height:1.02;
+
+    font-weight:900;
+
+    letter-spacing:-1.5px;
+
+    text-transform:uppercase;
+}
+
+.services-description{
+    max-width:310px;
+
+    margin-top:16px;
+
+    color:#666;
+
+    font-size:14px;
+
+    line-height:1.45;
+
+    font-weight:400;
+}
+
+
+/* =========================================================
+   SERVICE CARDS
+========================================================= */
+
+.services-list{
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:26px;
+}
+
+
+/* CARD */
+
+.service-card{
+    position:relative;
+
+    width:100%;
+
+    padding:26px;
+
+    background:#f7f8fa;
+
+    overflow:hidden;
+}
+
+
+/* CARD NUMBER */
+
+.service-number{
+    position:absolute;
+
+    top:20px;
+    right:19px;
+
+    color:#222;
+
+    font-size:11px;
+
+    line-height:1;
+
+    font-weight:500;
+
+    z-index:2;
+}
+
+
+/* =========================================================
+   SERVICE IMAGE
+========================================================= */
+
+.service-image{
+    width:100%;
+
+    height:115px;
+
+    margin-bottom:27px;
+
+    overflow:hidden;
+
+    background:#f0f1f3;
+
+    border:1px dashed #dfe1e5;
+}
+
+.service-image img{
+    display:block;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+
+/* =========================================================
+   SERVICE CONTENT
+========================================================= */
+
+.service-title{
+    margin:0 0 7px;
+
+    color:#000;
+
+    font-size:18px;
+
+    line-height:1.15;
+
+    font-weight:900;
+
+    letter-spacing:-.5px;
+}
+
+.service-description{
+    margin:0;
+
+    color:#555;
+
+    font-size:12px;
+
+    line-height:1.45;
+
+    font-weight:400;
+}
+
+
+/* =========================================================
+   SERVICE TAGS
+========================================================= */
+
+.service-tags{
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:6px;
+
+    margin-top:18px;
+}
+
+.service-tag{
+    display:inline-flex;
+
+    align-items:center;
+
+    min-height:22px;
+
+    padding:4px 7px;
+
+    background:#f1f2f4;
+
+    border:1px solid #dedfe2;
+
+    color:#111;
+
+    font-size:9px;
+
+    line-height:1;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   SERVICE BUTTON
+========================================================= */
+
+.service-link{
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    margin-top:22px;
+
+    padding-bottom:4px;
+
+    border-bottom:2px solid #438600;
+
+    color:#000;
+
+    text-decoration:none;
+
+    font-size:10px;
+
+    line-height:1;
+
+    font-weight:800;
+
+    text-transform:uppercase;
+}
+
+.service-link-arrow{
+    font-size:14px;
+
+    line-height:1;
+
+    font-weight:400;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+    .services{
+        padding:72px 26px 75px;
+    }
+
+    .services-header{
+        margin-bottom:46px;
+    }
+
+    .services-label{
+        font-size:12px;
+
+        margin-bottom:10px;
+    }
+
+    .services-title{
+        font-size:31px;
+
+        line-height:1.02;
+    }
+
+    .services-description{
+        max-width:315px;
+
+        margin-top:16px;
+
+        font-size:14px;
+
+        line-height:1.45;
+    }
+
+
+    .services-list{
+        gap:26px;
+    }
+
+
+    .service-card{
+        padding:26px;
+    }
+
+
+    .service-image{
+        height:115px;
+
+        margin-bottom:27px;
+    }
+
+
+    .service-title{
+        font-size:18px;
+    }
+
+    .service-description{
+        font-size:12px;
+
+        line-height:1.45;
+    }
+
+    .service-tags{
+        margin-top:18px;
+
+        gap:6px;
+    }
+
+    .service-tag{
+        font-size:9px;
+
+        padding:4px 7px;
+    }
+
+    .service-link{
+        margin-top:22px;
+
+        font-size:10px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media(max-width:380px){
+
+    .services{
+        padding-left:24px;
+        padding-right:24px;
+    }
+
+    .services-title{
+        font-size:29px;
+    }
+
+    .service-card{
+        padding:24px;
+    }
+
+    .service-image{
+        height:110px;
+    }
+
+}
 </style>
 
 </head>
@@ -1238,7 +1602,353 @@ body{
 
 
 </section>
+<!-- =======================================================
+     SERVICES
+======================================================= -->
 
+<section class="services" id="services">
+
+
+    <!-- SERVICES HEADER -->
+
+    <div class="services-header">
+
+        <div class="services-label">
+            OUR SERVICES
+        </div>
+
+        <h2 class="services-title">
+            FOUR SERVICES,<br>
+            ONE PLATFORM.
+        </h2>
+
+        <p class="services-description">
+            Everything you need to scale your
+            digital presence.
+        </p>
+
+    </div>
+
+
+    <!-- SERVICES LIST -->
+
+    <div class="services-list">
+
+
+        <!-- =================================================
+             SERVICE 01
+        ================================================== -->
+
+        <article class="service-card">
+
+            <div class="service-number">
+                01
+            </div>
+
+
+            <div class="service-image">
+
+                <img
+                    src="social-media-logs.jpeg.jpg"
+                    alt="Social Media Logs"
+                >
+
+            </div>
+
+
+            <h3 class="service-title">
+                Social Media Logs
+            </h3>
+
+
+            <p class="service-description">
+
+                Aged and verified accounts for
+                Facebook, Instagram, TikTok, X
+                (Twitter), and LinkedIn. Ready to use
+                instantly after purchase.
+
+            </p>
+
+
+            <div class="service-tags">
+
+                <span class="service-tag">
+                    FACEBOOK
+                </span>
+
+                <span class="service-tag">
+                    INSTAGRAM
+                </span>
+
+                <span class="service-tag">
+                    TIKTOK
+                </span>
+
+                <span class="service-tag">
+                    X
+                </span>
+
+                <span class="service-tag">
+                    LINKEDIN
+                </span>
+
+            </div>
+
+
+            <a
+                href="login.html"
+                class="service-link"
+            >
+
+                GET STARTED
+
+                <span class="service-link-arrow">
+                    ↗
+                </span>
+
+                <span class="service-link-arrow">
+                    →
+                </span>
+
+            </a>
+
+        </article>
+
+
+
+        <!-- =================================================
+             SERVICE 02
+        ================================================== -->
+
+        <article class="service-card">
+
+            <div class="service-number">
+                02
+            </div>
+
+
+            <div class="service-image">
+
+                <img
+                    src="working-tools.jpeg.jpg"
+                    alt="Working Tools"
+                >
+
+            </div>
+
+
+            <h3 class="service-title">
+                Working Tools
+            </h3>
+
+
+            <p class="service-description">
+
+                Updates, working pictures and working
+                tools. Downloaded instantly as a
+                secure file the moment your purchase
+                is confirmed.
+
+            </p>
+
+
+            <div class="service-tags">
+
+                <span class="service-tag">
+                    UPDATES
+                </span>
+
+                <span class="service-tag">
+                    WORKING PICTURES
+                </span>
+
+                <span class="service-tag">
+                    WORKING TOOLS
+                </span>
+
+            </div>
+
+
+            <a
+                href="login.html"
+                class="service-link"
+            >
+
+                GET STARTED
+
+                <span class="service-link-arrow">
+                    ↗
+                </span>
+
+                <span class="service-link-arrow">
+                    →
+                </span>
+
+            </a>
+
+        </article>
+
+
+
+        <!-- =================================================
+             SERVICE 03
+        ================================================== -->
+
+        <article class="service-card">
+
+            <div class="service-number">
+                03
+            </div>
+
+
+            <div class="service-image">
+
+                <img
+                    src="sms-virtual-numbers.jpeg.jpg"
+                    alt="SMS Virtual Numbers"
+                >
+
+            </div>
+
+
+            <h3 class="service-title">
+                SMS Virtual Numbers
+            </h3>
+
+
+            <p class="service-description">
+
+                Rent real virtual phone numbers from
+                200+ countries. Receive OTP codes
+                for WhatsApp, Telegram, Instagram,
+                and more in seconds.
+
+            </p>
+
+
+            <div class="service-tags">
+
+                <span class="service-tag">
+                    200+ COUNTRIES
+                </span>
+
+                <span class="service-tag">
+                    INSTANT OTP
+                </span>
+
+                <span class="service-tag">
+                    WHATSAPP
+                </span>
+
+                <span class="service-tag">
+                    TELEGRAM
+                </span>
+
+            </div>
+
+
+            <a
+                href="login.html"
+                class="service-link"
+            >
+
+                GET STARTED
+
+                <span class="service-link-arrow">
+                    ↗
+                </span>
+
+                <span class="service-link-arrow">
+                    →
+                </span>
+
+            </a>
+
+        </article>
+
+
+
+        <!-- =================================================
+             SERVICE 04
+        ================================================== -->
+
+        <article class="service-card">
+
+            <div class="service-number">
+                04
+            </div>
+
+
+            <div class="service-image">
+
+                <img
+                    src="sme-boosting.jpeg.jpg"
+                    alt="SME Boosting"
+                >
+
+            </div>
+
+
+            <h3 class="service-title">
+                SME Boosting
+            </h3>
+
+
+            <p class="service-description">
+
+                Followers, likes, views, and comments
+                for Instagram, TikTok, YouTube,
+                Facebook, and Telegram. Orders
+                fulfilled automatically.
+
+            </p>
+
+
+            <div class="service-tags">
+
+                <span class="service-tag">
+                    FOLLOWERS
+                </span>
+
+                <span class="service-tag">
+                    LIKES
+                </span>
+
+                <span class="service-tag">
+                    VIEWS
+                </span>
+
+                <span class="service-tag">
+                    COMMENTS
+                </span>
+
+            </div>
+
+
+            <a
+                href="login.html"
+                class="service-link"
+            >
+
+                GET STARTED
+
+                <span class="service-link-arrow">
+                    ↗
+                </span>
+
+                <span class="service-link-arrow">
+                    →
+                </span>
+
+            </a>
+
+        </article>
+
+
+    </div>
+
+</section>
 
 
 <div class="bottom-space"></div>
