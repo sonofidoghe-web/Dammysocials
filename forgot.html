@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DammySocials – Forgot Password</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .logo {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 48px;
+    }
+
+    .logo img {
+      height: 42px;
+      width: auto;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #6b7280;
+      text-decoration: none;
+      margin-bottom: 28px;
+    }
+
+    .back-link:hover {
+      color: #4d7c0f;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 32px;
+      line-height: 1.4;
+    }
+
+    /* Alert boxes */
+    .alert {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      margin-bottom: 24px;
+      display: none;
+      line-height: 1.5;
+    }
+
+    .alert.error {
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+    }
+
+    .alert.success {
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #111;
+      margin-bottom: 6px;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      height: 48px;
+      padding: 0 16px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.15s;
+      margin-bottom: 28px;
+    }
+
+    input:focus {
+      border-color: #4d7c0f;
+    }
+
+    .send-btn {
+      width: 100%;
+      height: 48px;
+      background: #4d7c0f;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .send-btn:hover {
+      background: #3f6b0c;
+    }
+
+    .send-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="logo.png.jpg" alt="DammySocials">
+    </div>
+
+    <!-- Back link -->
+    <a href="login.html" class="back-link">
+      ← Back to sign in
+    </a>
+
+    <h1>Forgot your password?</h1>
+    <p class="subtitle">Enter your email and we'll send you a reset link</p>
+
+    <!-- Alert box -->
+    <div id="alert" class="alert"></div>
+
+    <form id="resetForm">
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="you@example.com" required>
+      </div>
+
+      <button type="submit" class="send-btn" id="sendBtn">Send reset link</button>
+    </form>
+  </div>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+    import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCbCBQNB2zvaq-zoCNh81EdbE7_PsnKDBI",
+      authDomain: "dammysocials-2b126.firebaseapp.com",
+      projectId: "dammysocials-2b126",
+      storageBucket: "dammysocials-2b126.firebasestorage.app",
+      messagingSenderId: "1052998476146",
+      appId: "1:1052998476146:web:46ecb610aa1a23f8a0bdeb",
+      measurementId: "G-TBFDQZMGXS"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const alertBox = document.getElementById("alert");
+    const sendBtn = document.getElementById("sendBtn");
+    const resetForm = document.getElementById("resetForm");
+    const emailInput = document.getElementById("email");
+
+    function showAlert(message, type = "error") {
+      alertBox.innerHTML = message;
+      alertBox.className = `alert ${type}`;
+      alertBox.style.display = "block";
+    }
+
+    resetForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = emailInput.value.trim();
+
+      if (!email) {
+        showAlert("Please enter your email address.");
+        return;
+      }
+
+      sendBtn.textContent = "Sending…";
+      sendBtn.disabled = true;
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+
+        // Success message (exactly as you requested)
+        showAlert(
+          `Reset link has been sent to <strong>${email}</strong>.<br><br>
+           Please check your spam/junk folder and click <strong>"Not spam"</strong> 
+           so that all future messages from us go straight to your inbox.`,
+          "success"
+        );
+
+        // Optional: clear the form
+        emailInput.value = "";
+
+      } catch (error) {
+        let msg = "Something went wrong. Please try again.";
+
+        if (error.code === "auth/user-not-found") {
+          msg = "No account found with this email address.";
+        } else if (error.code === "auth/invalid-email") {
+          msg = "Please enter a valid email address.";
+        } else if (error.code === "auth/too-many-requests") {
+          msg = "Too many attempts. Please try again later.";
+        }
+
+        showAlert(msg, "error");
+      } finally {
+        sendBtn.textContent = "Send reset link";
+        sendBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
