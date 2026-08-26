@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TemmySocials – Create account</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .logo {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 40px;
+    }
+
+    .logo img {
+      height: 42px;
+      width: auto;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 32px;
+    }
+
+    /* Alert boxes */
+    .alert {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      display: none;
+      line-height: 1.4;
+    }
+
+    .alert.error {
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+    }
+
+    .alert.success {
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+
+    /* Google button */
+    .google-btn {
+      width: 100%;
+      height: 48px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #111;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .google-btn:hover {
+      background: #f9fafb;
+    }
+
+    .google-btn .spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #e5e7eb;
+      border-top-color: #4285f4;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    .google-btn.loading .spinner {
+      display: block;
+    }
+
+    .google-btn.loading .google-icon,
+    .google-btn.loading .btn-text {
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 28px 0;
+      color: #9ca3af;
+      font-size: 13px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e5e7eb;
+    }
+
+    .divider span {
+      padding: 0 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #111;
+      margin-bottom: 6px;
+    }
+
+    .name-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .name-row > div {
+      flex: 1;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      height: 48px;
+      padding: 0 16px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    input:focus {
+      border-color: #4d7c0f;
+    }
+
+    .password-wrapper {
+      position: relative;
+      margin-bottom: 28px;
+    }
+
+    .password-wrapper input {
+      padding-right: 48px;
+    }
+
+    .toggle-eye {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      width: 22px;
+      height: 22px;
+      opacity: 0.55;
+    }
+
+    .create-btn {
+      width: 100%;
+      height: 48px;
+      background: #4d7c0f;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .create-btn:hover {
+      background: #3f6b0c;
+    }
+
+    .create-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .footer a {
+      color: #4d7c0f;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="logo.png" alt="TemmySocials">
+    </div>
+
+    <h1>Create your account</h1>
+    <p class="subtitle">Join TemmySocials and get started</p>
+
+    <!-- Alert -->
+    <div id="alert" class="alert"></div>
+
+    <!-- Google button -->
+    <button class="google-btn" id="googleBtn">
+      <div class="spinner"></div>
+      <svg class="google-icon" width="18" height="18" viewBox="0 0 18 18">
+        <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/>
+        <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.96-2.184l-2.908-2.258c-.806.54-1.837.86-3.052.86-2.347 0-4.334-1.584-5.043-3.71H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+        <path fill="#FBBC05" d="M3.957 10.708c-.18-.54-.282-1.117-.282-1.708s.102-1.168.282-1.708V4.96H.957C.348 6.175 0 7.55 0 9s.348 2.825.957 4.04l3-2.332z"/>
+        <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.96L3.957 7.29C4.666 5.163 6.653 3.58 9 3.58z"/>
+      </svg>
+      <span class="btn-text">Continue with Google</span>
+    </button>
+
+    <div class="divider"><span>or sign up with email</span></div>
+
+    <form id="signupForm">
+      <!-- First + Last name -->
+      <div class="name-row">
+        <div>
+          <label for="firstName">First name</label>
+          <input type="text" id="firstName" placeholder="John" required>
+        </div>
+        <div>
+          <label for="lastName">Last name</label>
+          <input type="text" id="lastName" placeholder="Doe" required>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div style="margin-bottom: 20px;">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="you@example.com" required>
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label for="password">Password</label>
+        <div class="password-wrapper">
+          <input type="password" id="password" placeholder="min. 8 characters" required minlength="8">
+          <svg class="toggle-eye" id="togglePassword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </div>
+      </div>
+
+      <button type="submit" class="create-btn" id="createBtn">Create account</button>
+    </form>
+
+    <p class="footer">
+      Already have an account? <a href="login.html">Sign in</a>
+    </p>
+  </div>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      updateProfile,
+      GoogleAuthProvider,
+      signInWithPopup
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCbCBQNB2zvaq-zoCNh81EdbE7_PsnKDBI",
+      authDomain: "dammysocials-2b126.firebaseapp.com",
+      projectId: "dammysocials-2b126",
+      storageBucket: "dammysocials-2b126.firebasestorage.app",
+      messagingSenderId: "1052998476146",
+      appId: "1:1052998476146:web:46ecb610aa1a23f8a0bdeb",
+      measurementId: "G-TBFDQZMGXS"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // Elements
+    const alertBox = document.getElementById("alert");
+    const googleBtn = document.getElementById("googleBtn");
+    const createBtn = document.getElementById("createBtn");
+    const signupForm = document.getElementById("signupForm");
+    const firstNameInput = document.getElementById("firstName");
+    const lastNameInput = document.getElementById("lastName");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const togglePassword = document.getElementById("togglePassword");
+
+    function showAlert(message, type = "error") {
+      alertBox.textContent = message;
+      alertBox.className = `alert ${type}`;
+      alertBox.style.display = "block";
+      setTimeout(() => {
+        alertBox.style.display = "none";
+      }, 5000);
+    }
+
+    // Toggle password visibility
+    togglePassword.addEventListener("click", () => {
+      const type = passwordInput.type === "password" ? "text" : "password";
+      passwordInput.type = type;
+    });
+
+    // Google Sign-Up / Sign-In
+    googleBtn.addEventListener("click", async () => {
+      googleBtn.classList.add("loading");
+      googleBtn.disabled = true;
+
+      try {
+        await signInWithPopup(auth, provider);
+        window.location.href = "dashboard.html"; // change if needed
+      } catch (error) {
+        showAlert(error.message || "Google sign-up failed");
+      } finally {
+        googleBtn.classList.remove("loading");
+        googleBtn.disabled = false;
+      }
+    });
+
+    // Email / Password Sign-Up
+    signupForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const firstName = firstNameInput.value.trim();
+      const lastName = lastNameInput.value.trim();
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      if (password.length < 8) {
+        showAlert("Password must be at least 8 characters.");
+        return;
+      }
+
+      createBtn.textContent = "Creating account…";
+      createBtn.disabled = true;
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        
+        // Save full name to the user profile
+        await updateProfile(userCredential.user, {
+          displayName: `${firstName} ${lastName}`
+        });
+
+        showAlert("Account created successfully!", "success");
+        
+        setTimeout(() => {
+          window.location.href = "dashboard.html"; // change if needed
+        }, 1200);
+
+      } catch (error) {
+        let msg = "Something went wrong. Please try again.";
+        
+        if (error.code === "auth/email-already-in-use") {
+          msg = "This email is already registered. Please sign in instead.";
+        } else if (error.code === "auth/invalid-email") {
+          msg = "Please enter a valid email address.";
+        } else if (error.code === "auth/weak-password") {
+          msg = "Password is too weak. Use at least 8 characters.";
+        }
+        
+        showAlert(msg, "error");
+      } finally {
+        createBtn.textContent = "Create account";
+        createBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
