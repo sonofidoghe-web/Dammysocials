@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TemmySocials – Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: #f9fafb;
+      min-height: 100vh;
+      padding-top: 70px;
+      transition: filter 0.3s ease;
+    }
+
+    body.menu-open {
+      filter: blur(4px);
+      overflow: hidden;
+    }
+
+    /* ========== LOADING SCREEN ========== */
+    #loadingScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.4s ease;
+    }
+
+    #loadingScreen.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loading-logo {
+      height: 70px;
+      margin-bottom: 32px;
+    }
+
+    .dots {
+      display: flex;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: #4d7c0f;
+      border-radius: 50%;
+      animation: bounce 1.2s infinite ease-in-out;
+    }
+
+    .dot:nth-child(1) { animation-delay: 0s; }
+    .dot:nth-child(2) { animation-delay: 0.15s; }
+    .dot:nth-child(3) { animation-delay: 0.3s; }
+    .dot:nth-child(4) { animation-delay: 0.45s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% {
+        transform: scale(0.6);
+        opacity: 0.4;
+      }
+      40% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    /* ========== SIDEBAR ========== */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.89);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 300;
+      transition: left 0.3s ease;
+      overflow-y: auto;
+      padding: 20px 0;
+      border-right: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .sidebar-logo {
+      padding: 0 20px 20px;
+      border-bottom: 1px solid #e5e7eb;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-logo img {
+      height: 40px;
+    }
+
+    .sidebar-section {
+      margin-bottom: 24px;
+    }
+
+    .sidebar-section-title {
+      padding: 0 20px;
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      color: #111;
+      text-decoration: none;
+      font-size: 15px;
+      transition: background 0.15s;
+    }
+
+    .sidebar-item:hover {
+      background: #f3f4f6;
+    }
+
+    .sidebar-item.active {
+      background: #f3f4f6;
+      font-weight: 500;
+    }
+
+    .sidebar-item .icon {
+      width: 20px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #6b7280;
+    }
+
+    .sidebar-item .badge {
+      margin-left: auto;
+      background: #dcfce7;
+      color: #166534;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 500;
+    }
+
+    .sidebar-item.signout {
+      color: #dc2626;
+      margin-top: 20px;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 20px;
+    }
+
+    /* Main content */
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+
+    .welcome h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 4px;
+    }
+
+    .welcome p {
+      font-size: 15px;
+      color: #6b7280;
+      margin-bottom: 28px;
+    }
+
+    .stats {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid #f3f4f6;
+    }
+
+    .stat-card .label {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+
+    .stat-card .value {
+      font-size: 28px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 4px;
+    }
+
+    .stat-card .value.green {
+      color: #4d7c0f;
+    }
+
+    .stat-card .sub {
+      font-size: 13px;
+      color: #9ca3af;
+    }
+
+    .stat-card a {
+      font-size: 13px;
+      color: #4d7c0f;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 14px;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .action-card {
+      background: white;
+      border-radius: 16px;
+      padding: 18px 16px;
+      border: 1px solid #f3f4f6;
+      cursor: pointer;
+    }
+
+    .action-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .action-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 4px;
+    }
+
+    .action-card p {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .recent-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .recent-header a {
+      font-size: 14px;
+      color: #4d7c0f;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .empty-orders {
+      background: white;
+      border-radius: 16px;
+      padding: 40px 20px;
+      text-align: center;
+      border: 1px solid #f3f4f6;
+      margin-bottom: 32px;
+    }
+
+    .empty-orders h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .empty-orders p {
+      font-size: 13px;
+      color: #9ca3af;
+    }
+
+    .orders-list {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .order-item {
+      background: white;
+      border-radius: 14px;
+      padding: 16px;
+      border: 1px solid #f3f4f6;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .coming-item {
+      background: white;
+      border-radius: 14px;
+      padding: 16px 18px;
+      border: 1px solid #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .coming-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .coming-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #6b7280;
+    }
+
+    .badge-hot {
+      background: #fef2f2;
+      color: #dc2626;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .support-box {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid #f3f4f6;
+      margin-top: 8px;
+    }
+
+    .support-box h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .support-box p {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 16px;
+    }
+
+    .btn-whatsapp {
+      width: 100%;
+      height: 46px;
+      background: #4d7c0f;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .btn-telegram {
+      width: 100%;
+      height: 46px;
+      background: white;
+      color: #111;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .support-email {
+      font-size: 13px;
+      color: #6b7280;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOADING SCREEN -->
+  <div id="loadingScreen">
+    <img src="logo.png" alt="TemmySocials" class="loading-logo">
+    <div class="dots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div>
+      <img src="logo.png" alt="TemmySocials" class="logo-small">
+    </div>
+    <div class="header-right">
+      <div class="header-icon">N</div>
+      <div class="avatar" id="userAvatar">U</div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="welcome">
+      <h1>Welcome back, <span id="userName">...</span> ✋</h1>
+      <p>Here's what's going on with your account</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="label">Wallet balance</div>
+        <div class="value green" id="walletBalance">₦0</div>
+        <a href="#">View history →</a>
+      </div>
+
+      <div class="stat-card">
+        <div class="label">Total purchases</div>
+        <div class="value" id="totalPurchases">0</div>
+        <a href="#">View orders →</a>
+      </div>
+
+      <div class="stat-card">
+        <div class="label">Available inventory</div>
+        <div class="value" id="inventoryTotal">0</div>
+        <div class="sub">
+          <span id="logsCount">0</span> logs · <span id="toolsCount">0</span> tools
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Quick actions</h2>
+    <div class="quick-actions">
+      <div class="action-card">
+        <div class="action-icon" style="background:#3b82f6;">L</div>
+        <h3>Buy Logs</h3>
+        <p>Social media accounts, VPNs, proxies, etc.</p>
+      </div>
+      <div class="action-card">
+        <div class="action-icon" style="background:#8b5cf6;">T</div>
+        <h3>Buy Tools</h3>
+        <p>Updates & pictures</p>
+      </div>
+      <div class="action-card">
+        <div class="action-icon" style="background:#16a34a;">W</div>
+        <h3>Top Up Wallet</h3>
+        <p>Add funds to your balance</p>
+      </div>
+      <div class="action-card">
+        <div class="action-icon" style="background:#ea580c;">S</div>
+        <h3>Get Support</h3>
+        <p>Open a support ticket</p>
+      </div>
+    </div>
+
+    <div class="recent-header">
+      <h2 class="section-title" style="margin-bottom:0;">Recent orders</h2>
+      <a href="#">View all</a>
+    </div>
+
+    <div class="empty-orders" id="emptyOrders">
+      <h3>No orders yet</h3>
+      <p>Your purchases will appear here</p>
+    </div>
+
+    <div class="orders-list" id="ordersList"></div>
+
+    <h2 class="section-title">Coming soon</h2>
+
+    <div class="coming-item">
+      <div class="coming-left">
+        <div class="coming-icon">SMS</div>
+        <span>SMS Numbers</span>
+      </div>
+      <span class="badge-hot">Hot</span>
+    </div>
+
+    <div class="coming-item">
+      <div class="coming-left">
+        <div class="coming-icon">SME</div>
+        <span>SME Boosting</span>
+      </div>
+      <span class="badge-hot">Hot</span>
+    </div>
+
+    <div class="support-box">
+      <h3>Need quick help?</h3>
+      <p>Reach support directly if you want a faster response outside tickets.</p>
+      <button class="btn-whatsapp">Chat on WhatsApp</button>
+      <button class="btn-telegram">Open Telegram</button>
+      <div class="support-email">support@temmysocials.com</div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+    import { 
+      getFirestore, 
+      doc, 
+      getDoc, 
+      setDoc, 
+      collection, 
+      query, 
+      where, 
+      orderBy, 
+      limit, 
+      getDocs,
+      serverTimestamp 
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCbCBQNB2zvaq-zoCNh81EdbE7_PsnKDBI",
+      authDomain: "dammysocials-2b126.firebaseapp.com",
+      projectId: "dammysocials-2b126",
+      storageBucket: "dammysocials-2b126.firebasestorage.app",
+      messagingSenderId: "1052998476146",
+      appId: "1:1052998476146:web:46ecb610aa1a23f8a0bdeb",
+      measurementId: "G-TBFDQZMGXS"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const loadingScreen = document.getElementById("loadingScreen");
+    const userNameEl = document.getElementById("userName");
+    const userAvatar = document.getElementById("userAvatar");
+    const walletBalanceEl = document.getElementById("walletBalance");
+    const totalPurchasesEl = document.getElementById("totalPurchases");
+    const inventoryTotalEl = document.getElementById("inventoryTotal");
+    const logsCountEl = document.getElementById("logsCount");
+    const toolsCountEl = document.getElementById("toolsCount");
+    const emptyOrders = document.getElementById("emptyOrders");
+    const ordersList = document.getElementById("ordersList");
+
+    // Loading screen - 4 seconds
+    setTimeout(() => {
+      loadingScreen.classList.add("hide");
+      setTimeout(() => {
+        loadingScreen.style.display = "none";
+      }, 400);
+    }, 4000);
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      const name = user.displayName || user.email?.split("@")[0] || "User";
+      userNameEl.textContent = name;
+      const initials = name.split(" ").map(n => n[0]).join("").substring(0, 2).toUpperCase();
+      userAvatar.textContent = initials || "U";
+
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        await setDoc(userRef, {
+          displayName: name,
+          email: user.email,
+          walletBalance: 0,
+          totalPurchases: 0,
+          inventory: {
+            logs: 0,
+            tools: 0
+          },
+          createdAt: serverTimestamp()
+        });
+      }
+
+      const data = (await getDoc(userRef)).data();
+
+      walletBalanceEl.textContent = "₦" + Number(data.walletBalance || 0).toLocaleString();
+      totalPurchasesEl.textContent = data.totalPurchases || 0;
+
+      const logs = data.inventory?.logs || 0;
+      const tools = data.inventory?.tools || 0;
+      logsCountEl.textContent = logs;
+      toolsCountEl.textContent = tools;
+      inventoryTotalEl.textContent = logs + tools;
+
+      try {
+        const ordersQuery = query(
+          collection(db, "orders"),
+          where("userId", "==", user.uid),
+          orderBy("createdAt", "desc"),
+          limit(5)
+        );
+
+        const ordersSnap = await getDocs(ordersQuery);
+
+        if (ordersSnap.empty) {
+          emptyOrders.style.display = "block";
+          ordersList.style.display = "none";
+        } else {
+          emptyOrders.style.display = "none";
+          ordersList.style.display = "flex";
+          ordersList.innerHTML = "";
+
+          ordersSnap.forEach((docSnap) => {
+            const order = docSnap.data();
+            const item = document.createElement("div");
+            item.className = "order-item";
+            item.innerHTML = `
+              <div>
+                <div style="font-weight:600;font-size:14px;">${order.productName || "Order"}</div>
+                <div style="font-size:12px;color:#6b7280;">${order.status || "Completed"}</div>
+              </div>
+              <div style="font-weight:600;color:#4d7c0f;">₦${Number(order.amount || 0).toLocaleString()}</div>
+            `;
+            ordersList.appendChild(item);
+          });
+        }
+      } catch (err) {
+        console.error(err);
+        emptyOrders.style.display = "block";
+      }
+    });
+
+    userAvatar.addEventListener("click", async () => {
+      if (confirm("Do you want to sign out?")) {
+        await signOut(auth);
+        window.location.href = "login.html";
+      }
+    });
+  </script>
+</body>
+</html>
