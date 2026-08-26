@@ -13,24 +13,20 @@
     }
 
     body {
-      background: #f9fafb;
+      background: #f8f9fb;
       min-height: 100vh;
-      padding-top: 70px;
+      padding-top: 64px;
       transition: filter 0.3s ease;
     }
 
     body.menu-open {
-      filter: blur(4px);
       overflow: hidden;
     }
 
     /* ========== LOADING SCREEN ========== */
     #loadingScreen {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       background: #ffffff;
       display: flex;
       flex-direction: column;
@@ -46,8 +42,8 @@
     }
 
     .loading-logo {
-      height: 70px;
-      margin-bottom: 32px;
+      height: 64px;
+      margin-bottom: 28px;
     }
 
     .dots {
@@ -83,11 +79,11 @@
       background: rgba(255, 255, 255, 0.89);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
+      padding: 0 16px;
       z-index: 100;
     }
 
@@ -96,19 +92,18 @@
       height: 40px;
       border: none;
       background: transparent;
-      font-size: 22px;
+      font-size: 24px;
       cursor: pointer;
       color: #111;
-    }
-
-    .logo-small {
-      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .header-right {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .header-icon {
@@ -119,7 +114,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
       font-size: 13px;
       font-weight: 600;
       color: #374151;
@@ -142,11 +136,8 @@
     /* ========== SIDEBAR ========== */
     .sidebar-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.3);
+      inset: 0;
+      background: rgba(0,0,0,0.35);
       z-index: 200;
       opacity: 0;
       visibility: hidden;
@@ -164,13 +155,13 @@
       left: -280px;
       width: 280px;
       height: 100%;
-      background: rgba(255, 255, 255, 0.89);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       z-index: 300;
       transition: left 0.3s ease;
       overflow-y: auto;
-      padding: 20px 0;
+      padding: 20px 0 40px;
       border-right: 1px solid rgba(0,0,0,0.06);
     }
 
@@ -181,30 +172,32 @@
     .sidebar-logo {
       padding: 0 20px 20px;
       border-bottom: 1px solid #e5e7eb;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .sidebar-logo img {
-      height: 40px;
+      height: 38px;
     }
 
     .sidebar-section {
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
 
     .sidebar-section-title {
       padding: 0 20px;
-      font-size: 13px;
-      color: #6b7280;
-      margin-bottom: 8px;
+      font-size: 12px;
+      color: #9ca3af;
+      margin-bottom: 6px;
       font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
     }
 
     .sidebar-item {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 20px;
+      padding: 11px 20px;
       color: #111;
       text-decoration: none;
       font-size: 15px;
@@ -221,7 +214,7 @@
     }
 
     .sidebar-item .icon {
-      width: 20px;
+      width: 22px;
       text-align: center;
       font-size: 13px;
       font-weight: 600;
@@ -240,43 +233,46 @@
 
     .sidebar-item.signout {
       color: #dc2626;
-      margin-top: 20px;
+      margin-top: 12px;
       border-top: 1px solid #e5e7eb;
-      padding-top: 20px;
+      padding-top: 18px;
     }
 
-    /* Main content styles (same as before) */
+    /* ========== MAIN CONTENT ========== */
     .container {
       max-width: 480px;
       margin: 0 auto;
-      padding: 24px 16px 40px;
+      padding: 20px 16px 50px;
+    }
+
+    .welcome {
+      margin-bottom: 24px;
     }
 
     .welcome h1 {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 700;
       color: #111;
       margin-bottom: 4px;
     }
 
     .welcome p {
-      font-size: 15px;
+      font-size: 14px;
       color: #6b7280;
-      margin-bottom: 28px;
     }
 
     .stats {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
     .stat-card {
       background: white;
       border-radius: 16px;
-      padding: 20px;
-      border: 1px solid #f3f4f6;
+      padding: 18px 20px;
+      border: 1px solid #f0f0f0;
     }
 
     .stat-card .label {
@@ -286,7 +282,7 @@
     }
 
     .stat-card .value {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 700;
       color: #111;
       margin-bottom: 4px;
@@ -312,22 +308,21 @@
       font-size: 16px;
       font-weight: 600;
       color: #111;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .quick-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
     .action-card {
       background: white;
       border-radius: 16px;
-      padding: 18px 16px;
-      border: 1px solid #f3f4f6;
-      cursor: pointer;
+      padding: 16px;
+      border: 1px solid #f0f0f0;
     }
 
     .action-icon {
@@ -338,8 +333,8 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 12px;
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 14px;
+      font-weight: 700;
       color: white;
     }
 
@@ -347,19 +342,20 @@
       font-size: 15px;
       font-weight: 600;
       color: #111;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .action-card p {
       font-size: 12px;
       color: #6b7280;
+      line-height: 1.35;
     }
 
     .recent-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .recent-header a {
@@ -372,10 +368,10 @@
     .empty-orders {
       background: white;
       border-radius: 16px;
-      padding: 40px 20px;
+      padding: 36px 20px;
       text-align: center;
-      border: 1px solid #f3f4f6;
-      margin-bottom: 32px;
+      border: 1px solid #f0f0f0;
+      margin-bottom: 28px;
     }
 
     .empty-orders h3 {
@@ -393,14 +389,14 @@
       display: none;
       flex-direction: column;
       gap: 10px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
     .order-item {
       background: white;
       border-radius: 14px;
-      padding: 16px;
-      border: 1px solid #f3f4f6;
+      padding: 14px 16px;
+      border: 1px solid #f0f0f0;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -409,8 +405,8 @@
     .coming-item {
       background: white;
       border-radius: 14px;
-      padding: 16px 18px;
-      border: 1px solid #f3f4f6;
+      padding: 14px 16px;
+      border: 1px solid #f0f0f0;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -431,7 +427,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       color: #6b7280;
     }
@@ -441,7 +437,7 @@
       color: #dc2626;
       font-size: 11px;
       font-weight: 600;
-      padding: 3px 10px;
+      padding: 3px 9px;
       border-radius: 999px;
     }
 
@@ -449,7 +445,7 @@
       background: white;
       border-radius: 16px;
       padding: 20px;
-      border: 1px solid #f3f4f6;
+      border: 1px solid #f0f0f0;
       margin-top: 8px;
     }
 
@@ -463,29 +459,33 @@
       font-size: 13px;
       color: #6b7280;
       margin-bottom: 16px;
+      line-height: 1.4;
     }
 
-    .btn-whatsapp, .btn-telegram {
+    .btn-whatsapp {
       width: 100%;
       height: 46px;
+      background: #4d7c0f;
+      color: white;
+      border: none;
       border-radius: 12px;
       font-size: 15px;
       font-weight: 600;
       margin-bottom: 10px;
-      border: none;
       cursor: pointer;
     }
 
-    .btn-whatsapp {
-      background: #4d7c0f;
-      color: white;
-    }
-
     .btn-telegram {
+      width: 100%;
+      height: 46px;
       background: white;
       color: #111;
       border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 15px;
       font-weight: 500;
+      margin-bottom: 14px;
+      cursor: pointer;
     }
 
     .support-email {
@@ -499,7 +499,7 @@
 
   <!-- LOADING SCREEN -->
   <div id="loadingScreen">
-    <img src="logo.png.jpg" alt="DammySocials" class="loading-logo">
+    <img src="logo.png" alt="TemmySocials" class="loading-logo">
     <div class="dots">
       <div class="dot"></div>
       <div class="dot"></div>
@@ -510,9 +510,7 @@
 
   <!-- HEADER -->
   <header class="header">
-    <div>
-      <button class="menu-btn" id="menuBtn" style="background:none;border:none;font-size:22px;cursor:pointer;">☰</button>
-    </div>
+    <button class="menu-btn" id="menuBtn">☰</button>
     <div class="header-right">
       <div class="header-icon">N</div>
       <div class="avatar" id="userAvatar">U</div>
@@ -523,7 +521,7 @@
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
   <div class="sidebar" id="sidebar">
     <div class="sidebar-logo">
-      <img src="logo.png.jpg" alt="DammySocials">
+      <img src="logo.png" alt="TemmySocials">
     </div>
 
     <div class="sidebar-section">
@@ -562,6 +560,7 @@
     </div>
   </div>
 
+  <!-- MAIN CONTENT -->
   <div class="container">
     <div class="welcome">
       <h1>Welcome back, <span id="userName">...</span> ✋</h1>
@@ -649,7 +648,7 @@
       <p>Reach support directly if you want a faster response outside tickets.</p>
       <button class="btn-whatsapp">Chat on WhatsApp</button>
       <button class="btn-telegram">Open Telegram</button>
-      <div class="support-email">support@Dammysocials.com</div>
+      <div class="support-email">support@temmysocials.com</div>
     </div>
   </div>
 
@@ -657,17 +656,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
     import { 
-      getFirestore, 
-      doc, 
-      getDoc, 
-      setDoc, 
-      collection, 
-      query, 
-      where, 
-      orderBy, 
-      limit, 
-      getDocs,
-      serverTimestamp 
+      getFirestore, doc, getDoc, setDoc, collection, query, where, orderBy, limit, getDocs, serverTimestamp 
     } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -684,7 +673,11 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    // Elements
     const loadingScreen = document.getElementById("loadingScreen");
+    const menuBtn = document.getElementById("menuBtn");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebarOverlay");
     const userNameEl = document.getElementById("userName");
     const userAvatar = document.getElementById("userAvatar");
     const walletBalanceEl = document.getElementById("walletBalance");
@@ -694,15 +687,31 @@
     const toolsCountEl = document.getElementById("toolsCount");
     const emptyOrders = document.getElementById("emptyOrders");
     const ordersList = document.getElementById("ordersList");
+    const signOutBtn = document.getElementById("signOutBtn");
 
     // Loading screen - 4 seconds
     setTimeout(() => {
       loadingScreen.classList.add("hide");
-      setTimeout(() => {
-        loadingScreen.style.display = "none";
-      }, 400);
+      setTimeout(() => loadingScreen.style.display = "none", 400);
     }, 4000);
 
+    // Menu open / close
+    function openMenu() {
+      sidebar.classList.add("open");
+      overlay.classList.add("active");
+      document.body.classList.add("menu-open");
+    }
+
+    function closeMenu() {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("active");
+      document.body.classList.remove("menu-open");
+    }
+
+    menuBtn.addEventListener("click", openMenu);
+    overlay.addEventListener("click", closeMenu);
+
+    // Firebase Auth + Data
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
         window.location.href = "login.html";
@@ -715,7 +724,7 @@
       userAvatar.textContent = initials || "U";
 
       const userRef = doc(db, "users", user.uid);
-      const userSnap = await getDoc(userRef);
+      let userSnap = await getDoc(userRef);
 
       if (!userSnap.exists()) {
         await setDoc(userRef, {
@@ -723,15 +732,13 @@
           email: user.email,
           walletBalance: 0,
           totalPurchases: 0,
-          inventory: {
-            logs: 0,
-            tools: 0
-          },
+          inventory: { logs: 0, tools: 0 },
           createdAt: serverTimestamp()
         });
+        userSnap = await getDoc(userRef);
       }
 
-      const data = (await getDoc(userRef)).data();
+      const data = userSnap.data();
 
       walletBalanceEl.textContent = "₦" + Number(data.walletBalance || 0).toLocaleString();
       totalPurchasesEl.textContent = data.totalPurchases || 0;
@@ -742,6 +749,7 @@
       toolsCountEl.textContent = tools;
       inventoryTotalEl.textContent = logs + tools;
 
+      // Recent orders
       try {
         const ordersQuery = query(
           collection(db, "orders"),
@@ -749,7 +757,6 @@
           orderBy("createdAt", "desc"),
           limit(5)
         );
-
         const ordersSnap = await getDocs(ordersQuery);
 
         if (ordersSnap.empty) {
@@ -759,8 +766,7 @@
           emptyOrders.style.display = "none";
           ordersList.style.display = "flex";
           ordersList.innerHTML = "";
-
-          ordersSnap.forEach((docSnap) => {
+          ordersSnap.forEach(docSnap => {
             const order = docSnap.data();
             const item = document.createElement("div");
             item.className = "order-item";
@@ -774,9 +780,17 @@
             ordersList.appendChild(item);
           });
         }
-      } catch (err) {
-        console.error(err);
+      } catch (e) {
         emptyOrders.style.display = "block";
+      }
+    });
+
+    // Sign out
+    signOutBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      if (confirm("Do you want to sign out?")) {
+        await signOut(auth);
+        window.location.href = "login.html";
       }
     });
 
