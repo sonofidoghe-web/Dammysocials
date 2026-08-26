@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>Temmy Social</title>
 
@@ -34,8 +39,11 @@ body{
     width:100%;
     min-width:320px;
 
-    background:#ffffff;
-    color:#000000;
+    margin:0;
+    padding:0;
+
+    background:#fff;
+    color:#000;
 
     font-family:
         Inter,
@@ -66,7 +74,7 @@ body{
 
     padding:10px 32px;
 
-    background:rgba(255,255,255,0.92);
+    background:rgba(255,255,255,.92);
 
     backdrop-filter:blur(10px);
     -webkit-backdrop-filter:blur(10px);
@@ -75,7 +83,9 @@ body{
 }
 
 
-/* LOGO */
+/* =========================================================
+   LOGO
+========================================================= */
 
 .logo{
     width:207px;
@@ -85,6 +95,8 @@ body{
     align-items:center;
 
     flex-shrink:0;
+
+    text-decoration:none;
 }
 
 .logo img{
@@ -98,20 +110,22 @@ body{
 }
 
 
-/* RIGHT SIDE */
+/* =========================================================
+   HEADER RIGHT
+========================================================= */
 
 .header-right{
     display:flex;
     align-items:center;
 
-    gap:22px;
+    gap:25px;
 
     flex-shrink:0;
 }
 
 
 /* =========================================================
-   SUN / THEME ICON
+   SUN ICON
 ========================================================= */
 
 .theme-button{
@@ -121,15 +135,13 @@ body{
     padding:0;
 
     border:none;
-    background:transparent;
+    background:none;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
     cursor:pointer;
-
-    color:#000;
 }
 
 .theme-icon{
@@ -137,8 +149,6 @@ body{
 
     width:27px;
     height:27px;
-
-    display:block;
 }
 
 .theme-icon::before{
@@ -153,6 +163,7 @@ body{
     left:7px;
 
     border:2px solid #000;
+
     border-radius:50%;
 }
 
@@ -189,10 +200,11 @@ body{
     padding:0;
 
     border:none;
-    background:transparent;
+    background:none;
 
     display:flex;
     flex-direction:column;
+
     justify-content:center;
     align-items:flex-end;
 
@@ -233,7 +245,8 @@ body{
 
     border-radius:0 0 0 15px;
 
-    box-shadow:0 10px 35px rgba(0,0,0,.12);
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.12);
 
     z-index:9999;
 
@@ -273,13 +286,15 @@ body{
     width:100%;
 
     /*
-       This controls the exact point where
-       the green ticker begins.
+       The reference design has the green ticker
+       starting at this exact vertical position.
     */
+
     height:1169px;
     min-height:1169px;
 
     padding-top:216px;
+
     padding-left:25px;
     padding-right:25px;
 
@@ -299,7 +314,14 @@ body{
 
 .hero-title{
     width:100%;
-    max-width:610px;
+
+    /*
+       Important:
+       We allow the title to become wide enough
+       for "SOCIAL ASSETS" to remain on one line.
+    */
+
+    max-width:650px;
 
     margin:0;
 
@@ -320,11 +342,12 @@ body{
 
 
 /* =========================================================
-   HERO DESCRIPTION
+   DESCRIPTION
 ========================================================= */
 
 .hero-description{
     width:100%;
+
     max-width:585px;
 
     margin-top:48px;
@@ -342,7 +365,7 @@ body{
 
 
 /* =========================================================
-   HERO BUTTONS
+   BUTTONS
 ========================================================= */
 
 .hero-buttons{
@@ -351,7 +374,9 @@ body{
     margin-top:56px;
 
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
 
     gap:21px;
@@ -362,6 +387,7 @@ body{
     height:80px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -383,6 +409,7 @@ body{
 
 .get-started{
     background:#438600;
+
     color:#fff;
 }
 
@@ -399,7 +426,7 @@ body{
 }
 
 
-/* BROWSE SERVICES */
+/* BROWSE */
 
 .browse{
     background:#fff;
@@ -418,11 +445,12 @@ body{
 
 
 /* =========================================================
-   GREEN MOVING TICKER
+   GREEN TICKER
 ========================================================= */
 
 .ticker{
     width:100%;
+
     height:112px;
 
     background:#438600;
@@ -441,7 +469,11 @@ body{
 
     white-space:nowrap;
 
-    animation:tickerMove 25s linear infinite;
+    animation:
+        tickerMove
+        25s
+        linear
+        infinite;
 }
 
 .ticker-item{
@@ -487,11 +519,12 @@ body{
 
 
 /* =========================================================
-   STATISTICS
+   STATS
 ========================================================= */
 
 .stats{
     width:578px;
+
     max-width:calc(100% - 66px);
 
     margin:106px auto 0;
@@ -502,20 +535,23 @@ body{
 }
 
 
-/* EACH STAT */
+/* STAT */
 
 .stat{
     height:270px;
 
     display:flex;
+
     flex-direction:column;
 
     align-items:center;
+
     justify-content:center;
 
     text-align:center;
 
     border-right:1px solid #dedede;
+
     border-bottom:1px solid #dedede;
 }
 
@@ -573,7 +609,7 @@ body{
 
 
 /* =========================================================
-   BOTTOM WHITE SPACE
+   BOTTOM
 ========================================================= */
 
 .bottom-space{
@@ -584,8 +620,25 @@ body{
 
 
 /* =========================================================
-   MOBILE
+   IMPORTANT MOBILE FIX
 ========================================================= */
+
+/*
+   This is the part that fixes your second screenshot.
+
+   Your phone is narrower than the reference layout.
+   Therefore the old 56px mobile heading was forcing:
+
+   PREMIUM
+   SOCIAL
+   ASSETS
+
+   onto separate lines.
+
+   We reduce the title only on small screens
+   and give it enough width.
+*/
+
 
 @media(max-width:600px){
 
@@ -594,16 +647,16 @@ body{
     .header{
         height:85px;
 
-        padding:10px 32px;
+        padding:10px 20px;
     }
 
     .logo{
-        width:205px;
+        width:185px;
         height:62px;
     }
 
     .header-right{
-        gap:21px;
+        gap:17px;
     }
 
 
@@ -613,52 +666,70 @@ body{
         height:1169px;
         min-height:1169px;
 
-        padding-top:216px;
+        padding-top:130px;
 
-        padding-left:25px;
-        padding-right:25px;
+        padding-left:10px;
+        padding-right:10px;
     }
 
 
     /* TITLE */
 
     .hero-title{
-        font-size:56px;
+        width:100%;
 
-        line-height:.95;
+        max-width:380px;
 
-        letter-spacing:-2.6px;
+        font-size:48px;
+
+        line-height:.94;
+
+        letter-spacing:-2.2px;
+    }
+
+
+    /*
+       Force the desired line arrangement:
+       
+       PREMIUM
+       SOCIAL ASSETS
+       DELIVERED
+       FAST
+    */
+
+    .hero-title .green{
+        color:#438600;
     }
 
 
     /* DESCRIPTION */
 
     .hero-description{
-        max-width:585px;
+        max-width:360px;
 
-        margin-top:48px;
+        margin-top:38px;
 
-        font-size:21px;
+        font-size:19px;
 
-        line-height:1.7;
+        line-height:1.6;
     }
 
 
     /* BUTTONS */
 
     .hero-buttons{
-        margin-top:57px;
+        margin-top:43px;
 
-        gap:21px;
+        gap:18px;
     }
 
     .hero-button{
         width:355px;
-        max-width:100%;
+        max-width:calc(100vw - 50px);
 
-        height:80px;
+        height:78px;
 
-        font-size:22px;
+        font-size:21px;
     }
 
 
@@ -669,7 +740,11 @@ body{
     }
 
     .ticker-item{
-        font-size:30px;
+        font-size:29px;
+    }
+
+    .ticker-star{
+        font-size:33px;
     }
 
 
@@ -688,74 +763,81 @@ body{
     }
 
     .stat-number{
-        font-size:47px;
+        font-size:43px;
     }
 
     .stat-label{
-        font-size:19px;
+        font-size:17px;
     }
 
 }
 
 
 /* =========================================================
-   SMALL PHONES
+   VERY SMALL PHONES
 ========================================================= */
 
 @media(max-width:380px){
 
     .header{
-        padding-left:20px;
-        padding-right:20px;
+        padding-left:16px;
+        padding-right:16px;
     }
 
     .logo{
-        width:180px;
+        width:170px;
         height:58px;
     }
 
     .header-right{
-        gap:15px;
+        gap:12px;
     }
 
 
     .hero{
-        height:1050px;
-        min-height:1050px;
+        padding-top:125px;
 
-        padding-top:155px;
-
-        padding-left:18px;
-        padding-right:18px;
+        padding-left:8px;
+        padding-right:8px;
     }
 
-    .hero-title{
-        font-size:47px;
 
-        line-height:.95;
+    .hero-title{
+        max-width:370px;
+
+        font-size:44px;
 
         letter-spacing:-2px;
     }
 
+
     .hero-description{
-        margin-top:38px;
+        max-width:350px;
 
-        font-size:19px;
+        margin-top:35px;
 
-        line-height:1.6;
+        font-size:18px;
+
+        line-height:1.55;
     }
+
 
     .hero-buttons{
-        margin-top:45px;
+        margin-top:40px;
 
-        gap:18px;
+        gap:17px;
     }
 
+
     .hero-button{
-        height:75px;
+        width:345px;
+        max-width:calc(100vw - 40px);
+
+        height:74px;
 
         font-size:20px;
     }
+
 
     .ticker{
         height:105px;
@@ -769,6 +851,7 @@ body{
         font-size:31px;
     }
 
+
     .stats{
         max-width:calc(100% - 36px);
 
@@ -780,12 +863,13 @@ body{
     }
 
     .stat-number{
-        font-size:39px;
+        font-size:38px;
     }
 
     .stat-label{
-        font-size:16px;
+        font-size:15px;
     }
+
 
     .bottom-space{
         height:100px;
@@ -801,12 +885,15 @@ body{
 
 
 <!-- =======================================================
-     FIXED HEADER
+     HEADER
 ======================================================= -->
 
 <header class="header">
 
-    <a href="index.html" class="logo">
+    <a
+        href="index.html"
+        class="logo"
+    >
 
         <img
             src="logo.png"
@@ -819,13 +906,11 @@ body{
     <div class="header-right">
 
 
-        <!-- SUN -->
-
         <button
             class="theme-button"
             id="themeButton"
-            aria-label="Theme"
             type="button"
+            aria-label="Theme"
         >
 
             <span class="theme-icon"></span>
@@ -833,13 +918,11 @@ body{
         </button>
 
 
-        <!-- MENU -->
-
         <button
             class="menu-button"
             id="menuButton"
-            aria-label="Menu"
             type="button"
+            aria-label="Menu"
         >
 
             <span></span>
@@ -847,7 +930,6 @@ body{
             <span></span>
 
         </button>
-
 
     </div>
 
@@ -856,7 +938,7 @@ body{
 
 
 <!-- =======================================================
-     SLIDE MENU
+     MENU
 ======================================================= -->
 
 <nav
@@ -904,7 +986,6 @@ body{
     </h1>
 
 
-
     <p class="hero-description">
 
         Buy aged social media accounts, working
@@ -915,11 +996,8 @@ body{
     </p>
 
 
-
     <div class="hero-buttons">
 
-
-        <!-- GET STARTED -->
 
         <a
             href="login.html"
@@ -934,9 +1012,6 @@ body{
 
         </a>
 
-
-
-        <!-- BROWSE SERVICES -->
 
         <a
             href="#services"
@@ -955,7 +1030,7 @@ body{
 
 
 <!-- =======================================================
-     GREEN MOVING SERVICE BAR
+     TICKER
 ======================================================= -->
 
 <section class="ticker">
@@ -999,7 +1074,6 @@ body{
         </div>
 
 
-
         <!-- DUPLICATE -->
 
         <div class="ticker-item">
@@ -1037,7 +1111,6 @@ body{
             *
         </div>
 
-
     </div>
 
 </section>
@@ -1045,7 +1118,7 @@ body{
 
 
 <!-- =======================================================
-     STATISTICS
+     STATS
 ======================================================= -->
 
 <section
@@ -1053,8 +1126,6 @@ body{
     id="services"
 >
 
-
-    <!-- 10K -->
 
     <div class="stat">
 
@@ -1072,9 +1143,6 @@ body{
     </div>
 
 
-
-    <!-- 200 -->
-
     <div class="stat">
 
         <div class="stat-number">
@@ -1091,9 +1159,6 @@ body{
     </div>
 
 
-
-    <!-- DELIVERY -->
-
     <div class="stat">
 
         <div class="stat-number">
@@ -1109,9 +1174,6 @@ body{
 
     </div>
 
-
-
-    <!-- UPTIME -->
 
     <div class="stat">
 
@@ -1133,10 +1195,6 @@ body{
 
 
 
-<!-- =======================================================
-     BOTTOM SPACE
-======================================================= -->
-
 <div class="bottom-space"></div>
 
 
@@ -1146,7 +1204,6 @@ body{
 ======================================================= -->
 
 <script>
-
 
 /* =========================================================
    MENU
@@ -1169,9 +1226,8 @@ menuButton.addEventListener(
 );
 
 
-
 /* =========================================================
-   CLOSE MENU AFTER CLICKING A LINK
+   CLOSE MENU AFTER LINK CLICK
 ========================================================= */
 
 document
@@ -1190,7 +1246,6 @@ document
     });
 
 
-
 /* =========================================================
    CLOSE MENU WHEN CLICKING OUTSIDE
 ========================================================= */
@@ -1199,17 +1254,16 @@ document.addEventListener(
     "click",
     function(event){
 
-        const clickedInsideMenu =
+        const insideMenu =
             menu.contains(event.target);
 
-        const clickedMenuButton =
+        const menuButtonClicked =
             menuButton.contains(event.target);
 
 
         if(
-            !clickedInsideMenu &&
-            !clickedMenuButton &&
-            menu.classList.contains("active")
+            !insideMenu &&
+            !menuButtonClicked
         ){
 
             menu.classList.remove("active");
@@ -1220,9 +1274,8 @@ document.addEventListener(
 );
 
 
-
 /* =========================================================
-   THEME BUTTON
+   THEME
 ========================================================= */
 
 const themeButton =
@@ -1238,8 +1291,8 @@ themeButton.addEventListener(
     }
 );
 
-
 </script>
+
 
 </body>
 </html>
