@@ -308,27 +308,32 @@
     </p>
   </div>
 
-  <!-- Firebase SDKs (v9 modular) -->
+  <!-- Firebase (v12.18.0 modular) -->
   <script type="module">
-    // 1. Paste your Firebase config here
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
-
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    // Import the functions you need from the SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
     import {
       getAuth,
       signInWithEmailAndPassword,
       GoogleAuthProvider,
       signInWithPopup
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCbCBQNB2zvaq-zoCNh81EdbE7_PsnKDBI",
+      authDomain: "dammysocials-2b126.firebaseapp.com",
+      projectId: "dammysocials-2b126",
+      storageBucket: "dammysocials-2b126.firebasestorage.app",
+      messagingSenderId: "1052998476146",
+      appId: "1:1052998476146:web:46ecb610aa1a23f8a0bdeb",
+      measurementId: "G-TBFDQZMGXS"
+    };
+
+    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);   // optional – remove if you don't need Analytics yet
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
@@ -365,8 +370,8 @@
 
       try {
         await signInWithPopup(auth, provider);
-        // Success – redirect or do whatever you need
-        window.location.href = "dashboard.html"; // change to your page
+        // Success – redirect
+        window.location.href = "dashboard.html"; // ← change this to your actual page
       } catch (error) {
         showAlert(error.message || "Google sign-in failed");
       } finally {
@@ -382,20 +387,18 @@
       const email = emailInput.value.trim();
       const password = passwordInput.value;
 
-      // Change button text immediately
       signInBtn.textContent = "Signing in…";
       signInBtn.disabled = true;
 
       try {
         await signInWithEmailAndPassword(auth, email, password);
         showAlert("Signed in successfully", "success");
-        // Redirect after short delay so user sees the green message
         setTimeout(() => {
-          window.location.href = "dashboard.html"; // change to your page
+          window.location.href = "dashboard.html"; // ← change this to your actual page
         }, 1200);
       } catch (error) {
         let msg = "Something went wrong. Please try again.";
-        if (error.code === "auth/wrong-password" || error.code === "auth/user-not-found") {
+        if (error.code === "auth/wrong-password" || error.code === "auth/user-not-found" || error.code === "auth/invalid-credential") {
           msg = "Incorrect email or password.";
         } else if (error.code === "auth/invalid-email") {
           msg = "Please enter a valid email address.";
