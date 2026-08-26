@@ -69,14 +69,74 @@
     .dot:nth-child(4) { animation-delay: 0.45s; }
 
     @keyframes bounce {
-      0%, 80%, 100% {
-        transform: scale(0.6);
-        opacity: 0.4;
-      }
-      40% {
-        transform: scale(1.2);
-        opacity: 1;
-      }
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+      40% { transform: scale(1.2); opacity: 1; }
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background: rgba(255, 255, 255, 0.89);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 100;
+    }
+
+    .menu-btn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: transparent;
+      font-size: 22px;
+      cursor: pointer;
+      color: #111;
+    }
+
+    .logo-small {
+      height: 32px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #4d7c0f;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
     }
 
     /* ========== SIDEBAR ========== */
@@ -163,7 +223,7 @@
     .sidebar-item .icon {
       width: 20px;
       text-align: center;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       color: #6b7280;
     }
@@ -185,7 +245,7 @@
       padding-top: 20px;
     }
 
-    /* Main content */
+    /* Main content styles (same as before) */
     .container {
       max-width: 480px;
       margin: 0 auto;
@@ -405,28 +465,27 @@
       margin-bottom: 16px;
     }
 
-    .btn-whatsapp {
+    .btn-whatsapp, .btn-telegram {
       width: 100%;
       height: 46px;
-      background: #4d7c0f;
-      color: white;
-      border: none;
       border-radius: 12px;
       font-size: 15px;
       font-weight: 600;
       margin-bottom: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-whatsapp {
+      background: #4d7c0f;
+      color: white;
     }
 
     .btn-telegram {
-      width: 100%;
-      height: 46px;
       background: white;
       color: #111;
       border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      font-size: 15px;
       font-weight: 500;
-      margin-bottom: 14px;
     }
 
     .support-email {
@@ -440,7 +499,7 @@
 
   <!-- LOADING SCREEN -->
   <div id="loadingScreen">
-    <img src="logo.png" alt="TemmySocials" class="loading-logo">
+    <img src="logo.png.jpg" alt="DammySocials" class="loading-logo">
     <div class="dots">
       <div class="dot"></div>
       <div class="dot"></div>
@@ -452,13 +511,56 @@
   <!-- HEADER -->
   <header class="header">
     <div>
-      <img src="logo.png" alt="TemmySocials" class="logo-small">
+      <button class="menu-btn" id="menuBtn" style="background:none;border:none;font-size:22px;cursor:pointer;">☰</button>
     </div>
     <div class="header-right">
       <div class="header-icon">N</div>
       <div class="avatar" id="userAvatar">U</div>
     </div>
   </header>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <img src="logo.png.jpg" alt="DammySocials">
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Main</div>
+      <a href="dashboard.html" class="sidebar-item active"><span class="icon">D</span> Dashboard</a>
+      <a href="#" class="sidebar-item"><span class="icon">W</span> Wallet</a>
+      <a href="#" class="sidebar-item"><span class="icon">O</span> Orders</a>
+      <a href="#" class="sidebar-item"><span class="icon">T</span> Transactions</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Store</div>
+      <a href="#" class="sidebar-item"><span class="icon">L</span> Logs Store</a>
+      <a href="#" class="sidebar-item"><span class="icon">T</span> Tools Store</a>
+      <a href="#" class="sidebar-item"><span class="icon">S</span> SMS Numbers <span class="badge">Hot</span></a>
+      <a href="#" class="sidebar-item"><span class="icon">B</span> SME Boosting <span class="badge">Hot</span></a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Service</div>
+      <a href="#" class="sidebar-item"><span class="icon">A</span> Airtime & Bills</a>
+      <a href="#" class="sidebar-item"><span class="icon">C</span> Cable TV & Betting</a>
+      <a href="#" class="sidebar-item"><span class="icon">G</span> Gaming</a>
+      <a href="#" class="sidebar-item"><span class="icon">G</span> Gift Cards</a>
+      <a href="#" class="sidebar-item"><span class="icon">P</span> Proxies</a>
+      <a href="#" class="sidebar-item"><span class="icon">E</span> eSIM</a>
+      <a href="#" class="sidebar-item"><span class="icon">A</span> API & Docs</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Account</div>
+      <a href="#" class="sidebar-item"><span class="icon">S</span> Support</a>
+      <a href="#" class="sidebar-item"><span class="icon">N</span> Notifications</a>
+      <a href="#" class="sidebar-item"><span class="icon">P</span> Profile</a>
+      <a href="#" class="sidebar-item signout" id="signOutBtn"><span class="icon">X</span> Sign out</a>
+    </div>
+  </div>
 
   <div class="container">
     <div class="welcome">
@@ -547,7 +649,7 @@
       <p>Reach support directly if you want a faster response outside tickets.</p>
       <button class="btn-whatsapp">Chat on WhatsApp</button>
       <button class="btn-telegram">Open Telegram</button>
-      <div class="support-email">support@temmysocials.com</div>
+      <div class="support-email">support@Dammysocials.com</div>
     </div>
   </div>
 
