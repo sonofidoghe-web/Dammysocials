@@ -1,2443 +1,657 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>TemmySocials – Dashboard</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Temmy Social — Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
 <style>
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-}
-
-body{
-  background:#f8f9fb;
-  min-height:100vh;
-  padding-top:64px;
-  color:#111;
-}
-
-body.menu-open{
-  overflow:hidden;
-}
-
-/* =====================================================
-   LOADING SCREEN
-===================================================== */
-
-#loadingScreen{
-  position:fixed;
-  inset:0;
-  background:#fff;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-  transition:opacity .4s ease;
-}
-
-#loadingScreen.hide{
-  opacity:0;
-  pointer-events:none;
-}
-
-.loading-logo{
-  height:64px;
-  max-width:220px;
-  object-fit:contain;
-  margin-bottom:28px;
-}
-
-.dots{
-  display:flex;
-  gap:10px;
-}
-
-.dot{
-  width:10px;
-  height:10px;
-  background:#4d7c0f;
-  border-radius:50%;
-  animation:bounce 1.2s infinite ease-in-out;
-}
-
-.dot:nth-child(1){animation-delay:0s;}
-.dot:nth-child(2){animation-delay:.15s;}
-.dot:nth-child(3){animation-delay:.3s;}
-.dot:nth-child(4){animation-delay:.45s;}
-
-@keyframes bounce{
-  0%,80%,100%{
-    transform:scale(.6);
-    opacity:.4;
+  :root{
+    --green-900:#1f3a17;
+    --green-700:#33591f;
+    --green-600:#3f6a26;
+    --green-500:#4d7c2e;
+    --green-100:#e7efe0;
+    --green-50:#f3f7ee;
+    --ink:#181a16;
+    --ink-soft:#5b6156;
+    --paper:#fafaf8;
+    --line:#e8e6e0;
   }
-
-  40%{
-    transform:scale(1.2);
-    opacity:1;
-  }
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-.header{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  height:64px;
-  background:rgba(255,255,255,.94);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid #e7e7e7;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 16px;
-  z-index:100;
-}
-
-.menu-btn{
-  width:40px;
-  height:40px;
-  border:none;
-  background:transparent;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#111;
-}
-
-.menu-btn svg{
-  width:23px;
-  height:23px;
-}
-
-.header-right{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.header-icon{
-  min-width:36px;
-  height:36px;
-  padding:0 10px;
-  border-radius:20px;
-  background:#f1f3ef;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:13px;
-  font-weight:700;
-  color:#4d7c0f;
-}
-
-.theme-btn,
-.notification-btn{
-  width:36px;
-  height:36px;
-  border:none;
-  background:transparent;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  color:#111;
-}
-
-.theme-btn svg,
-.notification-btn svg{
-  width:19px;
-  height:19px;
-}
-
-.avatar{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  background:#4d7c0f;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:700;
-  font-size:14px;
-  cursor:pointer;
-}
-
-
-/* =====================================================
-   BLUR OVERLAY
-===================================================== */
-
-/*
-   THIS IS THE IMPORTANT PART.
-
-   When the menu opens, the overlay does NOT just make
-   the page dark.
-
-   It actually BLURS the entire dashboard behind it.
-*/
-
-.sidebar-overlay{
-  position:fixed;
-  inset:0;
-
-  background:rgba(255,255,255,.18);
-
-  backdrop-filter:blur(9px);
-  -webkit-backdrop-filter:blur(9px);
-
-  z-index:200;
-
-  opacity:0;
-  visibility:hidden;
-
-  pointer-events:none;
-
-  transition:
-    opacity .28s ease,
-    visibility .28s ease;
-}
-
-.sidebar-overlay.active{
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
-}
-
-
-/* =====================================================
-   SIDEBAR
-===================================================== */
-
-.sidebar{
-  position:fixed;
-  top:0;
-  left:0;
-
-  width:300px;
-  max-width:82vw;
-  height:100vh;
-
-  background:#fff;
-
-  z-index:300;
-
-  transform:translateX(-100%);
-
-  transition:transform .3s cubic-bezier(.4,0,.2,1);
-
-  overflow-y:auto;
-
-  padding:0 0 30px;
-
-  border-right:1px solid #e5e7eb;
-
-  box-shadow:8px 0 30px rgba(0,0,0,.08);
-}
-
-.sidebar.open{
-  transform:translateX(0);
-}
-
-
-/* SIDEBAR LOGO */
-
-.sidebar-logo{
-  height:110px;
-
-  display:flex;
-  align-items:center;
-
-  padding:20px 24px;
-
-  border-bottom:1px solid #e5e7eb;
-}
-
-.sidebar-logo img{
-  max-width:170px;
-  max-height:60px;
-  object-fit:contain;
-}
-
-
-/* SIDEBAR SECTIONS */
-
-.sidebar-section{
-  margin-top:22px;
-}
-
-.sidebar-section-title{
-  padding:0 24px;
-
-  font-size:15px;
-
-  color:#555;
-
-  margin-bottom:8px;
-
-  font-weight:500;
-}
-
-.sidebar-item{
-  display:flex;
-  align-items:center;
-
-  gap:14px;
-
-  min-height:52px;
-
-  margin:2px 14px;
-
-  padding:10px 14px;
-
-  color:#151515;
-
-  text-decoration:none;
-
-  font-size:16px;
-
-  border-radius:12px;
-
-  transition:
-    background .15s ease,
-    color .15s ease;
-}
-
-.sidebar-item:hover{
-  background:#f5f6f5;
-}
-
-.sidebar-item.active{
-  background:#f5f6f3;
-  font-weight:600;
-}
-
-.sidebar-item .icon{
-  width:25px;
-  height:25px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  color:#171717;
-
-  flex-shrink:0;
-}
-
-.sidebar-item .icon svg{
-  width:22px;
-  height:22px;
-  stroke-width:1.9;
-}
-
-.sidebar-item .badge{
-  margin-left:auto;
-
-  background:#edf5e7;
-
-  color:#4d7c0f;
-
-  font-size:12px;
-
-  padding:4px 9px;
-
-  border-radius:999px;
-
-  font-weight:600;
-}
-
-.sidebar-item.signout{
-  color:#dc2626;
-
-  border-top:1px solid #e5e7eb;
-
-  border-radius:0;
-
-  margin:18px 0 0;
-
-  padding:18px 28px 10px;
-}
-
-.sidebar-item.signout .icon{
-  color:#dc2626;
-}
-
-
-/* =====================================================
-   MAIN CONTENT
-===================================================== */
-
-.container{
-  width:100%;
-  max-width:480px;
-
-  margin:0 auto;
-
-  padding:20px 16px 50px;
-}
-
-.welcome{
-  margin-bottom:24px;
-}
-
-.welcome h1{
-  font-size:22px;
-  line-height:1.2;
-
-  font-weight:700;
-
-  color:#111;
-
-  margin-bottom:4px;
-}
-
-.welcome p{
-  font-size:14px;
-  color:#6b7280;
-}
-
-
-/* =====================================================
-   STAT CARDS
-===================================================== */
-
-.stats{
-  display:flex;
-  flex-direction:column;
-
-  gap:12px;
-
-  margin-bottom:28px;
-}
-
-.stat-card{
-  background:#fff;
-
-  border-radius:16px;
-
-  padding:20px;
-
-  border:1px solid #e5e5e5;
-}
-
-.stat-card .label{
-  font-size:13px;
-  color:#6b7280;
-
-  margin-bottom:7px;
-}
-
-.stat-card .value{
-  font-size:27px;
-
-  font-weight:700;
-
-  color:#111;
-
-  margin-bottom:5px;
-}
-
-.stat-card .value.green{
-  color:#4d7c0f;
-}
-
-.stat-card .sub{
-  font-size:13px;
-  color:#6b7280;
-}
-
-.stat-card a{
-  display:inline-block;
-
-  margin-top:3px;
-
-  font-size:13px;
-
-  color:#6b7280;
-
-  text-decoration:none;
-}
-
-
-/* =====================================================
-   SECTION TITLES
-===================================================== */
-
-.section-title{
-  font-size:15px;
-
-  font-weight:700;
-
-  color:#111;
-
-  margin-bottom:13px;
-
-  text-transform:none;
-}
-
-
-/* =====================================================
-   QUICK ACTIONS
-===================================================== */
-
-.quick-actions{
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:12px;
-
-  margin-bottom:30px;
-}
-
-.action-card{
-  min-height:164px;
-
-  background:#fff;
-
-  border-radius:14px;
-
-  padding:16px;
-
-  border:1px solid #e4e4e4;
-
-  cursor:pointer;
-
-  transition:
-    transform .15s ease,
-    box-shadow .15s ease;
-}
-
-.action-card:active{
-  transform:scale(.98);
-}
-
-.action-icon{
-  width:40px;
-  height:40px;
-
-  border-radius:12px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  margin-bottom:12px;
-}
-
-.action-icon svg{
-  width:21px;
-  height:21px;
-}
-
-.action-card h3{
-  font-size:14px;
-
-  font-weight:700;
-
-  color:#111;
-
-  margin-bottom:4px;
-}
-
-.action-card p{
-  font-size:12px;
-
-  color:#6b7280;
-
-  line-height:1.4;
-}
-
-
-/* =====================================================
-   RECENT ORDERS
-===================================================== */
-
-.recent-header{
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  margin-bottom:12px;
-}
-
-.recent-header .section-title{
-  margin-bottom:0;
-}
-
-.recent-header a{
-  font-size:13px;
-
-  color:#4d7c0f;
-
-  text-decoration:none;
-
-  font-weight:500;
-}
-
-.empty-orders{
-  background:#fff;
-
-  border-radius:16px;
-
-  padding:42px 20px;
-
-  text-align:center;
-
-  border:1px solid #e5e5e5;
-
-  margin-bottom:30px;
-}
-
-.empty-orders h3{
-  font-size:14px;
-
-  font-weight:600;
-
-  margin-bottom:5px;
-}
-
-.empty-orders p{
-  font-size:13px;
-
-  color:#9ca3af;
-}
-
-.orders-list{
-  display:none;
-
-  flex-direction:column;
-
-  gap:10px;
-
-  margin-bottom:30px;
-}
-
-.order-item{
-  background:#fff;
-
-  border-radius:14px;
-
-  padding:15px;
-
-  border:1px solid #e5e5e5;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-}
-
-
-/* =====================================================
-   COMING SOON
-===================================================== */
-
-.coming-item{
-  background:#fff;
-
-  border-radius:14px;
-
-  padding:15px 16px;
-
-  border:1px solid #e5e5e5;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  margin-bottom:10px;
-}
-
-.coming-left{
-  display:flex;
-
-  align-items:center;
-
-  gap:12px;
-
-  font-size:13px;
-
-  color:#555;
-}
-
-.coming-icon{
-  width:36px;
-  height:36px;
-
-  border-radius:10px;
-
-  background:#f5f5f5;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  color:#777;
-}
-
-.coming-icon svg{
-  width:17px;
-  height:17px;
-}
-
-.badge-hot{
-  background:#f7f7f7;
-
-  color:#777;
-
-  font-size:11px;
-
-  font-weight:500;
-
-  padding:4px 9px;
-
-  border-radius:999px;
-
-  border:1px solid #e7e7e7;
-}
-
-
-/* =====================================================
-   SUPPORT
-===================================================== */
-
-.support-box{
-  background:#fff;
-
-  border-radius:16px;
-
-  padding:20px;
-
-  border:1px solid #e5e5e5;
-
-  margin-top:30px;
-}
-
-.support-box h3{
-  font-size:15px;
-
-  font-weight:700;
-
-  margin-bottom:6px;
-}
-
-.support-box p{
-  font-size:13px;
-
-  color:#6b7280;
-
-  margin-bottom:16px;
-
-  line-height:1.4;
-}
-
-.btn-whatsapp,
-.btn-telegram{
-  width:100%;
-
-  height:46px;
-
-  border-radius:10px;
-
-  font-size:14px;
-
-  cursor:pointer;
-
-  margin-bottom:10px;
-}
-
-.btn-whatsapp{
-  background:#4d7c0f;
-
-  color:#fff;
-
-  border:none;
-
-  font-weight:600;
-}
-
-.btn-telegram{
-  background:#fff;
-
-  color:#111;
-
-  border:1px solid #e5e7eb;
-
-  font-weight:500;
-}
-
-.support-email{
-  font-size:13px;
-
-  color:#6b7280;
-
-  margin-top:4px;
-}
-
-
-/* =====================================================
-   DESKTOP
-===================================================== */
-
-@media (min-width:768px){
-
-  .container{
-    max-width:900px;
-    padding:30px 24px 60px;
-  }
-
-  .stats{
-    display:grid;
-
-    grid-template-columns:
-      repeat(3,1fr);
-
-    gap:14px;
-  }
-
-  .stat-card{
-    min-height:150px;
-  }
-
-  .quick-actions{
-    grid-template-columns:
-      repeat(4,1fr);
-  }
-
-  .action-card{
-    min-height:170px;
-  }
-
-  .sidebar{
-    width:330px;
-  }
-
-}
-
-
-/* =====================================================
-   SMALL PHONES
-===================================================== */
-
-@media (max-width:380px){
-
-  .container{
-    padding-left:14px;
-    padding-right:14px;
-  }
-
-  .quick-actions{
-    gap:10px;
-  }
-
-  .action-card{
-    padding:14px;
-    min-height:155px;
-  }
-
-  .action-card h3{
-    font-size:13px;
-  }
-
-  .action-card p{
-    font-size:11.5px;
-  }
-
-}
-
-
-/* =====================================================
-   REDUCE ANIMATION ACCESSIBILITY
-===================================================== */
-
-@media (prefers-reduced-motion:reduce){
-
-  *,
-  *::before,
-  *::after{
-    animation-duration:.01ms !important;
-    transition-duration:.01ms !important;
-  }
-
-}
-
+  *{font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;}
+  .font-display{font-family:'Fraunces',serif;}
+  body{background:var(--paper); color:var(--ink);}
+  .card{background:#fff;border:1px solid var(--line);border-radius:18px;}
+  .skeleton{background:linear-gradient(90deg,#eee 25%,#f5f5f5 37%,#eee 63%);background-size:400% 100%;animation:shimmer 1.4s ease infinite;}
+  @keyframes shimmer{0%{background-position:100% 50%}100%{background-position:0 50%}}
+  ::-webkit-scrollbar{width:8px;height:8px;}
+  ::-webkit-scrollbar-thumb{background:#d8d5cd;border-radius:8px;}
+  .nav-link.active{background:var(--green-50); color:var(--green-700); font-weight:600;}
+  .nav-link.active svg{stroke:var(--green-700);}
+  .btn-primary{background:var(--green-600);color:#fff;}
+  .btn-primary:hover{background:var(--green-700);}
+  [data-view]{display:none;}
+  [data-view].active{display:block;}
+  .toast{transition:all .35s cubic-bezier(.16,1,.3,1);}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
 </style>
 </head>
+<body class="min-h-screen">
 
-<body>
-
-
-<!-- =====================================================
-     LOADING SCREEN
-===================================================== -->
-
-<div id="loadingScreen">
-
-  <img
-    src="logo.png"
-    alt="DammySocials"
-    class="loading-logo.jpg"
-  >
-
-  <div class="dots">
-
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-
+<!-- ============ AUTH GATE ============ -->
+<div id="auth-screen" class="min-h-screen flex items-center justify-center px-4">
+  <div class="w-full max-w-sm">
+    <div class="text-center mb-8">
+      <div class="font-display text-3xl font-semibold" style="color:var(--green-700)">Temmy<span style="color:var(--ink)">Social</span></div>
+      <p class="text-sm mt-1" style="color:var(--ink-soft)">Sign in to your account</p>
+    </div>
+    <div class="card p-6">
+      <div id="auth-error" class="hidden text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2 mb-4"></div>
+      <form id="login-form" class="space-y-3">
+        <div>
+          <label class="text-xs font-medium" style="color:var(--ink-soft)">Email</label>
+          <input required type="email" id="login-email" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm outline-none focus:ring-2" style="border-color:var(--line)" placeholder="you@example.com"/>
+        </div>
+        <div>
+          <label class="text-xs font-medium" style="color:var(--ink-soft)">Password</label>
+          <input required type="password" id="login-password" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm outline-none focus:ring-2" style="border-color:var(--line)" placeholder="••••••••"/>
+        </div>
+        <button type="submit" id="login-btn" class="w-full btn-primary rounded-xl py-2.5 text-sm font-semibold mt-2">Sign in</button>
+      </form>
+      <button id="signup-toggle-btn" class="w-full mt-3 text-sm font-medium py-2" style="color:var(--green-700)">Create an account instead</button>
+    </div>
   </div>
-
 </div>
 
+<!-- ============ APP SHELL ============ -->
+<div id="app-shell" class="hidden">
+  <div class="flex min-h-screen">
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+    <!-- Sidebar (desktop) -->
+    <aside class="hidden md:flex md:w-64 flex-col border-r bg-white shrink-0" style="border-color:var(--line)">
+      <div class="px-5 py-5 border-b" style="border-color:var(--line)">
+        <div class="font-display text-xl font-semibold" style="color:var(--green-700)">Temmy<span style="color:var(--ink)">Social</span></div>
+      </div>
+      <nav class="flex-1 px-3 py-4 space-y-6 overflow-y-auto">
+        <div>
+          <div class="px-3 text-[11px] font-semibold uppercase tracking-wider mb-1.5" style="color:var(--ink-soft)">Main</div>
+          <div class="space-y-0.5">
+            <button data-nav="dashboard" class="nav-link active w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-left">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+              Dashboard
+            </button>
+            <button data-nav="wallet" class="nav-link w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-left">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/><circle cx="17" cy="15" r="1.2" fill="currentColor" stroke="none"/></svg>
+              Wallet
+            </button>
+            <button data-nav="orders" class="nav-link w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-left">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2l1.5 4h9L18 2"/><path d="M3 8h18l-1.5 12a2 2 0 0 1-2 1.8H6.5a2 2 0 0 1-2-1.8L3 8z"/><path d="M9 12a3 3 0 0 0 6 0"/></svg>
+              Orders
+            </button>
+            <button data-nav="transactions" class="nav-link w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-left">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3l4 4-4 4"/><path d="M21 7H9"/><path d="M7 21l-4-4 4-4"/><path d="M3 17h12"/></svg>
+              Transactions
+            </button>
+          </div>
+        </div>
+        <div>
+          <div class="px-3 text-[11px] font-semibold uppercase tracking-wider mb-1.5" style="color:var(--ink-soft)">Store</div>
+          <div class="space-y-0.5">
+            <button data-nav="browse" class="nav-link w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-left">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7l8.7 5 8.7-5M12 22V12"/></svg>
+              Browse Store
+            </button>
+            <button data-nav="tools" class="nav-link w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-left">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L2 19l3 3 7.3-7.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2 2.8-2.8z"/></svg>
+              Tools Store
+            </button>
+            <div class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-left" style="color:#b7b4ab">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              SMS Numbers <span class="ml-auto text-[10px] font-semibold px-2 py-0.5 rounded-full" style="background:var(--green-50);color:var(--green-600)">Soon</span>
+            </div>
+            <div class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-left" style="color:#b7b4ab">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+              SME Boosting <span class="ml-auto text-[10px] font-semibold px-2 py-0.5 rounded-full" style="background:var(--green-50);color:var(--green-600)">Soon</span>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="px-3 py-4 border-t" style="border-color:var(--line)">
+        <button data-nav="account" class="nav-link w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-left mb-0.5">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+          Account
+        </button>
+        <button id="signout-btn" class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-left text-red-600">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+          Sign out
+        </button>
+      </div>
+    </aside>
 
-<header class="header">
+    <!-- Mobile bottom nav -->
+    <nav class="md:hidden fixed bottom-0 inset-x-0 z-30 bg-white border-t flex justify-around py-2" style="border-color:var(--line)">
+      <button data-nav="dashboard" class="nav-link-mobile flex flex-col items-center gap-0.5 px-2 py-1 text-[10px]">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Home
+      </button>
+      <button data-nav="browse" class="nav-link-mobile flex flex-col items-center gap-0.5 px-2 py-1 text-[10px]">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        Browse
+      </button>
+      <button data-nav="wallet" class="nav-link-mobile flex flex-col items-center gap-0.5 px-2 py-1 text-[10px]">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        Wallet
+      </button>
+      <button data-nav="orders" class="nav-link-mobile flex flex-col items-center gap-0.5 px-2 py-1 text-[10px]">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h18l-1.5 12a2 2 0 0 1-2 1.8H6.5a2 2 0 0 1-2-1.8L3 8z"/></svg>
+        Orders
+      </button>
+      <button data-nav="account" class="nav-link-mobile flex flex-col items-center gap-0.5 px-2 py-1 text-[10px]">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        Account
+      </button>
+    </nav>
 
-  <button
-    class="menu-btn"
-    id="menuBtn"
-    aria-label="Open menu"
-  >
+    <!-- Main -->
+    <div class="flex-1 min-w-0 pb-20 md:pb-0">
+      <!-- Topbar -->
+      <header class="sticky top-0 z-20 bg-white/90 backdrop-blur border-b" style="border-color:var(--line)">
+        <div class="flex items-center justify-between px-4 md:px-8 py-3">
+          <div class="md:hidden font-display text-lg font-semibold" style="color:var(--green-700)">Temmy<span style="color:var(--ink)">Social</span></div>
+          <div class="hidden md:block text-sm" style="color:var(--ink-soft)" id="topbar-title">Dashboard</div>
+          <div class="flex items-center gap-2 md:gap-3">
+            <div class="text-xs font-semibold px-3 py-1.5 rounded-full border" style="border-color:var(--line)">
+              ₦<span id="topbar-balance">0</span>
+            </div>
+            <button class="w-9 h-9 rounded-full border flex items-center justify-center relative" style="border-color:var(--line)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+            </button>
+            <div id="avatar-badge" class="w-9 h-9 rounded-full text-white text-xs font-bold flex items-center justify-center" style="background:var(--green-600)">--</div>
+          </div>
+        </div>
+      </header>
 
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-    >
-      <line x1="4" y1="6" x2="20" y2="6"/>
-      <line x1="4" y1="12" x2="20" y2="12"/>
-      <line x1="4" y1="18" x2="20" y2="18"/>
-    </svg>
+      <main class="px-4 md:px-8 py-6 max-w-6xl mx-auto">
 
-  </button>
+        <!-- DASHBOARD VIEW -->
+        <section data-view="dashboard" class="active">
+          <h1 class="font-display text-2xl md:text-3xl font-semibold" id="welcome-heading">Welcome back 👋</h1>
+          <p class="text-sm mt-1" style="color:var(--ink-soft)">Here's what's going on with your account</p>
 
+          <div class="grid sm:grid-cols-3 gap-4 mt-6">
+            <div class="card p-5">
+              <p class="text-xs" style="color:var(--ink-soft)">Wallet balance</p>
+              <p class="font-display text-2xl font-semibold mt-1" style="color:var(--green-700)">₦<span id="stat-balance">0</span></p>
+              <button data-nav="wallet" class="text-xs font-semibold mt-3 inline-flex items-center gap-1" style="color:var(--green-600)">View history →</button>
+            </div>
+            <div class="card p-5">
+              <p class="text-xs" style="color:var(--ink-soft)">Total purchases</p>
+              <p class="font-display text-2xl font-semibold mt-1" id="stat-purchases">0</p>
+              <button data-nav="orders" class="text-xs font-semibold mt-3 inline-flex items-center gap-1" style="color:var(--green-600)">View orders →</button>
+            </div>
+            <div class="card p-5">
+              <p class="text-xs" style="color:var(--ink-soft)">Available inventory</p>
+              <p class="font-display text-2xl font-semibold mt-1" id="stat-inventory">0</p>
+              <p class="text-xs mt-3" style="color:var(--ink-soft)"><span id="stat-sites">0</span> websites · <span id="stat-tools">0</span> tools</p>
+            </div>
+          </div>
 
-  <div class="header-right">
+          <h2 class="text-sm font-semibold mt-8 mb-3" style="color:var(--ink-soft)">Quick actions</h2>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <button data-nav="browse" class="card p-5 text-left flex items-start gap-4 hover:shadow-sm transition">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style="background:#e6edfb">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3b5bdb" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-sm">Browse Store</p>
+                <p class="text-xs mt-0.5" style="color:var(--ink-soft)">Ready-made websites, every niche</p>
+              </div>
+            </button>
+            <button data-nav="tools" class="card p-5 text-left flex items-start gap-4 hover:shadow-sm transition">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style="background:#f1e9fb">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#8144c9" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L2 19l3 3 7.3-7.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2 2.8-2.8z"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-sm">Buy Tools</p>
+                <p class="text-xs mt-0.5" style="color:var(--ink-soft)">Updates & pictures</p>
+              </div>
+            </button>
+            <button data-nav="wallet" class="card p-5 text-left flex items-start gap-4 hover:shadow-sm transition">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style="background:var(--green-50)">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--green-600)" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-sm">Top Up Wallet</p>
+                <p class="text-xs mt-0.5" style="color:var(--ink-soft)">Add funds to your balance</p>
+              </div>
+            </button>
+            <button data-nav="support" class="card p-5 text-left flex items-start gap-4 hover:shadow-sm transition">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style="background:#fdece2">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#d97757" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-sm">Get Support</p>
+                <p class="text-xs mt-0.5" style="color:var(--ink-soft)">Open a support ticket</p>
+              </div>
+            </button>
+          </div>
 
-    <div class="header-icon">
-      ₦0
+          <div class="flex items-center justify-between mt-8 mb-3">
+            <h2 class="text-sm font-semibold" style="color:var(--ink-soft)">Recent orders</h2>
+            <button data-nav="orders" class="text-xs font-semibold" style="color:var(--green-600)">View all</button>
+          </div>
+          <div id="recent-orders-card" class="card p-10 flex flex-col items-center text-center">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#c9c6bd" stroke-width="1.6"><path d="M6 2l1.5 4h9L18 2"/><path d="M3 8h18l-1.5 12a2 2 0 0 1-2 1.8H6.5a2 2 0 0 1-2-1.8L3 8z"/></svg>
+            <p class="text-sm font-semibold mt-3">No orders yet</p>
+            <p class="text-xs mt-1" style="color:var(--ink-soft)">Your purchases will appear here</p>
+          </div>
+
+          <div class="card p-6 mt-8">
+            <p class="font-semibold text-sm">Need quick help?</p>
+            <p class="text-xs mt-1" style="color:var(--ink-soft)">Reach support directly if you want a faster response outside tickets.</p>
+            <a href="#" id="whatsapp-link" target="_blank" class="mt-4 w-full flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold text-white" style="background:var(--green-600)">
+              Chat on WhatsApp
+            </a>
+            <a href="#" id="telegram-link" target="_blank" class="mt-2 w-full flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold border" style="border-color:var(--line)">
+              Open Telegram
+            </a>
+            <p class="text-xs mt-3 text-center" style="color:var(--ink-soft)" id="support-email">support@temmysocials.com</p>
+          </div>
+        </section>
+
+        <!-- BROWSE STORE VIEW -->
+        <section data-view="browse">
+          <h1 class="font-display text-2xl font-semibold">Browse Store</h1>
+          <p class="text-sm mt-1" style="color:var(--ink-soft)">Ready-made websites, ready to launch</p>
+          <div id="browse-categories" class="flex gap-2 overflow-x-auto mt-5 pb-1"></div>
+          <div id="browse-products" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-5"></div>
+          <div id="browse-empty" class="hidden card p-10 text-center mt-5">
+            <p class="text-sm font-semibold">No products yet</p>
+            <p class="text-xs mt-1" style="color:var(--ink-soft)">Check back soon — new websites are added regularly.</p>
+          </div>
+        </section>
+
+        <!-- TOOLS STORE VIEW -->
+        <section data-view="tools">
+          <h1 class="font-display text-2xl font-semibold">Tools Store</h1>
+          <p class="text-sm mt-1" style="color:var(--ink-soft)">Updates & pictures</p>
+          <div id="tools-products" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-5"></div>
+          <div id="tools-empty" class="hidden card p-10 text-center mt-5">
+            <p class="text-sm font-semibold">No tools yet</p>
+            <p class="text-xs mt-1" style="color:var(--ink-soft)">Check back soon.</p>
+          </div>
+        </section>
+
+        <!-- WALLET VIEW -->
+        <section data-view="wallet">
+          <h1 class="font-display text-2xl font-semibold">Wallet</h1>
+          <div class="card p-6 mt-5 max-w-sm">
+            <p class="text-xs" style="color:var(--ink-soft)">Current balance</p>
+            <p class="font-display text-3xl font-semibold mt-1" style="color:var(--green-700)">₦<span id="wallet-balance">0</span></p>
+            <button id="topup-btn" class="mt-4 w-full btn-primary rounded-xl py-2.5 text-sm font-semibold">Top up wallet</button>
+          </div>
+          <h2 class="text-sm font-semibold mt-8 mb-3" style="color:var(--ink-soft)">History</h2>
+          <div id="wallet-history" class="card divide-y" style="border-color:var(--line)"></div>
+          <div id="wallet-empty" class="hidden card p-10 text-center">
+            <p class="text-sm font-semibold">No wallet activity yet</p>
+          </div>
+        </section>
+
+        <!-- ORDERS VIEW -->
+        <section data-view="orders">
+          <h1 class="font-display text-2xl font-semibold">Orders</h1>
+          <div id="orders-list" class="mt-5 space-y-3"></div>
+          <div id="orders-empty" class="hidden card p-10 text-center">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#c9c6bd" stroke-width="1.6" class="mx-auto"><path d="M3 8h18l-1.5 12a2 2 0 0 1-2 1.8H6.5a2 2 0 0 1-2-1.8L3 8z"/></svg>
+            <p class="text-sm font-semibold mt-3">No orders yet</p>
+            <p class="text-xs mt-1" style="color:var(--ink-soft)">Your purchases will appear here</p>
+          </div>
+        </section>
+
+        <!-- TRANSACTIONS VIEW -->
+        <section data-view="transactions">
+          <h1 class="font-display text-2xl font-semibold">Transactions</h1>
+          <div id="transactions-list" class="card mt-5 divide-y" style="border-color:var(--line)"></div>
+          <div id="transactions-empty" class="hidden card p-10 text-center">
+            <p class="text-sm font-semibold">No transactions yet</p>
+          </div>
+        </section>
+
+        <!-- ACCOUNT VIEW -->
+        <section data-view="account">
+          <h1 class="font-display text-2xl font-semibold">Account</h1>
+          <div class="card p-6 mt-5 max-w-sm">
+            <div class="flex items-center gap-4">
+              <div id="account-avatar" class="w-14 h-14 rounded-full text-white text-lg font-bold flex items-center justify-center" style="background:var(--green-600)">--</div>
+              <div>
+                <p class="font-semibold text-sm" id="account-name">—</p>
+                <p class="text-xs" style="color:var(--ink-soft)" id="account-email">—</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SUPPORT VIEW -->
+        <section data-view="support">
+          <h1 class="font-display text-2xl font-semibold">Get Support</h1>
+          <p class="text-sm mt-1" style="color:var(--ink-soft)">Reach us any way that's easiest for you</p>
+          <div class="card p-6 mt-5 max-w-sm">
+            <a href="#" id="whatsapp-link-2" target="_blank" class="w-full flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold text-white" style="background:var(--green-600)">Chat on WhatsApp</a>
+            <a href="#" id="telegram-link-2" target="_blank" class="mt-2 w-full flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold border" style="border-color:var(--line)">Open Telegram</a>
+            <p class="text-xs mt-3 text-center" style="color:var(--ink-soft)" id="support-email-2">support@temmysocials.com</p>
+          </div>
+        </section>
+
+      </main>
     </div>
-
-
-    <button
-      class="theme-btn"
-      id="themeBtn"
-      aria-label="Theme"
-    >
-
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.8"
-      >
-        <circle cx="12" cy="12" r="4"/>
-        <path d="M12 2v2"/>
-        <path d="M12 20v2"/>
-        <path d="m4.93 4.93 1.41 1.41"/>
-        <path d="m17.66 17.66 1.41 1.41"/>
-        <path d="M2 12h2"/>
-        <path d="M20 12h2"/>
-        <path d="m6.34 17.66-1.41 1.41"/>
-        <path d="m19.07 4.93-1.41 1.41"/>
-      </svg>
-
-    </button>
-
-
-    <button
-      class="notification-btn"
-      aria-label="Notifications"
-    >
-
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.8"
-      >
-        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
-        <path d="M10 21h4"/>
-      </svg>
-
-    </button>
-
-
-    <div
-      class="avatar"
-      id="userAvatar"
-    >
-      U
-    </div>
-
   </div>
+</div>
 
-</header>
-
-
-<!-- =====================================================
-     BLUR OVERLAY
-===================================================== -->
-
-<div
-  class="sidebar-overlay"
-  id="sidebarOverlay"
-></div>
-
-
-<!-- =====================================================
-     SIDEBAR
-===================================================== -->
-
-<aside
-  class="sidebar"
-  id="sidebar"
->
-
-
-  <div class="sidebar-logo">
-
-    <img
-      src="logo.png"
-      alt="TemmySocials"
-    >
-
-  </div>
-
-
-  <!-- MAIN -->
-
-  <div class="sidebar-section">
-
-    <div class="sidebar-section-title">
-      Main
-    </div>
-
-
-    <a
-      href="dashboard.html"
-      class="sidebar-item active"
-    >
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <rect x="3" y="3" width="7" height="7" rx="1"/>
-          <rect x="14" y="3" width="7" height="7" rx="1"/>
-          <rect x="3" y="14" width="7" height="7" rx="1"/>
-          <rect x="14" y="14" width="7" height="7" rx="1"/>
-        </svg>
-      </span>
-
-      Dashboard
-
-    </a>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <rect x="3" y="6" width="18" height="13" rx="2"/>
-          <path d="M16 14h5"/>
-          <circle cx="16" cy="14" r="1"/>
-          <path d="M3 6V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v1"/>
-        </svg>
-      </span>
-
-      Wallet
-
-    </a>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M5 7h14"/>
-          <path d="M4 7a2 2 0 0 1-2-2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7"/>
-          <path d="M4 7h16"/>
-          <path d="M8 12h4"/>
-        </svg>
-      </span>
-
-      Orders
-
-    </a>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M7 7h11"/>
-          <path d="m14 4 4 3-4 3"/>
-          <path d="M17 17H6"/>
-          <path d="m10 20-4-3 4-3"/>
-        </svg>
-      </span>
-
-      Transactions
-
-    </a>
-
-  </div>
-
-
-  <!-- STORE -->
-
-  <div class="sidebar-section">
-
-    <div class="sidebar-section-title">
-      Store
-    </div>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="m3 7 9-5 9 5-9 5-9-5Z"/>
-          <path d="M3 7v10l9 5 9-5V7"/>
-          <path d="M12 12v10"/>
-        </svg>
-      </span>
-
-      Logs Store
-
-    </a>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="m14.7 6.3 3-3a4 4 0 0 1 3 3l-3 3"/>
-          <path d="m17.7 6.3-8.4 8.4"/>
-          <path d="m6.3 17.7-3 3a4 4 0 0 1-3-3l3-3"/>
-          <path d="m6.3 17.7 8.4-8.4"/>
-        </svg>
-      </span>
-
-      Tools Store
-
-    </a>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M4 5h16v14H4z"/>
-          <path d="M7 9h10"/>
-          <path d="M7 13h7"/>
-        </svg>
-      </span>
-
-      SMS Numbers
-
-      <span class="badge">
-        Soon
-      </span>
-
-    </a>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/>
-        </svg>
-      </span>
-
-      SME Boosting
-
-      <span class="badge">
-        Soon
-      </span>
-
-    </a>
-
-  </div>
-
-
-  <!-- SERVICE -->
-
-  <div class="sidebar-section">
-
-    <div class="sidebar-section-title">
-      Service
-    </div>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M12 3v18"/>
-          <path d="M5 8h14"/>
-          <path d="M5 16h14"/>
-        </svg>
-      </span>
-
-      Airtime & Bills
-
-    </a>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <rect x="3" y="5" width="18" height="14" rx="2"/>
-          <path d="M7 9h.01"/>
-          <path d="M11 9h6"/>
-          <path d="M7 13h10"/>
-        </svg>
-      </span>
-
-      Cable TV & Betting
-
-    </a>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M8 6v12"/>
-          <path d="M16 6v12"/>
-          <path d="M6 8h12"/>
-          <path d="M6 16h12"/>
-        </svg>
-      </span>
-
-      Gaming
-
-    </a>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <rect x="3" y="6" width="18" height="12" rx="2"/>
-          <path d="M7 12h4"/>
-          <path d="M9 10v4"/>
-          <circle cx="16" cy="11" r="1"/>
-          <circle cx="18" cy="13" r="1"/>
-        </svg>
-      </span>
-
-      Gift Cards
-
-    </a>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.41 1.41-.06-.06a1.7 1.7 0 0 0-1.88-.34"/>
-          <path d="M8.6 9a1.7 1.7 0 0 0-.34-1.88L8.2 7.06l1.41-1.41.06.06a1.7 1.7 0 0 0 1.88.34"/>
-        </svg>
-      </span>
-
-      Proxies
-
-    </a>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <rect x="5" y="3" width="14" height="18" rx="2"/>
-          <path d="M9 7h6"/>
-          <path d="M9 11h6"/>
-          <path d="M9 15h3"/>
-        </svg>
-      </span>
-
-      eSIM
-
-    </a>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M4 4h16v16H4z"/>
-          <path d="M8 8h8"/>
-          <path d="M8 12h8"/>
-          <path d="M8 16h5"/>
-        </svg>
-      </span>
-
-      API & Docs
-
-    </a>
-
-  </div>
-
-
-  <!-- ACCOUNT -->
-
-  <div class="sidebar-section">
-
-    <div class="sidebar-section-title">
-      Account
-    </div>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M20 21a8 8 0 0 0-16 0"/>
-          <circle cx="12" cy="7" r="4"/>
-        </svg>
-      </span>
-
-      Support
-
-    </a>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
-          <path d="M10 21h4"/>
-        </svg>
-      </span>
-
-      Notifications
-
-    </a>
-
-
-    <a href="#" class="sidebar-item">
-
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <circle cx="12" cy="8" r="4"/>
-          <path d="M4 21a8 8 0 0 1 16 0"/>
-        </svg>
-      </span>
-
-      Profile
-
-    </a>
-
-
-    <a
-      href="#"
-      class="sidebar-item signout"
-      id="signOutBtn"
-    >
-
-      <span class="icon">
-
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-        >
-          <path d="M10 17l5-5-5-5"/>
-          <path d="M15 12H3"/>
-          <path d="M21 3v18"/>
-        </svg>
-
-      </span>
-
-      Sign out
-
-    </a>
-
-  </div>
-
-</aside>
-
-
-<!-- =====================================================
-     MAIN CONTENT
-===================================================== -->
-
-<main class="container">
-
-
-  <div class="welcome">
-
-    <h1>
-      Welcome back,
-      <span id="userName">...</span>!
-    </h1>
-
-    <p>
-      Here's what's going on with your account
-    </p>
-
-  </div>
-
-
-  <!-- STATS -->
-
-  <div class="stats">
-
-    <div class="stat-card">
-
-      <div class="label">
-        Wallet balance
-      </div>
-
-      <div
-        class="value green"
-        id="walletBalance"
-      >
-        ₦0
-      </div>
-
-      <a href="#">
-        View history →
-      </a>
-
-    </div>
-
-
-    <div class="stat-card">
-
-      <div class="label">
-        Total purchases
-      </div>
-
-      <div
-        class="value"
-        id="totalPurchases"
-      >
-        0
-      </div>
-
-      <a href="#">
-        View orders →
-      </a>
-
-    </div>
-
-
-    <div class="stat-card">
-
-      <div class="label">
-        Available inventory
-      </div>
-
-      <div
-        class="value"
-        id="inventoryTotal"
-      >
-        0
-      </div>
-
-      <div class="sub">
-
-        <span id="logsCount">0</span>
-        logs ·
-        <span id="toolsCount">0</span>
-        tools
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- QUICK ACTIONS -->
-
-  <h2 class="section-title">
-    Quick actions
-  </h2>
-
-
-  <div class="quick-actions">
-
-
-    <!-- 1 -->
-
-    <div class="action-card">
-
-      <div
-        class="action-icon"
-        style="background:#edf3ff;color:#3b82f6;"
-      >
-
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-
-          <path d="m3 7 9-5 9 5-9 5-9-5Z"/>
-          <path d="M3 7v10l9 5 9-5V7"/>
-          <path d="M12 12v10"/>
-
-        </svg>
-
-      </div>
-
-      <h3>
-        Buy Logs
-      </h3>
-
-      <p>
-        Social media accounts, VPNs, proxies, etc.
-      </p>
-
-    </div>
-
-
-    <!-- 2 -->
-
-    <div class="action-card">
-
-      <div
-        class="action-icon"
-        style="background:#f5eaff;color:#a855f7;"
-      >
-
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-
-          <path d="m14.7 6.3 3-3a4 4 0 0 1 3 3l-3 3"/>
-          <path d="m17.7 6.3-8.4 8.4"/>
-          <path d="m6.3 17.7-3 3a4 4 0 0 1-3-3l3-3"/>
-          <path d="m6.3 17.7 8.4-8.4"/>
-
-        </svg>
-
-      </div>
-
-      <h3>
-        Buy Tools
-      </h3>
-
-      <p>
-        Updates & pictures
-      </p>
-
-    </div>
-
-
-    <!-- 3 -->
-
-    <div class="action-card">
-
-      <div
-        class="action-icon"
-        style="background:#edf8ef;color:#16a34a;"
-      >
-
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-
-          <rect x="3" y="5" width="18" height="14" rx="2"/>
-          <path d="M3 10h18"/>
-          <path d="M7 15h3"/>
-
-        </svg>
-
-      </div>
-
-      <h3>
-        Top Up Wallet
-      </h3>
-
-      <p>
-        Add funds to your balance
-      </p>
-
-    </div>
-
-
-    <!-- 4 -->
-
-    <div class="action-card">
-
-      <div
-        class="action-icon"
-        style="background:#fff0e8;color:#ea580c;"
-      >
-
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-
-          <path d="M4 14a8 8 0 0 1 16 0"/>
-          <path d="M4 14v4"/>
-          <path d="M20 14v4"/>
-          <path d="M4 18h2"/>
-          <path d="M18 18h2"/>
-
-        </svg>
-
-      </div>
-
-      <h3>
-        Get Support
-      </h3>
-
-      <p>
-        Open a support ticket
-      </p>
-
-    </div>
-
-
-    <!-- 5 API KEY -->
-
-    <div class="action-card">
-
-      <div
-        class="action-icon"
-        style="background:#fff8e6;color:#eab308;"
-      >
-
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-
-          <circle cx="7" cy="17" r="3"/>
-          <path d="m9.5 14.5 8-8"/>
-          <path d="m15 6 3 3"/>
-          <path d="m17 4 3 3"/>
-
-        </svg>
-
-      </div>
-
-      <h3>
-        API Key
-      </h3>
-
-      <p>
-        Manage and view your API keys
-      </p>
-
-    </div>
-
-
-    <!-- 6 ESIM -->
-
-    <div class="action-card">
-
-      <div
-        class="action-icon"
-        style="background:#e8f9fb;color:#06b6d4;"
-      >
-
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-
-          <rect x="5" y="3" width="14" height="18" rx="2"/>
-          <path d="M9 7h6"/>
-          <path d="M9 11h6"/>
-          <path d="M9 15h3"/>
-
-        </svg>
-
-      </div>
-
-      <h3>
-        eSIM
-      </h3>
-
-      <p>
-        Buy eSIM data plans instantly
-      </p>
-
-    </div>
-
-
-    <!-- 7 PROXIES -->
-
-    <div class="action-card">
-
-      <div
-        class="action-icon"
-        style="background:#ffedf0;color:#ef4444;"
-      >
-
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-
-          <rect x="3" y="5" width="18" height="14" rx="2"/>
-          <path d="M7 9h10"/>
-          <path d="M7 13h7"/>
-          <path d="M7 17h4"/>
-
-        </svg>
-
-      </div>
-
-      <h3>
-        Proxies
-      </h3>
-
-      <p>
-        Premium proxies for all needs
-      </p>
-
-    </div>
-
-
-    <!-- 8 GAMING -->
-
-    <div class="action-card">
-
-      <div
-        class="action-icon"
-        style="background:#eef9ef;color:#65a30d;"
-      >
-
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-
-          <path d="M6 9h12"/>
-          <path d="M8 7v4"/>
-          <path d="M6 9h4"/>
-          <circle cx="16" cy="9" r="1"/>
-          <circle cx="18" cy="11" r="1"/>
-          <path d="M5 7c-2 1-3 4-2 8l1 4c.4 1.4 2.2 1.7 3 .5l2-3h6l2 3c.8 1.2 2.6.9 3-.5l1-4c1-4-1-7-3-8Z"/>
-
-        </svg>
-
-      </div>
-
-      <h3>
-        Gaming
-      </h3>
-
-      <p>
-        Gaming services & accounts
-      </p>
-
-    </div>
-
-
-  </div>
-
-
-  <!-- RECENT ORDERS -->
-
-  <div class="recent-header">
-
-    <h2 class="section-title">
-      Recent orders
-    </h2>
-
-    <a href="#">
-      View all
-    </a>
-
-  </div>
-
-
-  <div
-    class="empty-orders"
-    id="emptyOrders"
-  >
-
-    <h3>
-      No orders yet
-    </h3>
-
-    <p>
-      Your purchases will appear here
-    </p>
-
-  </div>
-
-
-  <div
-    class="orders-list"
-    id="ordersList"
-  ></div>
-
-
-  <!-- COMING SOON -->
-
-  <h2 class="section-title">
-    Coming soon
-  </h2>
-
-
-  <div class="coming-item">
-
-    <div class="coming-left">
-
-      <div class="coming-icon">
-
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-        >
-          <path d="M4 5h16v14H4z"/>
-          <path d="M7 9h10"/>
-          <path d="M7 13h7"/>
-        </svg>
-
-      </div>
-
-      <span>
-        SMS Numbers
-      </span>
-
-    </div>
-
-    <span class="badge-hot">
-      Soon
-    </span>
-
-  </div>
-
-
-  <div class="coming-item">
-
-    <div class="coming-left">
-
-      <div class="coming-icon">
-
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-        >
-          <path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/>
-        </svg>
-
-      </div>
-
-      <span>
-        SME Boosting
-      </span>
-
-    </div>
-
-    <span class="badge-hot">
-      Soon
-    </span>
-
-  </div>
-
-
-  <!-- SUPPORT -->
-
-  <div class="support-box">
-
-    <h3>
-      Need quick help?
-    </h3>
-
-    <p>
-      Reach support directly if you want a faster response outside tickets.
-    </p>
-
-    <button class="btn-whatsapp">
-      Chat on WhatsApp
-    </button>
-
-    <button class="btn-telegram">
-      Open Telegram
-    </button>
-
-    <div class="support-email">
-      support@Dammysocials.com
-    </div>
-
-  </div>
-
-
-</main>
-
-
-<!-- =====================================================
-     FIREBASE
-===================================================== -->
+<!-- Toast -->
+<div id="toast" class="toast fixed bottom-4 right-4 translate-y-24 opacity-0 bg-black text-white text-sm px-4 py-2.5 rounded-xl z-50"></div>
 
 <script type="module">
-
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
-import {
-  getAuth,
-  onAuthStateChanged,
-  signOut
+  getAuth, onAuthStateChanged, signInWithEmailAndPassword,
+  createUserWithEmailAndPassword, signOut
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-
 import {
-  getFirestore,
-  doc,
-  getDoc,
-  setDoc,
-  collection,
-  query,
-  where,
-  orderBy,
-  limit,
-  getDocs,
-  serverTimestamp
+  getFirestore, doc, getDoc, setDoc, collection, query, where,
+  orderBy, limit, onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
-
-/* =====================================================
-   FIREBASE CONFIG
-===================================================== */
-
 const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyCbCBQNB2zvaq-zoCNh81EdbE7_PsnKDBI",
-
-  authDomain:
-    "dammysocials-2b126.firebaseapp.com",
-
-  projectId:
-    "dammysocials-2b126",
-
-  storageBucket:
-    "dammysocials-2b126.firebasestorage.app",
-
-  messagingSenderId:
-    "1052998476146",
-
-  appId:
-    "1:1052998476146:web:46ecb610aa1a23f8a0bdeb",
-
-  measurementId:
-    "G-TBFDQZMGXS"
-
+  apiKey: "AIzaSyCbCBQNB2zvaq-zoCNh81EdbE7_PsnKDBI",
+  authDomain: "dammysocials-2b126.firebaseapp.com",
+  projectId: "dammysocials-2b126",
+  storageBucket: "dammysocials-2b126.firebasestorage.app",
+  messagingSenderId: "1052998476146",
+  appId: "1:1052998476146:web:46ecb610aa1a23f8a0bdeb",
 };
 
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-const app =
-  initializeApp(firebaseConfig);
-
-const auth =
-  getAuth(app);
-
-const db =
-  getFirestore(app);
-
-
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
-const loadingScreen =
-  document.getElementById("loadingScreen");
-
-const menuBtn =
-  document.getElementById("menuBtn");
-
-const sidebar =
-  document.getElementById("sidebar");
-
-const overlay =
-  document.getElementById("sidebarOverlay");
-
-const userNameEl =
-  document.getElementById("userName");
-
-const userAvatar =
-  document.getElementById("userAvatar");
-
-const walletBalanceEl =
-  document.getElementById("walletBalance");
-
-const totalPurchasesEl =
-  document.getElementById("totalPurchases");
-
-const inventoryTotalEl =
-  document.getElementById("inventoryTotal");
-
-const logsCountEl =
-  document.getElementById("logsCount");
-
-const toolsCountEl =
-  document.getElementById("toolsCount");
-
-const emptyOrders =
-  document.getElementById("emptyOrders");
-
-const ordersList =
-  document.getElementById("ordersList");
-
-const signOutBtn =
-  document.getElementById("signOutBtn");
-
-
-/* =====================================================
-   LOADING
-   KEEPING YOUR 4 SECOND LOADING
-===================================================== */
-
-setTimeout(() => {
-
-  loadingScreen.classList.add("hide");
-
-  setTimeout(() => {
-
-    loadingScreen.style.display = "none";
-
-  },400);
-
-},4000);
-
-
-/* =====================================================
-   SIDEBAR
-===================================================== */
-
-function openMenu(){
-
-  sidebar.classList.add("open");
-
-  overlay.classList.add("active");
-
-  document.body.classList.add("menu-open");
-
+// ---------- helpers ----------
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
+const fmt = (n) => Number(n || 0).toLocaleString("en-NG");
+const initials = (name, email) => {
+  const src = (name || email || "?").trim();
+  const parts = src.split(" ").filter(Boolean);
+  if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+  return src.slice(0, 2).toUpperCase();
+};
+function showToast(msg) {
+  const t = $("#toast");
+  t.textContent = msg;
+  t.classList.remove("translate-y-24", "opacity-0");
+  setTimeout(() => t.classList.add("translate-y-24", "opacity-0"), 2400);
 }
 
+// ---------- view routing ----------
+const views = ["dashboard","browse","tools","wallet","orders","transactions","account","support"];
+function goTo(view) {
+  if (!views.includes(view)) view = "dashboard";
+  $$('[data-view]').forEach(el => el.classList.toggle("active", el.dataset.view === view));
+  $$('.nav-link, .nav-link-mobile').forEach(el => el.classList.toggle("active", el.dataset.nav === view));
+  const titles = {dashboard:"Dashboard",browse:"Browse Store",tools:"Tools Store",wallet:"Wallet",orders:"Orders",transactions:"Transactions",account:"Account",support:"Support"};
+  $("#topbar-title").textContent = titles[view] || "Dashboard";
+  window.scrollTo({top:0, behavior:"instant"});
+  location.hash = view;
+}
+$$('[data-nav]').forEach(btn => btn.addEventListener("click", () => goTo(btn.dataset.nav)));
+window.addEventListener("hashchange", () => goTo(location.hash.replace("#","")));
 
-function closeMenu(){
+// ---------- auth ----------
+let showingSignup = false;
+$("#signup-toggle-btn").addEventListener("click", () => {
+  showingSignup = !showingSignup;
+  $("#login-btn").textContent = showingSignup ? "Create account" : "Sign in";
+  $("#signup-toggle-btn").textContent = showingSignup ? "Sign in instead" : "Create an account instead";
+  $("#auth-error").classList.add("hidden");
+});
 
-  sidebar.classList.remove("open");
+$("#login-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = $("#login-email").value.trim();
+  const password = $("#login-password").value;
+  const errBox = $("#auth-error");
+  errBox.classList.add("hidden");
+  $("#login-btn").disabled = true;
+  try {
+    if (showingSignup) {
+      const cred = await createUserWithEmailAndPassword(auth, email, password);
+      await setDoc(doc(db, "users", cred.user.uid), {
+        email,
+        walletBalance: 0,
+        totalPurchases: 0,
+        createdAt: new Date().toISOString(),
+      });
+    } else {
+      await signInWithEmailAndPassword(auth, email, password);
+    }
+  } catch (err) {
+    errBox.textContent = err.message.replace("Firebase: ", "");
+    errBox.classList.remove("hidden");
+  } finally {
+    $("#login-btn").disabled = false;
+  }
+});
 
-  overlay.classList.remove("active");
+$("#signout-btn").addEventListener("click", () => signOut(auth));
 
-  document.body.classList.remove("menu-open");
-
+let unsubscribers = [];
+function clearListeners() {
+  unsubscribers.forEach(u => u());
+  unsubscribers = [];
 }
 
-
-menuBtn.addEventListener(
-  "click",
-  openMenu
-);
-
-
-overlay.addEventListener(
-  "click",
-  closeMenu
-);
-
-
-/*
-   Pressing ESC also closes the menu.
-*/
-
-document.addEventListener(
-  "keydown",
-  (event) => {
-
-    if(
-      event.key === "Escape" &&
-      sidebar.classList.contains("open")
-    ){
-
-      closeMenu();
-
-    }
-
+onAuthStateChanged(auth, async (user) => {
+  clearListeners();
+  if (!user) {
+    $("#auth-screen").classList.remove("hidden");
+    $("#app-shell").classList.add("hidden");
+    return;
   }
-);
-
-
-/*
-   Clicking a sidebar link closes the sidebar.
-*/
-
-document
-  .querySelectorAll(".sidebar-item")
-  .forEach(item => {
-
-    item.addEventListener(
-      "click",
-      () => {
-
-        if(
-          !item.id ||
-          item.id !== "signOutBtn"
-        ){
-
-          closeMenu();
-
-        }
-
-      }
-    );
-
-  });
-
-
-/* =====================================================
-   FIREBASE AUTH + USER DATA
-===================================================== */
-
-onAuthStateChanged(
-  auth,
-  async (user) => {
-
-    if(!user){
-
-      window.location.href =
-        "login.html";
-
-      return;
-
-    }
-
-
-    /*
-       Google users will use their
-       Firebase displayName.
-    */
-
-    const name =
-      user.displayName ||
-      user.email?.split("@")[0] ||
-      "User";
-
-
-    userNameEl.textContent =
-      name;
-
-
-    const initials =
-      name
-        .split(" ")
-        .map(n => n[0])
-        .join("")
-        .substring(0,2)
-        .toUpperCase();
-
-
-    userAvatar.textContent =
-      initials || "U";
-
-
-    const userRef =
-      doc(
-        db,
-        "users",
-        user.uid
-      );
-
-
-    let userSnap =
-      await getDoc(userRef);
-
-
-    /*
-       Create user document only
-       if it does not exist.
-    */
-
-    if(!userSnap.exists()){
-
-      await setDoc(
-        userRef,
-        {
-
-          displayName:name,
-
-          email:user.email,
-
-          walletBalance:0,
-
-          totalPurchases:0,
-
-          inventory:{
-            logs:0,
-            tools:0
-          },
-
-          createdAt:
-            serverTimestamp()
-
-        }
-      );
-
-
-      userSnap =
-        await getDoc(userRef);
-
-    }
-
-
-    const data =
-      userSnap.data();
-
-
-    /* WALLET */
-
-    walletBalanceEl.textContent =
-      "₦" +
-      Number(
-        data.walletBalance || 0
-      ).toLocaleString("en-NG");
-
-
-    /* PURCHASES */
-
-    totalPurchasesEl.textContent =
-      data.totalPurchases || 0;
-
-
-    /* INVENTORY */
-
-    const logs =
-      data.inventory?.logs || 0;
-
-    const tools =
-      data.inventory?.tools || 0;
-
-
-    logsCountEl.textContent =
-      logs;
-
-    toolsCountEl.textContent =
-      tools;
-
-
-    inventoryTotalEl.textContent =
-      logs + tools;
-
-
-    /* =================================================
-       RECENT ORDERS
-    ================================================= */
-
-    try{
-
-      const ordersQuery =
-        query(
-
-          collection(
-            db,
-            "orders"
-          ),
-
-          where(
-            "userId",
-            "==",
-            user.uid
-          ),
-
-          orderBy(
-            "createdAt",
-            "desc"
-          ),
-
-          limit(5)
-
-        );
-
-
-      const ordersSnap =
-        await getDocs(
-          ordersQuery
-        );
-
-
-      if(
-        ordersSnap.empty
-      ){
-
-        emptyOrders.style.display =
-          "block";
-
-        ordersList.style.display =
-          "none";
-
-      }else{
-
-        emptyOrders.style.display =
-          "none";
-
-        ordersList.style.display =
-          "flex";
-
-        ordersList.innerHTML =
-          "";
-
-
-        ordersSnap.forEach(
-          docSnap => {
-
-            const order =
-              docSnap.data();
-
-
-            const item =
-              document.createElement(
-                "div"
-              );
-
-
-            item.className =
-              "order-item";
-
-
-            item.innerHTML = `
-
-              <div>
-
-                <div
-                  style="
-                    font-weight:600;
-                    font-size:14px;
-                  "
-                >
-                  ${
-                    order.productName ||
-                    "Order"
-                  }
-                </div>
-
-                <div
-                  style="
-                    font-size:12px;
-                    color:#6b7280;
-                  "
-                >
-                  ${
-                    order.status ||
-                    "Completed"
-                  }
-                </div>
-
-              </div>
-
-
-              <div
-                style="
-                  font-weight:600;
-                  color:#4d7c0f;
-                "
-              >
-                ₦${
-                  Number(
-                    order.amount || 0
-                  ).toLocaleString("en-NG")
-                }
-              </div>
-
-            `;
-
-
-            ordersList.appendChild(
-              item
-            );
-
-          }
-        );
-
-      }
-
-    }catch(error){
-
-      console.error(
-        "Orders error:",
-        error
-      );
-
-      emptyOrders.style.display =
-        "block";
-
-      ordersList.style.display =
-        "none";
-
-    }
-
+  $("#auth-screen").classList.add("hidden");
+  $("#app-shell").classList.remove("hidden");
+
+  // ensure user doc exists
+  const userRef = doc(db, "users", user.uid);
+  const snap = await getDoc(userRef);
+  if (!snap.exists()) {
+    await setDoc(userRef, { email: user.email, walletBalance: 0, totalPurchases: 0, createdAt: new Date().toISOString() });
   }
-);
 
+  // live user doc
+  unsubscribers.push(onSnapshot(userRef, (s) => {
+    const data = s.data() || {};
+    const name = data.displayName || null;
+    const ini = initials(name, user.email);
+    $("#avatar-badge").textContent = ini;
+    $("#account-avatar").textContent = ini;
+    $("#account-name").textContent = name || "No name set";
+    $("#account-email").textContent = user.email;
+    $("#welcome-heading").textContent = `Welcome back, ${name ? name.split(" ")[0] : "there"} 👋`;
+    $("#topbar-balance").textContent = fmt(data.walletBalance);
+    $("#stat-balance").textContent = fmt(data.walletBalance);
+    $("#wallet-balance").textContent = fmt(data.walletBalance);
+    $("#stat-purchases").textContent = fmt(data.totalPurchases);
+  }));
 
-/* =====================================================
-   SIGN OUT
-===================================================== */
+  // site settings (support links) — live, no hardcoding
+  unsubscribers.push(onSnapshot(doc(db, "settings", "support"), (s) => {
+    const d = s.data() || {};
+    const wa = d.whatsapp || "#";
+    const tg = d.telegram || "#";
+    const em = d.email || "";
+    [$("#whatsapp-link"), $("#whatsapp-link-2")].forEach(el => el.href = wa);
+    [$("#telegram-link"), $("#telegram-link-2")].forEach(el => el.href = tg);
+    [$("#support-email"), $("#support-email-2")].forEach(el => el.textContent = em);
+  }));
 
-signOutBtn.addEventListener(
-  "click",
-  async (event) => {
+  // products: websites (browse store)
+  unsubscribers.push(onSnapshot(query(collection(db, "products"), where("type", "==", "website")), (s) => {
+    renderProducts(s, "browse-products", "browse-empty");
+    $("#stat-sites").textContent = s.size;
+    updateInventory();
+  }));
 
-    event.preventDefault();
+  // products: tools
+  unsubscribers.push(onSnapshot(query(collection(db, "products"), where("type", "==", "tool")), (s) => {
+    renderProducts(s, "tools-products", "tools-empty");
+    $("#stat-tools").textContent = s.size;
+    updateInventory();
+  }));
 
+  // categories for browse store filter chips
+  unsubscribers.push(onSnapshot(collection(db, "categories"), (s) => {
+    const wrap = $("#browse-categories");
+    wrap.innerHTML = "";
+    const allChip = document.createElement("button");
+    allChip.textContent = "All";
+    allChip.className = "shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold border";
+    allChip.style.borderColor = "var(--line)";
+    allChip.style.background = "var(--green-600)";
+    allChip.style.color = "#fff";
+    wrap.appendChild(allChip);
+    s.forEach(d => {
+      const c = document.createElement("button");
+      c.textContent = d.data().name || "Category";
+      c.className = "shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold border";
+      c.style.borderColor = "var(--line)";
+      wrap.appendChild(c);
+    });
+  }));
 
-    if(
-      confirm(
-        "Do you want to sign out?"
-      )
-    ){
+  // orders (recent + full list)
+  unsubscribers.push(onSnapshot(query(collection(db, "orders"), where("uid", "==", user.uid), orderBy("createdAt", "desc")), (s) => {
+    renderOrders(s);
+  }));
 
-      await signOut(auth);
+  // wallet transactions
+  unsubscribers.push(onSnapshot(query(collection(db, "transactions"), where("uid", "==", user.uid), orderBy("createdAt", "desc")), (s) => {
+    renderTransactions(s);
+  }));
 
-      window.location.href =
-        "login.html";
+  goTo(location.hash.replace("#","") || "dashboard");
+});
 
-    }
+let websiteCount = 0, toolCount = 0;
+function updateInventory() {
+  const total = ($("#stat-sites").textContent | 0) + ($("#stat-tools").textContent | 0);
+  $("#stat-inventory").textContent = fmt(total);
+}
 
+function productCard(d) {
+  const p = d.data();
+  const img = p.imageUrl
+    ? `<img src="${p.imageUrl}" alt="${p.title || ''}" class="w-full h-36 object-cover rounded-t-2xl"/>`
+    : `<div class="w-full h-36 rounded-t-2xl skeleton flex items-center justify-center text-xs" style="color:var(--ink-soft)">No image</div>`;
+  return `
+    <div class="card overflow-hidden">
+      ${img}
+      <div class="p-4">
+        <p class="font-semibold text-sm">${p.title || "Untitled product"}</p>
+        <p class="text-xs mt-1 line-clamp-2" style="color:var(--ink-soft)">${p.description || ""}</p>
+        <div class="flex items-center justify-between mt-3">
+          <span class="font-display font-semibold text-sm" style="color:var(--green-700)">₦${fmt(p.price)}</span>
+          <button class="text-xs font-semibold px-3 py-1.5 rounded-lg text-white" style="background:var(--green-600)">Buy</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderProducts(snap, gridId, emptyId) {
+  const grid = $("#" + gridId);
+  const empty = $("#" + emptyId);
+  if (snap.empty) {
+    grid.innerHTML = "";
+    empty.classList.remove("hidden");
+    return;
   }
-);
+  empty.classList.add("hidden");
+  grid.innerHTML = snap.docs.map(productCard).join("");
+}
 
-
-/* =====================================================
-   AVATAR SIGN OUT
-===================================================== */
-
-userAvatar.addEventListener(
-  "click",
-  async () => {
-
-    if(
-      confirm(
-        "Do you want to sign out?"
-      )
-    ){
-
-      await signOut(auth);
-
-      window.location.href =
-        "login.html";
-
-    }
-
+function renderOrders(snap) {
+  const list = $("#orders-list");
+  const empty = $("#orders-empty");
+  const recentCard = $("#recent-orders-card");
+  if (snap.empty) {
+    list.innerHTML = "";
+    empty.classList.remove("hidden");
+    recentCard.innerHTML = `
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#c9c6bd" stroke-width="1.6"><path d="M6 2l1.5 4h9L18 2"/><path d="M3 8h18l-1.5 12a2 2 0 0 1-2 1.8H6.5a2 2 0 0 1-2-1.8L3 8z"/></svg>
+      <p class="text-sm font-semibold mt-3">No orders yet</p>
+      <p class="text-xs mt-1" style="color:var(--ink-soft)">Your purchases will appear here</p>`;
+    return;
   }
-);
+  empty.classList.add("hidden");
+  list.innerHTML = snap.docs.map(d => {
+    const o = d.data();
+    return `<div class="card p-4 flex items-center justify-between">
+      <div>
+        <p class="text-sm font-semibold">${o.title || "Order"}</p>
+        <p class="text-xs mt-0.5" style="color:var(--ink-soft)">${o.createdAt ? new Date(o.createdAt).toLocaleDateString() : ""}</p>
+      </div>
+      <div class="text-right">
+        <p class="text-sm font-semibold">₦${fmt(o.amount)}</p>
+        <p class="text-xs mt-0.5" style="color:var(--green-600)">${o.status || "completed"}</p>
+      </div>
+    </div>`;
+  }).join("");
 
+  recentCard.outerHTML = `<div id="recent-orders-card" class="space-y-3">` + snap.docs.slice(0,3).map(d => {
+    const o = d.data();
+    return `<div class="card p-4 flex items-center justify-between">
+      <div>
+        <p class="text-sm font-semibold">${o.title || "Order"}</p>
+        <p class="text-xs mt-0.5" style="color:var(--ink-soft)">${o.createdAt ? new Date(o.createdAt).toLocaleDateString() : ""}</p>
+      </div>
+      <p class="text-sm font-semibold">₦${fmt(o.amount)}</p>
+    </div>`;
+  }).join("") + `</div>`;
+}
+
+function renderTransactions(snap) {
+  const list = $("#transactions-list");
+  const empty = $("#transactions-empty");
+  const walletHistory = $("#wallet-history");
+  const walletEmpty = $("#wallet-empty");
+  if (snap.empty) {
+    list.innerHTML = "";
+    walletHistory.innerHTML = "";
+    empty.classList.remove("hidden");
+    walletEmpty.classList.remove("hidden");
+    return;
+  }
+  empty.classList.add("hidden");
+  walletEmpty.classList.add("hidden");
+  const rows = snap.docs.map(d => {
+    const t = d.data();
+    const isCredit = (t.amount || 0) >= 0;
+    return `<div class="p-4 flex items-center justify-between">
+      <div>
+        <p class="text-sm font-semibold">${t.description || "Transaction"}</p>
+        <p class="text-xs mt-0.5" style="color:var(--ink-soft)">${t.createdAt ? new Date(t.createdAt).toLocaleString() : ""}</p>
+      </div>
+      <p class="text-sm font-semibold" style="color:${isCredit ? 'var(--green-600)' : '#c0392b'}">${isCredit ? "+" : ""}₦${fmt(Math.abs(t.amount || 0))}</p>
+    </div>`;
+  }).join("");
+  list.innerHTML = rows;
+  walletHistory.innerHTML = rows;
+}
+
+$("#topup-btn").addEventListener("click", () => showToast("Top-up flow coming soon"));
+
+// initial view from hash
+goTo(location.hash.replace("#","") || "dashboard");
 </script>
-
 </body>
 </html>
