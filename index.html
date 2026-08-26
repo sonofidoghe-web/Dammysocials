@@ -3,430 +3,928 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Temmy Social</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 html{
-scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-background:#fff;
-color:#000;
-overflow-x:hidden;
+    width:100%;
+    min-width:320px;
+    background:#fff;
+    color:#000;
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    overflow-x:hidden;
 }
 
-/* HEADER */
-header{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:85px;
-padding:15px 25px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:rgba(255,255,255,0.85);
-backdrop-filter:blur(12px);
-z-index:9999;
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:85px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:10px 32px;
+
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+
+    z-index:10000;
 }
 
 .logo{
-height:55px;
+    width:207px;
+    height:64px;
+    display:flex;
+    align-items:center;
 }
 
 .logo img{
-height:100%;
-object-fit:contain;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    object-position:left center;
 }
+
+/* RIGHT HEADER */
 
 .header-right{
-display:flex;
-align-items:center;
-gap:18px;
+    display:flex;
+    align-items:center;
+    gap:25px;
 }
 
-.theme-btn{
-background:none;
-border:none;
-font-size:24px;
-cursor:pointer;
+/* SUN ICON */
+
+.theme-button{
+    width:31px;
+    height:31px;
+
+    border:none;
+    background:none;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    color:#000;
 }
 
-.menu-btn{
-width:35px;
-height:28px;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
-cursor:pointer;
+.theme-icon{
+    width:25px;
+    height:25px;
+    position:relative;
 }
 
-.menu-btn span{
-height:3px;
-background:#000;
-border-radius:10px;
+.theme-icon::before{
+    content:"";
+    position:absolute;
+
+    width:9px;
+    height:9px;
+
+    border:2px solid #000;
+    border-radius:50%;
+
+    top:6px;
+    left:6px;
 }
 
-/* MOBILE MENU */
-.mobile-menu{
-position:fixed;
-top:85px;
-right:-100%;
-width:250px;
-background:white;
-padding:20px;
-box-shadow:0 10px 25px rgba(0,0,0,.15);
-transition:.3s;
-z-index:999;
-display:flex;
-flex-direction:column;
-gap:15px;
+.theme-icon::after{
+    content:"☼";
+
+    position:absolute;
+
+    font-size:28px;
+    line-height:25px;
+
+    top:-1px;
+    left:-1px;
+
+    color:#000;
 }
 
-.mobile-menu.show{
-right:15px;
+/* MENU */
+
+.menu-button{
+    width:38px;
+    height:34px;
+
+    border:none;
+    background:none;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-end;
+
+    gap:7px;
+
+    cursor:pointer;
 }
 
-.mobile-menu a{
-text-decoration:none;
-color:#000;
-font-weight:700;
-padding:12px;
-border-radius:8px;
+.menu-button span{
+    display:block;
+
+    height:3px;
+
+    background:#000;
+
+    border-radius:10px;
 }
 
-.mobile-menu a:hover{
-background:#f5f5f5;
+.menu-button span:nth-child(1){
+    width:30px;
 }
 
-/* HERO */
+.menu-button span:nth-child(2){
+    width:30px;
+}
+
+.menu-button span:nth-child(3){
+    width:30px;
+}
+
+/* =========================
+   MENU
+========================= */
+
+.menu{
+    position:fixed;
+
+    top:85px;
+    right:-280px;
+
+    width:260px;
+
+    padding:18px;
+
+    background:rgba(255,255,255,.97);
+
+    border:1px solid #ddd;
+
+    border-radius:0 0 0 15px;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.12);
+
+    z-index:9999;
+
+    transition:right .3s ease;
+}
+
+.menu.active{
+    right:0;
+}
+
+.menu a{
+    display:block;
+
+    padding:15px 12px;
+
+    color:#000;
+
+    text-decoration:none;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    border-radius:8px;
+}
+
+.menu a:hover{
+    background:#f3f3f3;
+}
+
+/* =========================
+   HERO
+========================= */
+
 .hero{
-padding:170px 25px 80px;
-text-align:center;
+    width:100%;
+
+    min-height:1169px;
+
+    padding-top:210px;
+    padding-left:25px;
+    padding-right:25px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    text-align:center;
 }
 
-.hero h1{
-font-size:60px;
-font-weight:900;
-line-height:0.95;
-letter-spacing:-2px;
+/* MAIN HEADING */
+
+.hero-title{
+    width:100%;
+    max-width:610px;
+
+    color:#000;
+
+    font-size:58px;
+
+    line-height:.92;
+
+    font-weight:900;
+
+    letter-spacing:-2.5px;
 }
 
-.hero .green{
-color:#4b8b00;
+.hero-title .green{
+    color:#438600;
 }
 
-.hero p{
-margin-top:40px;
-font-size:22px;
-line-height:1.7;
-color:#666;
-max-width:600px;
-margin-left:auto;
-margin-right:auto;
+/* DESCRIPTION */
+
+.hero-description{
+    width:100%;
+    max-width:585px;
+
+    margin-top:48px;
+
+    color:#626262;
+
+    font-size:21px;
+
+    line-height:1.7;
+
+    font-weight:400;
+
+    letter-spacing:-.3px;
 }
+
+/* =========================
+   BUTTONS
+========================= */
 
 .hero-buttons{
-margin-top:50px;
-display:flex;
-flex-direction:column;
-gap:20px;
-align-items:center;
+    width:100%;
+
+    margin-top:56px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    gap:21px;
 }
 
-.btn{
-width:100%;
-max-width:370px;
-height:75px;
-border-radius:12px;
-display:flex;
-align-items:center;
-justify-content:center;
-text-decoration:none;
-font-size:22px;
-font-weight:800;
+.hero-button{
+    width:355px;
+    height:80px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:11px;
+
+    text-decoration:none;
+
+    font-size:22px;
+
+    font-weight:800;
+
+    letter-spacing:.1px;
+
+    transition:.2s ease;
 }
 
-.btn-primary{
-background:#4b8b00;
-color:white;
+.get-started{
+    background:#438600;
+    color:#fff;
 }
 
-.btn-secondary{
-background:white;
-border:2px solid #e5e5e5;
-color:black;
+.get-started:hover{
+    background:#367000;
 }
 
-/* TICKER */
+.get-started .arrow{
+    margin-left:17px;
+    font-size:30px;
+    font-weight:400;
+}
+
+.browse{
+    background:#fff;
+
+    color:#000;
+
+    border:2px solid #e4e4e4;
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,.04);
+}
+
+.browse:hover{
+    border-color:#ccc;
+}
+
+/* =========================
+   GREEN SLIDING BAR
+========================= */
+
 .ticker{
-background:#4b8b00;
-height:95px;
-overflow:hidden;
-display:flex;
-align-items:center;
-margin-top:50px;
+    width:100%;
+
+    height:112px;
+
+    background:#438600;
+
+    overflow:hidden;
+
+    display:flex;
+    align-items:center;
 }
 
-.ticker-track{
-display:flex;
-gap:40px;
-white-space:nowrap;
-animation:scroll 15s linear infinite;
-font-weight:800;
-font-size:28px;
-color:white;
+.ticker-content{
+    display:flex;
+    align-items:center;
+
+    width:max-content;
+
+    white-space:nowrap;
+
+    animation:tickerMove 25s linear infinite;
 }
 
-@keyframes scroll{
-from{
-transform:translateX(0);
-}
-to{
-transform:translateX(-50%);
-}
+.ticker-item{
+    display:flex;
+    align-items:center;
+
+    margin-right:48px;
+
+    color:#fff;
+
+    font-size:30px;
+
+    line-height:1;
+
+    font-weight:800;
+
+    letter-spacing:.5px;
 }
 
-/* STATS */
+.ticker-star{
+    margin-right:48px;
+
+    color:#fff;
+
+    font-size:34px;
+
+    font-weight:400;
+}
+
+@keyframes tickerMove{
+    0%{
+        transform:translateX(0);
+    }
+
+    100%{
+        transform:translateX(-50%);
+    }
+}
+
+/* =========================
+   STATS
+========================= */
+
 .stats{
-padding:90px 25px;
-display:grid;
-grid-template-columns:1fr 1fr;
-max-width:700px;
-margin:auto;
+    width:578px;
+    max-width:calc(100% - 66px);
+
+    margin:106px auto 0;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
 }
 
 .stat{
-text-align:center;
-padding:50px 15px;
-border-right:1px solid #ddd;
-border-bottom:1px solid #ddd;
+    height:270px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    border-right:1px solid #dedede;
+    border-bottom:1px solid #dedede;
 }
 
-.stat:nth-child(2n){
-border-right:none;
+.stat:nth-child(2){
+    border-right:none;
 }
 
-.stat:nth-child(3),
+.stat:nth-child(3){
+    border-bottom:none;
+}
+
 .stat:nth-child(4){
-border-bottom:none;
+    border-right:none;
+    border-bottom:none;
 }
 
-.stat h2{
-font-size:55px;
-font-weight:900;
-color:#4b8b00;
+.stat-number{
+    color:#438600;
+
+    font-size:48px;
+
+    line-height:1;
+
+    font-weight:900;
+
+    letter-spacing:-2px;
 }
 
-.stat p{
-font-size:18px;
-color:#777;
-line-height:1.5;
-margin-top:15px;
+.stat-label{
+    margin-top:20px;
+
+    color:#858585;
+
+    font-size:19px;
+
+    line-height:1.45;
+
+    font-weight:500;
 }
 
-/* DARK MODE */
-.dark{
-background:#111;
-color:white;
+/* =========================
+   EXTRA SPACE
+========================= */
+
+.bottom-space{
+    height:145px;
 }
 
-.dark header{
-background:rgba(20,20,20,0.85);
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .header{
+        height:85px;
+
+        padding:10px 32px;
+    }
+
+    .logo{
+        width:205px;
+        height:62px;
+    }
+
+    .header-right{
+        gap:21px;
+    }
+
+    .hero{
+        min-height:1169px;
+
+        padding-top:216px;
+
+        padding-left:25px;
+        padding-right:25px;
+    }
+
+    .hero-title{
+        font-size:56px;
+
+        line-height:.95;
+
+        letter-spacing:-2.6px;
+    }
+
+    .hero-description{
+        max-width:585px;
+
+        margin-top:48px;
+
+        font-size:21px;
+
+        line-height:1.7;
+    }
+
+    .hero-buttons{
+        margin-top:57px;
+
+        gap:21px;
+    }
+
+    .hero-button{
+        width:355px;
+        max-width:100%;
+
+        height:80px;
+
+        font-size:22px;
+    }
+
+    .ticker{
+        height:112px;
+    }
+
+    .ticker-item{
+        font-size:30px;
+    }
+
+    .stats{
+        width:578px;
+        max-width:calc(100% - 66px);
+
+        margin-top:106px;
+    }
+
+    .stat{
+        height:270px;
+    }
+
+    .stat-number{
+        font-size:47px;
+    }
+
+    .stat-label{
+        font-size:19px;
+    }
 }
 
-.dark .mobile-menu{
-background:#1a1a1a;
-}
+/* SMALL PHONES */
 
-.dark .mobile-menu a{
-color:white;
-}
+@media(max-width:380px){
 
-.dark .btn-secondary{
-background:#111;
-color:white;
-border-color:#333;
-}
+    .header{
+        padding-left:20px;
+        padding-right:20px;
+    }
 
-.dark .stat{
-border-color:#333;
-}
+    .logo{
+        width:180px;
+    }
 
-.dark .stat p{
-color:#aaa;
-}
+    .header-right{
+        gap:15px;
+    }
 
-.dark .hero p{
-color:#aaa;
-}
+    .hero{
+        padding-left:18px;
+        padding-right:18px;
+    }
 
-@media(max-width:480px){
+    .hero-title{
+        font-size:47px;
+    }
 
-.hero h1{
-font-size:48px;
-}
+    .hero-description{
+        font-size:19px;
+    }
 
-.hero p{
-font-size:18px;
-}
+    .hero-button{
+        height:75px;
+        font-size:20px;
+    }
 
-.btn{
-height:70px;
-font-size:20px;
-}
+    .stats{
+        max-width:calc(100% - 36px);
+    }
 
-.stat h2{
-font-size:42px;
-}
+    .stat{
+        height:235px;
+    }
 
-.stat p{
-font-size:16px;
-}
+    .stat-number{
+        font-size:39px;
+    }
 
-.ticker-track{
-font-size:22px;
-}
+    .stat-label{
+        font-size:16px;
+    }
 }
 </style>
 </head>
+
 <body>
 
-<header>
+<!-- =========================
+     FIXED HEADER
+========================= -->
 
-<div class="logo">
-<!-- Replace with your logo -->
-<img src="logo.png" alt="Temmy Social">
-</div>
+<header class="header">
 
-<div class="header-right">
+    <a href="index.html" class="logo">
+        <img src="logo.png" alt="Temmy Social">
+    </a>
 
-<button class="theme-btn" id="themeBtn">
-☼
-</button>
+    <div class="header-right">
 
-<div class="menu-btn" id="menuBtn">
-<span></span>
-<span></span>
-<span></span>
-</div>
+        <button class="theme-button" id="themeButton" aria-label="Theme">
+            <span class="theme-icon"></span>
+        </button>
 
-</div>
+        <button class="menu-button" id="menuButton" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </div>
 
 </header>
 
-<div class="mobile-menu" id="mobileMenu">
-<a href="#">Pricing</a>
-<a href="#">Sign In</a>
-<a href="#">Get Started</a>
-<a href="#">FAQ</a>
-</div>
+
+<!-- =========================
+     MENU
+========================= -->
+
+<nav class="menu" id="menu">
+
+    <a href="#">Pricing</a>
+
+    <a href="#">Sign In</a>
+
+    <a href="#">Get Started</a>
+
+    <a href="#">FAQ</a>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
-<h1>
-PREMIUM<br>
-<span class="green">SOCIAL</span> ASSETS<br>
-DELIVERED<br>
-FAST
-</h1>
+    <h1 class="hero-title">
 
-<p>
-Buy aged social media accounts, working tools,
-virtual SMS numbers, and SME boosting services
-plus all in one platform, paid from your wallet.
-</p>
+        PREMIUM<br>
 
-<div class="hero-buttons">
+        <span class="green">SOCIAL</span> ASSETS<br>
 
-<a href="#" class="btn btn-primary">
-GET STARTED →
-</a>
+        DELIVERED<br>
 
-<a href="#" class="btn btn-secondary">
-BROWSE SERVICES
-</a>
+        FAST
 
-</div>
+    </h1>
+
+
+    <p class="hero-description">
+
+        Buy aged social media accounts, working
+        tools, virtual SMS numbers, and SME
+        boosting services plus all in one platform,
+        paid from your wallet.
+
+    </p>
+
+
+    <div class="hero-buttons">
+
+        <a href="#" class="hero-button get-started">
+
+            GET STARTED
+
+            <span class="arrow">→</span>
+
+        </a>
+
+
+        <a href="#services" class="hero-button browse">
+
+            BROWSE SERVICES
+
+        </a>
+
+    </div>
 
 </section>
+
+
+<!-- =========================
+     MOVING SERVICE BAR
+========================= -->
 
 <section class="ticker">
 
-<div class="ticker-track">
-<span>FACEBOOK ACCOUNTS</span>
-<span>*</span>
-<span>INSTAGRAM ACCOUNTS</span>
-<span>*</span>
-<span>VIRTUAL SMS</span>
-<span>*</span>
-<span>SME BOOSTING</span>
-<span>*</span>
-<span>FACEBOOK ACCOUNTS</span>
-<span>*</span>
-<span>INSTAGRAM ACCOUNTS</span>
-</div>
+    <div class="ticker-content">
+
+        <div class="ticker-item">
+            FACEBOOK ACCOUNTS
+        </div>
+
+        <div class="ticker-star">
+            *
+        </div>
+
+        <div class="ticker-item">
+            INSTAGRAM ACCOUNTS
+        </div>
+
+        <div class="ticker-star">
+            *
+        </div>
+
+        <div class="ticker-item">
+            VIRTUAL SMS
+        </div>
+
+        <div class="ticker-star">
+            *
+        </div>
+
+        <div class="ticker-item">
+            SME BOOSTING
+        </div>
+
+        <div class="ticker-star">
+            *
+        </div>
+
+
+        <!-- Duplicate for seamless movement -->
+
+        <div class="ticker-item">
+            FACEBOOK ACCOUNTS
+        </div>
+
+        <div class="ticker-star">
+            *
+        </div>
+
+        <div class="ticker-item">
+            INSTAGRAM ACCOUNTS
+        </div>
+
+        <div class="ticker-star">
+            *
+        </div>
+
+        <div class="ticker-item">
+            VIRTUAL SMS
+        </div>
+
+        <div class="ticker-star">
+            *
+        </div>
+
+        <div class="ticker-item">
+            SME BOOSTING
+        </div>
+
+        <div class="ticker-star">
+            *
+        </div>
+
+    </div>
 
 </section>
 
-<section class="stats">
 
-<div class="stat">
-<h2>10K+</h2>
-<p>ACCOUNTS IN<br>STOCK</p>
-</div>
+<!-- =========================
+     STATISTICS
+========================= -->
 
-<div class="stat">
-<h2>200+</h2>
-<p>COUNTRIES FOR<br>SMS</p>
-</div>
+<section class="stats" id="services">
 
-<div class="stat">
-<h2>&lt;10s</h2>
-<p>AVG DELIVERY<br>TIME</p>
-</div>
+    <div class="stat">
 
-<div class="stat">
-<h2>24/7</h2>
-<p>PLATFORM<br>UPTIME</p>
-</div>
+        <div class="stat-number">
+            10K+
+        </div>
+
+        <div class="stat-label">
+            ACCOUNTS IN<br>
+            STOCK
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-number">
+            200+
+        </div>
+
+        <div class="stat-label">
+            COUNTRIES FOR<br>
+            SMS
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-number">
+            &lt; 10s
+        </div>
+
+        <div class="stat-label">
+            AVG DELIVERY<br>
+            TIME
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-number">
+            24/7
+        </div>
+
+        <div class="stat-label">
+            PLATFORM<br>
+            UPTIME
+        </div>
+
+    </div>
 
 </section>
+
+
+<div class="bottom-space"></div>
+
 
 <script>
-const menuBtn = document.getElementById("menuBtn");
-const mobileMenu = document.getElementById("mobileMenu");
 
-menuBtn.onclick = () => {
-mobileMenu.classList.toggle("show");
-};
+/* =========================
+   MENU
+========================= */
 
-const themeBtn = document.getElementById("themeBtn");
+const menuButton =
+    document.getElementById("menuButton");
 
-themeBtn.onclick = () => {
-document.body.classList.toggle("dark");
+const menu =
+    document.getElementById("menu");
 
-if(document.body.classList.contains("dark")){
-localStorage.setItem("theme","dark");
-}else{
-localStorage.setItem("theme","light");
-}
-};
+menuButton.addEventListener("click", function(){
 
-if(localStorage.getItem("theme")==="dark"){
-document.body.classList.add("dark");
-}
+    menu.classList.toggle("active");
+
+});
+
+
+/* CLOSE MENU WHEN LINK IS CLICKED */
+
+document.querySelectorAll(".menu a").forEach(function(link){
+
+    link.addEventListener("click", function(){
+
+        menu.classList.remove("active");
+
+    });
+
+});
+
+
+/* =========================
+   THEME
+========================= */
+
+const themeButton =
+    document.getElementById("themeButton");
+
+themeButton.addEventListener("click", function(){
+
+    /*
+       Theme functionality can be connected
+       to your existing theme.js later.
+    */
+
+    console.log("Theme button clicked");
+
+});
+
 </script>
 
 </body>
