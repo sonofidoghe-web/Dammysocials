@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dammy Social – Premium Social Assets</title>
   <style>
+    :root {
+      /* Light theme (default) */
+      --bg: #ffffff;
+      --text: #111111;
+      --text-muted: #555555;
+      --header-bg: rgba(255, 255, 255, 0.85);
+      --border: #eeeeee;
+      --card-border: #eeeeee;
+      --primary: #2e7d32;
+      --primary-dark: #1b5e20;
+      --primary-light: #4caf50;
+      --btn-secondary-bg: #ffffff;
+      --btn-secondary-border: #dddddd;
+      --btn-secondary-text: #111111;
+      --banner-bg: #2e7d32;
+      --logo-text: #1b5e20;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f0f0f;
+      --text: #f5f5f5;
+      --text-muted: #aaaaaa;
+      --header-bg: rgba(20, 20, 20, 0.85);
+      --border: #2a2a2a;
+      --card-border: #2a2a2a;
+      --primary: #43a047;
+      --primary-dark: #2e7d32;
+      --primary-light: #66bb6a;
+      --btn-secondary-bg: #1a1a1a;
+      --btn-secondary-border: #444444;
+      --btn-secondary-text: #f5f5f5;
+      --banner-bg: #1b5e20;
+      --logo-text: #81c784;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -13,110 +48,137 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: #ffffff;
-      color: #111;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.5;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
-    /* ========== HEADER (85% transparent) ========== */
+    /* ========== HEADER ========== */
     header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 70px;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      height: 72px;
+      background: var(--header-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
+      padding: 0 20px;
       z-index: 1000;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s ease;
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       text-decoration: none;
       font-weight: 700;
-      font-size: 1.45rem;
+      font-size: 1.4rem;
     }
 
     .logo-icon {
-      width: 36px;
-      height: 36px;
-      background: #2e7d32;
+      width: 38px;
+      height: 38px;
+      background: var(--primary);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 800;
       position: relative;
+      flex-shrink: 0;
     }
 
     .logo-icon::after {
       content: "✓";
       position: absolute;
-      font-size: 0.7rem;
-      bottom: 2px;
-      right: 3px;
+      font-size: 0.65rem;
+      bottom: 3px;
+      right: 4px;
+      background: white;
+      color: var(--primary);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
     }
 
     .logo-text {
-      color: #1b5e20;
+      color: var(--logo-text);
+      letter-spacing: -0.5px;
     }
 
     .logo-arrows {
-      color: #e53935; /* red >> */
+      color: #e53935;
       font-weight: 800;
-      letter-spacing: -1px;
+      letter-spacing: -2px;
+      font-size: 1.5rem;
+      margin-left: -2px;
     }
 
     .header-right {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
     }
 
     .header-right button {
       background: none;
       border: none;
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       cursor: pointer;
-      color: #333;
+      color: var(--text);
+      padding: 6px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .header-right button:hover {
+      background: rgba(0,0,0,0.05);
+    }
+
+    [data-theme="dark"] .header-right button:hover {
+      background: rgba(255,255,255,0.08);
     }
 
     /* ========== HERO ========== */
     .hero {
-      padding: 140px 20px 80px;
+      padding: 150px 20px 90px;
       text-align: center;
-      max-width: 900px;
+      max-width: 860px;
       margin: 0 auto;
     }
 
     .hero h1 {
-      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-size: clamp(2.6rem, 7vw, 4.2rem);
       font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -1px;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
       margin-bottom: 28px;
+      text-transform: uppercase;
     }
 
     .hero h1 .green {
-      color: #2e7d32;
+      color: var(--primary);
     }
 
     .hero p {
       font-size: 1.15rem;
-      color: #555;
-      max-width: 620px;
-      margin: 0 auto 40px;
-      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 42px;
+      line-height: 1.65;
     }
 
     .buttons {
@@ -127,34 +189,36 @@
     }
 
     .btn-primary {
-      background: #2e7d32;
+      background: var(--primary);
       color: white;
       border: none;
-      padding: 16px 42px;
+      padding: 17px 44px;
       font-size: 1rem;
       font-weight: 600;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      transition: background 0.2s;
+      gap: 10px;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 4px 14px rgba(46, 125, 50, 0.3);
     }
 
     .btn-primary:hover {
-      background: #1b5e20;
+      background: var(--primary-dark);
+      transform: translateY(-1px);
     }
 
     .btn-secondary {
-      background: white;
-      color: #111;
-      border: 1.5px solid #ddd;
-      padding: 14px 36px;
+      background: var(--btn-secondary-bg);
+      color: var(--btn-secondary-text);
+      border: 1.5px solid var(--btn-secondary-border);
+      padding: 15px 38px;
       font-size: 0.95rem;
       font-weight: 600;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, background 0.2s;
     }
 
     .btn-secondary:hover {
@@ -163,35 +227,38 @@
 
     /* ========== GREEN BANNER ========== */
     .services-banner {
-      background: #2e7d32;
+      background: var(--banner-bg);
       color: white;
       text-align: center;
-      padding: 18px 20px;
+      padding: 20px 16px;
       font-weight: 700;
-      font-size: 1.05rem;
-      letter-spacing: 1px;
+      font-size: 1rem;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
+      overflow: hidden;
+      white-space: nowrap;
     }
 
     .services-banner span {
-      margin: 0 12px;
-      opacity: 0.7;
+      margin: 0 14px;
+      opacity: 0.55;
+      font-weight: 400;
     }
 
     /* ========== STATS ========== */
     .stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
-      border-top: 1px solid #eee;
+      border-top: 1px solid var(--card-border);
     }
 
     .stat-box {
-      padding: 48px 20px;
+      padding: 52px 16px;
       text-align: center;
-      border-right: 1px solid #eee;
-      border-bottom: 1px solid #eee;
+      border-right: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
     }
 
     .stat-box:nth-child(2n) {
@@ -199,29 +266,35 @@
     }
 
     .stat-number {
-      font-size: 2.6rem;
+      font-size: 2.7rem;
       font-weight: 800;
-      color: #2e7d32;
-      margin-bottom: 6px;
+      color: var(--primary);
+      margin-bottom: 8px;
+      letter-spacing: -1px;
     }
 
     .stat-label {
-      font-size: 0.85rem;
-      color: #666;
+      font-size: 0.82rem;
+      color: var(--text-muted);
       font-weight: 500;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
       text-transform: uppercase;
     }
 
     /* Responsive */
-    @media (min-width: 640px) {
+    @media (min-width: 600px) {
       .buttons {
         flex-direction: row;
         justify-content: center;
+        gap: 16px;
       }
     }
 
     @media (min-width: 768px) {
+      header {
+        padding: 0 40px;
+      }
+
       .stats {
         grid-template-columns: repeat(4, 1fr);
       }
@@ -231,7 +304,7 @@
       }
 
       .stat-box:nth-child(2n) {
-        border-right: 1px solid #eee;
+        border-right: 1px solid var(--card-border);
       }
 
       .stat-box:last-child {
@@ -251,7 +324,7 @@
     </a>
 
     <div class="header-right">
-      <button aria-label="Toggle theme">☀</button>
+      <button id="theme-toggle" aria-label="Toggle theme">☀</button>
       <button aria-label="Menu">☰</button>
     </div>
   </header>
@@ -281,7 +354,7 @@
 
   <!-- GREEN SERVICES BANNER -->
   <div class="services-banner">
-    FACEBOOK ACCOUNTS <span>*</span> INSTAGRAM ACCOUNTS <span>*</span> MORE
+    FACEBOOK ACCOUNTS <span>*</span> INSTAGRAM ACCOUNTS <span>*</span> TWITTER ACCOUNTS
   </div>
 
   <!-- STATS -->
@@ -303,6 +376,29 @@
       <div class="stat-label">Platform Uptime</div>
     </div>
   </section>
+
+  <script>
+    // Theme toggle
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', savedTheme);
+    updateIcon(savedTheme);
+
+    toggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateIcon(next);
+    });
+
+    function updateIcon(theme) {
+      toggle.textContent = theme === 'light' ? '☀' : '☾';
+    }
+  </script>
 
 </body>
 </html>
