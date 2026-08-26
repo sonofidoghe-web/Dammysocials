@@ -38,7 +38,6 @@ html{
 body{
     width:100%;
     min-width:320px;
-
     margin:0;
     padding:0;
 
@@ -72,12 +71,12 @@ body{
     align-items:center;
     justify-content:space-between;
 
-    padding:10px 32px;
+    padding:8px 32px;
 
-    background:rgba(255,255,255,.92);
+    background:rgba(255,255,255,.94);
 
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
 
     z-index:10000;
 }
@@ -118,24 +117,24 @@ body{
     display:flex;
     align-items:center;
 
-    gap:25px;
+    gap:22px;
 
     flex-shrink:0;
 }
 
 
 /* =========================================================
-   SUN ICON
+   SUN
 ========================================================= */
 
 .theme-button{
-    width:31px;
-    height:31px;
+    width:30px;
+    height:30px;
 
     padding:0;
 
-    border:none;
-    background:none;
+    border:0;
+    background:transparent;
 
     display:flex;
     align-items:center;
@@ -149,6 +148,8 @@ body{
 
     width:27px;
     height:27px;
+
+    display:block;
 }
 
 .theme-icon::before{
@@ -172,11 +173,11 @@ body{
 
     position:absolute;
 
-    top:-3px;
-    left:-3px;
+    top:-4px;
+    left:-4px;
 
-    width:33px;
-    height:33px;
+    width:35px;
+    height:35px;
 
     display:flex;
     align-items:center;
@@ -190,7 +191,7 @@ body{
 
 
 /* =========================================================
-   MENU BUTTON
+   HAMBURGER
 ========================================================= */
 
 .menu-button{
@@ -199,8 +200,8 @@ body{
 
     padding:0;
 
-    border:none;
-    background:none;
+    border:0;
+    background:transparent;
 
     display:flex;
     flex-direction:column;
@@ -286,17 +287,22 @@ body{
     width:100%;
 
     /*
-       The reference design has the green ticker
-       starting at this exact vertical position.
-    */
+       IMPORTANT:
+       No fixed height here.
 
-    height:1169px;
-    min-height:1169px;
+       The old 1169px height was creating
+       the unnecessary giant empty area.
+
+       The hero now grows naturally according
+       to its content.
+    */
 
     padding-top:216px;
 
-    padding-left:25px;
-    padding-right:25px;
+    padding-left:20px;
+    padding-right:20px;
+
+    padding-bottom:210px;
 
     display:flex;
     flex-direction:column;
@@ -315,13 +321,7 @@ body{
 .hero-title{
     width:100%;
 
-    /*
-       Important:
-       We allow the title to become wide enough
-       for "SOCIAL ASSETS" to remain on one line.
-    */
-
-    max-width:650px;
+    max-width:610px;
 
     margin:0;
 
@@ -333,7 +333,22 @@ body{
 
     font-weight:900;
 
-    letter-spacing:-2.5px;
+    letter-spacing:-2.8px;
+}
+
+
+/*
+   Each line is controlled separately.
+   This prevents SOCIAL ASSETS from breaking
+   into two lines on smaller phones.
+*/
+
+.hero-line{
+    display:block;
+
+    width:100%;
+
+    white-space:nowrap;
 }
 
 .hero-title .green{
@@ -374,9 +389,7 @@ body{
     margin-top:56px;
 
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
 
     gap:21px;
@@ -387,7 +400,6 @@ body{
     height:80px;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
@@ -405,11 +417,12 @@ body{
 }
 
 
-/* GET STARTED */
+/* =========================================================
+   GET STARTED
+========================================================= */
 
 .get-started{
     background:#438600;
-
     color:#fff;
 }
 
@@ -426,7 +439,9 @@ body{
 }
 
 
-/* BROWSE */
+/* =========================================================
+   BROWSE
+========================================================= */
 
 .browse{
     background:#fff;
@@ -535,7 +550,9 @@ body{
 }
 
 
-/* STAT */
+/* =========================================================
+   STAT
+========================================================= */
 
 .stat{
     height:270px;
@@ -578,7 +595,9 @@ body{
 }
 
 
-/* NUMBER */
+/* =========================================================
+   STAT NUMBER
+========================================================= */
 
 .stat-number{
     color:#438600;
@@ -593,7 +612,9 @@ body{
 }
 
 
-/* LABEL */
+/* =========================================================
+   STAT LABEL
+========================================================= */
 
 .stat-label{
     margin-top:20px;
@@ -620,34 +641,19 @@ body{
 
 
 /* =========================================================
-   IMPORTANT MOBILE FIX
+   MOBILE
 ========================================================= */
-
-/*
-   This is the part that fixes your second screenshot.
-
-   Your phone is narrower than the reference layout.
-   Therefore the old 56px mobile heading was forcing:
-
-   PREMIUM
-   SOCIAL
-   ASSETS
-
-   onto separate lines.
-
-   We reduce the title only on small screens
-   and give it enough width.
-*/
-
 
 @media(max-width:600px){
 
-    /* HEADER */
+    /* -----------------------------------------------------
+       HEADER
+    ----------------------------------------------------- */
 
     .header{
         height:85px;
 
-        padding:10px 20px;
+        padding:8px 20px;
     }
 
     .logo{
@@ -656,58 +662,67 @@ body{
     }
 
     .header-right{
-        gap:17px;
+        gap:16px;
     }
 
 
-    /* HERO */
+    /* -----------------------------------------------------
+       HERO
+    ----------------------------------------------------- */
 
     .hero{
-        height:1169px;
-        min-height:1169px;
 
-        padding-top:130px;
+        /*
+           Keep the title in approximately the same
+           vertical position as the reference image.
+        */
+
+        padding-top:216px;
 
         padding-left:10px;
         padding-right:10px;
+
+        /*
+           THIS controls the space before the ticker.
+
+           It is NOT a giant fixed hero height.
+        */
+
+        padding-bottom:210px;
     }
 
 
-    /* TITLE */
+    /* -----------------------------------------------------
+       TITLE
+    ----------------------------------------------------- */
 
     .hero-title{
+
         width:100%;
 
         max-width:380px;
 
-        font-size:48px;
+        font-size:56px;
 
         line-height:.94;
 
-        letter-spacing:-2.2px;
+        letter-spacing:-2.8px;
+    }
+
+    .hero-line{
+        white-space:nowrap;
     }
 
 
-    /*
-       Force the desired line arrangement:
-       
-       PREMIUM
-       SOCIAL ASSETS
-       DELIVERED
-       FAST
-    */
-
-    .hero-title .green{
-        color:#438600;
-    }
-
-
-    /* DESCRIPTION */
+    /* -----------------------------------------------------
+       DESCRIPTION
+    ----------------------------------------------------- */
 
     .hero-description{
+
         max-width:360px;
 
-        margin-top:38px;
+        margin-top:48px;
 
         font-size:19px;
 
@@ -715,25 +730,32 @@ body{
     }
 
 
-    /* BUTTONS */
+    /* -----------------------------------------------------
+       BUTTONS
+    ----------------------------------------------------- */
 
     .hero-buttons{
-        margin-top:43px;
 
-        gap:18px;
+        margin-top:56px;
+
+        gap:20px;
     }
 
     .hero-button{
+
         width:355px;
+
         max-width:calc(100vw - 50px);
 
-        height:78px;
+        height:80px;
 
         font-size:21px;
     }
 
 
-    /* TICKER */
+    /* -----------------------------------------------------
+       TICKER
+    ----------------------------------------------------- */
 
     .ticker{
         height:112px;
@@ -748,9 +770,12 @@ body{
     }
 
 
-    /* STATS */
+    /* -----------------------------------------------------
+       STATS
+    ----------------------------------------------------- */
 
     .stats{
+
         width:578px;
 
         max-width:calc(100% - 66px);
@@ -774,7 +799,7 @@ body{
 
 
 /* =========================================================
-   VERY SMALL PHONES
+   SMALL PHONES
 ========================================================= */
 
 @media(max-width:380px){
@@ -794,50 +819,84 @@ body{
     }
 
 
-    .hero{
-        padding-top:125px;
+    /* -----------------------------------------------------
+       HERO
+    ----------------------------------------------------- */
 
-        padding-left:8px;
-        padding-right:8px;
+    .hero{
+
+        padding-top:216px;
+
+        padding-left:6px;
+        padding-right:6px;
+
+        /*
+           Still controlled spacing.
+           No fixed 1169px height.
+        */
+
+        padding-bottom:195px;
     }
 
+
+    /* -----------------------------------------------------
+       TITLE
+    ----------------------------------------------------- */
 
     .hero-title{
-        max-width:370px;
 
-        font-size:44px;
+        max-width:365px;
 
-        letter-spacing:-2px;
+        font-size:52px;
+
+        line-height:.94;
+
+        letter-spacing:-2.7px;
     }
 
 
+    /* -----------------------------------------------------
+       DESCRIPTION
+    ----------------------------------------------------- */
+
     .hero-description{
+
         max-width:350px;
 
-        margin-top:35px;
+        margin-top:44px;
 
         font-size:18px;
 
-        line-height:1.55;
+        line-height:1.6;
     }
 
+
+    /* -----------------------------------------------------
+       BUTTONS
+    ----------------------------------------------------- */
 
     .hero-buttons{
-        margin-top:40px;
 
-        gap:17px;
+        margin-top:50px;
+
+        gap:18px;
     }
 
-
     .hero-button{
+
         width:345px;
+
         max-width:calc(100vw - 40px);
 
-        height:74px;
+        height:76px;
 
         font-size:20px;
     }
 
+
+    /* -----------------------------------------------------
+       TICKER
+    ----------------------------------------------------- */
 
     .ticker{
         height:105px;
@@ -852,7 +911,12 @@ body{
     }
 
 
+    /* -----------------------------------------------------
+       STATS
+    ----------------------------------------------------- */
+
     .stats{
+
         max-width:calc(100% - 36px);
 
         margin-top:82px;
@@ -878,6 +942,7 @@ body{
 }
 
 </style>
+
 </head>
 
 
@@ -896,8 +961,8 @@ body{
     >
 
         <img
-            src="logo.png"
-            alt="Temmy Social"
+            src="logo.png.jpg"
+            alt=""
         >
 
     </a>
@@ -905,6 +970,8 @@ body{
 
     <div class="header-right">
 
+
+        <!-- SUN -->
 
         <button
             class="theme-button"
@@ -917,6 +984,8 @@ body{
 
         </button>
 
+
+        <!-- HAMBURGER -->
 
         <button
             class="menu-button"
@@ -938,7 +1007,7 @@ body{
 
 
 <!-- =======================================================
-     MENU
+     SLIDE MENU
 ======================================================= -->
 
 <nav
@@ -975,13 +1044,21 @@ body{
 
     <h1 class="hero-title">
 
-        PREMIUM<br>
+        <span class="hero-line">
+            PREMIUM
+        </span>
 
-        <span class="green">SOCIAL</span> ASSETS<br>
+        <span class="hero-line">
+            <span class="green">SOCIAL</span> ASSETS
+        </span>
 
-        DELIVERED<br>
+        <span class="hero-line">
+            DELIVERED
+        </span>
 
-        FAST
+        <span class="hero-line">
+            FAST
+        </span>
 
     </h1>
 
@@ -1030,7 +1107,7 @@ body{
 
 
 <!-- =======================================================
-     TICKER
+     GREEN MOVING BAR
 ======================================================= -->
 
 <section class="ticker">
@@ -1118,7 +1195,7 @@ body{
 
 
 <!-- =======================================================
-     STATS
+     STATISTICS
 ======================================================= -->
 
 <section
@@ -1126,6 +1203,8 @@ body{
     id="services"
 >
 
+
+    <!-- 10K -->
 
     <div class="stat">
 
@@ -1143,6 +1222,8 @@ body{
     </div>
 
 
+    <!-- 200 -->
+
     <div class="stat">
 
         <div class="stat-number">
@@ -1159,6 +1240,8 @@ body{
     </div>
 
 
+    <!-- DELIVERY -->
+
     <div class="stat">
 
         <div class="stat-number">
@@ -1174,6 +1257,8 @@ body{
 
     </div>
 
+
+    <!-- UPTIME -->
 
     <div class="stat">
 
@@ -1227,7 +1312,7 @@ menuButton.addEventListener(
 
 
 /* =========================================================
-   CLOSE MENU AFTER LINK CLICK
+   CLOSE MENU WHEN LINK IS CLICKED
 ========================================================= */
 
 document
@@ -1254,16 +1339,16 @@ document.addEventListener(
     "click",
     function(event){
 
-        const insideMenu =
+        const clickedInsideMenu =
             menu.contains(event.target);
 
-        const menuButtonClicked =
+        const clickedMenuButton =
             menuButton.contains(event.target);
 
 
         if(
-            !insideMenu &&
-            !menuButtonClicked
+            !clickedInsideMenu &&
+            !clickedMenuButton
         ){
 
             menu.classList.remove("active");
@@ -1275,7 +1360,7 @@ document.addEventListener(
 
 
 /* =========================================================
-   THEME
+   THEME BUTTON
 ========================================================= */
 
 const themeButton =
