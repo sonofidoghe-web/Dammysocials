@@ -1,47 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dammy Social</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dammy Social – Premium Social Assets</title>
   <style>
-    :root {
-      --bg: #ffffff;
-      --text: #111111;
-      --text-secondary: #666666;
-      --card-bg: #ffffff;
-      --border: #eeeeee;
-      --green: #4a7c3f;
-      --green-dark: #2d5a27;
-      --green-light: #e8f5e3;
-      --header-bg: rgba(255, 255, 255, 0.11);
-      --process-bg: #f7f7f4;
-      --stat-border: #eeeeee;
-      --tag-bg: #f5f5f5;
-      --tag-border: #e5e5e5;
-      --number-color: #ececec;
-      --step-number: #e4e4e4;
-    }
-
-    [data-theme="dark"] {
-      --bg: #0f0f0f;
-      --text: #f0f0f0;
-      --text-secondary: #aaaaaa;
-      --card-bg: #1a1a1a;
-      --border: #2a2a2a;
-      --green: #6bc45a;
-      --green-dark: #5aaf4a;
-      --green-light: #1e2e1c;
-      --header-bg: rgba(15, 15, 15, 0.75);
-      --process-bg: #141414;
-      --stat-border: #2a2a2a;
-      --tag-bg: #252525;
-      --tag-border: #333333;
-      --number-color: #2a2a2a;
-      --step-number: #333333;
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -49,84 +12,69 @@
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #ffffff;
+      color: #111;
       line-height: 1.5;
-      transition: background 0.3s, color 0.3s;
     }
 
-    /* ========== HEADER ========== */
-    .header {
+    /* ========== HEADER (85% transparent) ========== */
+    header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 70px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 24px;
-      background: var(--header-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       z-index: 1000;
-      transition: background 0.3s;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.45rem;
     }
 
     .logo-icon {
-      position: relative;
-      width: 42px;
-      height: 42px;
-      background: var(--green-dark);
-      border-radius: 50% 50% 50% 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 800;
-      font-size: 22px;
-    }
-
-    .logo-icon .check {
-      position: absolute;
-      bottom: 4px;
-      right: 4px;
-      background: var(--green);
-      color: white;
-      font-size: 11px;
-      width: 16px;
-      height: 16px;
+      width: 36px;
+      height: 36px;
+      background: #2e7d32;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 800;
+      position: relative;
+    }
+
+    .logo-icon::after {
+      content: "✓";
+      position: absolute;
+      font-size: 0.7rem;
+      bottom: 2px;
+      right: 3px;
     }
 
     .logo-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
+      color: #1b5e20;
     }
 
-    .dammy {
-      font-family: 'Pacifico', cursive;
-      font-size: 22px;
-      color: var(--green-dark);
-    }
-
-    .social {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--green);
-      letter-spacing: 0.5px;
-      margin-top: -2px;
+    .logo-arrows {
+      color: #e53935; /* red >> */
+      font-weight: 800;
+      letter-spacing: -1px;
     }
 
     .header-right {
@@ -135,609 +83,226 @@
       gap: 18px;
     }
 
-    .theme-toggle, .menu-btn {
+    .header-right button {
       background: none;
       border: none;
+      font-size: 1.35rem;
       cursor: pointer;
-      color: var(--text);
-      padding: 6px;
-      transition: color 0.3s;
-    }
-
-    .theme-toggle svg {
-      width: 22px;
-      height: 22px;
-    }
-
-    .menu-btn {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .menu-btn span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: background 0.3s;
+      color: #333;
     }
 
     /* ========== HERO ========== */
     .hero {
-      padding: 140px 24px 80px;
+      padding: 140px 20px 80px;
       text-align: center;
-      max-width: 700px;
+      max-width: 900px;
       margin: 0 auto;
     }
 
     .hero h1 {
-      font-size: clamp(2.8rem, 8vw, 4.2rem);
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
       font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -1.5px;
+      line-height: 1.1;
+      letter-spacing: -1px;
       margin-bottom: 28px;
     }
 
-    .hero h1 .black { color: var(--text); }
-    .hero h1 .green { color: var(--green); }
+    .hero h1 .green {
+      color: #2e7d32;
+    }
 
-    .subtitle {
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      max-width: 480px;
+    .hero p {
+      font-size: 1.15rem;
+      color: #555;
+      max-width: 620px;
       margin: 0 auto 40px;
       line-height: 1.6;
     }
 
-    .hero-buttons {
+    .buttons {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
 
     .btn-primary {
+      background: #2e7d32;
+      color: white;
+      border: none;
+      padding: 16px 42px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--green);
-      color: white;
-      font-weight: 700;
-      font-size: 15px;
-      padding: 16px 36px;
-      border-radius: 12px;
-      text-decoration: none;
       transition: background 0.2s;
     }
 
-    .btn-primary:hover { background: var(--green-dark); }
+    .btn-primary:hover {
+      background: #1b5e20;
+    }
 
     .btn-secondary {
-      display: inline-block;
-      color: var(--text);
-      font-weight: 700;
-      font-size: 14px;
-      padding: 14px 32px;
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      text-decoration: none;
+      background: white;
+      color: #111;
+      border: 1.5px solid #ddd;
+      padding: 14px 36px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
       transition: border-color 0.2s;
     }
 
+    .btn-secondary:hover {
+      border-color: #999;
+    }
+
     /* ========== GREEN BANNER ========== */
-    .green-banner {
-      background: var(--green);
+    .services-banner {
+      background: #2e7d32;
       color: white;
-      padding: 18px 0;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-
-    .banner-content {
-      display: inline-block;
+      text-align: center;
+      padding: 18px 20px;
       font-weight: 700;
-      font-size: 15px;
+      font-size: 1.05rem;
       letter-spacing: 1px;
-      animation: scroll 30s linear infinite;
+      text-transform: uppercase;
     }
 
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    .services-banner span {
+      margin: 0 12px;
+      opacity: 0.7;
     }
 
     /* ========== STATS ========== */
     .stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      max-width: 600px;
-      margin: 60px auto 80px;
-      border: 1px solid var(--stat-border);
-      border-radius: 16px;
-      overflow: hidden;
-      background: var(--card-bg);
+      max-width: 900px;
+      margin: 0 auto;
+      border-top: 1px solid #eee;
     }
 
-    .stat-card {
-      padding: 40px 20px;
+    .stat-box {
+      padding: 48px 20px;
       text-align: center;
-      border-right: 1px solid var(--stat-border);
-      border-bottom: 1px solid var(--stat-border);
+      border-right: 1px solid #eee;
+      border-bottom: 1px solid #eee;
     }
 
-    .stat-card:nth-child(2n) { border-right: none; }
-    .stat-card:nth-child(3),
-    .stat-card:nth-child(4) { border-bottom: none; }
+    .stat-box:nth-child(2n) {
+      border-right: none;
+    }
 
     .stat-number {
-      font-size: 2.4rem;
+      font-size: 2.6rem;
       font-weight: 800;
-      color: var(--green);
-      margin-bottom: 8px;
+      color: #2e7d32;
+      margin-bottom: 6px;
     }
 
     .stat-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      letter-spacing: 0.5px;
-      line-height: 1.4;
-    }
-
-    /* ========== SERVICES ========== */
-    .services {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
-    }
-
-    .services-header {
-      margin-bottom: 70px;
-    }
-
-    .section-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--green);
-      letter-spacing: 1px;
-      margin-bottom: 14px;
-    }
-
-    .services-header h2 {
-      font-size: clamp(2.1rem, 6vw, 2.9rem);
-      font-weight: 900;
-      line-height: 1.15;
-      letter-spacing: -1.2px;
-      margin-bottom: 22px;
-    }
-
-    .section-desc {
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      line-height: 1.65;
-      max-width: 440px;
-    }
-
-    .service-card {
-      position: relative;
-      margin-bottom: 80px;
-      padding-bottom: 50px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .service-card:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    .service-number {
-      font-size: 5rem;
-      font-weight: 800;
-      color: var(--number-color);
-      line-height: 1;
-      margin-bottom: 24px;
-      letter-spacing: -3px;
-    }
-
-    .coming-soon {
-      position: absolute;
-      top: 18px;
-      right: 0;
-      background: var(--green-light);
-      color: var(--green);
-      font-size: 12px;
-      font-weight: 700;
-      padding: 7px 16px;
-      border-radius: 50px;
-    }
-
-    .service-image {
-      width: 100%;
-      max-width: 440px;
-      aspect-ratio: 16/10;
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 32px;
-      background: #111;
-    }
-
-    .service-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .service-card h3 {
-      font-size: 1.7rem;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-
-    .service-desc {
-      font-size: 1.02rem;
-      color: var(--text-secondary);
-      line-height: 1.65;
-      margin-bottom: 24px;
-      max-width: 500px;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 28px;
-    }
-
-    .tags span {
-      font-size: 13px;
+      font-size: 0.85rem;
+      color: #666;
       font-weight: 500;
-      color: var(--text-secondary);
-      background: var(--tag-bg);
-      border: 1px solid var(--tag-border);
-      padding: 8px 18px;
-      border-radius: 50px;
-    }
-
-    .get-started {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--green);
-      font-weight: 600;
-      font-size: 15px;
-      text-decoration: none;
-    }
-
-    .get-started:hover { gap: 10px; }
-
-    /* ========== THREE STEPS ========== */
-    .process {
-      background: var(--process-bg);
-      padding: 100px 24px;
-      transition: background 0.3s;
-    }
-
-    .process-inner {
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    .process-header {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-
-    .process-header .section-label {
-      text-align: center;
-    }
-
-    .process-header h2 {
-      font-size: clamp(2.1rem, 6vw, 2.9rem);
-      font-weight: 900;
-      line-height: 1.15;
-      letter-spacing: -1.2px;
-      margin-top: 14px;
-    }
-
-    .step-card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 32px 30px;
-      margin-bottom: 18px;
-      position: relative;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.04);
-      transition: background 0.3s;
-    }
-
-    .step-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 22px;
-    }
-
-    .step-icon {
-      width: 52px;
-      height: 52px;
-      background: var(--green-light);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .step-icon svg {
-      width: 24px;
-      height: 24px;
-      stroke: var(--green);
-      stroke-width: 2;
-      fill: none;
-    }
-
-    .step-number {
-      font-size: 3rem;
-      font-weight: 800;
-      color: var(--step-number);
-      line-height: 1;
-    }
-
-    .step-card h3 {
-      font-size: 1.4rem;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-
-    .step-card p {
-      font-size: 1.02rem;
-      color: var(--text-secondary);
-      line-height: 1.65;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
     }
 
     /* Responsive */
-    @media (max-width: 480px) {
-      .hero h1 { font-size: 2.5rem; }
-      .stat-number { font-size: 2rem; }
-      .header { padding: 0 16px; }
-      .service-number { font-size: 4rem; }
+    @media (min-width: 640px) {
+      .buttons {
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .stats {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .stat-box {
+        border-bottom: none;
+      }
+
+      .stat-box:nth-child(2n) {
+        border-right: 1px solid #eee;
+      }
+
+      .stat-box:last-child {
+        border-right: none;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- HEADER -->
-  <header class="header">
-    <div class="logo">
-      <div class="logo-icon">
-        <span>D</span>
-        <span class="check">✓</span>
-      </div>
-      <div class="logo-text">
-        <span class="dammy">Dammy</span>
-        <span class="social">social»</span>
-      </div>
-    </div>
+  <header>
+    <a href="#" class="logo">
+      <div class="logo-icon">D</div>
+      <span class="logo-text">ammy social</span>
+      <span class="logo-arrows">>></span>
+    </a>
+
     <div class="header-right">
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <!-- Sun icon (default) -->
-        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="5"/>
-          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-        </svg>
-        <!-- Moon icon (hidden by default) -->
-        <svg class="moon-icon" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </button>
-      <button class="menu-btn" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+      <button aria-label="Toggle theme">☀</button>
+      <button aria-label="Menu">☰</button>
     </div>
   </header>
 
   <!-- HERO -->
   <section class="hero">
     <h1>
-      <span class="black">PREMIUM</span><br>
-      <span class="green">SOCIAL</span> <span class="black">ASSETS</span><br>
-      <span class="black">DELIVERED</span><br>
-      <span class="black">FAST</span>
+      PREMIUM<br>
+      <span class="green">SOCIAL ASSETS</span><br>
+      DELIVERED<br>
+      FAST
     </h1>
-    <p class="subtitle">
-      Buy aged social media accounts, working<br>
-      tools, virtual SMS numbers, and SME<br>
-      boosting services plus all in one platform,<br>
-      paid from your wallet.
+
+    <p>
+      Buy aged social media accounts, working tools, virtual SMS numbers, and SME boosting services plus all in one platform, paid from your wallet.
     </p>
-    <div class="hero-buttons">
-      <a href="#" class="btn-primary">GET STARTED →</a>
-      <a href="#" class="btn-secondary">BROWSE SERVICES</a>
+
+    <div class="buttons">
+      <button class="btn-primary">
+        GET STARTED →
+      </button>
+      <button class="btn-secondary">
+        BROWSE SERVICES
+      </button>
     </div>
   </section>
 
-  <!-- GREEN BANNER -->
-  <div class="green-banner">
-    <div class="banner-content">
-      FACEBOOK ACCOUNTS &nbsp;*&nbsp; INSTAGRAM ACCOUNTS &nbsp;*&nbsp; TWITTER ACCOUNTS &nbsp;*&nbsp; TIKTOK ACCOUNTS &nbsp;*&nbsp; SMS NUMBERS &nbsp;*&nbsp; FACEBOOK ACCOUNTS &nbsp;*&nbsp; INSTAGRAM ACCOUNTS
-    </div>
+  <!-- GREEN SERVICES BANNER -->
+  <div class="services-banner">
+    FACEBOOK ACCOUNTS <span>*</span> INSTAGRAM ACCOUNTS <span>*</span> MORE
   </div>
 
   <!-- STATS -->
   <section class="stats">
-    <div class="stat-card">
+    <div class="stat-box">
       <div class="stat-number">10K+</div>
-      <div class="stat-label">ACCOUNTS IN<br>STOCK</div>
+      <div class="stat-label">Accounts in Stock</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-box">
       <div class="stat-number">200+</div>
-      <div class="stat-label">COUNTRIES FOR<br>SMS</div>
+      <div class="stat-label">Countries for SMS</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-box">
       <div class="stat-number">&lt; 10s</div>
-      <div class="stat-label">AVG DELIVERY<br>TIME</div>
+      <div class="stat-label">Avg Delivery Time</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-box">
       <div class="stat-number">24/7</div>
-      <div class="stat-label">PLATFORM<br>UPTIME</div>
+      <div class="stat-label">Platform Uptime</div>
     </div>
   </section>
-
-  <!-- SERVICES -->
-  <section class="services">
-    <div class="services-header">
-      <p class="section-label">WHAT WE OFFER</p>
-      <h2>FOUR SERVICES,<br>ONE PLATFORM.</h2>
-      <p class="section-desc">
-        Everything a digital entrepreneur needs to run<br>
-        campaigns, grow accounts, and verify<br>
-        identities.
-      </p>
-    </div>
-
-    <!-- 01 -->
-    <div class="service-card">
-      <div class="service-number">01</div>
-      <div class="service-image">
-        <img src="https://via.placeholder.com/440x275/111111/ffffff?text=Social+Media+Logs" alt="Social Media Logs">
-      </div>
-      <h3>Social Media Logs</h3>
-      <p class="service-desc">Aged and verified accounts for Facebook, Instagram, TikTok, X (Twitter), and LinkedIn. Ready to use instantly after purchase.</p>
-      <div class="tags">
-        <span>Facebook</span><span>Instagram</span><span>TikTok</span><span>X</span><span>LinkedIn</span>
-      </div>
-      <a href="#" class="get-started">Get started ↗</a>
-    </div>
-
-    <!-- 02 -->
-    <div class="service-card">
-      <div class="service-number">02</div>
-      <div class="service-image">
-        <img src="https://via.placeholder.com/440x275/1a1a2e/ffffff?text=Working+Tools" alt="Working Tools">
-      </div>
-      <h3>Working Tools</h3>
-      <p class="service-desc">Updates, working pictures and working tools. Downloaded instantly as a secure file the moment your purchase is confirmed.</p>
-      <div class="tags">
-        <span>Updates</span><span>Working Pictures</span><span>Working Tools</span>
-      </div>
-      <a href="#" class="get-started">Get started ↗</a>
-    </div>
-
-    <!-- 03 -->
-    <div class="service-card">
-      <div class="service-number">03</div>
-      <span class="coming-soon">COMING SOON</span>
-      <div class="service-image">
-        <img src="https://via.placeholder.com/440x275/f5f5f5/999999?text=SMS+Virtual+Numbers" alt="SMS Virtual Numbers">
-      </div>
-      <h3>SMS Virtual Numbers</h3>
-      <p class="service-desc">Rent real virtual phone numbers from 200+ countries. Receive OTP codes for WhatsApp, Telegram, Instagram, and more in seconds.</p>
-      <div class="tags">
-        <span>200+ Countries</span><span>Instant OTP</span><span>WhatsApp</span><span>Telegram</span>
-      </div>
-      <a href="#" class="get-started">Get started ↗</a>
-    </div>
-
-    <!-- 04 -->
-    <div class="service-card">
-      <div class="service-number">04</div>
-      <span class="coming-soon">COMING SOON</span>
-      <div class="service-image">
-        <img src="https://via.placeholder.com/440x275/f5f5f5/999999?text=SME+Boosting" alt="SME Boosting">
-      </div>
-      <h3>SME Boosting</h3>
-      <p class="service-desc">Followers, likes, views, and comments for Instagram, TikTok, YouTube, Facebook, and Telegram. Orders fulfilled automatically.</p>
-      <div class="tags">
-        <span>Followers</span><span>Likes</span><span>Views</span><span>Comments</span>
-      </div>
-      <a href="#" class="get-started">Get started ↗</a>
-    </div>
-  </section>
-
-  <!-- THREE STEPS -->
-  <section class="process">
-    <div class="process-inner">
-      <div class="process-header">
-        <p class="section-label">SIMPLE PROCESS</p>
-        <h2>THREE STEPS.<br>THAT'S ALL.</h2>
-      </div>
-
-      <div class="step-card">
-        <div class="step-top">
-          <div class="step-icon">
-            <svg viewBox="0 0 24 24">
-              <rect x="2" y="6" width="20" height="14" rx="2"/>
-              <path d="M2 10h20"/>
-              <circle cx="17" cy="14" r="1.5"/>
-            </svg>
-          </div>
-          <div class="step-number">01</div>
-        </div>
-        <h3>Top up your wallet</h3>
-        <p>Fund your DammySocials wallet using Flutterwave - card or bank transfer. Credits reflect instantly. No charges on deposits.</p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-top">
-          <div class="step-icon">
-            <svg viewBox="0 0 24 24">
-              <path d="M6 7h12l1 12H5L6 7z"/>
-              <path d="M9 7V5a3 3 0 0 1 6 0v2"/>
-            </svg>
-          </div>
-          <div class="step-number">02</div>
-        </div>
-        <h3>Browse and pick</h3>
-        <p>Browse by category - logs, tools, SMS numbers, or boosting. Filter by platform, price, or type. Pick exactly what you need.</p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-top">
-          <div class="step-icon">
-            <svg viewBox="0 0 24 24">
-              <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/>
-            </svg>
-          </div>
-          <div class="step-number">03</div>
-        </div>
-        <h3>Instant delivery</h3>
-        <p>Purchase and your item is delivered immediately on screen and to your email. No waiting, no manual processing, no back and forth.</p>
-      </div>
-    </div>
-  </section>
-
-  <script>
-    const themeToggle = document.getElementById('themeToggle');
-    const sunIcon = themeToggle.querySelector('.sun-icon');
-    const moonIcon = themeToggle.querySelector('.moon-icon');
-    const html = document.documentElement;
-
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    if (savedTheme === 'dark') {
-      html.setAttribute('data-theme', 'dark');
-      sunIcon.style.display = 'none';
-      moonIcon.style.display = 'block';
-    }
-
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = html.getAttribute('data-theme');
-      
-      if (currentTheme === 'dark') {
-        html.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
-        sunIcon.style.display = 'block';
-        moonIcon.style.display = 'none';
-      } else {
-        html.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-        sunIcon.style.display = 'none';
-        moonIcon.style.display = 'block';
-      }
-    });
-  </script>
 
 </body>
 </html>
