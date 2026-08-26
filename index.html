@@ -8,9 +8,18 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+>
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
     margin:0;
     padding:0;
@@ -24,20 +33,30 @@ html{
 body{
     width:100%;
     min-width:320px;
-    background:#fff;
-    color:#000;
-    font-family:Inter,Arial,Helvetica,sans-serif;
+
+    background:#ffffff;
+    color:#000000;
+
+    font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
     overflow-x:hidden;
 }
 
-/* =========================
+
+/* =========================================================
    HEADER
-========================= */
+========================================================= */
 
 .header{
     position:fixed;
+
     top:0;
     left:0;
+
     width:100%;
     height:85px;
 
@@ -47,43 +66,62 @@ body{
 
     padding:10px 32px;
 
-    background:rgba(255,255,255,0.85);
+    background:rgba(255,255,255,0.92);
+
     backdrop-filter:blur(10px);
     -webkit-backdrop-filter:blur(10px);
 
     z-index:10000;
 }
 
+
+/* LOGO */
+
 .logo{
     width:207px;
     height:64px;
+
     display:flex;
     align-items:center;
+
+    flex-shrink:0;
 }
 
 .logo img{
+    display:block;
+
     width:100%;
     height:100%;
+
     object-fit:contain;
     object-position:left center;
 }
 
-/* RIGHT HEADER */
+
+/* RIGHT SIDE */
 
 .header-right{
     display:flex;
     align-items:center;
-    gap:25px;
+
+    gap:22px;
+
+    flex-shrink:0;
 }
 
-/* SUN ICON */
+
+/* =========================================================
+   SUN / THEME ICON
+========================================================= */
 
 .theme-button{
     width:31px;
     height:31px;
 
+    padding:0;
+
     border:none;
-    background:none;
+    background:transparent;
 
     display:flex;
     align-items:center;
@@ -95,23 +133,27 @@ body{
 }
 
 .theme-icon{
-    width:25px;
-    height:25px;
     position:relative;
+
+    width:27px;
+    height:27px;
+
+    display:block;
 }
 
 .theme-icon::before{
     content:"";
+
     position:absolute;
 
     width:9px;
     height:9px;
 
+    top:7px;
+    left:7px;
+
     border:2px solid #000;
     border-radius:50%;
-
-    top:6px;
-    left:6px;
 }
 
 .theme-icon::after{
@@ -119,23 +161,35 @@ body{
 
     position:absolute;
 
-    font-size:28px;
-    line-height:25px;
+    top:-3px;
+    left:-3px;
 
-    top:-1px;
-    left:-1px;
+    width:33px;
+    height:33px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:28px;
+    line-height:1;
 
     color:#000;
 }
 
-/* MENU */
+
+/* =========================================================
+   MENU BUTTON
+========================================================= */
 
 .menu-button{
     width:38px;
     height:34px;
 
+    padding:0;
+
     border:none;
-    background:none;
+    background:transparent;
 
     display:flex;
     flex-direction:column;
@@ -150,6 +204,7 @@ body{
 .menu-button span{
     display:block;
 
+    width:30px;
     height:3px;
 
     background:#000;
@@ -157,21 +212,10 @@ body{
     border-radius:10px;
 }
 
-.menu-button span:nth-child(1){
-    width:30px;
-}
 
-.menu-button span:nth-child(2){
-    width:30px;
-}
-
-.menu-button span:nth-child(3){
-    width:30px;
-}
-
-/* =========================
-   MENU
-========================= */
+/* =========================================================
+   SLIDE MENU
+========================================================= */
 
 .menu{
     position:fixed;
@@ -183,7 +227,7 @@ body{
 
     padding:18px;
 
-    background:rgba(255,255,255,.97);
+    background:rgba(255,255,255,.98);
 
     border:1px solid #ddd;
 
@@ -220,16 +264,22 @@ body{
     background:#f3f3f3;
 }
 
-/* =========================
+
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .hero{
     width:100%;
 
+    /*
+       This controls the exact point where
+       the green ticker begins.
+    */
+    height:1169px;
     min-height:1169px;
 
-    padding-top:210px;
+    padding-top:216px;
     padding-left:25px;
     padding-right:25px;
 
@@ -238,13 +288,20 @@ body{
     align-items:center;
 
     text-align:center;
+
+    background:#fff;
 }
 
-/* MAIN HEADING */
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
 
 .hero-title{
     width:100%;
     max-width:610px;
+
+    margin:0;
 
     color:#000;
 
@@ -261,7 +318,10 @@ body{
     color:#438600;
 }
 
-/* DESCRIPTION */
+
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
 
 .hero-description{
     width:100%;
@@ -280,9 +340,10 @@ body{
     letter-spacing:-.3px;
 }
 
-/* =========================
-   BUTTONS
-========================= */
+
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
 
 .hero-buttons{
     width:100%;
@@ -317,6 +378,9 @@ body{
     transition:.2s ease;
 }
 
+
+/* GET STARTED */
+
 .get-started{
     background:#438600;
     color:#fff;
@@ -328,9 +392,14 @@ body{
 
 .get-started .arrow{
     margin-left:17px;
+
     font-size:30px;
+
     font-weight:400;
 }
+
+
+/* BROWSE SERVICES */
 
 .browse{
     background:#fff;
@@ -347,13 +416,13 @@ body{
     border-color:#ccc;
 }
 
-/* =========================
-   GREEN SLIDING BAR
-========================= */
+
+/* =========================================================
+   GREEN MOVING TICKER
+========================================================= */
 
 .ticker{
     width:100%;
-
     height:112px;
 
     background:#438600;
@@ -399,10 +468,13 @@ body{
 
     font-size:34px;
 
+    line-height:1;
+
     font-weight:400;
 }
 
 @keyframes tickerMove{
+
     0%{
         transform:translateX(0);
     }
@@ -410,11 +482,13 @@ body{
     100%{
         transform:translateX(-50%);
     }
+
 }
 
-/* =========================
-   STATS
-========================= */
+
+/* =========================================================
+   STATISTICS
+========================================================= */
 
 .stats{
     width:578px;
@@ -427,11 +501,15 @@ body{
     grid-template-columns:1fr 1fr;
 }
 
+
+/* EACH STAT */
+
 .stat{
     height:270px;
 
     display:flex;
     flex-direction:column;
+
     align-items:center;
     justify-content:center;
 
@@ -441,18 +519,30 @@ body{
     border-bottom:1px solid #dedede;
 }
 
+
+/* TOP RIGHT */
+
 .stat:nth-child(2){
     border-right:none;
 }
+
+
+/* BOTTOM LEFT */
 
 .stat:nth-child(3){
     border-bottom:none;
 }
 
+
+/* BOTTOM RIGHT */
+
 .stat:nth-child(4){
     border-right:none;
     border-bottom:none;
 }
+
+
+/* NUMBER */
 
 .stat-number{
     color:#438600;
@@ -466,6 +556,9 @@ body{
     letter-spacing:-2px;
 }
 
+
+/* LABEL */
+
 .stat-label{
     margin-top:20px;
 
@@ -478,19 +571,25 @@ body{
     font-weight:500;
 }
 
-/* =========================
-   EXTRA SPACE
-========================= */
+
+/* =========================================================
+   BOTTOM WHITE SPACE
+========================================================= */
 
 .bottom-space{
-    height:145px;
+    height:115px;
+
+    background:#fff;
 }
 
-/* =========================
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media(max-width:600px){
+
+    /* HEADER */
 
     .header{
         height:85px;
@@ -507,7 +606,11 @@ body{
         gap:21px;
     }
 
+
+    /* HERO */
+
     .hero{
+        height:1169px;
         min-height:1169px;
 
         padding-top:216px;
@@ -516,6 +619,9 @@ body{
         padding-right:25px;
     }
 
+
+    /* TITLE */
+
     .hero-title{
         font-size:56px;
 
@@ -523,6 +629,9 @@ body{
 
         letter-spacing:-2.6px;
     }
+
+
+    /* DESCRIPTION */
 
     .hero-description{
         max-width:585px;
@@ -533,6 +642,9 @@ body{
 
         line-height:1.7;
     }
+
+
+    /* BUTTONS */
 
     .hero-buttons{
         margin-top:57px;
@@ -549,6 +661,9 @@ body{
         font-size:22px;
     }
 
+
+    /* TICKER */
+
     .ticker{
         height:112px;
     }
@@ -557,8 +672,12 @@ body{
         font-size:30px;
     }
 
+
+    /* STATS */
+
     .stats{
         width:578px;
+
         max-width:calc(100% - 66px);
 
         margin-top:106px;
@@ -575,9 +694,13 @@ body{
     .stat-label{
         font-size:19px;
     }
+
 }
 
-/* SMALL PHONES */
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
 
 @media(max-width:380px){
 
@@ -588,32 +711,68 @@ body{
 
     .logo{
         width:180px;
+        height:58px;
     }
 
     .header-right{
         gap:15px;
     }
 
+
     .hero{
+        height:1050px;
+        min-height:1050px;
+
+        padding-top:155px;
+
         padding-left:18px;
         padding-right:18px;
     }
 
     .hero-title{
         font-size:47px;
+
+        line-height:.95;
+
+        letter-spacing:-2px;
     }
 
     .hero-description{
+        margin-top:38px;
+
         font-size:19px;
+
+        line-height:1.6;
+    }
+
+    .hero-buttons{
+        margin-top:45px;
+
+        gap:18px;
     }
 
     .hero-button{
         height:75px;
+
         font-size:20px;
+    }
+
+    .ticker{
+        height:105px;
+    }
+
+    .ticker-item{
+        font-size:27px;
+    }
+
+    .ticker-star{
+        font-size:31px;
     }
 
     .stats{
         max-width:calc(100% - 36px);
+
+        margin-top:82px;
     }
 
     .stat{
@@ -627,61 +786,110 @@ body{
     .stat-label{
         font-size:16px;
     }
+
+    .bottom-space{
+        height:100px;
+    }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- =========================
+
+<!-- =======================================================
      FIXED HEADER
-========================= -->
+======================================================= -->
 
 <header class="header">
 
     <a href="index.html" class="logo">
-        <img src="logo.png" alt="Temmy Social">
+
+        <img
+            src="logo.png"
+            alt="Temmy Social"
+        >
+
     </a>
+
 
     <div class="header-right">
 
-        <button class="theme-button" id="themeButton" aria-label="Theme">
+
+        <!-- SUN -->
+
+        <button
+            class="theme-button"
+            id="themeButton"
+            aria-label="Theme"
+            type="button"
+        >
+
             <span class="theme-icon"></span>
+
         </button>
 
-        <button class="menu-button" id="menuButton" aria-label="Menu">
+
+        <!-- MENU -->
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Menu"
+            type="button"
+        >
+
             <span></span>
             <span></span>
             <span></span>
+
         </button>
+
 
     </div>
 
 </header>
 
 
-<!-- =========================
-     MENU
-========================= -->
 
-<nav class="menu" id="menu">
+<!-- =======================================================
+     SLIDE MENU
+======================================================= -->
 
-    <a href="#">Pricing</a>
+<nav
+    class="menu"
+    id="menu"
+>
 
-    <a href="#">Sign In</a>
+    <a href="#">
+        Pricing
+    </a>
 
-    <a href="#">Get Started</a>
+    <a href="login.html">
+        Sign In
+    </a>
 
-    <a href="#">FAQ</a>
+    <a href="login.html">
+        Get Started
+    </a>
+
+    <a href="#">
+        FAQ
+    </a>
 
 </nav>
 
 
-<!-- =========================
+
+<!-- =======================================================
      HERO
-========================= -->
+======================================================= -->
 
 <section class="hero">
+
 
     <h1 class="hero-title">
 
@@ -696,6 +904,7 @@ body{
     </h1>
 
 
+
     <p class="hero-description">
 
         Buy aged social media accounts, working
@@ -706,36 +915,54 @@ body{
     </p>
 
 
+
     <div class="hero-buttons">
 
-        <a href="#" class="hero-button get-started">
+
+        <!-- GET STARTED -->
+
+        <a
+            href="login.html"
+            class="hero-button get-started"
+        >
 
             GET STARTED
 
-            <span class="arrow">→</span>
+            <span class="arrow">
+                →
+            </span>
 
         </a>
 
 
-        <a href="#services" class="hero-button browse">
+
+        <!-- BROWSE SERVICES -->
+
+        <a
+            href="#services"
+            class="hero-button browse"
+        >
 
             BROWSE SERVICES
 
         </a>
 
+
     </div>
 
 </section>
 
 
-<!-- =========================
-     MOVING SERVICE BAR
-========================= -->
+
+<!-- =======================================================
+     GREEN MOVING SERVICE BAR
+======================================================= -->
 
 <section class="ticker">
 
     <div class="ticker-content">
 
+
         <div class="ticker-item">
             FACEBOOK ACCOUNTS
         </div>
@@ -743,6 +970,7 @@ body{
         <div class="ticker-star">
             *
         </div>
+
 
         <div class="ticker-item">
             INSTAGRAM ACCOUNTS
@@ -752,6 +980,7 @@ body{
             *
         </div>
 
+
         <div class="ticker-item">
             VIRTUAL SMS
         </div>
@@ -759,6 +988,7 @@ body{
         <div class="ticker-star">
             *
         </div>
+
 
         <div class="ticker-item">
             SME BOOSTING
@@ -769,7 +999,8 @@ body{
         </div>
 
 
-        <!-- Duplicate for seamless movement -->
+
+        <!-- DUPLICATE -->
 
         <div class="ticker-item">
             FACEBOOK ACCOUNTS
@@ -779,6 +1010,7 @@ body{
             *
         </div>
 
+
         <div class="ticker-item">
             INSTAGRAM ACCOUNTS
         </div>
@@ -786,6 +1018,7 @@ body{
         <div class="ticker-star">
             *
         </div>
+
 
         <div class="ticker-item">
             VIRTUAL SMS
@@ -795,6 +1028,7 @@ body{
             *
         </div>
 
+
         <div class="ticker-item">
             SME BOOSTING
         </div>
@@ -802,17 +1036,25 @@ body{
         <div class="ticker-star">
             *
         </div>
+
 
     </div>
 
 </section>
 
 
-<!-- =========================
-     STATISTICS
-========================= -->
 
-<section class="stats" id="services">
+<!-- =======================================================
+     STATISTICS
+======================================================= -->
+
+<section
+    class="stats"
+    id="services"
+>
+
+
+    <!-- 10K -->
 
     <div class="stat">
 
@@ -821,12 +1063,17 @@ body{
         </div>
 
         <div class="stat-label">
+
             ACCOUNTS IN<br>
             STOCK
+
         </div>
 
     </div>
 
+
+
+    <!-- 200 -->
 
     <div class="stat">
 
@@ -835,12 +1082,17 @@ body{
         </div>
 
         <div class="stat-label">
+
             COUNTRIES FOR<br>
             SMS
+
         </div>
 
     </div>
 
+
+
+    <!-- DELIVERY -->
 
     <div class="stat">
 
@@ -849,12 +1101,17 @@ body{
         </div>
 
         <div class="stat-label">
+
             AVG DELIVERY<br>
             TIME
+
         </div>
 
     </div>
 
+
+
+    <!-- UPTIME -->
 
     <div class="stat">
 
@@ -863,23 +1120,37 @@ body{
         </div>
 
         <div class="stat-label">
+
             PLATFORM<br>
             UPTIME
+
         </div>
 
     </div>
 
+
 </section>
 
+
+
+<!-- =======================================================
+     BOTTOM SPACE
+======================================================= -->
 
 <div class="bottom-space"></div>
 
 
+
+<!-- =======================================================
+     JAVASCRIPT
+======================================================= -->
+
 <script>
 
-/* =========================
+
+/* =========================================================
    MENU
-========================= */
+========================================================= */
 
 const menuButton =
     document.getElementById("menuButton");
@@ -887,43 +1158,86 @@ const menuButton =
 const menu =
     document.getElementById("menu");
 
-menuButton.addEventListener("click", function(){
 
-    menu.classList.toggle("active");
+menuButton.addEventListener(
+    "click",
+    function(){
 
-});
+        menu.classList.toggle("active");
+
+    }
+);
 
 
-/* CLOSE MENU WHEN LINK IS CLICKED */
 
-document.querySelectorAll(".menu a").forEach(function(link){
+/* =========================================================
+   CLOSE MENU AFTER CLICKING A LINK
+========================================================= */
 
-    link.addEventListener("click", function(){
+document
+    .querySelectorAll(".menu a")
+    .forEach(function(link){
 
-        menu.classList.remove("active");
+        link.addEventListener(
+            "click",
+            function(){
+
+                menu.classList.remove("active");
+
+            }
+        );
 
     });
 
-});
 
 
-/* =========================
-   THEME
-========================= */
+/* =========================================================
+   CLOSE MENU WHEN CLICKING OUTSIDE
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const clickedInsideMenu =
+            menu.contains(event.target);
+
+        const clickedMenuButton =
+            menuButton.contains(event.target);
+
+
+        if(
+            !clickedInsideMenu &&
+            !clickedMenuButton &&
+            menu.classList.contains("active")
+        ){
+
+            menu.classList.remove("active");
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   THEME BUTTON
+========================================================= */
 
 const themeButton =
     document.getElementById("themeButton");
 
-themeButton.addEventListener("click", function(){
 
-    /*
-       Theme functionality can be connected
-       to your existing theme.js later.
-    */
+themeButton.addEventListener(
+    "click",
+    function(){
 
-    console.log("Theme button clicked");
+        console.log("Theme button clicked");
 
-});
+    }
+);
+
 
 </script>
 
