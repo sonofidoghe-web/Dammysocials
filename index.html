@@ -1,30 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<title>Temmy Social</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
->
+<title>TemmySocials — Premium Digital Services</title>
 
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
 *{
     margin:0;
     padding:0;
@@ -36,2285 +18,1414 @@ html{
 }
 
 body{
-    width:100%;
-    min-width:320px;
-
-    margin:0;
-    padding:0;
-
+    font-family:Arial, Helvetica, sans-serif;
     background:#fff;
-    color:#000;
-
-    font-family:
-        Inter,
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    color:#111;
     overflow-x:hidden;
 }
 
+a{
+    text-decoration:none;
+    color:inherit;
+}
 
-/* =========================================================
-   HEADER
-========================================================= */
+button{
+    font-family:inherit;
+}
 
-.header{
-    position:fixed;
+.container{
+    width:min(1180px,92%);
+    margin:auto;
+}
 
+/* ================= HEADER ================= */
+
+header{
+    height:82px;
+    border-bottom:1px solid #eeeeee;
+    background:#fff;
+    position:sticky;
     top:0;
-    left:0;
+    z-index:1000;
+}
 
-    width:100%;
-    height:72px;
-
+.nav{
+    height:82px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-
-    padding:7px 24px;
-
-    background:rgba(255,255,255,.94);
-
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-
-    z-index:10000;
 }
-
-
-/* =========================================================
-   LOGO
-========================================================= */
 
 .logo{
     width:175px;
-    height:55px;
-
-    display:flex;
-    align-items:center;
-
-    flex-shrink:0;
-
-    text-decoration:none;
-}
-
-.logo img{
+    height:auto;
     display:block;
-
-    width:100%;
-    height:100%;
-
-    object-fit:contain;
-    object-position:left center;
 }
 
-
-/* =========================================================
-   HEADER RIGHT
-========================================================= */
-
-.header-right{
+.nav-links{
     display:flex;
     align-items:center;
-
-    gap:17px;
-
-    flex-shrink:0;
+    gap:32px;
+    font-size:14px;
+    font-weight:600;
 }
 
+.nav-links a{
+    color:#222;
+    transition:.2s;
+}
 
-/* =========================================================
-   THEME BUTTON
-========================================================= */
+.nav-links a:hover{
+    color:#52772d;
+}
 
-.theme-button{
-    width:28px;
-    height:28px;
-
-    padding:0;
-
-    border:none;
-    background:none;
-
+.nav-buttons{
     display:flex;
     align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
+    gap:12px;
 }
 
-.theme-icon{
-    position:relative;
-
-    width:25px;
-    height:25px;
+.sign-in{
+    padding:12px 19px;
+    border:1px solid #222;
+    border-radius:6px;
+    font-size:14px;
+    font-weight:600;
 }
 
-.theme-icon::before{
-    content:"";
-
-    position:absolute;
-
-    width:8px;
-    height:8px;
-
-    top:6px;
-    left:6px;
-
-    border:2px solid #000;
-
-    border-radius:50%;
+.register{
+    padding:13px 20px;
+    border-radius:6px;
+    background:#243d17;
+    color:#fff;
+    font-size:14px;
+    font-weight:600;
 }
 
-.theme-icon::after{
-    content:"☼";
-
-    position:absolute;
-
-    top:-3px;
-    left:-3px;
-
-    width:31px;
-    height:31px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:26px;
-    line-height:1;
-
-    color:#000;
-}
-
-
-/* =========================================================
-   MENU BUTTON
-========================================================= */
-
-.menu-button{
-    width:34px;
-    height:32px;
-
-    padding:0;
-
-    border:none;
-    background:none;
-
-    display:flex;
-    flex-direction:column;
-
-    justify-content:center;
-    align-items:flex-end;
-
-    gap:6px;
-
-    cursor:pointer;
-}
-
-.menu-button span{
-    display:block;
-
-    width:28px;
-    height:3px;
-
-    background:#000;
-
-    border-radius:10px;
-}
-
-
-/* =========================================================
-   SLIDE MENU
-========================================================= */
-
-.menu{
-    position:fixed;
-
-    top:72px;
-    right:-280px;
-
-    width:250px;
-
-    padding:15px;
-
-    background:rgba(255,255,255,.98);
-
+.menu-btn{
+    display:none;
+    width:42px;
+    height:42px;
     border:1px solid #ddd;
-
-    border-radius:0 0 0 15px;
-
-    box-shadow:
-        0 10px 35px rgba(0,0,0,.12);
-
-    z-index:9999;
-
-    transition:right .3s ease;
+    border-radius:6px;
+    background:#fff;
+    cursor:pointer;
 }
 
-.menu.active{
-    right:0;
-}
-
-.menu a{
+.menu-btn span{
     display:block;
-
-    padding:14px 12px;
-
-    color:#000;
-
-    text-decoration:none;
-
-    font-size:15px;
-
-    font-weight:700;
-
-    border-radius:8px;
+    width:19px;
+    height:2px;
+    background:#222;
+    margin:4px auto;
 }
 
-.menu a:hover{
-    background:#f3f3f3;
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
+/* ================= HERO ================= */
 
 .hero{
-    width:100%;
-
-    /*
-       IMPORTANT:
-       No huge fixed height here.
-       The section ends naturally after the buttons.
-    */
-
-    padding-top:125px;
-
-    padding-left:18px;
-    padding-right:18px;
-
-    padding-bottom:70px;
-
-    display:flex;
-    flex-direction:column;
+    min-height:650px;
+    padding:82px 0 75px;
+    display:grid;
+    grid-template-columns:1.02fr .98fr;
+    gap:55px;
     align-items:center;
-
-    text-align:center;
-
-    background:#fff;
 }
 
+.hero-small{
+    color:#5c7d3a;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:2px;
+    margin-bottom:22px;
+}
 
-/* =========================================================
-   HERO TITLE
-========================================================= */
-
-.hero-title{
-    width:100%;
-
-    max-width:590px;
-
-    margin:0;
-
-    color:#000;
-
-    font-size:52px;
-
+.hero h1{
+    font-size:clamp(48px,6vw,78px);
     line-height:.94;
-
-    font-weight:900;
-
-    letter-spacing:-2.5px;
+    letter-spacing:-4px;
+    font-weight:800;
+    max-width:620px;
 }
 
-.hero-title .green{
-    color:#438600;
+.hero h1 span{
+    color:#587b37;
 }
 
-
-/* =========================================================
-   DESCRIPTION
-========================================================= */
-
-.hero-description{
-    width:100%;
-
-    max-width:570px;
-
-    margin-top:38px;
-
-    color:#626262;
-
-    font-size:20px;
-
-    line-height:1.6;
-
-    font-weight:400;
-
-    letter-spacing:-.25px;
+.hero-text{
+    margin-top:27px;
+    max-width:540px;
+    color:#666;
+    font-size:17px;
+    line-height:1.7;
 }
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
 
 .hero-buttons{
-    width:100%;
-
-    margin-top:42px;
-
     display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    gap:14px;
+    gap:13px;
+    margin-top:34px;
 }
 
-
-/* =========================================================
-   GENERAL BUTTON
-========================================================= */
-
-.hero-button{
-    width:335px;
-    max-width:calc(100vw - 60px);
-
-    height:70px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:11px;
-
-    text-decoration:none;
-
-    font-size:20px;
-
-    font-weight:800;
-
-    letter-spacing:0;
-
-    transition:.2s ease;
-}
-
-
-/* =========================================================
-   GET STARTED
-========================================================= */
-
-.get-started{
-    background:#438600;
-
+.primary-btn{
+    background:#243d17;
     color:#fff;
+    border:1px solid #243d17;
+    padding:15px 25px;
+    border-radius:6px;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
 }
 
-.get-started:hover{
-    background:#367000;
-}
-
-.get-started .arrow{
-    margin-left:15px;
-
-    font-size:18px;
-
-    font-weight:400;
-}
-
-
-/* =========================================================
-   BROWSE SERVICES
-========================================================= */
-
-.browse{
+.secondary-btn{
     background:#fff;
-
-    color:#000;
-
-    border:1.5px solid #e4e4e4;
-
-    box-shadow:
-        0 1.5px 3px rgba(0,0,0,.04);
+    color:#222;
+    border:1px solid #222;
+    padding:15px 25px;
+    border-radius:6px;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
 }
 
-.browse:hover{
-    border-color:#ccc;
+.hero-image{
+    position:relative;
 }
 
-
-/* =========================================================
-   GREEN TICKER
-========================================================= */
-
-.ticker{
+.hero-image img{
     width:100%;
-
-    /*
-       Reduced from the previous 112px.
-    */
-
-    height:88px;
-
-    background:#438600;
-
-    overflow:hidden;
-
-    display:flex;
-    align-items:center;
-
-    margin:0;
+    height:430px;
+    object-fit:cover;
+    border-radius:10px;
+    display:block;
 }
 
-.ticker-content{
-    display:flex;
-
-    align-items:center;
-
-    width:max-content;
-
-    white-space:nowrap;
-
-    animation:
-        tickerMove
-        25s
-        linear
-        infinite;
+.hero-image::after{
+    content:"";
+    position:absolute;
+    width:110px;
+    height:110px;
+    border:1px solid #dfe8d8;
+    border-radius:50%;
+    right:-35px;
+    bottom:-30px;
+    z-index:-1;
 }
 
-.ticker-item{
-    display:flex;
-
-    align-items:center;
-
-    margin-right:38px;
-
-    color:#fff;
-
-    font-size:25px;
-
-    line-height:1;
-
-    font-weight:800;
-
-    letter-spacing:.3px;
-}
-
-.ticker-star{
-    margin-right:38px;
-
-    color:#fff;
-
-    font-size:29px;
-
-    line-height:1;
-
-    font-weight:400;
-}
-
-@keyframes tickerMove{
-
-    0%{
-        transform:translateX(0);
-    }
-
-    100%{
-        transform:translateX(-50%);
-    }
-
-}
-
-
-/* =========================================================
-   STATS
-========================================================= */
+/* ================= STATS ================= */
 
 .stats{
-    width:578px;
-
-    max-width:calc(100% - 66px);
-
-    margin:58px auto 0;
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
+    border-top:1px solid #e9e9e9;
+    border-bottom:1px solid #e9e9e9;
 }
 
-
-/* =========================================================
-   STAT BOX
-========================================================= */
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+}
 
 .stat{
-    height:235px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
-
-    border-right:1px solid #dedede;
-
-    border-bottom:1px solid #dedede;
+    padding:30px 20px;
+    border-right:1px solid #e9e9e9;
 }
 
-
-/* TOP RIGHT */
-
-.stat:nth-child(2){
-    border-right:none;
+.stat:last-child{
+    border-right:0;
 }
-
-
-/* BOTTOM LEFT */
-
-.stat:nth-child(3){
-    border-bottom:none;
-}
-
-
-/* BOTTOM RIGHT */
-
-.stat:nth-child(4){
-    border-right:none;
-    border-bottom:none;
-}
-
-
-/* =========================================================
-   STAT NUMBER
-========================================================= */
 
 .stat-number{
-    color:#438600;
-
-    font-size:43px;
-
-    line-height:1;
-
-    font-weight:900;
-
-    letter-spacing:-2px;
+    font-size:35px;
+    font-weight:800;
+    letter-spacing:-1px;
 }
-
-
-/* =========================================================
-   STAT LABEL
-========================================================= */
 
 .stat-label{
-    margin-top:17px;
-
-    color:#858585;
-
-    font-size:17px;
-
-    line-height:1.4;
-
-    font-weight:500;
+    margin-top:8px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1.7px;
+    color:#777;
 }
 
+/* ================= SECTION HEADINGS ================= */
 
-/* =========================================================
-   BOTTOM SPACE
-========================================================= */
-
-.bottom-space{
-    height:70px;
-
-    background:#fff;
+.section{
+    padding:110px 0;
 }
 
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:600px){
-
-    /* HEADER */
-
-    .header{
-        height:72px;
-
-        padding:7px 20px;
-    }
-
-    .logo{
-        width:170px;
-        height:54px;
-    }
-
-    .header-right{
-        gap:15px;
-    }
-
-    .menu-button{
-        width:33px;
-    }
-
-    .menu-button span{
-        width:28px;
-    }
-
-
-    /* HERO */
-
-    .hero{
-        padding-top:118px;
-
-        padding-left:12px;
-        padding-right:12px;
-
-        /*
-           This is what removes the huge gap
-           before the green ticker.
-        */
-
-        padding-bottom:60px;
-    }
-
-
-    /* TITLE */
-
-    .hero-title{
-        max-width:390px;
-
-        font-size:46px;
-
-        line-height:.95;
-
-        letter-spacing:-2.2px;
-    }
-
-
-    /* DESCRIPTION */
-
-    .hero-description{
-        max-width:365px;
-
-        margin-top:35px;
-
-        font-size:18px;
-
-        line-height:1.58;
-    }
-
-
-    /* BUTTONS */
-
-    .hero-buttons{
-        margin-top:39px;
-
-        gap:13px;
-    }
-
-    .hero-button{
-        /*
-           Smaller than the previous version.
-        */
-
-        width:335px;
-
-        max-width:calc(100vw - 50px);
-
-        height:70px;
-
-        font-size:20px;
-    }
-
-    .get-started .arrow{
-        margin-left:14px;
-
-        font-size:27px;
-    }
-
-
-    /* TICKER */
-
-    .ticker{
-        height:88px;
-    }
-
-    .ticker-item{
-        font-size:24px;
-
-        margin-right:35px;
-    }
-
-    .ticker-star{
-        font-size:28px;
-
-        margin-right:35px;
-    }
-
-
-    /* STATS */
-
-    .stats{
-        width:578px;
-
-        max-width:calc(100% - 50px);
-
-        margin-top:55px;
-    }
-
-    .stat{
-        height:235px;
-    }
-
-    .stat-number{
-        font-size:41px;
-    }
-
-    .stat-label{
-        margin-top:16px;
-
-        font-size:16px;
-    }
-
-
-    .bottom-space{
-        height:65px;
-    }
-
-}
-
-
-/* =========================================================
-   SMALL PHONES
-========================================================= */
-
-@media(max-width:380px){
-
-    /* HEADER */
-
-    .header{
-        padding-left:16px;
-        padding-right:16px;
-    }
-
-    .logo{
-        width:155px;
-        height:52px;
-    }
-
-    .header-right{
-        gap:11px;
-    }
-
-
-    /* HERO */
-
-    .hero{
-        padding-top:112px;
-
-        padding-left:8px;
-        padding-right:8px;
-
-        padding-bottom:52px;
-    }
-
-
-    /* TITLE */
-
-    .hero-title{
-        max-width:355px;
-
-        font-size:42px;
-
-        line-height:.96;
-
-        letter-spacing:-2px;
-    }
-
-
-    /* DESCRIPTION */
-
-    .hero-description{
-        max-width:340px;
-
-        margin-top:32px;
-
-        font-size:17px;
-
-        line-height:1.55;
-    }
-
-
-    /* BUTTONS */
-
-    .hero-buttons{
-        margin-top:36px;
-
-        gap:12px;
-    }
-
-    .hero-button{
-        width:320px;
-
-        max-width:calc(100vw - 36px);
-
-        height:66px;
-
-        font-size:19px;
-    }
-
-    .get-started .arrow{
-        font-size:25px;
-
-        margin-left:12px;
-    }
-
-
-    /* TICKER */
-
-    .ticker{
-        height:82px;
-    }
-
-    .ticker-item{
-        font-size:22px;
-
-        margin-right:30px;
-    }
-
-    .ticker-star{
-        font-size:26px;
-
-        margin-right:30px;
-    }
-
-
-    /* STATS */
-
-    .stats{
-        max-width:calc(100% - 32px);
-
-        margin-top:48px;
-    }
-
-    .stat{
-        height:220px;
-    }
-
-    .stat-number{
-        font-size:36px;
-    }
-
-    .stat-label{
-        margin-top:15px;
-
-        font-size:15px;
-    }
-
-
-    .bottom-space{
-        height:55px;
-    }
-
-}
-/* =========================================================
-   SERVICES SECTION
-========================================================= */
-
-.services{
-    width:100%;
-
-    padding:78px 26px 80px;
-
-    background:#fff;
-}
-
-
-/* SERVICES INTRO */
-
-.services-header{
-    width:100%;
-    max-width:100%;
-
-    margin:0 auto 48px;
-}
-
-.services-label{
-    margin-bottom:10px;
-
-    color:#438600;
-
-    font-size:12px;
-
-    line-height:1;
-
+.eyebrow{
+    font-size:11px;
     font-weight:800;
-
-    letter-spacing:1px;
-
-    text-transform:uppercase;
+    letter-spacing:2.2px;
+    color:#638443;
+    margin-bottom:17px;
 }
 
-.services-title{
-    margin:0;
-
-    color:#000;
-
-    font-size:32px;
-
-    line-height:1.02;
-
-    font-weight:900;
-
-    letter-spacing:-1.5px;
-
-    text-transform:uppercase;
+.section-title{
+    font-size:clamp(40px,5vw,65px);
+    line-height:.98;
+    letter-spacing:-3px;
+    font-weight:800;
 }
 
-.services-description{
-    max-width:310px;
-
-    margin-top:16px;
-
+.section-description{
+    max-width:560px;
+    margin-top:22px;
     color:#666;
-
-    font-size:14px;
-
-    line-height:1.45;
-
-    font-weight:400;
+    line-height:1.7;
+    font-size:16px;
 }
 
+/* ================= SERVICES ================= */
 
-/* =========================================================
-   SERVICE CARDS
-========================================================= */
-
-.services-list{
-    width:100%;
-
+.services-heading{
     display:flex;
-
-    flex-direction:column;
-
-    gap:26px;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:40px;
+    margin-bottom:55px;
 }
 
+.services-heading .section-description{
+    margin:0;
+}
 
-/* CARD */
+.service-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
 
 .service-card{
-    position:relative;
-
-    width:100%;
-
-    padding:26px;
-
-    background:#f7f8fa;
-
+    border:1px solid #e5e5e5;
+    border-radius:10px;
     overflow:hidden;
+    background:#fff;
+    transition:.25s;
 }
 
-
-/* CARD NUMBER */
-
-.service-number{
-    position:absolute;
-
-    top:20px;
-    right:19px;
-
-    color:#222;
-
-    font-size:11px;
-
-    line-height:1;
-
-    font-weight:500;
-
-    z-index:2;
+.service-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 35px rgba(0,0,0,.07);
 }
-
-
-/* =========================================================
-   SERVICE IMAGE
-========================================================= */
 
 .service-image{
-    width:100%;
-
-    height:115px;
-
-    margin-bottom:27px;
-
+    height:250px;
     overflow:hidden;
-
-    background:#f0f1f3;
-
-    border:1px dashed #dfe1e5;
+    background:#f5f5f5;
 }
 
 .service-image img{
-    display:block;
-
     width:100%;
     height:100%;
-
     object-fit:cover;
+    display:block;
 }
 
-
-/* =========================================================
-   SERVICE CONTENT
-========================================================= */
-
-.service-title{
-    margin:0 0 7px;
-
-    color:#000;
-
-    font-size:18px;
-
-    line-height:1.15;
-
-    font-weight:900;
-
-    letter-spacing:-.5px;
+.service-content{
+    padding:28px;
 }
 
-.service-description{
-    margin:0;
-
-    color:#555;
-
+.service-number{
+    color:#6a894b;
     font-size:12px;
-
-    line-height:1.45;
-
-    font-weight:400;
+    font-weight:800;
+    margin-bottom:18px;
 }
 
+.service-content h3{
+    font-size:27px;
+    letter-spacing:-1px;
+    margin-bottom:13px;
+}
 
-/* =========================================================
-   SERVICE TAGS
-========================================================= */
+.service-content p{
+    color:#666;
+    line-height:1.65;
+    font-size:14px;
+}
 
 .service-tags{
     display:flex;
-
     flex-wrap:wrap;
-
-    gap:6px;
-
-    margin-top:18px;
+    gap:7px;
+    margin-top:20px;
 }
 
-.service-tag{
-    display:inline-flex;
-
-    align-items:center;
-
-    min-height:22px;
-
-    padding:4px 7px;
-
-    background:#f1f2f4;
-
-    border:1px solid #dedfe2;
-
-    color:#111;
-
-    font-size:9px;
-
-    line-height:1;
-
-    font-weight:700;
-
-    text-transform:uppercase;
+.tag{
+    border:1px solid #ddd;
+    border-radius:50px;
+    padding:7px 11px;
+    font-size:11px;
+    color:#555;
 }
-
-
-/* =========================================================
-   SERVICE BUTTON
-========================================================= */
 
 .service-link{
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:5px;
-
-    margin-top:22px;
-
-    padding-bottom:4px;
-
-    border-bottom:2px solid #438600;
-
-    color:#000;
-
-    text-decoration:none;
-
-    font-size:10px;
-
-    line-height:1;
-
+    display:inline-block;
+    margin-top:23px;
+    font-size:13px;
     font-weight:800;
-
-    text-transform:uppercase;
+    color:#314d21;
 }
 
-.service-link-arrow{
+/* ================= PROCESS ================= */
+
+.process{
+    background:#f6f7f4;
+}
+
+.process-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0;
+    margin-top:60px;
+}
+
+.process-item{
+    padding:25px 35px 25px 0;
+    margin-right:35px;
+    border-right:1px solid #d8ddd4;
+}
+
+.process-item:last-child{
+    border-right:0;
+}
+
+.process-number{
+    font-size:12px;
+    font-weight:800;
+    color:#6a894b;
+    margin-bottom:24px;
+}
+
+.process-item h3{
+    font-size:24px;
+    letter-spacing:-.8px;
+    margin-bottom:12px;
+}
+
+.process-item p{
+    color:#666;
+    line-height:1.65;
     font-size:14px;
-
-    line-height:1;
-
-    font-weight:400;
 }
 
+/* ================= FEATURES ================= */
 
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:600px){
-
-    .services{
-        padding:72px 26px 75px;
-    }
-
-    .services-header{
-        margin-bottom:46px;
-    }
-
-    .services-label{
-        font-size:12px;
-
-        margin-bottom:10px;
-    }
-
-    .services-title{
-        font-size:31px;
-
-        line-height:1.02;
-    }
-
-    .services-description{
-        max-width:315px;
-
-        margin-top:16px;
-
-        font-size:14px;
-
-        line-height:1.45;
-    }
-
-
-    .services-list{
-        gap:26px;
-    }
-
-
-    .service-card{
-        padding:26px;
-    }
-
-
-    .service-image{
-        height:115px;
-
-        margin-bottom:27px;
-    }
-
-
-    .service-title{
-        font-size:18px;
-    }
-
-    .service-description{
-        font-size:12px;
-
-        line-height:1.45;
-    }
-
-    .service-tags{
-        margin-top:18px;
-
-        gap:6px;
-    }
-
-    .service-tag{
-        font-size:9px;
-
-        padding:4px 7px;
-    }
-
-    .service-link{
-        margin-top:22px;
-
-        font-size:10px;
-    }
-
+.features{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:65px;
+    align-items:center;
 }
 
-
-/* =========================================================
-   SMALL PHONES
-========================================================= */
-
-@media(max-width:380px){
-
-    .services{
-        padding-left:24px;
-        padding-right:24px;
-    }
-
-    .services-title{
-        font-size:29px;
-    }
-
-    .service-card{
-        padding:24px;
-    }
-
-    .service-image{
-        height:110px;
-    }
-
+.feature-photo{
+    height:570px;
 }
-/* =========================================================
-   HOW IT WORKS
-========================================================= */
 
-.how-it-works{
+.feature-photo img{
     width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:10px;
+    display:block;
+}
 
-    background:#f7f8fa;
+.feature-list{
+    margin-top:38px;
+}
 
+.feature{
+    padding:24px 0;
     border-top:1px solid #e5e5e5;
+}
+
+.feature:last-child{
     border-bottom:1px solid #e5e5e5;
-
-    padding:0 0 155px;
-
-    overflow:hidden;
 }
 
+.feature h3{
+    font-size:19px;
+    margin-bottom:8px;
+}
 
-/* =========================================================
-   HOW CONTAINER
-========================================================= */
+.feature p{
+    color:#666;
+    line-height:1.6;
+    font-size:14px;
+}
 
-.how-container{
+/* ================= TESTIMONIALS ================= */
+
+.testimonials{
+    background:#f6f7f4;
+}
+
+.testimonial-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:55px;
+}
+
+.testimonial{
+    background:#fff;
+    border:1px solid #e5e5e5;
+    border-radius:9px;
+    padding:28px;
+}
+
+.quote{
+    font-size:17px;
+    line-height:1.65;
+    color:#333;
+}
+
+.person{
+    margin-top:30px;
+    padding-top:18px;
+    border-top:1px solid #e8e8e8;
+}
+
+.person strong{
+    display:block;
+    font-size:13px;
+}
+
+.person span{
+    display:block;
+    margin-top:5px;
+    color:#777;
+    font-size:11px;
+}
+
+/* ================= FAQ ================= */
+
+.faq-layout{
+    display:grid;
+    grid-template-columns:.75fr 1.25fr;
+    gap:80px;
+}
+
+.faq-list{
+    border-top:1px solid #ddd;
+}
+
+.faq-item{
+    border-bottom:1px solid #ddd;
+}
+
+.faq-question{
     width:100%;
-
-    max-width:680px;
-
-    margin:0 auto;
-
-    padding:250px 60px 0;
+    background:none;
+    border:0;
+    padding:23px 0;
+    text-align:left;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
 }
 
-
-/* =========================================================
-   HEADING
-========================================================= */
-
-.how-heading{
-    width:100%;
-
-    text-align:center;
-
-    margin-bottom:135px;
-}
-
-.how-label{
-    color:#438600;
-
-    font-size:28px;
-
-    line-height:1;
-
-    font-weight:800;
-
-    letter-spacing:1.2px;
-
-    margin-bottom:34px;
-}
-
-.how-heading h2{
-    margin:0;
-
-    color:#000;
-
-    font-size:64px;
-
-    line-height:1.08;
-
-    font-weight:900;
-
-    letter-spacing:-3px;
-}
-
-
-/* =========================================================
-   STEPS
-========================================================= */
-
-.how-step{
-    width:100%;
-
-    margin-bottom:142px;
-}
-
-.how-step:last-child{
-    margin-bottom:0;
-}
-
-
-/* =========================================================
-   STEP NUMBER
-========================================================= */
-
-.step-number{
-    color:#438600;
-
-    font-size:48px;
-
-    line-height:1;
-
-    font-weight:900;
-
-    letter-spacing:-1px;
-
-    margin-bottom:45px;
-}
-
-
-/* =========================================================
-   STEP TITLE
-========================================================= */
-
-.how-step h3{
-    margin:0 0 20px;
-
-    color:#000;
-
-    font-size:34px;
-
-    line-height:1.1;
-
-    font-weight:900;
-
-    letter-spacing:-1.5px;
-}
-
-
-/* =========================================================
-   STEP DESCRIPTION
-========================================================= */
-
-.how-step p{
-    margin:0;
-
-    color:#626262;
-
-    font-size:28px;
-
-    line-height:1.48;
-
+.faq-icon{
+    font-size:20px;
     font-weight:400;
-
-    letter-spacing:-.4px;
+    transition:.2s;
 }
 
+.faq-answer{
+    display:none;
+    padding:0 35px 23px 0;
+    color:#666;
+    line-height:1.65;
+    font-size:14px;
+}
 
-/* =========================================================
-   MOBILE
-========================================================= */
+.faq-item.active .faq-answer{
+    display:block;
+}
+
+.faq-item.active .faq-icon{
+    transform:rotate(45deg);
+}
+
+/* ================= CTA ================= */
+
+.cta{
+    padding:115px 0;
+    background:#243d17;
+    color:#fff;
+    text-align:center;
+}
+
+.cta .eyebrow{
+    color:#b7c9a6;
+}
+
+.cta h2{
+    font-size:clamp(42px,6vw,75px);
+    line-height:.95;
+    letter-spacing:-4px;
+    max-width:800px;
+    margin:auto;
+}
+
+.cta p{
+    max-width:560px;
+    margin:25px auto 0;
+    color:#d1d9cb;
+    line-height:1.7;
+}
+
+.cta-buttons{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin-top:32px;
+}
+
+.cta .primary-btn{
+    background:#fff;
+    color:#243d17;
+    border-color:#fff;
+}
+
+.cta .secondary-btn{
+    color:#fff;
+    border-color:#fff;
+    background:transparent;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#111;
+    color:#fff;
+    padding:70px 0 30px;
+}
+
+.footer-top{
+    display:grid;
+    grid-template-columns:1.6fr 1fr 1fr 1fr;
+    gap:50px;
+    padding-bottom:55px;
+}
+
+.footer-logo{
+    width:170px;
+    background:#fff;
+    padding:5px;
+    border-radius:5px;
+}
+
+.footer-description{
+    color:#999;
+    line-height:1.7;
+    font-size:13px;
+    max-width:330px;
+    margin-top:20px;
+}
+
+.footer-column h4{
+    font-size:11px;
+    letter-spacing:1.7px;
+    margin-bottom:20px;
+    color:#aaa;
+}
+
+.footer-column a{
+    display:block;
+    color:#ddd;
+    font-size:13px;
+    margin-bottom:13px;
+}
+
+.footer-bottom{
+    border-top:1px solid #292929;
+    padding-top:25px;
+    display:flex;
+    justify-content:space-between;
+    color:#777;
+    font-size:11px;
+}
+
+/* ================= MOBILE MENU ================= */
+
+.mobile-menu{
+    position:fixed;
+    top:82px;
+    right:0;
+    width:68%;
+    max-width:330px;
+    height:calc(100vh - 82px);
+    background:#fff;
+    border-left:1px solid #e5e5e5;
+    padding:28px;
+    transform:translateX(100%);
+    transition:.3s ease;
+    z-index:999;
+}
+
+.mobile-menu.open{
+    transform:translateX(0);
+}
+
+.mobile-menu a{
+    display:block;
+    padding:17px 0;
+    border-bottom:1px solid #eee;
+    font-size:14px;
+    font-weight:600;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .nav-links,
+    .nav-buttons{
+        display:none;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        padding-top:55px;
+    }
+
+    .hero-image{
+        order:-1;
+    }
+
+    .hero-image img{
+        height:330px;
+    }
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .stat:nth-child(2){
+        border-right:0;
+    }
+
+    .stat:nth-child(-n+2){
+        border-bottom:1px solid #e9e9e9;
+    }
+
+    .services-heading{
+        display:block;
+    }
+
+    .services-heading .section-description{
+        margin-top:20px;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .feature-photo{
+        height:400px;
+    }
+
+    .testimonial-grid{
+        grid-template-columns:1fr;
+    }
+
+    .faq-layout{
+        grid-template-columns:1fr;
+        gap:45px;
+    }
+
+    .footer-top{
+        grid-template-columns:1fr 1fr;
+    }
+}
 
 @media(max-width:600px){
 
-    .how-it-works{
-        padding-bottom:110px;
+    header,
+    .nav{
+        height:72px;
     }
 
-    .how-container{
-        max-width:none;
-
-        padding:
-            150px
-            30px
-            0;
+    .mobile-menu{
+        top:72px;
+        height:calc(100vh - 72px);
     }
 
-
-    /* HEADING */
-
-    .how-heading{
-        margin-bottom:110px;
+    .logo{
+        width:145px;
     }
 
-    .how-label{
-        font-size:21px;
-
-        letter-spacing:1px;
-
-        margin-bottom:27px;
+    .hero{
+        min-height:auto;
+        padding:40px 0 60px;
+        gap:35px;
     }
 
-    .how-heading h2{
-        font-size:48px;
-
-        line-height:1.05;
-
-        letter-spacing:-2.2px;
+    .hero h1{
+        font-size:49px;
+        letter-spacing:-2.7px;
     }
 
-
-    /* STEPS */
-
-    .how-step{
-        margin-bottom:115px;
+    .hero-text{
+        font-size:15px;
     }
 
-
-    .step-number{
-        font-size:42px;
-
-        margin-bottom:40px;
+    .hero-image img{
+        height:260px;
     }
 
+    .hero-buttons,
+    .cta-buttons{
+        flex-direction:column;
+    }
 
-    .how-step h3{
+    .primary-btn,
+    .secondary-btn{
+        width:100%;
+        text-align:center;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stat{
+        padding:22px 14px;
+    }
+
+    .stat-number{
         font-size:28px;
-
-        line-height:1.12;
-
-        letter-spacing:-1px;
-
-        margin-bottom:18px;
     }
 
-
-    .how-step p{
-        font-size:21px;
-
-        line-height:1.52;
-
-        letter-spacing:-.2px;
+    .section{
+        padding:75px 0;
     }
 
-}
-
-
-/* =========================================================
-   SMALL PHONES
-========================================================= */
-
-@media(max-width:380px){
-
-    .how-container{
-        padding:
-            125px
-            25px
-            0;
-    }
-
-
-    .how-heading{
-        margin-bottom:90px;
-    }
-
-
-    .how-label{
-        font-size:18px;
-
-        margin-bottom:23px;
-    }
-
-
-    .how-heading h2{
+    .section-title{
         font-size:43px;
-
-        letter-spacing:-2px;
+        letter-spacing:-2.3px;
     }
 
-
-    .how-step{
-        margin-bottom:100px;
+    .service-grid{
+        grid-template-columns:1fr;
     }
 
-
-    .step-number{
-        font-size:38px;
-
-        margin-bottom:35px;
+    .service-image{
+        height:220px;
     }
 
-
-    .how-step h3{
-        font-size:25px;
-
-        margin-bottom:16px;
+    .process-grid{
+        grid-template-columns:1fr;
     }
 
-
-    .how-step p{
-        font-size:19px;
-
-        line-height:1.5;
+    .process-item{
+        border-right:0;
+        border-bottom:1px solid #d8ddd4;
+        margin:0;
+        padding:25px 0;
     }
 
+    .process-item:last-child{
+        border-bottom:0;
+    }
+
+    .feature-photo{
+        height:300px;
+    }
+
+    .cta{
+        padding:80px 0;
+    }
+
+    .cta h2{
+        font-size:46px;
+        letter-spacing:-2.5px;
+    }
+
+    .footer-top{
+        grid-template-columns:1fr;
+        gap:35px;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+        gap:10px;
+    }
 }
 </style>
-
 </head>
-
 
 <body>
 
+<!-- ================= HEADER ================= -->
 
-<!-- =======================================================
-     HEADER
-======================================================= -->
+<header>
+    <div class="container nav">
 
-<header class="header">
+        <a href="#" aria-label="TemmySocials home">
+            <img src="IMG_4590.jpeg" class="logo" alt="TemmySocials">
+        </a>
 
-    <a
-        href="index.html"
-        class="logo"
-    >
+        <nav class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#process">How it works</a>
+            <a href="#faq">FAQ</a>
+            <a href="#support">Support</a>
+        </nav>
 
-        <img
-            src="logo.png.jpg"
-            alt="Temmy Social"
-        >
+        <div class="nav-buttons">
+            <a href="#" class="sign-in">Sign in</a>
+            <a href="#" class="register">Create account</a>
+        </div>
 
-    </a>
-
-
-    <div class="header-right">
-
-        <button
-            class="theme-button"
-            id="themeButton"
-            type="button"
-            aria-label="Theme"
-        >
-
-            <span class="theme-icon"></span>
-
-        </button>
-
-
-        <button
-            class="menu-button"
-            id="menuButton"
-            type="button"
-            aria-label="Menu"
-        >
-
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">
             <span></span>
             <span></span>
             <span></span>
-
         </button>
 
     </div>
-
 </header>
 
-
-
-<!-- =======================================================
-     SLIDE MENU
-======================================================= -->
-
-<nav
-    class="menu"
-    id="menu"
->
-
-    <a href="#">
-        Pricing
-    </a>
-
-    <a href="login.html">
-        Sign In
-    </a>
-
-    <a href="login.html">
-        Get Started
-    </a>
-
-    <a href="#">
-        FAQ
-    </a>
-
-</nav>
-
-
-
-<!-- =======================================================
-     HERO
-======================================================= -->
-
-<section class="hero">
-
-
-    <h1 class="hero-title">
-
-        PREMIUM<br>
-
-        <span class="green">SOCIAL</span> ASSETS<br>
-
-        DELIVERED<br>
-
-        FAST
-
-    </h1>
-
-
-    <p class="hero-description">
-
-        Buy aged social media accounts, working
-        tools, virtual SMS numbers, and SME
-        boosting services plus all in one platform,
-        paid from your wallet.
-
-    </p>
-
-
-    <div class="hero-buttons">
-
-
-        <a
-            href="login.html"
-            class="hero-button get-started"
-        >
-
-            GET STARTED
-
-            <span class="arrow">
-                →
-            </span>
-
-        </a>
-
-
-        <a
-            href="#services"
-            class="hero-button browse"
-        >
-
-            BROWSE SERVICES
-
-        </a>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =======================================================
-     GREEN SLIDING BAR
-======================================================= -->
-
-<section class="ticker">
-
-    <div class="ticker-content">
-
-
-        <div class="ticker-item">
-            FACEBOOK ACCOUNTS
-        </div>
-
-        <div class="ticker-star">
-            *
-        </div>
-
-
-        <div class="ticker-item">
-            INSTAGRAM ACCOUNTS
-        </div>
-
-        <div class="ticker-star">
-            *
-        </div>
-
-
-        <div class="ticker-item">
-            VIRTUAL SMS
-        </div>
-
-        <div class="ticker-star">
-            *
-        </div>
-
-
-        <div class="ticker-item">
-            SME BOOSTING
-        </div>
-
-        <div class="ticker-star">
-            *
-        </div>
-
-
-
-        <!-- DUPLICATE FOR LOOP -->
-
-        <div class="ticker-item">
-            FACEBOOK ACCOUNTS
-        </div>
-
-        <div class="ticker-star">
-            *
-        </div>
-
-
-        <div class="ticker-item">
-            INSTAGRAM ACCOUNTS
-        </div>
-
-        <div class="ticker-star">
-            *
-        </div>
-
-
-        <div class="ticker-item">
-            VIRTUAL SMS
-        </div>
-
-        <div class="ticker-star">
-            *
-        </div>
-
-
-        <div class="ticker-item">
-            SME BOOSTING
-        </div>
-
-        <div class="ticker-star">
-            *
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =======================================================
-     STATISTICS
-======================================================= -->
-
-<section
-    class="stats"
-    id="services"
->
-
-
-    <div class="stat">
-
-        <div class="stat-number">
-            10K+
-        </div>
-
-        <div class="stat-label">
-            ACCOUNTS IN<br>
-            STOCK
-        </div>
-
-    </div>
-
-
-
-    <div class="stat">
-
-        <div class="stat-number">
-            200+
-        </div>
-
-        <div class="stat-label">
-            COUNTRIES FOR<br>
-            SMS
-        </div>
-
-    </div>
-
-
-
-    <div class="stat">
-
-        <div class="stat-number">
-            &lt; 10s
-        </div>
-
-        <div class="stat-label">
-            AVG DELIVERY<br>
-            TIME
-        </div>
-
-    </div>
-
-
-
-    <div class="stat">
-
-        <div class="stat-number">
-            24/7
-        </div>
-
-        <div class="stat-label">
-            PLATFORM<br>
-            UPTIME
-        </div>
-
-    </div>
-
-
-</section>
-<!-- =======================================================
-     SERVICES
-======================================================= -->
-
-<section class="services" id="services">
-
-
-    <!-- SERVICES HEADER -->
-
-    <div class="services-header">
-
-        <div class="services-label">
-            OUR SERVICES
-        </div>
-
-        <h2 class="services-title">
-            FOUR SERVICES,<br>
-            ONE PLATFORM.
-        </h2>
-
-        <p class="services-description">
-            Everything you need to scale your
-            digital presence.
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#services">Services</a>
+    <a href="#process">How it works</a>
+    <a href="#faq">FAQ</a>
+    <a href="#support">Support</a>
+    <a href="#">Sign in</a>
+    <a href="#">Create account</a>
+</div>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="container hero">
+
+    <div>
+        <div class="hero-small">PREMIUM DIGITAL SERVICES</div>
+
+        <h1>
+            Everything you need.
+            <span>One platform.</span>
+        </h1>
+
+        <p class="hero-text">
+            Premium digital tools and social-media resources
+            designed for creators, agencies, entrepreneurs,
+            and growing online businesses.
         </p>
 
+        <div class="hero-buttons">
+            <a href="#services" class="primary-btn">EXPLORE SERVICES</a>
+            <a href="#" class="secondary-btn">CREATE ACCOUNT</a>
+        </div>
     </div>
 
+    <div class="hero-image">
+        <img src="IMG_4654.jpeg" alt="Digital social media services">
+    </div>
 
-    <!-- SERVICES LIST -->
+</section>
 
-    <div class="services-list">
 
+<!-- ================= STATS ================= -->
 
-        <!-- =================================================
-             SERVICE 01
-        ================================================== -->
+<section class="stats">
 
-        <article class="service-card">
+    <div class="container stats-grid">
 
-            <div class="service-number">
-                01
-            </div>
+        <div class="stat">
+            <div class="stat-number">10K+</div>
+            <div class="stat-label">DIGITAL ASSETS</div>
+        </div>
 
+        <div class="stat">
+            <div class="stat-number">200+</div>
+            <div class="stat-label">SUPPORTED REGIONS</div>
+        </div>
 
-            <div class="service-image">
+        <div class="stat">
+            <div class="stat-number">&lt; 10s</div>
+            <div class="stat-label">AVG DELIVERY TIME</div>
+        </div>
 
-                <img
-                    src="social-media-logs.jpeg.jpg"
-                    alt="Social Media Logs"
-                >
-
-            </div>
-
-
-            <h3 class="service-title">
-                Social Media Logs
-            </h3>
-
-
-            <p class="service-description">
-
-                Aged and verified accounts for
-                Facebook, Instagram, TikTok, X
-                (Twitter), and LinkedIn. Ready to use
-                instantly after purchase.
-
-            </p>
-
-
-            <div class="service-tags">
-
-                <span class="service-tag">
-                    FACEBOOK
-                </span>
-
-                <span class="service-tag">
-                    INSTAGRAM
-                </span>
-
-                <span class="service-tag">
-                    TIKTOK
-                </span>
-
-                <span class="service-tag">
-                    X
-                </span>
-
-                <span class="service-tag">
-                    LINKEDIN
-                </span>
-
-            </div>
-
-
-            <a
-                href="login.html"
-                class="service-link"
-            >
-
-                GET STARTED
-
-                <span class="service-link-arrow">
-                    ↗
-                </span>
-
-                <span class="service-link-arrow">
-                    →
-                </span>
-
-            </a>
-
-        </article>
-
-
-
-        <!-- =================================================
-             SERVICE 02
-        ================================================== -->
-
-        <article class="service-card">
-
-            <div class="service-number">
-                02
-            </div>
-
-
-            <div class="service-image">
-
-                <img
-                    src="working-tools.jpeg.jpg"
-                    alt="Working Tools"
-                >
-
-            </div>
-
-
-            <h3 class="service-title">
-                Working Tools
-            </h3>
-
-
-            <p class="service-description">
-
-                Updates, working pictures and working
-                tools. Downloaded instantly as a
-                secure file the moment your purchase
-                is confirmed.
-
-            </p>
-
-
-            <div class="service-tags">
-
-                <span class="service-tag">
-                    UPDATES
-                </span>
-
-                <span class="service-tag">
-                    WORKING PICTURES
-                </span>
-
-                <span class="service-tag">
-                    WORKING TOOLS
-                </span>
-
-            </div>
-
-
-            <a
-                href="login.html"
-                class="service-link"
-            >
-
-                GET STARTED
-
-                <span class="service-link-arrow">
-                    ↗
-                </span>
-
-                <span class="service-link-arrow">
-                    →
-                </span>
-
-            </a>
-
-        </article>
-
-
-
-        <!-- =================================================
-             SERVICE 03
-        ================================================== -->
-
-        <article class="service-card">
-
-            <div class="service-number">
-                03
-            </div>
-
-
-            <div class="service-image">
-
-                <img
-                    src="sms-virtual-numbers.jpeg.jpg"
-                    alt="SMS Virtual Numbers"
-                >
-
-            </div>
-
-
-            <h3 class="service-title">
-                SMS Virtual Numbers
-            </h3>
-
-
-            <p class="service-description">
-
-                Rent real virtual phone numbers from
-                200+ countries. Receive OTP codes
-                for WhatsApp, Telegram, Instagram,
-                and more in seconds.
-
-            </p>
-
-
-            <div class="service-tags">
-
-                <span class="service-tag">
-                    200+ COUNTRIES
-                </span>
-
-                <span class="service-tag">
-                    INSTANT OTP
-                </span>
-
-                <span class="service-tag">
-                    WHATSAPP
-                </span>
-
-                <span class="service-tag">
-                    TELEGRAM
-                </span>
-
-            </div>
-
-
-            <a
-                href="login.html"
-                class="service-link"
-            >
-
-                GET STARTED
-
-                <span class="service-link-arrow">
-                    ↗
-                </span>
-
-                <span class="service-link-arrow">
-                    →
-                </span>
-
-            </a>
-
-        </article>
-
-
-
-        <!-- =================================================
-             SERVICE 04
-        ================================================== -->
-
-        <article class="service-card">
-
-            <div class="service-number">
-                04
-            </div>
-
-
-            <div class="service-image">
-
-                <img
-                    src="sme-boosting.jpeg.jpg"
-                    alt="SME Boosting"
-                >
-
-            </div>
-
-
-            <h3 class="service-title">
-                SME Boosting
-            </h3>
-
-
-            <p class="service-description">
-
-                Followers, likes, views, and comments
-                for Instagram, TikTok, YouTube,
-                Facebook, and Telegram. Orders
-                fulfilled automatically.
-
-            </p>
-
-
-            <div class="service-tags">
-
-                <span class="service-tag">
-                    FOLLOWERS
-                </span>
-
-                <span class="service-tag">
-                    LIKES
-                </span>
-
-                <span class="service-tag">
-                    VIEWS
-                </span>
-
-                <span class="service-tag">
-                    COMMENTS
-                </span>
-
-            </div>
-
-
-            <a
-                href="login.html"
-                class="service-link"
-            >
-
-                GET STARTED
-
-                <span class="service-link-arrow">
-                    ↗
-                </span>
-
-                <span class="service-link-arrow">
-                    →
-                </span>
-
-            </a>
-
-        </article>
-
+        <div class="stat">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">PLATFORM SUPPORT</div>
+        </div>
 
     </div>
 
 </section>
-<!-- =========================================================
-     HOW IT WORKS
-========================================================= -->
 
-<section class="how-it-works">
 
-    <div class="how-container">
+<!-- ================= SERVICES ================= -->
 
-        <!-- SECTION INTRO -->
+<section class="section" id="services">
 
-        <div class="how-heading">
+    <div class="container">
 
-            <div class="how-label">
-                HOW IT WORKS
+        <div class="services-heading">
+
+            <div>
+                <div class="eyebrow">WHAT WE OFFER</div>
+                <h2 class="section-title">
+                    FOUR SERVICES,<br>
+                    ONE PLATFORM.
+                </h2>
             </div>
 
-            <h2>
-                THREE STEPS.<br>
-                THAT’S ALL.
+            <p class="section-description">
+                Everything a digital entrepreneur needs to
+                manage campaigns, create content, and grow
+                an online presence.
+            </p>
+
+        </div>
+
+
+        <div class="service-grid">
+
+            <!-- CARD 01 -->
+
+            <article class="service-card">
+
+                <div class="service-image">
+                    <img src="IMG_4654.jpeg" alt="Social media resources">
+                </div>
+
+                <div class="service-content">
+
+                    <div class="service-number">01</div>
+
+                    <h3>Social Media Resources</h3>
+
+                    <p>
+                        A curated collection of digital resources
+                        for creators, agencies, marketers, and
+                        online businesses.
+                    </p>
+
+                    <div class="service-tags">
+                        <span class="tag">Instagram</span>
+                        <span class="tag">TikTok</span>
+                        <span class="tag">Facebook</span>
+                        <span class="tag">YouTube</span>
+                    </div>
+
+                    <a href="#" class="service-link">GET STARTED →</a>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 02 -->
+
+            <article class="service-card">
+
+                <div class="service-image">
+                    <img src="IMG_4656.jpeg" alt="Digital communication tools">
+                </div>
+
+                <div class="service-content">
+
+                    <div class="service-number">02</div>
+
+                    <h3>Digital Tools</h3>
+
+                    <p>
+                        Practical tools and downloadable resources
+                        designed to help you manage everyday
+                        digital work more efficiently.
+                    </p>
+
+                    <div class="service-tags">
+                        <span class="tag">Tools</span>
+                        <span class="tag">Resources</span>
+                        <span class="tag">Downloads</span>
+                    </div>
+
+                    <a href="#" class="service-link">GET STARTED →</a>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 03 -->
+
+            <article class="service-card">
+
+                <div class="service-image">
+                    <img src="IMG_4657.jpeg" alt="Social media growth resources">
+                </div>
+
+                <div class="service-content">
+
+                    <div class="service-number">03</div>
+
+                    <h3>Messaging Services</h3>
+
+                    <p>
+                        Communication resources for legitimate
+                        business workflows, testing, and digital
+                        projects.
+                    </p>
+
+                    <div class="service-tags">
+                        <span class="tag">Messaging</span>
+                        <span class="tag">Business</span>
+                        <span class="tag">Digital</span>
+                    </div>
+
+                    <a href="#" class="service-link">GET STARTED →</a>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 04 -->
+
+            <article class="service-card">
+
+                <div class="service-image">
+                    <img src="IMG_4654.jpeg" alt="Creator resources">
+                </div>
+
+                <div class="service-content">
+
+                    <div class="service-number">04</div>
+
+                    <h3>Creator Growth</h3>
+
+                    <p>
+                        Resources and tools to help creators organize
+                        campaigns, improve content workflows, and
+                        understand their audience.
+                    </p>
+
+                    <div class="service-tags">
+                        <span class="tag">Analytics</span>
+                        <span class="tag">Content</span>
+                        <span class="tag">Strategy</span>
+                    </div>
+
+                    <a href="#" class="service-link">GET STARTED →</a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROCESS ================= -->
+
+<section class="section process" id="process">
+
+    <div class="container">
+
+        <div class="eyebrow">SIMPLE PROCESS</div>
+
+        <h2 class="section-title">
+            THREE STEPS.<br>
+            THAT'S ALL.
+        </h2>
+
+        <div class="process-grid">
+
+            <div class="process-item">
+
+                <div class="process-number">01</div>
+
+                <h3>Create your account</h3>
+
+                <p>
+                    Register your account and set up your
+                    personal workspace in minutes.
+                </p>
+
+            </div>
+
+
+            <div class="process-item">
+
+                <div class="process-number">02</div>
+
+                <h3>Browse and pick</h3>
+
+                <p>
+                    Browse the available categories and choose
+                    the digital resources that fit your project.
+                </p>
+
+            </div>
+
+
+            <div class="process-item">
+
+                <div class="process-number">03</div>
+
+                <h3>Get your resources</h3>
+
+                <p>
+                    Access your purchased digital resources
+                    through your account without unnecessary
+                    manual processing.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="section">
+
+    <div class="container features">
+
+        <div class="feature-photo">
+            <img src="IMG_4656.jpeg" alt="Digital communication">
+        </div>
+
+        <div>
+
+            <div class="eyebrow">BUILT FOR EFFICIENCY</div>
+
+            <h2 class="section-title">
+                Simple tools.<br>
+                Less waiting.
+            </h2>
+
+            <p class="section-description">
+                Built for digital entrepreneurs, agencies,
+                social media managers, creators, and online
+                businesses that value speed and simplicity.
+            </p>
+
+            <div class="feature-list">
+
+                <div class="feature">
+                    <h3>Instant Access</h3>
+                    <p>
+                        Digital resources can be accessed through
+                        your account after purchase.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>Wallet System</h3>
+                    <p>
+                        Keep your account balance ready for
+                        convenient future purchases.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>Organized Inventory</h3>
+                    <p>
+                        Browse resources by category and quickly
+                        find what you need.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>Reseller Friendly</h3>
+                    <p>
+                        Useful for businesses and professionals
+                        managing digital resources for clients.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TESTIMONIALS ================= -->
+
+<section class="section testimonials">
+
+    <div class="container">
+
+        <div class="eyebrow">WHAT PEOPLE SAY</div>
+
+        <h2 class="section-title">
+            TRUSTED BY<br>
+            DIGITAL CREATORS.
+        </h2>
+
+        <div class="testimonial-grid">
+
+            <div class="testimonial">
+
+                <p class="quote">
+                    “The platform is simple to use and the
+                    resources are easy to access.”
+                </p>
+
+                <div class="person">
+                    <strong>Chukwuemeka A.</strong>
+                    <span>Digital Entrepreneur</span>
+                </div>
+
+            </div>
+
+
+            <div class="testimonial">
+
+                <p class="quote">
+                    “I like how everything is organized in one
+                    place. It saves me a lot of time.”
+                </p>
+
+                <div class="person">
+                    <strong>Oluwaseun B.</strong>
+                    <span>Digital Marketer</span>
+                </div>
+
+            </div>
+
+
+            <div class="testimonial">
+
+                <p class="quote">
+                    “The wallet system makes repeat purchases
+                    much easier.”
+                </p>
+
+                <div class="person">
+                    <strong>Amina M.</strong>
+                    <span>Content Creator</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FAQ ================= -->
+
+<section class="section" id="faq">
+
+    <div class="container faq-layout">
+
+        <div>
+
+            <div class="eyebrow">QUESTIONS</div>
+
+            <h2 class="section-title">
+                GOT QUESTIONS?<br>
+                WE HAVE ANSWERS.
             </h2>
 
         </div>
 
 
-        <!-- STEP 01 -->
+        <div class="faq-list">
 
-        <div class="how-step">
+            <div class="faq-item">
 
-            <div class="step-number">
-                01
+                <button class="faq-question">
+                    How does the wallet work?
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    Your account balance can be used for
+                    eligible purchases available on the platform.
+                </div>
+
             </div>
 
-            <h3>
-                Top up wallet
-            </h3>
 
-            <p>
-                Add funds securely to your centralized
-                VerifyStackAcct wallet using multiple supported
-                payment methods.
-            </p>
+            <div class="faq-item">
 
-        </div>
+                <button class="faq-question">
+                    How fast can I access a digital resource?
+                    <span class="faq-icon">+</span>
+                </button>
 
+                <div class="faq-answer">
+                    Digital resources are designed to become
+                    available through your account after the
+                    purchase process is completed.
+                </div>
 
-        <!-- STEP 02 -->
-
-        <div class="how-step">
-
-            <div class="step-number">
-                02
             </div>
 
-            <h3>
-                Browse &amp; pick
-            </h3>
 
-            <p>
-                Select the services, assets, or tools you need
-                from our verified and constantly updated
-                inventory.
-            </p>
+            <div class="faq-item">
 
-        </div>
+                <button class="faq-question">
+                    What services are available?
+                    <span class="faq-icon">+</span>
+                </button>
 
+                <div class="faq-answer">
+                    The platform can offer digital resources,
+                    creator tools, communication resources,
+                    analytics, and other legitimate digital products.
+                </div>
 
-        <!-- STEP 03 -->
-
-        <div class="how-step">
-
-            <div class="step-number">
-                03
             </div>
 
-            <h3>
-                Instant delivery
-            </h3>
 
-            <p>
-                Complete the purchase and receive your digital
-                assets instantly directly to your dashboard.
-            </p>
+            <div class="faq-item">
+
+                <button class="faq-question">
+                    Can I use the platform for my business?
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    Yes. The platform is designed for creators,
+                    entrepreneurs, agencies, and online businesses.
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+                    How do I contact support?
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    You can contact the support team through the
+                    support channels provided on the platform.
+                </div>
+
+            </div>
 
         </div>
 
@@ -2322,107 +1433,160 @@ body{
 
 </section>
 
-<div class="bottom-space"></div>
+
+<!-- ================= CTA ================= -->
+
+<section class="cta" id="support">
+
+    <div class="container">
+
+        <div class="eyebrow">READY TO GET STARTED?</div>
+
+        <h2>
+            YOUR DIGITAL<br>
+            WORKSPACE IS WAITING.
+        </h2>
+
+        <p>
+            Create your account and start exploring premium
+            digital resources in one simple platform.
+        </p>
+
+        <div class="cta-buttons">
+            <a href="#" class="primary-btn">CREATE FREE ACCOUNT</a>
+            <a href="#services" class="secondary-btn">BROWSE SERVICES</a>
+        </div>
+
+    </div>
+
+</section>
 
 
+<!-- ================= FOOTER ================= -->
 
-<!-- =======================================================
-     JAVASCRIPT
-======================================================= -->
+<footer>
+
+    <div class="container">
+
+        <div class="footer-top">
+
+            <div>
+
+                <img
+                    src="IMG_4590.jpeg"
+                    class="footer-logo"
+                    alt="TemmySocials"
+                >
+
+                <p class="footer-description">
+                    Your go-to platform for premium digital
+                    resources, useful tools, communication
+                    solutions, and creator resources.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>SERVICES</h4>
+
+                <a href="#services">Social Resources</a>
+                <a href="#services">Digital Tools</a>
+                <a href="#services">Messaging Services</a>
+                <a href="#services">Creator Growth</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>PLATFORM</h4>
+
+                <a href="#">Pricing</a>
+                <a href="#faq">FAQ</a>
+                <a href="#">About us</a>
+                <a href="#support">Support</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>ACCOUNT</h4>
+
+                <a href="#">Sign in</a>
+                <a href="#">Register</a>
+                <a href="#">Dashboard</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 TemmySocials. All rights reserved.
+            </span>
+
+            <span>
+                Privacy policy &nbsp; · &nbsp; Terms of service
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
 
 <script>
 
+/* ================= MOBILE MENU ================= */
 
-/* =========================================================
-   MENU
-========================================================= */
+const menuBtn = document.getElementById("menuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
 
-const menuButton =
-    document.getElementById("menuButton");
+menuBtn.addEventListener("click", function(){
 
-const menu =
-    document.getElementById("menu");
+    mobileMenu.classList.toggle("open");
 
-
-menuButton.addEventListener(
-    "click",
-    function(event){
-
-        event.stopPropagation();
-
-        menu.classList.toggle("active");
-
-    }
-);
+});
 
 
-/* =========================================================
-   CLOSE MENU WHEN LINK IS CLICKED
-========================================================= */
+document.querySelectorAll(".mobile-menu a").forEach(function(link){
 
-document
-    .querySelectorAll(".menu a")
-    .forEach(function(link){
+    link.addEventListener("click", function(){
+        mobileMenu.classList.remove("open");
+    });
 
-        link.addEventListener(
-            "click",
-            function(){
+});
 
-                menu.classList.remove("active");
 
+/* ================= FAQ ================= */
+
+document.querySelectorAll(".faq-question").forEach(function(button){
+
+    button.addEventListener("click", function(){
+
+        const item = this.parentElement;
+
+        document.querySelectorAll(".faq-item").forEach(function(other){
+
+            if(other !== item){
+                other.classList.remove("active");
             }
-        );
+
+        });
+
+        item.classList.toggle("active");
 
     });
 
-
-/* =========================================================
-   CLOSE MENU WHEN CLICKING OUTSIDE
-========================================================= */
-
-document.addEventListener(
-    "click",
-    function(event){
-
-        const clickedInsideMenu =
-            menu.contains(event.target);
-
-        const clickedMenuButton =
-            menuButton.contains(event.target);
-
-
-        if(
-            !clickedInsideMenu &&
-            !clickedMenuButton
-        ){
-
-            menu.classList.remove("active");
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   THEME BUTTON
-========================================================= */
-
-const themeButton =
-    document.getElementById("themeButton");
-
-
-themeButton.addEventListener(
-    "click",
-    function(){
-
-        console.log("Theme button clicked");
-
-    }
-);
+});
 
 </script>
-
 
 </body>
 </html>
