@@ -749,6 +749,9 @@ onAuthStateChanged(auth, async (user) => {
     $("#stat-balance").textContent = fmt(data.walletBalance);
     $("#wallet-balance").textContent = fmt(data.walletBalance);
     $("#stat-purchases").textContent = fmt(data.totalPurchases);
+  }, (err) => {
+    console.error("user doc listener error:", err);
+    showToast("Couldn't load account data — check Firestore rules");
   }));
 
   // site settings (support links) — live, no hardcoding
@@ -796,19 +799,28 @@ onAuthStateChanged(auth, async (user) => {
     });
   }));
 
-  // orders (recent + full list)
-  unsubscribers.push(onSnapshot(query(collection(db, "orders"), where("uid", "==", user.uid), orderBy("createdAt", "desc")), (s) => {
+  // orders (recent + full list) — filter only, sort client-side to avoid needing a composite index
+  unsubscribers.push(onSnapshot(query(collection(db, "orders"), where("uid", "==", user.uid)), (s) => {
     renderOrders(s);
+  }, (err) => {
+    console.error("orders listener error:", err);
+    showToast("Couldn't load orders — check Firestore rules/index");
   }));
 
-  // wallet transactions
-  unsubscribers.push(onSnapshot(query(collection(db, "transactions"), where("uid", "==", user.uid), orderBy("createdAt", "desc")), (s) => {
+  // wallet transactions — filter only, sort client-side to avoid needing a composite index
+  unsubscribers.push(onSnapshot(query(collection(db, "transactions"), where("uid", "==", user.uid)), (s) => {
     renderTransactions(s);
+  }, (err) => {
+    console.error("transactions listener error:", err);
+    showToast("Couldn't load transactions — check Firestore rules/index");
   }));
 
-  // notifications
-  unsubscribers.push(onSnapshot(query(collection(db, "notifications"), where("uid", "==", user.uid), orderBy("createdAt", "desc")), (s) => {
+  // notifications — filter only, sort client-side to avoid needing a composite index
+  unsubscribers.push(onSnapshot(query(collection(db, "notifications"), where("uid", "==", user.uid)), (s) => {
     renderNotifications(s);
+  }, (err) => {
+    console.error("notifications listener error:", err);
+    showToast("Couldn't load notifications — check Firestore rules/index");
   }));
 
   goTo(location.hash.replace("#","") || "dashboard");
@@ -851,6 +863,14 @@ function renderProducts(snap, gridId, emptyId) {
   grid.innerHTML = snap.docs.map(productCard).join("");
 }
 
+function sortByCreatedAtDesc(docs) {
+  return [...docs].sort((a, b) => {
+    const ta = new Date(a.data().createdAt || 0).getTime();
+    const tb = new Date(b.data().createdAt || 0).getTime();
+    return tb - ta;
+  });
+}
+
 function renderOrders(snap) {
   const list = $("#orders-list");
   const empty = $("#orders-empty");
@@ -865,7 +885,8 @@ function renderOrders(snap) {
     return;
   }
   empty.classList.add("hidden");
-  list.innerHTML = snap.docs.map(d => {
+  const docs = sortByCreatedAtDesc(snap.docs);
+  list.innerHTML = docs.map(d => {
     const o = d.data();
     return `<div class="card p-4 flex items-center justify-between">
       <div>
@@ -879,7 +900,7 @@ function renderOrders(snap) {
     </div>`;
   }).join("");
 
-  recentCard.outerHTML = `<div id="recent-orders-card" class="space-y-3">` + snap.docs.slice(0,3).map(d => {
+  recentCard.outerHTML = `<div id="recent-orders-card" class="space-y-3">` + docs.slice(0,3).map(d => {
     const o = d.data();
     return `<div class="card p-4 flex items-center justify-between">
       <div>
@@ -905,7 +926,7 @@ function renderTransactions(snap) {
   }
   empty.classList.add("hidden");
   walletEmpty.classList.add("hidden");
-  const rows = snap.docs.map(txnDoc => {
+  const rows = sortByCreatedAtDesc(snap.docs).map(txnDoc => {
     const t = txnDoc.data();
     const isCredit = (t.amount || 0) >= 0;
     const status = resolveTxnStatus(txnDoc);
@@ -939,7 +960,7 @@ function renderNotifications(snap) {
     return;
   }
   empty.classList.add("hidden");
-  list.innerHTML = snap.docs.map(d => {
+  list.innerHTML = sortByCreatedAtDesc(snap.docs).map(d => {
     const n = d.data();
     return `<div class="card p-4">
       <p class="text-sm font-semibold">${n.title || "Notification"}</p>
