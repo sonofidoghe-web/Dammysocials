@@ -1,378 +1,363 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dammy Social – Premium Social Assets Delivered Fast</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dammy Social — Digital Account &amp; Social Media Management</title>
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: #ffffff;
-      color: #1a1a1a;
-      line-height: 1.5;
-      overflow-x: hidden;
-    }
+<!-- Google Fonts: a rounded handwriting script for the logo + a bold grotesk for the headline -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    /* ========== FIXED HEADER – 40% transparent ========== */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    }
+<style>
+  :root{
+    --green-dark:   #33501f;   /* headline "D" / deep leaves */
+    --green:        #5c7a29;  /* primary brand green */
+    --green-mid:    #6c8f2f;  /* button green */
+    --green-light:  #edf2e2;  /* faint tints */
+    --brown:        #7a4b32;  /* arrow accent */
+    --ink:          #17190f;
+    --ink-soft:     #4b4f45;
+    --grey-line:    #e3e3de;
+    --paper:        #ffffff;
+    --radius:       10px;
+    font-size: 16px;
+  }
 
-    .header-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+  *{ box-sizing: border-box; margin:0; padding:0; }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      height: 42px;
-    }
+  html,body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    .logo svg {
-      height: 42px;
-      width: auto;
-      display: block;
-    }
+  img, svg{ display:block; }
 
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
+  a{ text-decoration:none; color:inherit; }
 
-    .icon-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #333;
-    }
+  .wrap{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
 
-    .icon-btn svg {
-      width: 22px;
-      height: 22px;
-    }
+  /* ---------- NAV ---------- */
+  header.nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 22px 32px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
 
-    /* ========== HERO ========== */
-    .hero {
-      padding: 140px 20px 50px;
-      text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
-    }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap: 4px;
+    line-height: 1;
+  }
 
-    .hero h1 {
-      font-size: clamp(2.5rem, 8vw, 4rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -1.5px;
-      margin-bottom: 28px;
-      text-transform: uppercase;
-    }
+  .logo-mark{
+    position:relative;
+    width: 46px;
+    height: 54px;
+    flex-shrink:0;
+  }
 
-    .hero h1 .green {
-      color: #2e7d32;
-    }
+  .logo-mark svg{ width:100%; height:100%; }
 
-    .hero p {
-      font-size: clamp(1rem, 2.8vw, 1.18rem);
-      color: #555;
-      max-width: 580px;
-      margin: 0 auto 42px;
-      line-height: 1.65;
-    }
+  .logo-word{
+    font-family:'Caveat','Poppins', cursive;
+    font-weight:700;
+    font-size: 2.3rem;
+    color: var(--green-dark);
+    display:flex;
+    flex-direction:column;
+    line-height: 0.92;
+    margin-left: -4px;
+  }
 
-    .cta-buttons {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-    }
+  .logo-word .top{ color: var(--green-dark); }
+  .logo-word .bottom{
+    display:flex;
+    align-items:center;
+    gap: 6px;
+    color: var(--green-dark);
+  }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 15px 36px;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      min-width: 220px;
-      letter-spacing: 0.3px;
-    }
+  .chevrons{
+    color: var(--brown);
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size: 1.05rem;
+    letter-spacing: -3px;
+    margin-left: 2px;
+  }
 
-    .btn-primary {
-      background: #2e7d32;
-      color: #ffffff;
-      border: 2px solid #2e7d32;
-    }
+  .nav-icons{
+    display:flex;
+    align-items:center;
+    gap: 22px;
+    color: var(--ink);
+  }
 
-    .btn-primary:hover {
-      background: #1b5e20;
-      border-color: #1b5e20;
-    }
+  .icon-btn{
+    width: 22px;
+    height: 22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+  }
+  .icon-btn svg{ width:100%; height:100%; }
 
-    .btn-outline {
-      background: transparent;
-      color: #1a1a1a;
-      border: 2px solid #d0d0d0;
-    }
+  /* ---------- HERO ---------- */
+  .hero{
+    text-align:center;
+    padding: 38px 24px 46px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
 
-    .btn-outline:hover {
-      border-color: #2e7d32;
-      color: #2e7d32;
-    }
+  .hero h1{
+    font-family:'Poppins',sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.6rem, 6.4vw, 4.6rem);
+    line-height: 1.06;
+    letter-spacing: -0.5px;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
 
-    /* ========== GREEN TICKER BAR ========== */
-    .ticker {
-      background: #2e7d32;
-      color: #ffffff;
-      padding: 15px 0;
-      overflow: hidden;
-      white-space: nowrap;
-      margin-top: 50px;
-    }
+  .hero h1 .accent{ color: var(--green-mid); }
 
-    .ticker-track {
-      display: inline-block;
-      animation: scroll 28s linear infinite;
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-    }
+  .hero p.sub{
+    margin: 26px auto 0;
+    max-width: 620px;
+    color: var(--ink-soft);
+    font-size: 1.12rem;
+    line-height: 1.6;
+    font-weight: 400;
+  }
 
-    .ticker-track span {
-      margin: 0 28px;
-    }
+  .hero-actions{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap: 16px;
+    margin-top: 34px;
+  }
 
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
+  .btn{
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 16px 30px;
+    border-radius: 8px;
+    display:inline-flex;
+    align-items:center;
+    gap: 10px;
+    cursor:pointer;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
 
-    /* ========== STATS ========== */
-    .stats {
-      max-width: 1000px;
-      margin: 60px auto 90px;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border: 1px solid #e8e8e8;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #fff;
-    }
+  .btn-solid{
+    background: var(--green-mid);
+    color: #fff;
+    border: 2px solid var(--green-mid);
+  }
+  .btn-solid:hover{
+    background: var(--green-dark);
+    border-color: var(--green-dark);
+    transform: translateY(-2px);
+  }
 
-    .stat {
-      padding: 42px 16px;
-      text-align: center;
-      border-right: 1px solid #e8e8e8;
-      border-bottom: 1px solid #e8e8e8;
-    }
+  .btn-outline{
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid #d8d8d2;
+  }
+  .btn-outline:hover{
+    border-color: var(--ink);
+    transform: translateY(-2px);
+  }
 
-    .stat:nth-child(2n) {
-      border-right: none;
-    }
+  /* ---------- MARQUEE BAR ---------- */
+  .marquee-bar{
+    background: var(--green-mid);
+    color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 20px 0;
+    margin-top: 54px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+  }
 
-    .stat:nth-child(3),
-    .stat:nth-child(4) {
-      border-bottom: none;
-    }
+  .marquee-track{
+    display:inline-flex;
+    align-items:center;
+    gap: 40px;
+    animation: scroll-left 28s linear infinite;
+  }
 
-    .stat-number {
-      font-size: clamp(2.1rem, 6vw, 2.9rem);
-      font-weight: 800;
-      color: #2e7d32;
-      margin-bottom: 10px;
-      line-height: 1;
-    }
+  .marquee-track span{
+    display:inline-flex;
+    align-items:center;
+    gap: 40px;
+  }
 
-    .stat-label {
-      font-size: 12.5px;
-      color: #666;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      font-weight: 500;
-    }
+  .marquee-track .dot{
+    color: rgba(255,255,255,0.55);
+    font-weight: 400;
+  }
 
-    /* ========== RESPONSIVE ========== */
-    @media (min-width: 640px) {
-      .cta-buttons {
-        flex-direction: row;
-        justify-content: center;
-      }
-      .btn {
-        min-width: 190px;
-      }
-    }
+  @keyframes scroll-left{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
 
-    @media (min-width: 768px) {
-      .stats {
-        grid-template-columns: repeat(4, 1fr);
-      }
-      .stat {
-        border-bottom: none;
-        border-right: 1px solid #e8e8e8;
-      }
-      .stat:last-child {
-        border-right: none;
-      }
-      .hero {
-        padding-top: 160px;
-      }
-    }
+  /* ---------- STATS ---------- */
+  .stats{
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 56px 32px 70px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    text-align:center;
+  }
 
-    @media (max-width: 480px) {
-      .header-inner {
-        padding: 10px 16px;
-      }
-      .logo svg {
-        height: 36px;
-      }
-      .hero {
-        padding: 120px 16px 40px;
-      }
-    }
-  </style>
+  .stat{
+    padding: 26px 18px;
+    position:relative;
+  }
+
+  .stat .num{
+    font-family:'Caveat','Poppins',cursive;
+    font-weight: 700;
+    font-size: 2.7rem;
+    color: var(--green-mid);
+    line-height: 1;
+  }
+
+  .stat .label{
+    margin-top: 10px;
+    font-size: 0.82rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  /* grid divider lines */
+  .stats{
+    border-top: 1px solid var(--grey-line);
+  }
+  .stat:nth-child(1){ border-right: 1px solid var(--grey-line); border-bottom: 1px solid var(--grey-line); }
+  .stat:nth-child(2){ border-bottom: 1px solid var(--grey-line); }
+  .stat:nth-child(3){ border-right: 1px solid var(--grey-line); }
+
+  @media (max-width: 600px){
+    header.nav{ padding: 18px 20px; }
+    .hero{ padding: 30px 16px 36px; }
+    .stats{ padding: 44px 16px 56px; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- FIXED HEADER -->
-  <header>
-    <div class="header-inner">
-      <!-- LOGO -->
-      <a href="#" class="logo" aria-label="Dammy Social">
-        <svg viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg">
-          <!-- Large D shape -->
-          <path d="M10 10 C10 10 10 80 10 80 C10 80 75 80 75 45 C75 10 10 10 10 10 Z" fill="#2e7d32"/>
-          <path d="M22 18 C22 18 22 72 22 72 C22 72 62 72 62 45 C62 18 22 18 22 18 Z" fill="#ffffff"/>
-          
-          <!-- Circle badge with check -->
-          <circle cx="42" cy="45" r="18" fill="#2e7d32"/>
-          <circle cx="42" cy="45" r="14.5" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-dasharray="3 2.5"/>
-          <path d="M35 45 L40 50 L50 38" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-          
-          <!-- "ammy" cursive -->
-          <text x="95" y="38" font-family="Georgia, 'Times New Roman', serif" font-size="32" font-style="italic" font-weight="600" fill="#2e7d32">ammy</text>
-          
-          <!-- "social" -->
-          <text x="95" y="72" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#2e7d32">social</text>
-          
-          <!-- Red chevrons -->
-          <g fill="#8B4513">
-            <path d="M255 48 L265 58 L255 68 L260 68 L270 58 L260 48 Z"/>
-            <path d="M270 48 L280 58 L270 68 L275 68 L285 58 L275 48 Z"/>
-            <path d="M285 48 L295 58 L285 68 L290 68 L300 58 L290 48 Z"/>
-          </g>
+  <!-- ============ NAVIGATION ============ -->
+  <header class="nav">
+    <a href="#" class="logo" aria-label="Dammy Social home">
+      <span class="logo-mark">
+        <svg viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bold letter D -->
+          <path d="M4 2 H30 C46 2 56 15 56 35 C56 55 46 68 30 68 H4 V2 Z M18 16 V54 H28 C37 54 42 47 42 35 C42 23 37 16 28 16 H18 Z" fill="var(--green-dark)"/>
+          <!-- verified badge cut into base of D -->
+          <circle cx="27" cy="52" r="15" fill="#ffffff" stroke="var(--green-dark)" stroke-width="2"/>
+          <circle cx="27" cy="52" r="11.5" fill="none" stroke="var(--green-dark)" stroke-width="1.4" stroke-dasharray="2.6 2.4"/>
+          <path d="M20.5 52.5 L25 57 L34 46.5" stroke="var(--green)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
         </svg>
-      </a>
+      </span>
+      <span class="logo-word">
+        <span class="top">ammy</span>
+        <span class="bottom">social<span class="chevrons">&raquo;</span></span>
+      </span>
+    </a>
 
-      <div class="header-actions">
-        <!-- Sun icon (no emoji) -->
-        <button class="icon-btn" aria-label="Toggle theme">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"/>
-            <line x1="12" y1="1" x2="12" y2="3"/>
-            <line x1="12" y1="21" x2="12" y2="23"/>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-            <line x1="1" y1="12" x2="3" y2="12"/>
-            <line x1="21" y1="12" x2="23" y2="12"/>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-          </svg>
-        </button>
-
-        <!-- Hamburger menu icon -->
-        <button class="icon-btn" aria-label="Menu">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-            <line x1="3" y1="6" x2="21" y2="6"/>
-            <line x1="3" y1="12" x2="21" y2="12"/>
-            <line x1="3" y1="18" x2="21" y2="18"/>
-          </svg>
-        </button>
-      </div>
+    <div class="nav-icons">
+      <span class="icon-btn" title="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.5v2.6M12 18.9v2.6M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2.5 12h2.6M18.9 12h2.6M4.2 19.8l1.8-1.8M18 6l1.8-1.8"/>
+        </svg>
+      </span>
+      <span class="icon-btn" title="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M3 6h18M3 12h18M3 18h18"/>
+        </svg>
+      </span>
     </div>
   </header>
 
-  <!-- HERO -->
+  <!-- ============ HERO ============ -->
   <section class="hero">
-    <h1>
-      PREMIUM<br>
-      <span class="green">SOCIAL</span> ASSETS<br>
-      DELIVERED<br>
-      FAST
-    </h1>
-    <p>
-      Buy aged social media accounts, working tools, virtual SMS numbers, and SME boosting services plus all in one platform, paid from your wallet.
+    <h1>DIGITAL ACCOUNT &amp; <span class="accent">SOCIAL MEDIA</span> MANAGEMENT MADE EASY</h1>
+    <p class="sub">
+      Hand your profiles to a dedicated manager, get content, growth and engagement handled
+      end-to-end, and track every result from one simple dashboard — billed straight from your wallet.
     </p>
-    <div class="cta-buttons">
-      <a href="#" class="btn btn-primary">GET STARTED →</a>
+
+    <div class="hero-actions">
+      <a href="#" class="btn btn-solid">GET STARTED <span aria-hidden="true">&rarr;</span></a>
       <a href="#" class="btn btn-outline">BROWSE SERVICES</a>
     </div>
   </section>
 
-  <!-- GREEN TICKER -->
-  <div class="ticker">
-    <div class="ticker-track">
-      <span>ACCOUNTS</span> *
-      <span>TIKTOK ACCOUNTS</span> *
-      <span>INSTAGRAM ACCOUNTS</span> *
-      <span>FACEBOOK ACCOUNTS</span> *
-      <span>TWITTER ACCOUNTS</span> *
-      <span>ACCOUNTS</span> *
-      <span>TIKTOK ACCOUNTS</span> *
-      <span>INSTAGRAM ACCOUNTS</span> *
-      <span>FACEBOOK ACCOUNTS</span> *
-      <span>TWITTER ACCOUNTS</span>
+  <!-- ============ MARQUEE BAR ============ -->
+  <div class="marquee-bar">
+    <div class="marquee-track" id="marquee">
+      <span>
+        <span>INSTAGRAM MANAGEMENT</span><span class="dot">&#8226;</span>
+        <span>TIKTOK MANAGEMENT</span><span class="dot">&#8226;</span>
+        <span>FACEBOOK PAGE GROWTH</span><span class="dot">&#8226;</span>
+        <span>CONTENT SCHEDULING</span><span class="dot">&#8226;</span>
+        <span>COMMUNITY ENGAGEMENT</span><span class="dot">&#8226;</span>
+        <span>BRAND STRATEGY</span><span class="dot">&#8226;</span>
+      </span>
+      <span aria-hidden="true">
+        <span>INSTAGRAM MANAGEMENT</span><span class="dot">&#8226;</span>
+        <span>TIKTOK MANAGEMENT</span><span class="dot">&#8226;</span>
+        <span>FACEBOOK PAGE GROWTH</span><span class="dot">&#8226;</span>
+        <span>CONTENT SCHEDULING</span><span class="dot">&#8226;</span>
+        <span>COMMUNITY ENGAGEMENT</span><span class="dot">&#8226;</span>
+        <span>BRAND STRATEGY</span><span class="dot">&#8226;</span>
+      </span>
     </div>
   </div>
 
-  <!-- STATS -->
+  <!-- ============ STATS ============ -->
   <section class="stats">
     <div class="stat">
-      <div class="stat-number">10K+</div>
-      <div class="stat-label">ACCOUNTS IN STOCK</div>
+      <div class="num">500+</div>
+      <div class="label">Brands Managed</div>
     </div>
     <div class="stat">
-      <div class="stat-number">200+</div>
-      <div class="stat-label">COUNTRIES FOR SMS</div>
+      <div class="num">50+</div>
+      <div class="label">Platforms Covered</div>
     </div>
     <div class="stat">
-      <div class="stat-number">&lt; 10s</div>
-      <div class="stat-label">AVG DELIVERY TIME</div>
+      <div class="num">&lt;24H</div>
+      <div class="label">Onboarding Time</div>
     </div>
     <div class="stat">
-      <div class="stat-number">24/7</div>
-      <div class="stat-label">PLATFORM UPTIME</div>
+      <div class="num">24/7</div>
+      <div class="label">Manager Support</div>
     </div>
   </section>
 
