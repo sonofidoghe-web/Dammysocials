@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Dashboard</title>
 
@@ -31,37 +31,25 @@ html {
 }
 
 body {
-  width: 100%;
   min-height: 100vh;
-
   background: #ffffff;
-  color: #080808;
-
-  font-family:
-    "Inter",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-
+  color: #090909;
+  font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
 
 button,
+input,
 a {
   font-family: inherit;
 }
 
 button {
   border: 0;
-  outline: none;
 }
 
-button:focus-visible,
-a:focus-visible {
-  outline: 2px solid #438900;
-  outline-offset: 3px;
+a {
+  color: inherit;
 }
 
 
@@ -71,30 +59,24 @@ a:focus-visible {
 
 .top-header {
   position: fixed;
-
   top: 0;
   left: 0;
-  right: 0;
-
   width: 100%;
   height: 60px;
+  z-index: 1000;
 
-  z-index: 9999;
-
-  background: rgba(255, 255, 255, 0.60);
-
+  background: rgba(255,255,255,0.60);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e7e7e7;
 }
 
 .header-inner {
   width: 100%;
   max-width: 1100px;
   height: 100%;
-
-  margin: 0 auto;
+  margin: auto;
 
   padding: 0 21px;
 
@@ -105,21 +87,18 @@ a:focus-visible {
 
 
 /* =========================================================
-   MENU ICON
+   MENU BUTTON
 ========================================================= */
 
 .menu-btn {
-  width: 22px;
-  height: 22px;
-
-  position: relative;
+  width: 28px;
+  height: 28px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   background: transparent;
-
   cursor: pointer;
 }
 
@@ -127,11 +106,10 @@ a:focus-visible {
   width: 13px;
   height: 13px;
 
-  position: relative;
-
-  border: 1.4px solid #171717;
-
+  border: 1.5px solid #111;
   border-radius: 2px;
+
+  position: relative;
 }
 
 .menu-icon::after {
@@ -139,40 +117,35 @@ a:focus-visible {
 
   position: absolute;
 
-  top: -1px;
-  bottom: -1px;
+  top: -1.5px;
+  bottom: -1.5px;
 
   left: 5px;
 
   width: 1px;
 
-  background: #171717;
+  background: #111;
 }
 
 
 /* =========================================================
-   HEADER RIGHT SIDE
+   HEADER RIGHT
 ========================================================= */
 
 .header-right {
   display: flex;
   align-items: center;
-
-  gap: 14px;
+  gap: 13px;
 }
-
-
-/* Currency */
 
 .currency-btn {
   min-width: 32px;
-  height: 22px;
+  height: 23px;
 
   padding: 0 8px;
 
-  border-radius: 999px;
-
-  border: 1px solid #dddddd;
+  border: 1px solid #dedede;
+  border-radius: 50px;
 
   background: #fafafa;
 
@@ -180,16 +153,11 @@ a:focus-visible {
 
   font-size: 10px;
   font-weight: 700;
-
-  cursor: pointer;
 }
 
-
-/* Sun */
-
 .header-icon-btn {
-  width: 22px;
-  height: 22px;
+  width: 23px;
+  height: 23px;
 
   display: flex;
   align-items: center;
@@ -207,17 +175,11 @@ a:focus-visible {
   height: 17px;
 
   fill: none;
-
   stroke: currentColor;
-
   stroke-width: 1.45;
-
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-
-
-/* Avatar */
 
 .avatar {
   width: 34px;
@@ -226,8 +188,7 @@ a:focus-visible {
   border-radius: 50%;
 
   background: #438900;
-
-  color: #ffffff;
+  color: #fff;
 
   display: flex;
   align-items: center;
@@ -235,8 +196,6 @@ a:focus-visible {
 
   font-size: 12px;
   font-weight: 700;
-
-  cursor: pointer;
 }
 
 
@@ -245,18 +204,18 @@ a:focus-visible {
 ========================================================= */
 
 .dashboard {
-  width: 100%;
-
   padding-top: 84px;
-  padding-bottom: 30px;
+  padding-bottom: 35px;
+
+  transition:
+    filter 0.25s ease,
+    transform 0.25s ease;
 }
 
 .dashboard-inner {
   width: calc(100% - 42px);
-
   max-width: 1040px;
-
-  margin: 0 auto;
+  margin: auto;
 }
 
 
@@ -270,103 +229,64 @@ a:focus-visible {
 
 .welcome h1 {
   font-size: 23px;
-
   line-height: 1.25;
-
   font-weight: 750;
-
   letter-spacing: -0.7px;
-
-  color: #080808;
 }
 
 .welcome p {
   margin-top: 3px;
 
-  font-size: 13px;
-
-  line-height: 1.5;
-
   color: #707070;
 
-  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 
 /* =========================================================
-   SUMMARY CARDS
+   SUMMARY
 ========================================================= */
 
 .summary {
   display: grid;
-
   grid-template-columns: 1fr;
-
   gap: 13px;
 }
 
 .summary-card {
-  width: 100%;
-
   min-height: 126px;
 
   padding: 22px;
 
-  background: #ffffff;
+  background: #fff;
 
   border: 1px solid #e2e2e2;
-
   border-radius: 15px;
-
-  box-shadow: 0 1px 2px rgba(0,0,0,0.015);
 }
 
 .card-label {
+  margin-bottom: 6px;
+
   color: #707070;
 
   font-size: 13px;
+}
 
-  line-height: 1.4;
-
-  font-weight: 400;
-
-  margin-bottom: 6px;
+.balance,
+.big-number {
+  font-size: 25px;
+  line-height: 1.2;
+  font-weight: 750;
+  letter-spacing: -0.5px;
 }
 
 .balance {
   color: #438900;
-
-  font-size: 25px;
-
-  line-height: 1.2;
-
-  font-weight: 750;
-
-  letter-spacing: -0.5px;
-}
-
-.big-number {
-  color: #080808;
-
-  font-size: 25px;
-
-  line-height: 1.2;
-
-  font-weight: 750;
-
-  letter-spacing: -0.5px;
 }
 
 .card-link {
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 4px;
-
   margin-top: 10px;
-
-  padding: 0;
 
   background: transparent;
 
@@ -387,13 +307,11 @@ a:focus-visible {
   color: #707070;
 
   font-size: 12px;
-
-  line-height: 1.4;
 }
 
 
 /* =========================================================
-   SECTION
+   SECTIONS
 ========================================================= */
 
 .section {
@@ -401,35 +319,22 @@ a:focus-visible {
 }
 
 .section-header {
-  width: 100%;
+  margin-bottom: 14px;
 
   display: flex;
-
   align-items: center;
   justify-content: space-between;
-
-  margin-bottom: 14px;
 }
 
 .section-title {
-  color: #090909;
-
   font-size: 15px;
-
-  line-height: 1.3;
-
   font-weight: 700;
-
-  letter-spacing: -0.2px;
 }
 
 .view-all {
   background: transparent;
-
   color: #438900;
-
   font-size: 13px;
-
   cursor: pointer;
 }
 
@@ -440,67 +345,36 @@ a:focus-visible {
 
 .quick-actions {
   display: grid;
-
   grid-template-columns: 1fr;
-
   gap: 10px;
 }
 
 .action-card {
-  width: 100%;
-
   min-height: 133px;
 
   padding: 22px;
 
-  display: flex;
+  background: #fff;
 
-  flex-direction: column;
-
-  align-items: flex-start;
-
-  justify-content: flex-start;
+  border: 1px solid #e2e2e2;
+  border-radius: 15px;
 
   text-align: left;
 
-  background: #ffffff;
-
-  border: 1px solid #e2e2e2;
-
-  border-radius: 15px;
-
   cursor: pointer;
-
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
 }
-
-.action-card:active {
-  transform: scale(0.99);
-}
-
-.action-card:hover {
-  box-shadow: 0 5px 18px rgba(0,0,0,0.045);
-}
-
-
-/* =========================================================
-   ACTION ICONS
-========================================================= */
 
 .action-icon {
   width: 38px;
   height: 38px;
 
+  margin-bottom: 12px;
+
   border-radius: 11px;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
-
-  margin-bottom: 12px;
 }
 
 .action-icon svg {
@@ -508,90 +382,60 @@ a:focus-visible {
   height: 19px;
 
   fill: none;
-
   stroke: currentColor;
-
   stroke-width: 1.65;
-
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-
-
-/* Blue */
 
 .logs-icon {
   background: #edf3ff;
   color: #3b82f6;
 }
 
-
-/* Purple */
-
 .tools-icon {
   background: #f7eaff;
   color: #b23cff;
 }
-
-
-/* Green */
 
 .wallet-icon {
   background: #eff4e9;
   color: #4b880e;
 }
 
-
-/* Orange */
-
 .support-icon {
   background: #fff0e8;
   color: #ff701c;
 }
 
-
 .action-card strong {
-  color: #090909;
-
-  font-size: 13px;
-
-  line-height: 1.4;
-
-  font-weight: 700;
+  display: block;
 
   margin-bottom: 2px;
+
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .action-description {
   color: #707070;
-
   font-size: 12px;
-
   line-height: 1.45;
-
-  font-weight: 400;
 }
 
 
 /* =========================================================
-   ORDERS EMPTY
+   ORDERS
 ========================================================= */
 
 .orders-empty {
-  width: 100%;
-
   min-height: 214px;
 
   border: 1px solid #e2e2e2;
-
   border-radius: 15px;
 
-  background: #ffffff;
-
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
 
@@ -612,22 +456,14 @@ a:focus-visible {
   height: 100%;
 
   fill: none;
-
   stroke: currentColor;
-
   stroke-width: 1.45;
-
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .orders-empty strong {
-  color: #111;
-
   font-size: 13px;
-
-  line-height: 1.4;
-
   font-weight: 500;
 }
 
@@ -635,10 +471,7 @@ a:focus-visible {
   margin-top: 4px;
 
   color: #707070;
-
   font-size: 12px;
-
-  line-height: 1.4;
 }
 
 
@@ -648,33 +481,23 @@ a:focus-visible {
 
 .orders-list {
   display: none;
-
   flex-direction: column;
-
   gap: 10px;
 }
 
 .order-item {
-  width: 100%;
-
   padding: 16px;
 
   border: 1px solid #e2e2e2;
-
   border-radius: 15px;
 
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
-
-  gap: 15px;
 }
 
 .order-name {
   font-size: 13px;
-
   font-weight: 600;
 }
 
@@ -682,19 +505,17 @@ a:focus-visible {
   margin-top: 4px;
 
   color: #707070;
-
   font-size: 11px;
 }
 
 .order-status {
   padding: 5px 9px;
 
-  border-radius: 999px;
-
   background: #f3f3f3;
 
-  color: #666;
+  border-radius: 999px;
 
+  color: #666;
   font-size: 10px;
 }
 
@@ -705,29 +526,20 @@ a:focus-visible {
 
 .coming-list {
   display: flex;
-
   flex-direction: column;
-
   gap: 10px;
 }
 
 .coming-card {
-  width: 100%;
-
   min-height: 80px;
 
   padding: 17px;
 
   border: 1px solid #e7e7e7;
-
   border-radius: 14px;
 
-  background: #ffffff;
-
   display: flex;
-
   align-items: center;
-
   gap: 12px;
 }
 
@@ -742,7 +554,6 @@ a:focus-visible {
   color: #a0a0a0;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 }
@@ -752,21 +563,15 @@ a:focus-visible {
   height: 16px;
 
   fill: none;
-
   stroke: currentColor;
-
   stroke-width: 1.45;
-
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .coming-name {
   color: #646464;
-
   font-size: 13px;
-
-  font-weight: 400;
 }
 
 .soon {
@@ -775,7 +580,6 @@ a:focus-visible {
   padding: 3px 8px;
 
   border: 1px solid #e8e8e8;
-
   border-radius: 999px;
 
   color: #777;
@@ -789,27 +593,17 @@ a:focus-visible {
 ========================================================= */
 
 .help-card {
-  width: 100%;
-
   margin-top: 30px;
 
   padding: 22px;
 
   border: 1px solid #e1e1e1;
-
   border-radius: 15px;
-
-  background: #ffffff;
 }
 
 .help-title {
-  color: #090909;
-
   font-size: 15px;
-
   font-weight: 700;
-
-  line-height: 1.4;
 }
 
 .help-description {
@@ -818,7 +612,6 @@ a:focus-visible {
   color: #707070;
 
   font-size: 12px;
-
   line-height: 1.5;
 }
 
@@ -826,30 +619,23 @@ a:focus-visible {
   margin-top: 15px;
 
   display: flex;
-
   flex-direction: column;
-
   gap: 8px;
 }
 
 .help-button {
-  width: 100%;
-
   min-height: 43px;
 
   border-radius: 5px;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
-
   gap: 7px;
 
   text-decoration: none;
 
   font-size: 13px;
-
   font-weight: 500;
 }
 
@@ -858,36 +644,28 @@ a:focus-visible {
   height: 17px;
 
   fill: none;
-
   stroke: currentColor;
-
   stroke-width: 1.5;
-
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .whatsapp {
   background: #438900;
-
-  color: #ffffff;
+  color: #fff;
 }
 
 .telegram {
-  background: #ffffff;
-
-  color: #111111;
-
-  border: 1px solid #dddddd;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #111;
 }
 
 .support-email {
   margin-top: 19px;
 
   display: flex;
-
   align-items: center;
-
   gap: 8px;
 
   color: #707070;
@@ -897,15 +675,327 @@ a:focus-visible {
   font-size: 12px;
 }
 
-.support-email svg {
-  width: 16px;
-  height: 16px;
+
+/* =========================================================
+   =========================================================
+   SLIDE MENU
+   =========================================================
+========================================================= */
+
+.menu-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 5000;
+
+  visibility: hidden;
+  opacity: 0;
+
+  background: rgba(0,0,0,0.10);
+
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease;
+}
+
+.menu-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/* =========================================================
+   BLUR EVERYTHING BEHIND MENU
+========================================================= */
+
+body.menu-open .dashboard,
+body.menu-open .top-header {
+  filter: blur(7px);
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   MENU PANEL
+========================================================= */
+
+.side-menu {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  z-index: 6000;
+
+  width: min(420px, 86vw);
+
+  background: #fff;
+
+  display: flex;
+  flex-direction: column;
+
+  transform: translateX(-105%);
+
+  transition:
+    transform 0.30s cubic-bezier(.22,.61,.36,1);
+
+  box-shadow: 5px 0 25px rgba(0,0,0,0.06);
+
+  overflow: hidden;
+}
+
+.menu-overlay.active .side-menu {
+  transform: translateX(0);
+}
+
+
+/* =========================================================
+   MENU TOP
+========================================================= */
+
+.menu-top {
+  height: 153px;
+
+  flex-shrink: 0;
+
+  padding: 25px 38px 20px;
+
+  border-bottom: 1px solid #e3e3e3;
+
+  display: flex;
+  align-items: flex-start;
+}
+
+
+/*
+  Replace logo.png with your actual logo.
+
+  Keep the image itself transparent if possible.
+*/
+
+.menu-logo {
+  width: 225px;
+  height: 100px;
+
+  object-fit: contain;
+  object-position: left center;
+
+  display: block;
+}
+
+
+/* =========================================================
+   MENU SCROLL AREA
+========================================================= */
+
+.menu-scroll {
+  flex: 1;
+
+  overflow-y: auto;
+
+  padding: 34px 20px 20px;
+}
+
+
+/* =========================================================
+   MENU SECTION TITLE
+========================================================= */
+
+.menu-section-title {
+  margin: 0 18px 26px;
+
+  color: #555;
+
+  font-size: 25px;
+
+  font-weight: 400;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================================
+   MENU ITEMS
+========================================================= */
+
+.menu-list {
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.menu-item {
+  width: 100%;
+  min-height: 72px;
+
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 20px;
+
+  border-radius: 16px;
+
+  background: transparent;
+
+  color: #111;
+
+  text-decoration: none;
+
+  font-size: 21px;
+
+  font-weight: 400;
+
+  transition:
+    background 0.15s ease;
+}
+
+.menu-item:hover {
+  background: #f7f7f7;
+}
+
+.menu-item.active {
+  background: #f5f5f5;
+}
+
+
+/* =========================================================
+   MENU ICON
+========================================================= */
+
+.menu-item-icon {
+  width: 28px;
+  height: 28px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-item-icon svg {
+  width: 27px;
+  height: 27px;
 
   fill: none;
 
   stroke: currentColor;
 
-  stroke-width: 1.4;
+  stroke-width: 1.8;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* =========================================================
+   DISABLED MENU ITEMS
+========================================================= */
+
+.menu-item.disabled {
+  color: #777;
+
+  cursor: default;
+}
+
+.menu-item.disabled .menu-item-icon {
+  color: #777;
+}
+
+.menu-soon {
+  margin-left: 0;
+
+  padding: 5px 10px;
+
+  border-radius: 999px;
+
+  background: #f1f5ec;
+
+  color: #79a052;
+
+  font-size: 12px;
+
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   MENU SPACING
+========================================================= */
+
+.menu-group {
+  margin-bottom: 42px;
+}
+
+
+/* =========================================================
+   ACCOUNT
+========================================================= */
+
+.account-group {
+  margin-top: 6px;
+}
+
+
+/* =========================================================
+   MENU BOTTOM SIGN OUT
+========================================================= */
+
+.menu-bottom {
+  flex-shrink: 0;
+
+  min-height: 112px;
+
+  padding: 0 20px;
+
+  border-top: 1px solid #e3e3e3;
+
+  background: #fff;
+
+  display: flex;
+  align-items: center;
+}
+
+.signout-btn {
+  width: 100%;
+  min-height: 72px;
+
+  padding: 0 20px;
+
+  background: transparent;
+
+  color: #d62828;
+
+  display: flex;
+  align-items: center;
+
+  gap: 20px;
+
+  font-size: 21px;
+  font-weight: 400;
+
+  cursor: pointer;
+}
+
+.signout-btn svg {
+  width: 28px;
+  height: 28px;
+
+  fill: none;
+
+  stroke: currentColor;
+
+  stroke-width: 1.8;
 
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -930,16 +1020,15 @@ a:focus-visible {
 
   border-radius: 999px;
 
-  background: #111111;
+  background: #111;
 
-  color: #ffffff;
+  color: #fff;
 
   font-size: 12px;
 
   text-align: center;
 
   opacity: 0;
-
   pointer-events: none;
 
   transform: translate(-50%, 15px);
@@ -951,7 +1040,6 @@ a:focus-visible {
 
 .toast.show {
   opacity: 1;
-
   transform: translate(-50%, 0);
 }
 
@@ -961,10 +1049,6 @@ a:focus-visible {
 ========================================================= */
 
 @media (min-width: 600px) {
-
-  .dashboard {
-    padding-top: 90px;
-  }
 
   .dashboard-inner {
     width: calc(100% - 60px);
@@ -1013,7 +1097,6 @@ a:focus-visible {
 
   .coming-list {
     display: grid;
-
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -1021,23 +1104,10 @@ a:focus-visible {
 
 
 /* =========================================================
-   LARGE DESKTOP
+   SMALL PHONES
 ========================================================= */
 
-@media (min-width: 1200px) {
-
-  .dashboard-inner {
-    max-width: 1040px;
-  }
-
-}
-
-
-/* =========================================================
-   VERY SMALL PHONES
-========================================================= */
-
-@media (max-width: 360px) {
+@media (max-width: 380px) {
 
   .header-inner {
     padding-left: 15px;
@@ -1049,7 +1119,7 @@ a:focus-visible {
   }
 
   .header-right {
-    gap: 9px;
+    gap: 8px;
   }
 
   .welcome h1 {
@@ -1060,6 +1130,88 @@ a:focus-visible {
   .action-card,
   .help-card {
     padding: 19px;
+  }
+
+
+  /* Smaller menu */
+
+  .side-menu {
+    width: 88vw;
+  }
+
+  .menu-top {
+    height: 125px;
+
+    padding:
+      18px
+      25px
+      15px;
+  }
+
+  .menu-logo {
+    width: 190px;
+    height: 85px;
+  }
+
+  .menu-scroll {
+    padding:
+      27px
+      13px
+      15px;
+  }
+
+  .menu-section-title {
+    margin-left: 15px;
+
+    font-size: 21px;
+
+    margin-bottom: 17px;
+  }
+
+  .menu-item {
+    min-height: 61px;
+
+    padding: 0 15px;
+
+    gap: 15px;
+
+    font-size: 18px;
+  }
+
+  .menu-item-icon,
+  .signout-btn svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .menu-bottom {
+    min-height: 90px;
+  }
+
+  .signout-btn {
+    min-height: 65px;
+
+    padding: 0 15px;
+
+    gap: 15px;
+
+    font-size: 18px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    scroll-behavior: auto !important;
   }
 
 }
@@ -1082,10 +1234,12 @@ a:focus-visible {
     <button
       class="menu-btn"
       id="menuButton"
-      aria-label="Open menu"
       type="button"
+      aria-label="Open menu"
     >
+
       <span class="menu-icon"></span>
+
     </button>
 
 
@@ -1102,9 +1256,8 @@ a:focus-visible {
 
       <button
         class="header-icon-btn"
-        id="themeButton"
         type="button"
-        aria-label="Toggle theme"
+        id="themeButton"
       >
 
         <svg viewBox="0 0 24 24">
@@ -1115,17 +1268,17 @@ a:focus-visible {
             r="4"
           />
 
-          <path d="M12 2v2" />
-          <path d="M12 20v2" />
+          <path d="M12 2v2"/>
+          <path d="M12 20v2"/>
 
-          <path d="m4.93 4.93 1.41 1.41" />
-          <path d="m17.66 17.66 1.41 1.41" />
+          <path d="m4.93 4.93 1.41 1.41"/>
+          <path d="m17.66 17.66 1.41 1.41"/>
 
-          <path d="M2 12h2" />
-          <path d="M20 12h2" />
+          <path d="M2 12h2"/>
+          <path d="M20 12h2"/>
 
-          <path d="m4.93 19.07 1.41-1.41" />
-          <path d="m17.66 6.34 1.41-1.41" />
+          <path d="m4.93 19.07 1.41-1.41"/>
+          <path d="m17.66 6.34 1.41-1.41"/>
 
         </svg>
 
@@ -1136,14 +1289,13 @@ a:focus-visible {
         class="header-icon-btn"
         id="notificationButton"
         type="button"
-        aria-label="Notifications"
       >
 
         <svg viewBox="0 0 24 24">
 
-          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" />
+          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
 
-          <path d="M10 21h4" />
+          <path d="M10 21h4"/>
 
         </svg>
 
@@ -1154,7 +1306,6 @@ a:focus-visible {
         class="avatar"
         id="avatarButton"
         type="button"
-        aria-label="Account"
       >
         <span id="avatarInitials">--</span>
       </button>
@@ -1176,7 +1327,7 @@ a:focus-visible {
   <div class="dashboard-inner">
 
 
-    <!-- Welcome -->
+    <!-- WELCOME -->
 
     <section class="welcome">
 
@@ -1193,14 +1344,10 @@ a:focus-visible {
 
 
 
-    <!-- ===================================================
-         SUMMARY
-    ==================================================== -->
+    <!-- SUMMARY -->
 
     <section class="summary">
 
-
-      <!-- Wallet -->
 
       <article class="summary-card">
 
@@ -1220,15 +1367,12 @@ a:focus-visible {
           id="historyButton"
           type="button"
         >
-          View history
-          <span>→</span>
+          View history →
         </button>
 
       </article>
 
 
-
-      <!-- Purchases -->
 
       <article class="summary-card">
 
@@ -1248,15 +1392,12 @@ a:focus-visible {
           id="ordersButton"
           type="button"
         >
-          View orders
-          <span>→</span>
+          View orders →
         </button>
 
       </article>
 
 
-
-      <!-- Inventory -->
 
       <article class="summary-card">
 
@@ -1289,9 +1430,7 @@ a:focus-visible {
 
 
 
-    <!-- ===================================================
-         QUICK ACTIONS
-    ==================================================== -->
+    <!-- QUICK ACTIONS -->
 
     <section class="section">
 
@@ -1307,8 +1446,6 @@ a:focus-visible {
       <div class="quick-actions">
 
 
-        <!-- Logs -->
-
         <button
           class="action-card"
           data-action="logs"
@@ -1319,21 +1456,17 @@ a:focus-visible {
 
             <svg viewBox="0 0 24 24">
 
-              <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z" />
-
-              <path d="m4 7.5 8 4.5 8-4.5" />
-
-              <path d="M12 12v9" />
+              <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/>
+              <path d="m4 7.5 8 4.5 8-4.5"/>
+              <path d="M12 12v9"/>
 
             </svg>
 
           </span>
 
-
           <strong>
             Buy Logs
           </strong>
-
 
           <span class="action-description">
             Social media accounts, VPNs, proxies, etc.
@@ -1342,8 +1475,6 @@ a:focus-visible {
         </button>
 
 
-
-        <!-- Tools -->
 
         <button
           class="action-card"
@@ -1355,17 +1486,15 @@ a:focus-visible {
 
             <svg viewBox="0 0 24 24">
 
-              <path d="m14.7 6.3 3-3a4.2 4.2 0 0 0 0 5.9l-8.5 8.5a2.1 2.1 0 1 0 3 3l8.5-8.5a4.2 4.2 0 0 0 5.9 0" />
+              <path d="m14.7 6.3 3-3a4.2 4.2 0 0 0 0 5.9l-8.5 8.5a2.1 2.1 0 1 0 3 3l8.5-8.5a4.2 4.2 0 0 0 5.9 0"/>
 
             </svg>
 
           </span>
 
-
           <strong>
             Buy Tools
           </strong>
-
 
           <span class="action-description">
             Updates & pictures
@@ -1374,8 +1503,6 @@ a:focus-visible {
         </button>
 
 
-
-        <!-- Wallet -->
 
         <button
           class="action-card"
@@ -1387,21 +1514,17 @@ a:focus-visible {
 
             <svg viewBox="0 0 24 24">
 
-              <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H19v16H6.5A2.5 2.5 0 0 1 4 17.5v-11Z" />
-
-              <path d="M4 7h13" />
-
-              <path d="M16 12h5v4h-5a2 2 0 0 1 0-4Z" />
+              <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H19v16H6.5A2.5 2.5 0 0 1 4 17.5v-11Z"/>
+              <path d="M4 7h13"/>
+              <path d="M16 12h5v4h-5a2 2 0 0 1 0-4Z"/>
 
             </svg>
 
           </span>
 
-
           <strong>
             Top Up Wallet
           </strong>
-
 
           <span class="action-description">
             Add funds to your balance
@@ -1410,8 +1533,6 @@ a:focus-visible {
         </button>
 
 
-
-        <!-- Support -->
 
         <button
           class="action-card"
@@ -1423,23 +1544,18 @@ a:focus-visible {
 
             <svg viewBox="0 0 24 24">
 
-              <path d="M4 13v-2a8 8 0 0 1 16 0v2" />
-
-              <path d="M4 13h3v6H5a1 1 0 0 1-1-1v-5Z" />
-
-              <path d="M20 13h-3v6h2a1 1 0 0 0 1-1v-5Z" />
-
-              <path d="M17 19c0 1-1 2-3 2h-1" />
+              <path d="M4 13v-2a8 8 0 0 1 16 0v2"/>
+              <path d="M4 13h3v6H5a1 1 0 0 1-1-1v-5Z"/>
+              <path d="M20 13h-3v6h2a1 1 0 0 0 1-1v-5Z"/>
+              <path d="M17 19c0 1-1 2-3 2h-1"/>
 
             </svg>
 
           </span>
 
-
           <strong>
             Get Support
           </strong>
-
 
           <span class="action-description">
             Open a support ticket
@@ -1453,9 +1569,7 @@ a:focus-visible {
 
 
 
-    <!-- ===================================================
-         RECENT ORDERS
-    ==================================================== -->
+    <!-- RECENT ORDERS -->
 
     <section class="section">
 
@@ -1476,8 +1590,6 @@ a:focus-visible {
       </div>
 
 
-      <!-- Empty state -->
-
       <div
         class="orders-empty"
         id="ordersEmpty"
@@ -1487,21 +1599,17 @@ a:focus-visible {
 
           <svg viewBox="0 0 24 24">
 
-            <path d="M5 8h14l1 12H4L5 8Z" />
-
-            <path d="M8 8a4 4 0 0 1 8 0" />
-
-            <path d="M9 12h6" />
+            <path d="M5 8h14l1 12H4L5 8Z"/>
+            <path d="M8 8a4 4 0 0 1 8 0"/>
+            <path d="M9 12h6"/>
 
           </svg>
 
         </div>
 
-
         <strong>
           No orders yet
         </strong>
-
 
         <p>
           Your purchases will appear here
@@ -1509,8 +1617,6 @@ a:focus-visible {
 
       </div>
 
-
-      <!-- Firebase orders appear here -->
 
       <div
         class="orders-list"
@@ -1521,9 +1627,7 @@ a:focus-visible {
 
 
 
-    <!-- ===================================================
-         COMING SOON
-    ==================================================== -->
+    <!-- COMING SOON -->
 
     <section class="section">
 
@@ -1545,21 +1649,17 @@ a:focus-visible {
 
             <svg viewBox="0 0 24 24">
 
-              <path d="M5 5h14v14H5z" />
-
-              <path d="M8 9h8" />
-
-              <path d="M8 12h6" />
+              <path d="M5 5h14v14H5z"/>
+              <path d="M8 9h8"/>
+              <path d="M8 12h6"/>
 
             </svg>
 
           </span>
 
-
           <span class="coming-name">
             SMS Numbers
           </span>
-
 
           <small class="soon">
             Soon
@@ -1575,17 +1675,15 @@ a:focus-visible {
 
             <svg viewBox="0 0 24 24">
 
-              <path d="m13 2-8 12h6l-1 8 8-12h-6l1-8Z" />
+              <path d="m13 2-8 12h6l-1 8 8-12h-6l1-8Z"/>
 
             </svg>
 
           </span>
 
-
           <span class="coming-name">
             SME Boosting
           </span>
-
 
           <small class="soon">
             Soon
@@ -1599,16 +1697,13 @@ a:focus-visible {
 
 
 
-    <!-- ===================================================
-         HELP
-    ==================================================== -->
+    <!-- HELP -->
 
     <section class="help-card">
 
       <h2 class="help-title">
         Need quick help?
       </h2>
-
 
       <p class="help-description">
         Reach support directly if you want a faster response outside tickets.
@@ -1617,25 +1712,12 @@ a:focus-visible {
 
       <div class="help-buttons">
 
-
-        <!-- WhatsApp -->
-
         <a
           class="help-button whatsapp"
           id="whatsappLink"
           href="#"
           target="_blank"
-          rel="noopener"
         >
-
-          <svg viewBox="0 0 24 24">
-
-            <path d="M20 11.5a8.2 8.2 0 0 1-12.2 7.2L4 20l1.3-3.6A8.2 8.2 0 1 1 20 11.5Z" />
-
-            <path d="M8.7 8.5c.3-.5.6-.5.9-.5h.4c.2 0 .4.1.5.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c-.1.1-.2.3-.1.5.3.6 1.1 1.6 2.1 2.1.2.1.4.1.5-.1l.7-.8c.2-.2.4-.2.6-.1l1.7.8c.2.1.3.3.2.5-.2.8-.8 1.4-1.5 1.5-1 .1-2.7-.6-4-1.7-1.2-1-2.1-2.3-2.5-3.3-.3-.8-.2-1.5.4-2.2Z" />
-
-          </svg>
-
 
           <span>
             Chat on WhatsApp
@@ -1644,25 +1726,12 @@ a:focus-visible {
         </a>
 
 
-
-        <!-- Telegram -->
-
         <a
           class="help-button telegram"
           id="telegramLink"
           href="#"
           target="_blank"
-          rel="noopener"
         >
-
-          <svg viewBox="0 0 24 24">
-
-            <path d="m21 4-3 16-6-5-3 3-.5-5L4 11l17-7Z" />
-
-            <path d="m8.5 13 8-6" />
-
-          </svg>
-
 
           <span>
             Open Telegram
@@ -1673,28 +1742,11 @@ a:focus-visible {
       </div>
 
 
-      <!-- Email -->
-
       <a
         class="support-email"
         id="supportEmail"
         href="#"
       >
-
-        <svg viewBox="0 0 24 24">
-
-          <rect
-            x="3"
-            y="5"
-            width="18"
-            height="14"
-            rx="2"
-          />
-
-          <path d="m4 7 8 6 8-6" />
-
-        </svg>
-
 
         <span id="supportEmailText">
           Support email
@@ -1704,14 +1756,457 @@ a:focus-visible {
 
     </section>
 
-
   </div>
 
 </main>
 
 
 
-<!-- Toast -->
+<!-- =======================================================
+     MENU OVERLAY + SIDE MENU
+======================================================== -->
+
+<div
+  class="menu-overlay"
+  id="menuOverlay"
+>
+
+
+  <!-- SIDE MENU -->
+
+  <aside
+    class="side-menu"
+    id="sideMenu"
+    aria-label="Navigation menu"
+  >
+
+
+    <!-- LOGO -->
+
+    <div class="menu-top">
+
+      <!--
+        PUT YOUR LOGO HERE.
+
+        Example:
+        logo.png
+
+        Just upload your logo into the same
+        folder as this index.html file.
+      -->
+
+      <img
+        src="logo.png"
+        alt="Logo"
+        class="menu-logo"
+      >
+
+    </div>
+
+
+
+    <!-- SCROLLABLE MENU -->
+
+    <div class="menu-scroll">
+
+
+      <!-- =========================
+           MAIN
+      ========================== -->
+
+      <div class="menu-group">
+
+        <h2 class="menu-section-title">
+          Main
+        </h2>
+
+
+        <nav class="menu-list">
+
+
+          <!-- Dashboard -->
+
+          <a
+            href="index.html"
+            class="menu-item active"
+          >
+
+            <span class="menu-item-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                <rect x="14" y="14" width="7" height="7" rx="1"/>
+
+              </svg>
+
+            </span>
+
+            <span>
+              Dashboard
+            </span>
+
+          </a>
+
+
+
+          <!-- Wallet -->
+
+          <a
+            href="wallet.html"
+            class="menu-item"
+          >
+
+            <span class="menu-item-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <path d="M4 7V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 1-2-2V7Z"/>
+                <path d="M4 7h14"/>
+                <path d="M16 11h4v5h-4a2.5 2.5 0 0 1 0-5Z"/>
+
+              </svg>
+
+            </span>
+
+            <span>
+              Wallet
+            </span>
+
+          </a>
+
+
+
+          <!-- Orders -->
+
+          <a
+            href="orders.html"
+            class="menu-item"
+          >
+
+            <span class="menu-item-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <path d="M5 8h14l1 12H4L5 8Z"/>
+                <path d="M8 8a4 4 0 0 1 8 0"/>
+                <path d="M9 12h6"/>
+
+              </svg>
+
+            </span>
+
+            <span>
+              Orders
+            </span>
+
+          </a>
+
+
+
+          <!-- Transactions -->
+
+          <a
+            href="transactions.html"
+            class="menu-item"
+          >
+
+            <span class="menu-item-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <path d="M3 8h17"/>
+                <path d="m16 4 4 4-4 4"/>
+
+                <path d="M21 16H4"/>
+                <path d="m8 12-4 4 4 4"/>
+
+              </svg>
+
+            </span>
+
+            <span>
+              Transactions
+            </span>
+
+          </a>
+
+        </nav>
+
+      </div>
+
+
+
+      <!-- =========================
+           STORE
+      ========================== -->
+
+      <div class="menu-group">
+
+        <h2 class="menu-section-title">
+          Store
+        </h2>
+
+
+        <nav class="menu-list">
+
+
+          <!-- Logs -->
+
+          <a
+            href="logs.html"
+            class="menu-item"
+          >
+
+            <span class="menu-item-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/>
+                <path d="m4 7.5 8 4.5 8-4.5"/>
+                <path d="M12 12v9"/>
+
+              </svg>
+
+            </span>
+
+            <span>
+              Logs Store
+            </span>
+
+          </a>
+
+
+
+          <!-- Tools -->
+
+          <a
+            href="tools.html"
+            class="menu-item"
+          >
+
+            <span class="menu-item-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <path d="m14.7 6.3 3-3a4.2 4.2 0 0 0 0 5.9l-8.5 8.5a2.1 2.1 0 1 0 3 3l8.5-8.5a4.2 4.2 0 0 0 5.9 0"/>
+
+              </svg>
+
+            </span>
+
+            <span>
+              Tools Store
+            </span>
+
+          </a>
+
+
+
+          <!-- SMS -->
+
+          <div
+            class="menu-item disabled"
+          >
+
+            <span class="menu-item-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <path d="M4 5h16v14H4z"/>
+                <path d="M7 9h10"/>
+                <path d="M7 12h7"/>
+                <path d="M7 15h5"/>
+
+              </svg>
+
+            </span>
+
+            <span>
+              SMS Numbers
+            </span>
+
+            <small class="menu-soon">
+              Soon
+            </small>
+
+          </div>
+
+
+
+          <!-- SME -->
+
+          <div
+            class="menu-item disabled"
+          >
+
+            <span class="menu-item-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <path d="m13 2-8 12h6l-1 8 8-12h-6l1-8Z"/>
+
+              </svg>
+
+            </span>
+
+            <span>
+              SME Boosting
+            </span>
+
+            <small class="menu-soon">
+              Soon
+            </small>
+
+          </div>
+
+        </nav>
+
+      </div>
+
+
+
+      <!-- =========================
+           ACCOUNT
+      ========================== -->
+
+      <div class="menu-group account-group">
+
+        <h2 class="menu-section-title">
+          Account
+        </h2>
+
+
+        <nav class="menu-list">
+
+
+          <!-- Support -->
+
+          <a
+            href="support.html"
+            class="menu-item"
+          >
+
+            <span class="menu-item-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <path d="M4 13v-2a8 8 0 0 1 16 0v2"/>
+                <path d="M4 13h3v6H5a1 1 0 0 1-1-1v-5Z"/>
+                <path d="M20 13h-3v6h2a1 1 0 0 0 1-1v-5Z"/>
+
+              </svg>
+
+            </span>
+
+            <span>
+              Support
+            </span>
+
+          </a>
+
+
+
+          <!-- Notifications -->
+
+          <a
+            href="notifications.html"
+            class="menu-item"
+          >
+
+            <span class="menu-item-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+                <path d="M10 21h4"/>
+
+              </svg>
+
+            </span>
+
+            <span>
+              Notifications
+            </span>
+
+          </a>
+
+
+
+          <!-- Profile -->
+
+          <a
+            href="profile.html"
+            class="menu-item"
+          >
+
+            <span class="menu-item-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <circle cx="12" cy="7" r="4"/>
+                <path d="M4 21v-2a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v2"/>
+
+              </svg>
+
+            </span>
+
+            <span>
+              Profile
+            </span>
+
+          </a>
+
+
+        </nav>
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         SIGN OUT
+    ========================== -->
+
+    <div class="menu-bottom">
+
+      <button
+        class="signout-btn"
+        id="signOutButton"
+        type="button"
+      >
+
+        <svg viewBox="0 0 24 24">
+
+          <path d="M10 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5"/>
+
+          <path d="M14 8l4 4-4 4"/>
+
+          <path d="M8 12h10"/>
+
+        </svg>
+
+        <span>
+          Sign out
+        </span>
+
+      </button>
+
+    </div>
+
+
+  </aside>
+
+</div>
+
+
+
+<!-- TOAST -->
 
 <div
   class="toast"
@@ -1727,7 +2222,7 @@ a:focus-visible {
 <script type="module">
 
 /* =========================================================
-   FIREBASE IMPORTS
+   FIREBASE
 ========================================================= */
 
 import {
@@ -1736,7 +2231,8 @@ import {
 
 import {
   getAuth,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 import {
@@ -1751,7 +2247,7 @@ import {
 
 
 /* =========================================================
-   FIREBASE CONFIG
+   CONFIG
 ========================================================= */
 
 const firebaseConfig = {
@@ -1780,10 +2276,6 @@ const firebaseConfig = {
 };
 
 
-/* =========================================================
-   INITIALIZE FIREBASE
-========================================================= */
-
 const app =
   initializeApp(firebaseConfig);
 
@@ -1795,30 +2287,22 @@ const db =
 
 
 /* =========================================================
-   SHORT SELECTOR
+   HELPERS
 ========================================================= */
 
-const $ = (id) =>
+const $ = id =>
   document.getElementById(id);
 
 
-/* =========================================================
-   TOAST
-========================================================= */
-
 function showToast(message) {
 
-  const toast =
-    $("toast");
+  const toast = $("toast");
 
-  toast.textContent =
-    message;
+  toast.textContent = message;
 
   toast.classList.add("show");
 
-  clearTimeout(
-    showToast.timer
-  );
+  clearTimeout(showToast.timer);
 
   showToast.timer =
     setTimeout(() => {
@@ -1830,55 +2314,43 @@ function showToast(message) {
 }
 
 
-/* =========================================================
-   INITIALS
-========================================================= */
-
 function getInitials(name = "") {
 
-  const words =
+  const parts =
     name
       .trim()
       .split(/\s+/)
       .filter(Boolean);
 
 
-  if (!words.length) {
-
+  if (!parts.length) {
     return "--";
-
   }
 
 
-  if (words.length === 1) {
+  if (parts.length === 1) {
 
-    return words[0]
-      .substring(0, 2)
+    return parts[0]
+      .slice(0, 2)
       .toUpperCase();
 
   }
 
 
   return (
-
-    words[0][0] +
-    words[words.length - 1][0]
-
+    parts[0][0] +
+    parts[parts.length - 1][0]
   ).toUpperCase();
 
 }
 
-
-/* =========================================================
-   MONEY FORMAT
-========================================================= */
 
 function formatMoney(
   amount,
   currency = "NGN"
 ) {
 
-  const number =
+  const value =
     Number(amount) || 0;
 
 
@@ -1888,31 +2360,25 @@ function formatMoney(
       "en-NG",
       {
         style: "currency",
-        currency: currency,
+        currency,
         maximumFractionDigits: 2
       }
-    ).format(number);
+    ).format(value);
 
   } catch {
 
     return "₦" +
-      number.toLocaleString();
+      value.toLocaleString();
 
   }
 
 }
 
 
-/* =========================================================
-   DATE
-========================================================= */
-
 function timestampValue(value) {
 
   if (!value) {
-
     return 0;
-
   }
 
 
@@ -1933,12 +2399,12 @@ function timestampValue(value) {
   }
 
 
-  const date =
+  const result =
     new Date(value).getTime();
 
 
-  return Number.isFinite(date)
-    ? date
+  return Number.isFinite(result)
+    ? result
     : 0;
 
 }
@@ -1951,9 +2417,7 @@ function formatDate(value) {
 
 
   if (!timestamp) {
-
     return "";
-
   }
 
 
@@ -1971,48 +2435,134 @@ function formatDate(value) {
 }
 
 
-/* =========================================================
-   HTML ESCAPE
-========================================================= */
-
 function escapeHTML(value) {
 
   return String(value)
 
     .replaceAll("&", "&amp;")
-
     .replaceAll("<", "&lt;")
-
     .replaceAll(">", "&gt;")
-
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 
 }
 
 
 /* =========================================================
-   LOAD USER FROM FIRESTORE
+   SLIDE MENU
+========================================================= */
+
+const menuButton =
+  $("menuButton");
+
+const menuOverlay =
+  $("menuOverlay");
+
+
+function openMenu() {
+
+  document.body.classList.add(
+    "menu-open"
+  );
+
+  menuOverlay.classList.add(
+    "active"
+  );
+
+}
+
+
+function closeMenu() {
+
+  document.body.classList.remove(
+    "menu-open"
+  );
+
+  menuOverlay.classList.remove(
+    "active"
+  );
+
+}
+
+
+menuButton.addEventListener(
+  "click",
+  openMenu
+);
+
+
+/*
+   Clicking the blurred area closes
+   the menu.
+*/
+
+menuOverlay.addEventListener(
+  "click",
+  event => {
+
+    if (
+      event.target ===
+      menuOverlay
+    ) {
+
+      closeMenu();
+
+    }
+
+  }
+);
+
+
+/*
+   Escape closes menu.
+*/
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key === "Escape"
+    ) {
+
+      closeMenu();
+
+    }
+
+  }
+);
+
+
+/*
+   When a menu link is clicked,
+   close menu first.
+*/
+
+document
+  .querySelectorAll(
+    ".menu-item[href]"
+  )
+  .forEach(item => {
+
+    item.addEventListener(
+      "click",
+      () => {
+
+        closeMenu();
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   FIREBASE USER
 ========================================================= */
 
 async function loadUser(user) {
 
-  /*
-    Firestore path:
-
-    users
-      └── user UID
-  */
-
-
-  const userReference =
+  const userRef =
     doc(
       db,
       "users",
@@ -2020,97 +2570,73 @@ async function loadUser(user) {
     );
 
 
-  const userSnapshot =
+  const snapshot =
     await getDoc(
-      userReference
+      userRef
     );
 
 
-  const userData =
-    userSnapshot.exists()
-      ? userSnapshot.data()
+  const data =
+    snapshot.exists()
+      ? snapshot.data()
       : {};
 
 
   /*
-    Name comes from Firestore.
-    Authentication is fallback.
+    User information comes
+    from Firebase.
   */
 
   const name =
 
-    userData.name ||
+    data.name ||
 
-    userData.displayName ||
+    data.displayName ||
 
     user.displayName ||
 
     "Account";
 
 
-  /*
-    Wallet comes from Firebase.
+  const balance =
 
-    Supported:
+    data.walletBalance ??
 
-    walletBalance
+    data.balance ??
 
-    balance
-
-    wallet.balance
-  */
-
-  const walletBalance =
-
-    userData.walletBalance ??
-
-    userData.balance ??
-
-    userData.wallet?.balance ??
+    data.wallet?.balance ??
 
     0;
 
 
   const currency =
-    userData.currency ||
+    data.currency ||
     "NGN";
 
 
-  /*
-    Display name.
-  */
-
-  $("userName").textContent =
+  $("userName")
+    .textContent =
     name;
 
 
-  /*
-    Avatar.
-  */
-
-  $("avatarInitials").textContent =
+  $("avatarInitials")
+    .textContent =
     getInitials(name);
 
 
-  /*
-    Currency.
-  */
+  $("walletBalance")
+    .textContent =
+    formatMoney(
+      balance,
+      currency
+    );
 
-  $("currencyButton").textContent =
+
+  $("currencyButton")
+    .textContent =
     currency === "NGN"
       ? "₦"
       : currency;
-
-
-  /*
-    Wallet.
-  */
-
-  $("walletBalance").textContent =
-    formatMoney(
-      walletBalance,
-      currency
-    );
 
 
   /*
@@ -2119,37 +2645,29 @@ async function loadUser(user) {
 
   const whatsapp =
 
-    userData.whatsapp ||
+    data.whatsapp ||
 
-    userData.whatsappNumber ||
+    data.whatsappNumber ||
 
     "";
 
 
   const telegram =
 
-    userData.telegram ||
+    data.telegram ||
 
-    userData.telegramUsername ||
+    data.telegramUsername ||
 
     "";
 
 
-  const supportEmail =
+  const email =
 
-    userData.supportEmail ||
+    data.supportEmail ||
 
     user.email ||
 
     "";
-
-
-  /*
-    WhatsApp.
-  */
-
-  const whatsappLink =
-    $("whatsappLink");
 
 
   if (whatsapp) {
@@ -2160,7 +2678,7 @@ async function loadUser(user) {
         .replace(/^\+/, "");
 
 
-    whatsappLink.href =
+    $("whatsappLink").href =
       "https://wa.me/" +
       number;
 
@@ -2169,76 +2687,60 @@ async function loadUser(user) {
 
   else {
 
-    whatsappLink.onclick =
-      function(event) {
+    $("whatsappLink")
+      .addEventListener(
+        "click",
+        event => {
 
-        event.preventDefault();
+          event.preventDefault();
 
-        showToast(
-          "WhatsApp contact is not configured yet."
-        );
+          showToast(
+            "WhatsApp is not configured yet."
+          );
 
-      };
+        }
+      );
 
   }
 
 
-  /*
-    Telegram.
-  */
-
-  const telegramLink =
-    $("telegramLink");
-
-
   if (telegram) {
 
-    const username =
+    $("telegramLink").href =
+      "https://t.me/" +
       String(telegram)
         .replace(/^@/, "");
-
-
-    telegramLink.href =
-      "https://t.me/" +
-      username;
 
   }
 
 
   else {
 
-    telegramLink.onclick =
-      function(event) {
+    $("telegramLink")
+      .addEventListener(
+        "click",
+        event => {
 
-        event.preventDefault();
+          event.preventDefault();
 
-        showToast(
-          "Telegram contact is not configured yet."
-        );
+          showToast(
+            "Telegram is not configured yet."
+          );
 
-      };
+        }
+      );
 
   }
 
 
-  /*
-    Email.
-  */
+  if (email) {
 
-  const emailLink =
-    $("supportEmail");
-
-
-  if (supportEmail) {
-
-    emailLink.href =
-      "mailto:" +
-      supportEmail;
-
+    $("supportEmail").href =
+      "mailto:" + email;
 
     $("supportEmailText")
       .textContent =
-      supportEmail;
+      email;
 
   }
 
@@ -2246,25 +2748,10 @@ async function loadUser(user) {
 
 
 /* =========================================================
-   LOAD ORDERS
+   ORDERS FROM FIREBASE
 ========================================================= */
 
 async function loadOrders(user) {
-
-  /*
-    Firestore:
-
-    orders
-      └── order ID
-
-    Each order should contain:
-
-    userId
-    productName
-    status
-    createdAt
-  */
-
 
   const ordersQuery =
     query(
@@ -2291,86 +2778,62 @@ async function loadOrders(user) {
 
   const orders =
     snapshot.docs.map(
-      document => ({
+      item => ({
 
-        id:
-          document.id,
+        id: item.id,
 
-        ...document.data()
+        ...item.data()
 
       })
     );
 
 
-  /*
-    Newest first.
-  */
-
   orders.sort(
     (a, b) =>
 
       timestampValue(
-        b.createdAt ||
-        b.date
+        b.createdAt
       )
 
       -
 
       timestampValue(
-        a.createdAt ||
-        a.date
+        a.createdAt
       )
   );
 
-
-  /*
-    Purchase count.
-  */
 
   $("purchaseCount")
     .textContent =
     orders.length;
 
 
-  const empty =
-    $("ordersEmpty");
-
-  const list =
-    $("ordersList");
-
-
-  /*
-    No orders.
-  */
-
   if (!orders.length) {
 
-    empty.style.display =
+    $("ordersEmpty")
+      .style.display =
       "flex";
 
-    list.style.display =
+    $("ordersList")
+      .style.display =
       "none";
-
-    list.innerHTML =
-      "";
 
     return;
 
   }
 
 
-  /*
-    Orders available.
-  */
-
-  empty.style.display =
+  $("ordersEmpty")
+    .style.display =
     "none";
 
-  list.style.display =
+  $("ordersList")
+    .style.display =
     "flex";
 
 
-  list.innerHTML =
+  $("ordersList").innerHTML =
+
     orders
       .slice(0, 5)
       .map(order => {
@@ -2394,10 +2857,8 @@ async function loadOrders(user) {
 
 
         const date =
-
           formatDate(
-            order.createdAt ||
-            order.date
+            order.createdAt
           );
 
 
@@ -2434,30 +2895,10 @@ async function loadOrders(user) {
 
 
 /* =========================================================
-   LOAD INVENTORY
+   INVENTORY FROM FIREBASE
 ========================================================= */
 
 async function loadInventory() {
-
-  /*
-    Firestore:
-
-    inventory
-      └── item ID
-
-    Example fields:
-
-    type: "log"
-    status: "available"
-    quantity: 1
-
-    or:
-
-    type: "tool"
-    status: "available"
-    quantity: 1
-  */
-
 
   const snapshot =
     await getDocs(
@@ -2476,10 +2917,10 @@ async function loadInventory() {
 
 
   snapshot.forEach(
-    document => {
+    item => {
 
       const data =
-        document.data();
+        item.data();
 
 
       const status =
@@ -2489,24 +2930,13 @@ async function loadInventory() {
         ).toLowerCase();
 
 
-      /*
-        Ignore unavailable stock.
-      */
-
       if (
 
-        status !==
-        "available"
+        status !== "available" &&
 
-        &&
+        status !== "in_stock" &&
 
-        status !==
-        "in_stock"
-
-        &&
-
-        status !==
-        "active"
+        status !== "active"
 
       ) {
 
@@ -2516,6 +2946,7 @@ async function loadInventory() {
 
 
       const quantity =
+
         Number(
 
           data.quantity ??
@@ -2538,21 +2969,16 @@ async function loadInventory() {
 
           data.category ??
 
-          data.productType ??
-
           ""
 
-        )
-        .trim()
-        .toLowerCase();
+        ).toLowerCase();
 
 
       if (
         type.includes("log")
       ) {
 
-        logs +=
-          quantity;
+        logs += quantity;
 
       }
 
@@ -2561,8 +2987,7 @@ async function loadInventory() {
         type.includes("tool")
       ) {
 
-        tools +=
-          quantity;
+        tools += quantity;
 
       }
 
@@ -2588,110 +3013,86 @@ async function loadInventory() {
 
 
 /* =========================================================
-   BUTTONS
+   SIGN OUT
 ========================================================= */
 
-
-/*
-   Menu
-
-   This will be replaced with
-   your actual slide menu when
-   you send the design.
-*/
-
-$("menuButton")
+$("signOutButton")
   .addEventListener(
     "click",
-    () => {
+    async () => {
 
-      showToast(
-        "Menu will open here."
-      );
+      try {
+
+        await signOut(auth);
+
+        closeMenu();
+
+        window.location.href =
+          "login.html";
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+        showToast(
+          "Unable to sign out."
+        );
+
+      }
 
     }
   );
 
 
-/*
-   Theme
-*/
-
-$("themeButton")
-  .addEventListener(
-    "click",
-    () => {
-
-      showToast(
-        "Theme settings will be connected here."
-      );
-
-    }
-  );
-
-
-/*
-   Notifications
-*/
+/* =========================================================
+   OTHER BUTTONS
+========================================================= */
 
 $("notificationButton")
   .addEventListener(
     "click",
     () => {
 
-      showToast(
-        "No new notifications."
-      );
+      window.location.href =
+        "notifications.html";
 
     }
   );
 
-
-/*
-   Avatar
-*/
 
 $("avatarButton")
   .addEventListener(
     "click",
     () => {
 
-      showToast(
-        "Account menu will open here."
-      );
+      window.location.href =
+        "profile.html";
 
     }
   );
 
-
-/*
-   Wallet history
-*/
 
 $("historyButton")
   .addEventListener(
     "click",
     () => {
 
-      showToast(
-        "Wallet history page is not connected yet."
-      );
+      window.location.href =
+        "transactions.html";
 
     }
   );
 
-
-/*
-   Orders
-*/
 
 $("ordersButton")
   .addEventListener(
     "click",
     () => {
 
-      $("viewAllOrders")
-        .click();
+      window.location.href =
+        "orders.html";
 
     }
   );
@@ -2702,81 +3103,74 @@ $("viewAllOrders")
     "click",
     () => {
 
-      showToast(
-        "Orders page is not connected yet."
-      );
+      window.location.href =
+        "orders.html";
 
     }
   );
 
 
-/*
-   Quick action buttons
-*/
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
 
 document
   .querySelectorAll(
     ".action-card"
   )
-  .forEach(
-    button => {
+  .forEach(button => {
 
-      button.addEventListener(
-        "click",
-        () => {
+    button.addEventListener(
+      "click",
+      () => {
 
-          const action =
-            button.dataset.action;
-
-
-          if (
-            action === "logs"
-          ) {
-
-            showToast(
-              "Buy Logs page is not connected yet."
-            );
-
-          }
+        const action =
+          button.dataset.action;
 
 
-          if (
-            action === "tools"
-          ) {
+        if (
+          action === "logs"
+        ) {
 
-            showToast(
-              "Buy Tools page is not connected yet."
-            );
-
-          }
-
-
-          if (
-            action === "wallet"
-          ) {
-
-            showToast(
-              "Top Up Wallet page is not connected yet."
-            );
-
-          }
-
-
-          if (
-            action === "support"
-          ) {
-
-            showToast(
-              "Support page is not connected yet."
-            );
-
-          }
+          window.location.href =
+            "logs.html";
 
         }
-      );
 
-    }
-  );
+
+        if (
+          action === "tools"
+        ) {
+
+          window.location.href =
+            "tools.html";
+
+        }
+
+
+        if (
+          action === "wallet"
+        ) {
+
+          window.location.href =
+            "wallet.html";
+
+        }
+
+
+        if (
+          action === "support"
+        ) {
+
+          window.location.href =
+            "support.html";
+
+        }
+
+      }
+    );
+
+  });
 
 
 /* =========================================================
@@ -2787,35 +3181,24 @@ onAuthStateChanged(
   auth,
   async user => {
 
-    /*
-      If nobody is logged in.
-    */
-
     if (!user) {
 
       $("userName")
         .textContent =
         "Account";
 
-
       $("avatarInitials")
         .textContent =
         "--";
-
 
       $("walletBalance")
         .textContent =
         "₦0";
 
-
       return;
 
     }
 
-
-    /*
-      User is logged in.
-    */
 
     try {
 
@@ -2834,13 +3217,12 @@ onAuthStateChanged(
     catch (error) {
 
       console.error(
-        "Dashboard Firebase error:",
+        "Firebase dashboard error:",
         error
       );
 
-
       showToast(
-        "Unable to load some dashboard data."
+        "Some dashboard data could not be loaded."
       );
 
     }
