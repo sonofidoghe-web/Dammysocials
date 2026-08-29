@@ -60,10 +60,23 @@
   #mainContent.blurred{filter:blur(6px);pointer-events:none;user-select:none;}
 
   /* ---------- Header ---------- */
+  :root{ --header-h:62px; }
   header.topbar{
+    position:fixed;top:0;left:0;right:0;z-index:30;
+    height:var(--header-h);
     display:flex;align-items:center;justify-content:space-between;
-    padding:10px 2px 16px;
+    padding:0 16px;
+    max-width:640px;margin:0 auto;
+    background:rgba(255,255,255,.9);
+    -webkit-backdrop-filter:blur(14px) saturate(160%);
+    backdrop-filter:blur(14px) saturate(160%);
+    border-bottom:1px solid var(--border);
+    transition:filter .25s ease,background .2s ease;
   }
+  body.dark header.topbar{background:rgba(20,20,20,.9);}
+  header.topbar.blurred{filter:blur(6px);pointer-events:none;}
+  /* spacer so content isn't hidden under the fixed header */
+  #mainContent{padding-top:calc(var(--header-h) + 14px) !important;}
   .icon-btn{
     width:38px;height:38px;border-radius:10px;border:1px solid var(--border);
     background:var(--card);display:flex;align-items:center;justify-content:center;
@@ -118,8 +131,8 @@
   }
   .qa-icon{
     width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-    font-size:19px;
   }
+  .qa-icon svg{width:20px;height:20px;}
   .qa-title{font-weight:700;font-size:15.5px;}
   .qa-sub{color:var(--sub);font-size:14px;margin-top:-4px;}
 
@@ -148,6 +161,7 @@
     padding:16px;margin-bottom:12px;opacity:.6;
   }
   .soon-icon{width:34px;height:34px;border-radius:10px;background:var(--page-bg);display:flex;align-items:center;justify-content:center;}
+  .soon-icon svg{width:17px;height:17px;}
   .soon-row .label{flex:1;font-weight:600;font-size:15px;}
   .soon-tag{
     font-size:12px;font-weight:600;color:var(--sub);
@@ -171,7 +185,9 @@
     background:transparent;color:var(--ink);border:1px solid var(--border);border-radius:12px;
     padding:14px;font-weight:700;font-size:15px;width:100%;margin-bottom:14px;cursor:pointer;
   }
+  .btn-wa svg,.btn-tg svg,.help-email svg{width:17px;height:17px;flex-shrink:0;}
   .help-email{display:flex;align-items:center;gap:8px;color:var(--sub);font-size:14px;}
+  .icon-btn svg{width:18px;height:18px;}
 
   /* ---------- Sidebar ---------- */
   #overlay{
@@ -203,7 +219,10 @@
   }
   .side-link:hover{background:var(--page-bg);}
   .side-link.active{background:var(--green-light);font-weight:700;color:var(--green);}
-  .side-link .ic{width:20px;text-align:center;font-size:16px;}
+  .side-link .ic{width:20px;display:flex;align-items:center;justify-content:center;color:var(--sub);}
+  .side-link.active .ic{color:var(--green);}
+  .side-link.signout .ic{color:var(--danger);}
+  .side-link .ic svg{width:18px;height:18px;}
   .side-link .tag{
     margin-left:auto;font-size:11px;font-weight:600;color:var(--sub);
     border:1px solid var(--border);border-radius:999px;padding:2px 8px;
@@ -237,43 +256,46 @@
     </div>
     <div class="side-scroll">
       <div class="side-group-label">Main</div>
-      <div class="side-link active" data-nav="dashboard"><span class="ic">▦</span> Dashboard</div>
-      <div class="side-link" data-nav="wallet"><span class="ic">💳</span> Wallet</div>
-      <div class="side-link" data-nav="orders"><span class="ic">🛍️</span> Orders</div>
-      <div class="side-link" data-nav="transactions"><span class="ic">⇄</span> Transactions</div>
+      <div class="side-link active" data-nav="dashboard"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></span> Dashboard</div>
+      <div class="side-link" data-nav="wallet"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></span> Wallet</div>
+      <div class="side-link" data-nav="orders"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span> Orders</div>
+      <div class="side-link" data-nav="transactions"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2 4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></span> Transactions</div>
 
       <div class="side-group-label">Store</div>
-      <div class="side-link" data-nav="browse-store"><span class="ic">🌐</span> Browse Store</div>
-      <div class="side-link" data-nav="tools-store"><span class="ic">🔧</span> Tools Store</div>
-      <div class="side-link" data-nav="sms"><span class="ic">💬</span> SMS Numbers <span class="tag">Soon</span></div>
-      <div class="side-link" data-nav="sme"><span class="ic">⚡</span> SME Boosting <span class="tag">Soon</span></div>
+      <div class="side-link" data-nav="browse-store"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span> Browse Store</div>
+      <div class="side-link" data-nav="tools-store"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span> Tools Store</div>
+      <div class="side-link" data-nav="sms"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span> SMS Numbers <span class="tag">Soon</span></div>
+      <div class="side-link" data-nav="sme"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span> SME Boosting <span class="tag">Soon</span></div>
 
       <div class="side-group-label">Account</div>
-      <div class="side-link" data-nav="support"><span class="ic">🎧</span> Support</div>
-      <div class="side-link" data-nav="notifications"><span class="ic">🔔</span> Notifications</div>
-      <div class="side-link" data-nav="profile"><span class="ic">👤</span> Profile</div>
+      <div class="side-link" data-nav="support"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></span> Support</div>
+      <div class="side-link" data-nav="notifications"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span> Notifications</div>
+      <div class="side-link" data-nav="profile"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></span> Profile</div>
     </div>
     <div class="side-foot">
-      <div class="side-link signout" id="signOutBtn"><span class="ic">↪</span> Sign out</div>
+      <div class="side-link signout" id="signOutBtn"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span> Sign out</div>
     </div>
   </nav>
 
+  <header class="topbar" id="topHeader">
+    <button class="icon-btn" id="menuToggle" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="topbar-right">
+      <div class="balance-pill">₦<span id="hdrBalance">0</span></div>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme"></button>
+      <button class="icon-btn bell-wrap" id="bellBtn" aria-label="Notifications">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="bell-dot" id="bellDot"></span>
+      </button>
+      <div class="avatar" id="avatarInitials">--</div>
+    </div>
+  </header>
+
   <!-- ================= MAIN CONTENT ================= -->
   <div id="mainContent">
-    <header class="topbar">
-      <button class="icon-btn" id="menuToggle" aria-label="Open menu">☰</button>
-      <div class="topbar-right">
-        <div class="balance-pill">₦<span id="hdrBalance">0</span></div>
-        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">☀️</button>
-        <button class="icon-btn bell-wrap" id="bellBtn" aria-label="Notifications">
-          🔔<span class="bell-dot" id="bellDot"></span>
-        </button>
-        <div class="avatar" id="avatarInitials">--</div>
-      </div>
-    </header>
-
     <section class="welcome">
-      <h1 id="welcomeName">Welcome back 👋</h1>
+      <h1 id="welcomeName">Welcome back</h1>
       <p>Here's what's going on with your account</p>
     </section>
 
@@ -298,7 +320,9 @@
     <div class="section-title"><h2>Quick actions</h2></div>
 
     <div class="qa-card" data-nav="browse-store">
-      <div class="qa-icon" style="background:var(--purple-bg);color:var(--purple);">🌐</div>
+      <div class="qa-icon" style="background:var(--purple-bg);color:var(--purple);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
       <div>
         <div class="qa-title">Browse Store</div>
         <div class="qa-sub">Websites — ecommerce, betting & more</div>
@@ -306,7 +330,9 @@
     </div>
 
     <div class="qa-card" data-nav="tools-store">
-      <div class="qa-icon" style="background:var(--wrench-bg);color:var(--wrench);">🔧</div>
+      <div class="qa-icon" style="background:var(--wrench-bg);color:var(--wrench);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
       <div>
         <div class="qa-title">Buy Tools</div>
         <div class="qa-sub">Updates & pictures</div>
@@ -314,7 +340,9 @@
     </div>
 
     <div class="qa-card" data-nav="wallet">
-      <div class="qa-icon" style="background:var(--wallet-bg);color:var(--wallet);">💳</div>
+      <div class="qa-icon" style="background:var(--wallet-bg);color:var(--wallet);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      </div>
       <div>
         <div class="qa-title">Top Up Wallet</div>
         <div class="qa-sub">Add funds to your balance</div>
@@ -322,7 +350,9 @@
     </div>
 
     <div class="qa-card" data-nav="support">
-      <div class="qa-icon" style="background:var(--support-bg);color:var(--support);">🎧</div>
+      <div class="qa-icon" style="background:var(--support-bg);color:var(--support);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+      </div>
       <div>
         <div class="qa-title">Get Support</div>
         <div class="qa-sub">Open a support ticket</div>
@@ -335,7 +365,9 @@
     </div>
     <div id="ordersWrap">
       <div class="empty">
-        <div class="bag">🛍️</div>
+        <div class="bag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:30px;height:30px;"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
         <strong>No orders yet</strong>
         Your purchases will appear here
       </div>
@@ -343,12 +375,12 @@
 
     <div class="section-title"><h2>Coming soon</h2></div>
     <div class="soon-row">
-      <div class="soon-icon">💬</div>
+      <div class="soon-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
       <div class="label">SMS Numbers</div>
       <div class="soon-tag">Soon</div>
     </div>
     <div class="soon-row">
-      <div class="soon-icon">⚡</div>
+      <div class="soon-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
       <div class="label">SME Boosting</div>
       <div class="soon-tag">Soon</div>
     </div>
@@ -356,9 +388,18 @@
     <div class="help-card">
       <h3>Need quick help?</h3>
       <p>Reach support directly if you want a faster response outside tickets.</p>
-      <button class="btn-wa" id="waBtn">💬 Chat on WhatsApp</button>
-      <button class="btn-tg" id="tgBtn">✈️ Open Telegram</button>
-      <div class="help-email">✉️ support@temmysocials.com</div>
+      <button class="btn-wa" id="waBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 8.4 8.4 0 0 1-4.3-1.2L3 20l1.2-5.2A8.5 8.5 0 1 1 21 11.5z"/></svg>
+        Chat on WhatsApp
+      </button>
+      <button class="btn-tg" id="tgBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Open Telegram
+      </button>
+      <div class="help-email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+        support@temmysocials.com
+      </div>
     </div>
   </div>
 </div>
@@ -446,7 +487,7 @@
     const displayName = user.displayName || (user.email ? user.email.split("@")[0] : "there");
     const initials = displayName.trim().slice(0, 2).toUpperCase();
 
-    document.getElementById("welcomeName").textContent = `Welcome back, ${displayName} 👋`;
+    document.getElementById("welcomeName").textContent = `Welcome back, ${displayName}`;
     document.getElementById("avatarInitials").textContent = initials;
 
     const userRef = doc(db, "users", user.uid);
@@ -466,7 +507,7 @@
       document.getElementById("inventoryBreakdown").textContent = `${logs} logs · ${tools} tools`;
 
       if (data.name) {
-        document.getElementById("welcomeName").textContent = `Welcome back, ${data.name} 👋`;
+        document.getElementById("welcomeName").textContent = `Welcome back, ${data.name}`;
         document.getElementById("avatarInitials").textContent = data.name.trim().slice(0, 2).toUpperCase();
       }
     }, (err) => {
@@ -508,17 +549,20 @@
   const sidebar = document.getElementById("sidebar");
   const overlay = document.getElementById("overlay");
   const mainContent = document.getElementById("mainContent");
+  const topHeader = document.getElementById("topHeader");
   const menuToggle = document.getElementById("menuToggle");
 
   function openSidebar() {
     sidebar.classList.add("open");
     overlay.classList.add("show");
     mainContent.classList.add("blurred");
+    topHeader.classList.add("blurred");
   }
   function closeSidebar() {
     sidebar.classList.remove("open");
     overlay.classList.remove("show");
     mainContent.classList.remove("blurred");
+    topHeader.classList.remove("blurred");
   }
   menuToggle.addEventListener("click", openSidebar);
   overlay.addEventListener("click", closeSidebar);
@@ -549,9 +593,11 @@
 
   /* ---------------- Theme toggle ---------------- */
   const themeToggle = document.getElementById("themeToggle");
+  const SUN_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"/><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"/></svg>';
+  const MOON_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>';
   function applyTheme(dark) {
     document.body.classList.toggle("dark", dark);
-    themeToggle.textContent = dark ? "🌙" : "☀️";
+    themeToggle.innerHTML = dark ? MOON_ICON : SUN_ICON;
   }
   applyTheme(localStorage.getItem("dsTheme") === "dark");
   themeToggle.addEventListener("click", () => {
