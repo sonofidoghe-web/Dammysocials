@@ -16,6 +16,7 @@
     --card:#ffffff;
     --page-bg:#fafafa;
     --purple-bg:#f1ecfb; --purple:#7c3aed;
+    --blue-bg:#e8edfb; --blue:#3454a6;
     --wrench-bg:#f1ecfb; --wrench:#7c3aed;
     --wallet-bg:#eef1e6; --wallet:#4b5b2f;
     --support-bg:#fde9dd; --support:#e2632a;
@@ -204,8 +205,8 @@
   }
   #sidebar.open{transform:translateX(0);}
 
-  .side-head{padding:20px 18px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;}
-  .side-head img{height:34px;width:auto;object-fit:contain;}
+  .side-head{padding:22px 18px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;}
+  .side-head img{height:52px;width:auto;object-fit:contain;}
 
   .side-scroll{flex:1;overflow-y:auto;padding:14px 12px;}
   .side-group-label{
@@ -295,7 +296,7 @@
   <!-- ================= MAIN CONTENT ================= -->
   <div id="mainContent">
     <section class="welcome">
-      <h1 id="welcomeName">Welcome back</h1>
+      <h1 id="welcomeName">Welcome back 👋</h1>
       <p>Here's what's going on with your account</p>
     </section>
 
@@ -320,7 +321,7 @@
     <div class="section-title"><h2>Quick actions</h2></div>
 
     <div class="qa-card" data-nav="browse-store">
-      <div class="qa-icon" style="background:var(--purple-bg);color:var(--purple);">
+      <div class="qa-icon" style="background:var(--blue-bg);color:var(--blue);">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       </div>
       <div>
@@ -487,7 +488,7 @@
     const displayName = user.displayName || (user.email ? user.email.split("@")[0] : "there");
     const initials = displayName.trim().slice(0, 2).toUpperCase();
 
-    document.getElementById("welcomeName").textContent = `Welcome back, ${displayName}`;
+    document.getElementById("welcomeName").textContent = `Welcome back, ${displayName} 👋`;
     document.getElementById("avatarInitials").textContent = initials;
 
     const userRef = doc(db, "users", user.uid);
@@ -507,7 +508,7 @@
       document.getElementById("inventoryBreakdown").textContent = `${logs} logs · ${tools} tools`;
 
       if (data.name) {
-        document.getElementById("welcomeName").textContent = `Welcome back, ${data.name}`;
+        document.getElementById("welcomeName").textContent = `Welcome back, ${data.name} 👋`;
         document.getElementById("avatarInitials").textContent = data.name.trim().slice(0, 2).toUpperCase();
       }
     }, (err) => {
