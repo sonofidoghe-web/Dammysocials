@@ -1,3236 +1,1014 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Dashboard</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-  rel="stylesheet"
->
-
-<style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  min-height: 100vh;
-  background: #ffffff;
-  color: #090909;
-  font-family: "Inter", sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-button,
-input,
-a {
-  font-family: inherit;
-}
-
-button {
-  border: 0;
-}
-
-a {
-  color: inherit;
-}
-
-
-/* =========================================================
-   FIXED HEADER
-========================================================= */
-
-.top-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  z-index: 1000;
-
-  background: rgba(255,255,255,0.60);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-
-  border-bottom: 1px solid #e7e7e7;
-}
-
-.header-inner {
-  width: 100%;
-  max-width: 1100px;
-  height: 100%;
-  margin: auto;
-
-  padding: 0 21px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-
-/* =========================================================
-   MENU BUTTON
-========================================================= */
-
-.menu-btn {
-  width: 28px;
-  height: 28px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: transparent;
-  cursor: pointer;
-}
-
-.menu-icon {
-  width: 13px;
-  height: 13px;
-
-  border: 1.5px solid #111;
-  border-radius: 2px;
-
-  position: relative;
-}
-
-.menu-icon::after {
-  content: "";
-
-  position: absolute;
-
-  top: -1.5px;
-  bottom: -1.5px;
-
-  left: 5px;
-
-  width: 1px;
-
-  background: #111;
-}
-
-
-/* =========================================================
-   HEADER RIGHT
-========================================================= */
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-}
-
-.currency-btn {
-  min-width: 32px;
-  height: 23px;
-
-  padding: 0 8px;
-
-  border: 1px solid #dedede;
-  border-radius: 50px;
-
-  background: #fafafa;
-
-  color: #438900;
-
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.header-icon-btn {
-  width: 23px;
-  height: 23px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: transparent;
-
-  color: #111;
-
-  cursor: pointer;
-}
-
-.header-icon-btn svg {
-  width: 17px;
-  height: 17px;
-
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.45;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.avatar {
-  width: 34px;
-  height: 34px;
-
-  border-radius: 50%;
-
-  background: #438900;
-  color: #fff;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 12px;
-  font-weight: 700;
-}
-
-
-/* =========================================================
-   PAGE
-========================================================= */
-
-.dashboard {
-  padding-top: 84px;
-  padding-bottom: 35px;
-
-  transition:
-    filter 0.25s ease,
-    transform 0.25s ease;
-}
-
-.dashboard-inner {
-  width: calc(100% - 42px);
-  max-width: 1040px;
-  margin: auto;
-}
-
-
-/* =========================================================
-   WELCOME
-========================================================= */
-
-.welcome {
-  margin-bottom: 28px;
-}
-
-.welcome h1 {
-  font-size: 23px;
-  line-height: 1.25;
-  font-weight: 750;
-  letter-spacing: -0.7px;
-}
-
-.welcome p {
-  margin-top: 3px;
-
-  color: #707070;
-
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-
-/* =========================================================
-   SUMMARY
-========================================================= */
-
-.summary {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 13px;
-}
-
-.summary-card {
-  min-height: 126px;
-
-  padding: 22px;
-
-  background: #fff;
-
-  border: 1px solid #e2e2e2;
-  border-radius: 15px;
-}
-
-.card-label {
-  margin-bottom: 6px;
-
-  color: #707070;
-
-  font-size: 13px;
-}
-
-.balance,
-.big-number {
-  font-size: 25px;
-  line-height: 1.2;
-  font-weight: 750;
-  letter-spacing: -0.5px;
-}
-
-.balance {
-  color: #438900;
-}
-
-.card-link {
-  margin-top: 10px;
-
-  background: transparent;
-
-  color: #707070;
-
-  font-size: 13px;
-
-  cursor: pointer;
-}
-
-.card-link span {
-  font-size: 14px;
-}
-
-.inventory-text {
-  margin-top: 7px;
-
-  color: #707070;
-
-  font-size: 12px;
-}
-
-
-/* =========================================================
-   SECTIONS
-========================================================= */
-
-.section {
-  margin-top: 30px;
-}
-
-.section-header {
-  margin-bottom: 14px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.section-title {
-  font-size: 15px;
-  font-weight: 700;
-}
-
-.view-all {
-  background: transparent;
-  color: #438900;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-
-/* =========================================================
-   QUICK ACTIONS
-========================================================= */
-
-.quick-actions {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-}
-
-.action-card {
-  min-height: 133px;
-
-  padding: 22px;
-
-  background: #fff;
-
-  border: 1px solid #e2e2e2;
-  border-radius: 15px;
-
-  text-align: left;
-
-  cursor: pointer;
-}
-
-.action-icon {
-  width: 38px;
-  height: 38px;
-
-  margin-bottom: 12px;
-
-  border-radius: 11px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.action-icon svg {
-  width: 19px;
-  height: 19px;
-
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.65;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.logs-icon {
-  background: #edf3ff;
-  color: #3b82f6;
-}
-
-.tools-icon {
-  background: #f7eaff;
-  color: #b23cff;
-}
-
-.wallet-icon {
-  background: #eff4e9;
-  color: #4b880e;
-}
-
-.support-icon {
-  background: #fff0e8;
-  color: #ff701c;
-}
-
-.action-card strong {
-  display: block;
-
-  margin-bottom: 2px;
-
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.action-description {
-  color: #707070;
-  font-size: 12px;
-  line-height: 1.45;
-}
-
-
-/* =========================================================
-   ORDERS
-========================================================= */
-
-.orders-empty {
-  min-height: 214px;
-
-  border: 1px solid #e2e2e2;
-  border-radius: 15px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-}
-
-.empty-icon {
-  width: 40px;
-  height: 40px;
-
-  margin-bottom: 7px;
-
-  color: #d1d1d1;
-}
-
-.empty-icon svg {
-  width: 100%;
-  height: 100%;
-
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.45;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.orders-empty strong {
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.orders-empty p {
-  margin-top: 4px;
-
-  color: #707070;
-  font-size: 12px;
-}
-
-
-/* =========================================================
-   ORDERS LIST
-========================================================= */
-
-.orders-list {
-  display: none;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.order-item {
-  padding: 16px;
-
-  border: 1px solid #e2e2e2;
-  border-radius: 15px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.order-name {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.order-date {
-  margin-top: 4px;
-
-  color: #707070;
-  font-size: 11px;
-}
-
-.order-status {
-  padding: 5px 9px;
-
-  background: #f3f3f3;
-
-  border-radius: 999px;
-
-  color: #666;
-  font-size: 10px;
-}
-
-
-/* =========================================================
-   COMING SOON
-========================================================= */
-
-.coming-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.coming-card {
-  min-height: 80px;
-
-  padding: 17px;
-
-  border: 1px solid #e7e7e7;
-  border-radius: 14px;
-
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.coming-icon {
-  width: 30px;
-  height: 30px;
-
-  border-radius: 8px;
-
-  background: #fafafa;
-
-  color: #a0a0a0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.coming-icon svg {
-  width: 16px;
-  height: 16px;
-
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.45;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.coming-name {
-  color: #646464;
-  font-size: 13px;
-}
-
-.soon {
-  margin-left: auto;
-
-  padding: 3px 8px;
-
-  border: 1px solid #e8e8e8;
-  border-radius: 999px;
-
-  color: #777;
-
-  font-size: 10px;
-}
-
-
-/* =========================================================
-   HELP CARD
-========================================================= */
-
-.help-card {
-  margin-top: 30px;
-
-  padding: 22px;
-
-  border: 1px solid #e1e1e1;
-  border-radius: 15px;
-}
-
-.help-title {
-  font-size: 15px;
-  font-weight: 700;
-}
-
-.help-description {
-  margin-top: 4px;
-
-  color: #707070;
-
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.help-buttons {
-  margin-top: 15px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.help-button {
-  min-height: 43px;
-
-  border-radius: 5px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-
-  text-decoration: none;
-
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.help-button svg {
-  width: 17px;
-  height: 17px;
-
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.whatsapp {
-  background: #438900;
-  color: #fff;
-}
-
-.telegram {
-  border: 1px solid #ddd;
-  background: #fff;
-  color: #111;
-}
-
-.support-email {
-  margin-top: 19px;
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  color: #707070;
-
-  text-decoration: none;
-
-  font-size: 12px;
-}
-
-
-/* =========================================================
-   =========================================================
-   SLIDE MENU
-   =========================================================
-========================================================= */
-
-.menu-overlay {
-  position: fixed;
-
-  inset: 0;
-
-  z-index: 5000;
-
-  visibility: hidden;
-  opacity: 0;
-
-  background: rgba(0,0,0,0.10);
-
-  transition:
-    opacity 0.25s ease,
-    visibility 0.25s ease;
-}
-
-.menu-overlay.active {
-  visibility: visible;
-  opacity: 1;
-}
-
-
-/* =========================================================
-   BLUR EVERYTHING BEHIND MENU
-========================================================= */
-
-body.menu-open .dashboard,
-body.menu-open .top-header {
-  filter: blur(7px);
-}
-
-body.menu-open {
-  overflow: hidden;
-}
-
-
-/* =========================================================
-   MENU PANEL
-========================================================= */
-
-.side-menu {
-  position: fixed;
-
-  top: 0;
-  left: 0;
-  bottom: 0;
-
-  z-index: 6000;
-
-  width: min(420px, 86vw);
-
-  background: #fff;
-
-  display: flex;
-  flex-direction: column;
-
-  transform: translateX(-105%);
-
-  transition:
-    transform 0.30s cubic-bezier(.22,.61,.36,1);
-
-  box-shadow: 5px 0 25px rgba(0,0,0,0.06);
-
-  overflow: hidden;
-}
-
-.menu-overlay.active .side-menu {
-  transform: translateX(0);
-}
-
-
-/* =========================================================
-   MENU TOP
-========================================================= */
-
-.menu-top {
-  height: 153px;
-
-  flex-shrink: 0;
-
-  padding: 25px 38px 20px;
-
-  border-bottom: 1px solid #e3e3e3;
-
-  display: flex;
-  align-items: flex-start;
-}
-
-
-/*
-  Replace logo.png with your actual logo.
-
-  Keep the image itself transparent if possible.
-*/
-
-.menu-logo {
-  width: 225px;
-  height: 100px;
-
-  object-fit: contain;
-  object-position: left center;
-
-  display: block;
-}
-
-
-/* =========================================================
-   MENU SCROLL AREA
-========================================================= */
-
-.menu-scroll {
-  flex: 1;
-
-  overflow-y: auto;
-
-  padding: 34px 20px 20px;
-}
-
-
-/* =========================================================
-   MENU SECTION TITLE
-========================================================= */
-
-.menu-section-title {
-  margin: 0 18px 26px;
-
-  color: #555;
-
-  font-size: 25px;
-
-  font-weight: 400;
-
-  line-height: 1.2;
-}
-
-
-/* =========================================================
-   MENU ITEMS
-========================================================= */
-
-.menu-list {
-  list-style: none;
-
-  display: flex;
-  flex-direction: column;
-
-  gap: 6px;
-}
-
-.menu-item {
-  width: 100%;
-  min-height: 72px;
-
-  padding: 0 20px;
-
-  display: flex;
-  align-items: center;
-
-  gap: 20px;
-
-  border-radius: 16px;
-
-  background: transparent;
-
-  color: #111;
-
-  text-decoration: none;
-
-  font-size: 21px;
-
-  font-weight: 400;
-
-  transition:
-    background 0.15s ease;
-}
-
-.menu-item:hover {
-  background: #f7f7f7;
-}
-
-.menu-item.active {
-  background: #f5f5f5;
-}
-
-
-/* =========================================================
-   MENU ICON
-========================================================= */
-
-.menu-item-icon {
-  width: 28px;
-  height: 28px;
-
-  flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.menu-item-icon svg {
-  width: 27px;
-  height: 27px;
-
-  fill: none;
-
-  stroke: currentColor;
-
-  stroke-width: 1.8;
-
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-
-/* =========================================================
-   DISABLED MENU ITEMS
-========================================================= */
-
-.menu-item.disabled {
-  color: #777;
-
-  cursor: default;
-}
-
-.menu-item.disabled .menu-item-icon {
-  color: #777;
-}
-
-.menu-soon {
-  margin-left: 0;
-
-  padding: 5px 10px;
-
-  border-radius: 999px;
-
-  background: #f1f5ec;
-
-  color: #79a052;
-
-  font-size: 12px;
-
-  font-weight: 500;
-}
-
-
-/* =========================================================
-   MENU SPACING
-========================================================= */
-
-.menu-group {
-  margin-bottom: 42px;
-}
-
-
-/* =========================================================
-   ACCOUNT
-========================================================= */
-
-.account-group {
-  margin-top: 6px;
-}
-
-
-/* =========================================================
-   MENU BOTTOM SIGN OUT
-========================================================= */
-
-.menu-bottom {
-  flex-shrink: 0;
-
-  min-height: 112px;
-
-  padding: 0 20px;
-
-  border-top: 1px solid #e3e3e3;
-
-  background: #fff;
-
-  display: flex;
-  align-items: center;
-}
-
-.signout-btn {
-  width: 100%;
-  min-height: 72px;
-
-  padding: 0 20px;
-
-  background: transparent;
-
-  color: #d62828;
-
-  display: flex;
-  align-items: center;
-
-  gap: 20px;
-
-  font-size: 21px;
-  font-weight: 400;
-
-  cursor: pointer;
-}
-
-.signout-btn svg {
-  width: 28px;
-  height: 28px;
-
-  fill: none;
-
-  stroke: currentColor;
-
-  stroke-width: 1.8;
-
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-.toast {
-  position: fixed;
-
-  left: 50%;
-  bottom: 24px;
-
-  z-index: 10000;
-
-  max-width: calc(100% - 40px);
-
-  padding: 10px 15px;
-
-  border-radius: 999px;
-
-  background: #111;
-
-  color: #fff;
-
-  font-size: 12px;
-
-  text-align: center;
-
-  opacity: 0;
-  pointer-events: none;
-
-  transform: translate(-50%, 15px);
-
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
-}
-
-.toast.show {
-  opacity: 1;
-  transform: translate(-50%, 0);
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (min-width: 600px) {
-
-  .dashboard-inner {
-    width: calc(100% - 60px);
-  }
-
-  .summary {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .summary-card:last-child {
-    grid-column: 1 / -1;
-  }
-
-  .quick-actions {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-}
-
-
-/* =========================================================
-   DESKTOP
-========================================================= */
-
-@media (min-width: 900px) {
-
-  .dashboard-inner {
-    width: calc(100% - 80px);
-  }
-
-  .summary {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .summary-card:last-child {
-    grid-column: auto;
-  }
-
-  .quick-actions {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .action-card {
-    min-height: 165px;
-  }
-
-  .coming-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-}
-
-
-/* =========================================================
-   SMALL PHONES
-========================================================= */
-
-@media (max-width: 380px) {
-
-  .header-inner {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
-  .dashboard-inner {
-    width: calc(100% - 30px);
-  }
-
-  .header-right {
-    gap: 8px;
-  }
-
-  .welcome h1 {
-    font-size: 21px;
-  }
-
-  .summary-card,
-  .action-card,
-  .help-card {
-    padding: 19px;
-  }
-
-
-  /* Smaller menu */
-
-  .side-menu {
-    width: 88vw;
-  }
-
-  .menu-top {
-    height: 125px;
-
-    padding:
-      18px
-      25px
-      15px;
-  }
-
-  .menu-logo {
-    width: 190px;
-    height: 85px;
-  }
-
-  .menu-scroll {
-    padding:
-      27px
-      13px
-      15px;
-  }
-
-  .menu-section-title {
-    margin-left: 15px;
-
-    font-size: 21px;
-
-    margin-bottom: 17px;
-  }
-
-  .menu-item {
-    min-height: 61px;
-
-    padding: 0 15px;
-
-    gap: 15px;
-
-    font-size: 18px;
-  }
-
-  .menu-item-icon,
-  .signout-btn svg {
-    width: 25px;
-    height: 25px;
-  }
-
-  .menu-bottom {
-    min-height: 90px;
-  }
-
-  .signout-btn {
-    min-height: 65px;
-
-    padding: 0 15px;
-
-    gap: 15px;
-
-    font-size: 18px;
-  }
-
-}
-
-
-/* =========================================================
-   REDUCE MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Dashboard — Temmy Social</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --sidebar-bg: #ffffff;
+      --text-primary: #111827;
+      --text-secondary: #6b7280;
+      --text-muted: #9ca3af;
+      --border: #e5e7eb;
+      --border-light: #f3f4f6;
+      --active-bg: #f3f4f6;
+      --red: #ef4444;
+      --green: #16a34a;
+      --green-dark: #15803d;
+      --green-btn: #166534;
+      --soon-bg: #dcfce7;
+      --soon-text: #15803d;
+      --card-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      --radius: 16px;
+      --sidebar-width: 280px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body { display: flex; overflow-x: hidden; }
+
+    /* ========== SIDEBAR ========== */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--sidebar-width);
+      height: 100%;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      z-index: 1000;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .sidebar-header {
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 40px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+      margin-left: 4px;
+    }
+
+    .logo-text .top {
+      font-size: 14px;
+      font-weight: 700;
+      color: #166534;
+    }
+
+    .logo-text .bottom {
+      font-size: 14px;
+      font-weight: 700;
+      color: #166534;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-arrows {
+      font-size: 13px;
+      color: #166534;
+      font-weight: 700;
+      margin-left: 1px;
+    }
+
+    .sidebar-close {
+      display: none;
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      border-radius: 50%;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+    }
+
+    .sidebar-close:hover { background: var(--active-bg); }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 16px 12px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-section { margin-top: 16px; }
+    .nav-section:first-child { margin-top: 4px; }
+
+    .nav-section-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      padding: 0 12px 8px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 12px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-size: 15px;
+      font-weight: 500;
+      transition: background 0.15s ease;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      width: 100%;
+      text-align: left;
+    }
+
+    .nav-item:hover { background: var(--active-bg); }
+    .nav-item.active { background: var(--active-bg); }
+
+    .nav-item svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      stroke: currentColor;
+      stroke-width: 1.75;
+      fill: none;
+    }
+
+    .nav-item .soon-badge {
+      margin-left: auto;
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--soon-bg);
+      color: var(--soon-text);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .sidebar-footer {
+      padding: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .nav-item.sign-out { color: var(--red); }
+    .nav-item.sign-out:hover { background: #fef2f2; }
+
+    /* ========== OVERLAY ========== */
+    .sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .sidebar-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ========== MAIN ========== */
+    .main-wrapper {
+      flex: 1;
+      margin-left: var(--sidebar-width);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Top bar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .menu-toggle {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: transparent;
+      border-radius: 10px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-primary);
+    }
+    .menu-toggle:hover { background: var(--active-bg); }
+    .menu-toggle svg { width: 22px; height: 22px; }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .topbar-btn {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-secondary);
+      position: relative;
+    }
+    .topbar-btn:hover { background: var(--active-bg); }
+    .topbar-btn svg { width: 20px; height: 20px; }
+
+    .topbar-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: #f3f4f6;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #166534;
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding: 24px 28px 48px;
+      max-width: 640px;
+    }
+
+    /* Welcome */
+    .welcome {
+      margin-bottom: 24px;
+    }
+
+    .welcome h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .welcome p {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* Stats cards */
+    .stats {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 4px;
+    }
+
+    .stat-value.green { color: var(--green); }
+
+    .stat-link {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .stat-link:hover { color: var(--text-primary); }
+
+    .stat-sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* Section title */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .section-link {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--green);
+      text-decoration: none;
+    }
+    .section-link:hover { text-decoration: underline; }
+
+    /* Quick actions */
+    .quick-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .action-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 18px 20px;
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+    }
+    .action-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      border-color: #d1d5db;
+    }
+
+    .action-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+    .action-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    .action-icon.blue { background: #eff6ff; }
+    .action-icon.blue svg { stroke: #3b82f6; }
+    .action-icon.purple { background: #f5f3ff; }
+    .action-icon.purple svg { stroke: #8b5cf6; }
+    .action-icon.green { background: #f0fdf4; }
+    .action-icon.green svg { stroke: #16a34a; }
+    .action-icon.orange { background: #fff7ed; }
+    .action-icon.orange svg { stroke: #f97316; }
+
+    .action-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .action-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* Empty state / Recent orders */
+    .empty-card {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: var(--radius);
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 32px;
+    }
+
+    .empty-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 12px;
+      color: #d1d5db;
+    }
+    .empty-icon svg {
+      width: 48px;
+      height: 48px;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      fill: none;
+    }
+
+    .empty-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .empty-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* Coming soon */
+    .coming-soon {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .soon-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 14px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .soon-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+    }
+    .soon-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 1.75;
+      fill: none;
+    }
+
+    .soon-label {
+      font-size: 14px;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .soon-badge {
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--soon-bg);
+      color: var(--soon-text);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    /* Help card */
+    .help-card {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .help-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .help-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.45;
+      margin-bottom: 16px;
+    }
+
+    .help-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.15s ease;
+    }
+    .help-btn:hover { opacity: 0.92; }
+
+    .help-btn.whatsapp {
+      background: var(--green-btn);
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .help-btn.telegram {
+      background: #fff;
+      color: var(--text-primary);
+      border: 1px solid #e5e7eb;
+    }
+
+    .help-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .help-email {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+    .help-email:hover { color: var(--text-primary); }
+    .help-email svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 1.75;
+      fill: none;
+    }
+
+    /* Auth loading */
+    .auth-loading {
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .auth-loading.hidden { display: none; }
+
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid #e5e7eb;
+      border-top-color: #16a34a;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .auth-loading p {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar-close { display: flex; }
+      .main-wrapper { margin-left: 0; }
+      .menu-toggle { display: flex; }
+      .main-content { padding: 20px 16px 40px; }
+    }
+
+    @media (max-width: 480px) {
+      .main-content { padding: 16px 14px 32px; }
+      .welcome h1 { font-size: 20px; }
+      .stat-value { font-size: 24px; }
+      .action-card { padding: 16px 16px; }
+    }
+  </style>
 </head>
-
-
 <body>
-
-
-<!-- =======================================================
-     FIXED HEADER
-======================================================== -->
-
-<header class="top-header">
-
-  <div class="header-inner">
-
-    <button
-      class="menu-btn"
-      id="menuButton"
-      type="button"
-      aria-label="Open menu"
-    >
-
-      <span class="menu-icon"></span>
-
-    </button>
-
-
-    <div class="header-right">
-
-      <button
-        class="currency-btn"
-        id="currencyButton"
-        type="button"
-      >
-        NGN
-      </button>
-
-
-      <button
-        class="header-icon-btn"
-        type="button"
-        id="themeButton"
-      >
-
-        <svg viewBox="0 0 24 24">
-
-          <circle
-            cx="12"
-            cy="12"
-            r="4"
-          />
-
-          <path d="M12 2v2"/>
-          <path d="M12 20v2"/>
-
-          <path d="m4.93 4.93 1.41 1.41"/>
-          <path d="m17.66 17.66 1.41 1.41"/>
-
-          <path d="M2 12h2"/>
-          <path d="M20 12h2"/>
-
-          <path d="m4.93 19.07 1.41-1.41"/>
-          <path d="m17.66 6.34 1.41-1.41"/>
-
-        </svg>
-
-      </button>
-
-
-      <button
-        class="header-icon-btn"
-        id="notificationButton"
-        type="button"
-      >
-
-        <svg viewBox="0 0 24 24">
-
-          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
-
-          <path d="M10 21h4"/>
-
-        </svg>
-
-      </button>
-
-
-      <button
-        class="avatar"
-        id="avatarButton"
-        type="button"
-      >
-        <span id="avatarInitials">--</span>
-      </button>
-
-    </div>
-
+  <!-- Auth loading -->
+  <div class="auth-loading" id="authLoading">
+    <div class="spinner"></div>
+    <p>Loading...</p>
   </div>
 
-</header>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-
-
-<!-- =======================================================
-     DASHBOARD
-======================================================== -->
-
-<main class="dashboard">
-
-  <div class="dashboard-inner">
-
-
-    <!-- WELCOME -->
-
-    <section class="welcome">
-
-      <h1>
-        Welcome back,
-        <span id="userName">...</span>
-      </h1>
-
-      <p>
-        Here's what's going on with your account
-      </p>
-
-    </section>
-
-
-
-    <!-- SUMMARY -->
-
-    <section class="summary">
-
-
-      <article class="summary-card">
-
-        <p class="card-label">
-          Wallet balance
-        </p>
-
-        <div
-          class="balance"
-          id="walletBalance"
-        >
-          ₦0
+  <!-- ========== SIDEBAR ========== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="#" class="logo">
+        <svg class="logo-icon" viewBox="0 0 52 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 6h28c1.1 0 2 .9 2 2v4c0 1.1-.9 2-2 2H22v26c0 1.1-.9 2-2 2h-6c-1.1 0-2-.9-2-2V14H8c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2z" fill="#166534"/>
+          <circle cx="28" cy="20" r="9" fill="#166534"/>
+          <path d="M24.2 20.8l2.4 2.4 5.2-5.6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="logo-text">
+          <span class="top">emmy</span>
+          <span class="bottom">social<span class="logo-arrows">»</span></span>
         </div>
-
-        <button
-          class="card-link"
-          id="historyButton"
-          type="button"
-        >
-          View history →
-        </button>
-
-      </article>
-
-
-
-      <article class="summary-card">
-
-        <p class="card-label">
-          Total purchases
-        </p>
-
-        <div
-          class="big-number"
-          id="purchaseCount"
-        >
-          0
-        </div>
-
-        <button
-          class="card-link"
-          id="ordersButton"
-          type="button"
-        >
-          View orders →
-        </button>
-
-      </article>
-
-
-
-      <article class="summary-card">
-
-        <p class="card-label">
-          Available inventory
-        </p>
-
-        <div
-          class="big-number"
-          id="inventoryCount"
-        >
-          0
-        </div>
-
-        <p class="inventory-text">
-
-          <span id="logsCount">0</span>
-          logs
-
-          ·
-
-          <span id="toolsCount">0</span>
-          tools
-
-        </p>
-
-      </article>
-
-    </section>
-
-
-
-    <!-- QUICK ACTIONS -->
-
-    <section class="section">
-
-      <div class="section-header">
-
-        <h2 class="section-title">
-          Quick actions
-        </h2>
-
-      </div>
-
-
-      <div class="quick-actions">
-
-
-        <button
-          class="action-card"
-          data-action="logs"
-          type="button"
-        >
-
-          <span class="action-icon logs-icon">
-
-            <svg viewBox="0 0 24 24">
-
-              <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/>
-              <path d="m4 7.5 8 4.5 8-4.5"/>
-              <path d="M12 12v9"/>
-
-            </svg>
-
-          </span>
-
-          <strong>
-            Buy Logs
-          </strong>
-
-          <span class="action-description">
-            Social media accounts, VPNs, proxies, etc.
-          </span>
-
-        </button>
-
-
-
-        <button
-          class="action-card"
-          data-action="tools"
-          type="button"
-        >
-
-          <span class="action-icon tools-icon">
-
-            <svg viewBox="0 0 24 24">
-
-              <path d="m14.7 6.3 3-3a4.2 4.2 0 0 0 0 5.9l-8.5 8.5a2.1 2.1 0 1 0 3 3l8.5-8.5a4.2 4.2 0 0 0 5.9 0"/>
-
-            </svg>
-
-          </span>
-
-          <strong>
-            Buy Tools
-          </strong>
-
-          <span class="action-description">
-            Updates & pictures
-          </span>
-
-        </button>
-
-
-
-        <button
-          class="action-card"
-          data-action="wallet"
-          type="button"
-        >
-
-          <span class="action-icon wallet-icon">
-
-            <svg viewBox="0 0 24 24">
-
-              <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H19v16H6.5A2.5 2.5 0 0 1 4 17.5v-11Z"/>
-              <path d="M4 7h13"/>
-              <path d="M16 12h5v4h-5a2 2 0 0 1 0-4Z"/>
-
-            </svg>
-
-          </span>
-
-          <strong>
-            Top Up Wallet
-          </strong>
-
-          <span class="action-description">
-            Add funds to your balance
-          </span>
-
-        </button>
-
-
-
-        <button
-          class="action-card"
-          data-action="support"
-          type="button"
-        >
-
-          <span class="action-icon support-icon">
-
-            <svg viewBox="0 0 24 24">
-
-              <path d="M4 13v-2a8 8 0 0 1 16 0v2"/>
-              <path d="M4 13h3v6H5a1 1 0 0 1-1-1v-5Z"/>
-              <path d="M20 13h-3v6h2a1 1 0 0 0 1-1v-5Z"/>
-              <path d="M17 19c0 1-1 2-3 2h-1"/>
-
-            </svg>
-
-          </span>
-
-          <strong>
-            Get Support
-          </strong>
-
-          <span class="action-description">
-            Open a support ticket
-          </span>
-
-        </button>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- RECENT ORDERS -->
-
-    <section class="section">
-
-      <div class="section-header">
-
-        <h2 class="section-title">
-          Recent orders
-        </h2>
-
-        <button
-          class="view-all"
-          id="viewAllOrders"
-          type="button"
-        >
-          View all
-        </button>
-
-      </div>
-
-
-      <div
-        class="orders-empty"
-        id="ordersEmpty"
-      >
-
-        <div class="empty-icon">
-
-          <svg viewBox="0 0 24 24">
-
-            <path d="M5 8h14l1 12H4L5 8Z"/>
-            <path d="M8 8a4 4 0 0 1 8 0"/>
-            <path d="M9 12h6"/>
-
-          </svg>
-
-        </div>
-
-        <strong>
-          No orders yet
-        </strong>
-
-        <p>
-          Your purchases will appear here
-        </p>
-
-      </div>
-
-
-      <div
-        class="orders-list"
-        id="ordersList"
-      ></div>
-
-    </section>
-
-
-
-    <!-- COMING SOON -->
-
-    <section class="section">
-
-      <div class="section-header">
-
-        <h2 class="section-title">
-          Coming soon
-        </h2>
-
-      </div>
-
-
-      <div class="coming-list">
-
-
-        <div class="coming-card">
-
-          <span class="coming-icon">
-
-            <svg viewBox="0 0 24 24">
-
-              <path d="M5 5h14v14H5z"/>
-              <path d="M8 9h8"/>
-              <path d="M8 12h6"/>
-
-            </svg>
-
-          </span>
-
-          <span class="coming-name">
-            SMS Numbers
-          </span>
-
-          <small class="soon">
-            Soon
-          </small>
-
-        </div>
-
-
-
-        <div class="coming-card">
-
-          <span class="coming-icon">
-
-            <svg viewBox="0 0 24 24">
-
-              <path d="m13 2-8 12h6l-1 8 8-12h-6l1-8Z"/>
-
-            </svg>
-
-          </span>
-
-          <span class="coming-name">
-            SME Boosting
-          </span>
-
-          <small class="soon">
-            Soon
-          </small>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- HELP -->
-
-    <section class="help-card">
-
-      <h2 class="help-title">
-        Need quick help?
-      </h2>
-
-      <p class="help-description">
-        Reach support directly if you want a faster response outside tickets.
-      </p>
-
-
-      <div class="help-buttons">
-
-        <a
-          class="help-button whatsapp"
-          id="whatsappLink"
-          href="#"
-          target="_blank"
-        >
-
-          <span>
-            Chat on WhatsApp
-          </span>
-
-        </a>
-
-
-        <a
-          class="help-button telegram"
-          id="telegramLink"
-          href="#"
-          target="_blank"
-        >
-
-          <span>
-            Open Telegram
-          </span>
-
-        </a>
-
-      </div>
-
-
-      <a
-        class="support-email"
-        id="supportEmail"
-        href="#"
-      >
-
-        <span id="supportEmailText">
-          Support email
-        </span>
-
       </a>
-
-    </section>
-
-  </div>
-
-</main>
-
-
-
-<!-- =======================================================
-     MENU OVERLAY + SIDE MENU
-======================================================== -->
-
-<div
-  class="menu-overlay"
-  id="menuOverlay"
->
-
-
-  <!-- SIDE MENU -->
-
-  <aside
-    class="side-menu"
-    id="sideMenu"
-    aria-label="Navigation menu"
-  >
-
-
-    <!-- LOGO -->
-
-    <div class="menu-top">
-
-      <!--
-        PUT YOUR LOGO HERE.
-
-        Example:
-        logo.png
-
-        Just upload your logo into the same
-        folder as this index.html file.
-      -->
-
-      <img
-        src="logo.png.jpg"
-        alt="Logo"
-        class="menu-logo"
-      >
-
-    </div>
-
-
-
-    <!-- SCROLLABLE MENU -->
-
-    <div class="menu-scroll">
-
-
-      <!-- =========================
-           MAIN
-      ========================== -->
-
-      <div class="menu-group">
-
-        <h2 class="menu-section-title">
-          Main
-        </h2>
-
-
-        <nav class="menu-list">
-
-
-          <!-- Dashboard -->
-
-          <a
-            href="index.html"
-            class="menu-item active"
-          >
-
-            <span class="menu-item-icon">
-
-              <svg viewBox="0 0 24 24">
-
-                <rect x="3" y="3" width="7" height="7" rx="1"/>
-                <rect x="14" y="3" width="7" height="7" rx="1"/>
-                <rect x="3" y="14" width="7" height="7" rx="1"/>
-                <rect x="14" y="14" width="7" height="7" rx="1"/>
-
-              </svg>
-
-            </span>
-
-            <span>
-              Dashboard
-            </span>
-
-          </a>
-
-
-
-          <!-- Wallet -->
-
-          <a
-            href="wallet.html"
-            class="menu-item"
-          >
-
-            <span class="menu-item-icon">
-
-              <svg viewBox="0 0 24 24">
-
-                <path d="M4 7V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 1-2-2V7Z"/>
-                <path d="M4 7h14"/>
-                <path d="M16 11h4v5h-4a2.5 2.5 0 0 1 0-5Z"/>
-
-              </svg>
-
-            </span>
-
-            <span>
-              Wallet
-            </span>
-
-          </a>
-
-
-
-          <!-- Orders -->
-
-          <a
-            href="orders.html"
-            class="menu-item"
-          >
-
-            <span class="menu-item-icon">
-
-              <svg viewBox="0 0 24 24">
-
-                <path d="M5 8h14l1 12H4L5 8Z"/>
-                <path d="M8 8a4 4 0 0 1 8 0"/>
-                <path d="M9 12h6"/>
-
-              </svg>
-
-            </span>
-
-            <span>
-              Orders
-            </span>
-
-          </a>
-
-
-
-          <!-- Transactions -->
-
-          <a
-            href="transactions.html"
-            class="menu-item"
-          >
-
-            <span class="menu-item-icon">
-
-              <svg viewBox="0 0 24 24">
-
-                <path d="M3 8h17"/>
-                <path d="m16 4 4 4-4 4"/>
-
-                <path d="M21 16H4"/>
-                <path d="m8 12-4 4 4 4"/>
-
-              </svg>
-
-            </span>
-
-            <span>
-              Transactions
-            </span>
-
-          </a>
-
-        </nav>
-
-      </div>
-
-
-
-      <!-- =========================
-           STORE
-      ========================== -->
-
-      <div class="menu-group">
-
-        <h2 class="menu-section-title">
-          Store
-        </h2>
-
-
-        <nav class="menu-list">
-
-
-          <!-- Logs -->
-
-          <a
-            href="logs.html"
-            class="menu-item"
-          >
-
-            <span class="menu-item-icon">
-
-              <svg viewBox="0 0 24 24">
-
-                <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/>
-                <path d="m4 7.5 8 4.5 8-4.5"/>
-                <path d="M12 12v9"/>
-
-              </svg>
-
-            </span>
-
-            <span>
-              Logs Store
-            </span>
-
-          </a>
-
-
-
-          <!-- Tools -->
-
-          <a
-            href="tools.html"
-            class="menu-item"
-          >
-
-            <span class="menu-item-icon">
-
-              <svg viewBox="0 0 24 24">
-
-                <path d="m14.7 6.3 3-3a4.2 4.2 0 0 0 0 5.9l-8.5 8.5a2.1 2.1 0 1 0 3 3l8.5-8.5a4.2 4.2 0 0 0 5.9 0"/>
-
-              </svg>
-
-            </span>
-
-            <span>
-              Tools Store
-            </span>
-
-          </a>
-
-
-
-          <!-- SMS -->
-
-          <div
-            class="menu-item disabled"
-          >
-
-            <span class="menu-item-icon">
-
-              <svg viewBox="0 0 24 24">
-
-                <path d="M4 5h16v14H4z"/>
-                <path d="M7 9h10"/>
-                <path d="M7 12h7"/>
-                <path d="M7 15h5"/>
-
-              </svg>
-
-            </span>
-
-            <span>
-              SMS Numbers
-            </span>
-
-            <small class="menu-soon">
-              Soon
-            </small>
-
-          </div>
-
-
-
-          <!-- SME -->
-
-          <div
-            class="menu-item disabled"
-          >
-
-            <span class="menu-item-icon">
-
-              <svg viewBox="0 0 24 24">
-
-                <path d="m13 2-8 12h6l-1 8 8-12h-6l1-8Z"/>
-
-              </svg>
-
-            </span>
-
-            <span>
-              SME Boosting
-            </span>
-
-            <small class="menu-soon">
-              Soon
-            </small>
-
-          </div>
-
-        </nav>
-
-      </div>
-
-
-
-      <!-- =========================
-           ACCOUNT
-      ========================== -->
-
-      <div class="menu-group account-group">
-
-        <h2 class="menu-section-title">
-          Account
-        </h2>
-
-
-        <nav class="menu-list">
-
-
-          <!-- Support -->
-
-          <a
-            href="support.html"
-            class="menu-item"
-          >
-
-            <span class="menu-item-icon">
-
-              <svg viewBox="0 0 24 24">
-
-                <path d="M4 13v-2a8 8 0 0 1 16 0v2"/>
-                <path d="M4 13h3v6H5a1 1 0 0 1-1-1v-5Z"/>
-                <path d="M20 13h-3v6h2a1 1 0 0 0 1-1v-5Z"/>
-
-              </svg>
-
-            </span>
-
-            <span>
-              Support
-            </span>
-
-          </a>
-
-
-
-          <!-- Notifications -->
-
-          <a
-            href="notifications.html"
-            class="menu-item"
-          >
-
-            <span class="menu-item-icon">
-
-              <svg viewBox="0 0 24 24">
-
-                <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
-                <path d="M10 21h4"/>
-
-              </svg>
-
-            </span>
-
-            <span>
-              Notifications
-            </span>
-
-          </a>
-
-
-
-          <!-- Profile -->
-
-          <a
-            href="profile.html"
-            class="menu-item"
-          >
-
-            <span class="menu-item-icon">
-
-              <svg viewBox="0 0 24 24">
-
-                <circle cx="12" cy="7" r="4"/>
-                <path d="M4 21v-2a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v2"/>
-
-              </svg>
-
-            </span>
-
-            <span>
-              Profile
-            </span>
-
-          </a>
-
-
-        </nav>
-
-      </div>
-
-
-    </div>
-
-
-
-    <!-- =========================
-         SIGN OUT
-    ========================== -->
-
-    <div class="menu-bottom">
-
-      <button
-        class="signout-btn"
-        id="signOutButton"
-        type="button"
-      >
-
-        <svg viewBox="0 0 24 24">
-
-          <path d="M10 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5"/>
-
-          <path d="M14 8l4 4-4 4"/>
-
-          <path d="M8 12h10"/>
-
-        </svg>
-
-        <span>
-          Sign out
-        </span>
-
+      <button class="sidebar-close" id="sidebarClose" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
-
     </div>
 
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">Main</div>
+        <a href="#" class="nav-item active" data-page="dashboard">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Dashboard
+        </a>
+        <a href="#" class="nav-item" data-page="wallet">
+          <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/><circle cx="16" cy="14" r="1.5" fill="currentColor" stroke="none"/></svg>
+          Wallet
+        </a>
+        <a href="#" class="nav-item" data-page="orders">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Orders
+        </a>
+        <a href="#" class="nav-item" data-page="transactions">
+          <svg viewBox="0 0 24 24"><path d="M7 16l-4-4 4-4"/><path d="M17 8l4 4-4 4"/><path d="M3 12h18"/></svg>
+          Transactions
+        </a>
+      </div>
 
+      <div class="nav-section">
+        <div class="nav-section-title">Store</div>
+        <a href="#" class="nav-item" data-page="logs-store">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05"/><path d="M12 22.08V12"/></svg>
+          Logs Store
+        </a>
+        <a href="#" class="nav-item" data-page="tools-store">
+          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          Tools Store
+        </a>
+        <a href="#" class="nav-item" data-page="sms">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          SMS Numbers
+          <span class="soon-badge">Soon</span>
+        </a>
+        <a href="#" class="nav-item" data-page="sme">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          SME Boosting
+          <span class="soon-badge">Soon</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Account</div>
+        <a href="#" class="nav-item" data-page="support">
+          <svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/></svg>
+          Support
+        </a>
+        <a href="#" class="nav-item" data-page="notifications">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+          Notifications
+        </a>
+        <a href="#" class="nav-item" data-page="profile">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Profile
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="nav-item sign-out" id="signOutBtn">
+        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sign out
+      </button>
+    </div>
   </aside>
 
-</div>
-
-
-
-<!-- TOAST -->
-
-<div
-  class="toast"
-  id="toast"
-></div>
-
-
-
-<!-- =======================================================
-     FIREBASE + JAVASCRIPT
-======================================================== -->
-
-<script type="module">
-
-/* =========================================================
-   FIREBASE
-========================================================= */
-
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
-import {
-  getAuth,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  collection,
-  query,
-  where,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-
-
-/* =========================================================
-   CONFIG
-========================================================= */
-
-const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyCbCBQNB2zvaq-zoCNh81EdbE7_PsnKDBI",
-
-  authDomain:
-    "dammysocials-2b126.firebaseapp.com",
-
-  projectId:
-    "dammysocials-2b126",
-
-  storageBucket:
-    "dammysocials-2b126.firebasestorage.app",
-
-  messagingSenderId:
-    "1052998476146",
-
-  appId:
-    "1:1052998476146:web:46ecb610aa1a23f8a0bdeb",
-
-  measurementId:
-    "G-TBFDQZMGXS"
-
-};
-
-
-const app =
-  initializeApp(firebaseConfig);
-
-const auth =
-  getAuth(app);
-
-const db =
-  getFirestore(app);
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-const $ = id =>
-  document.getElementById(id);
-
-
-function showToast(message) {
-
-  const toast = $("toast");
-
-  toast.textContent = message;
-
-  toast.classList.add("show");
-
-  clearTimeout(showToast.timer);
-
-  showToast.timer =
-    setTimeout(() => {
-
-      toast.classList.remove("show");
-
-    }, 2200);
-
-}
-
-
-function getInitials(name = "") {
-
-  const parts =
-    name
-      .trim()
-      .split(/\s+/)
-      .filter(Boolean);
-
-
-  if (!parts.length) {
-    return "--";
-  }
-
-
-  if (parts.length === 1) {
-
-    return parts[0]
-      .slice(0, 2)
-      .toUpperCase();
-
-  }
-
-
-  return (
-    parts[0][0] +
-    parts[parts.length - 1][0]
-  ).toUpperCase();
-
-}
-
-
-function formatMoney(
-  amount,
-  currency = "NGN"
-) {
-
-  const value =
-    Number(amount) || 0;
-
-
-  try {
-
-    return new Intl.NumberFormat(
-      "en-NG",
-      {
-        style: "currency",
-        currency,
-        maximumFractionDigits: 2
-      }
-    ).format(value);
-
-  } catch {
-
-    return "₦" +
-      value.toLocaleString();
-
-  }
-
-}
-
-
-function timestampValue(value) {
-
-  if (!value) {
-    return 0;
-  }
-
-
-  if (
-    typeof value.toMillis ===
-    "function"
-  ) {
-
-    return value.toMillis();
-
-  }
-
-
-  if (value instanceof Date) {
-
-    return value.getTime();
-
-  }
-
-
-  const result =
-    new Date(value).getTime();
-
-
-  return Number.isFinite(result)
-    ? result
-    : 0;
-
-}
-
-
-function formatDate(value) {
-
-  const timestamp =
-    timestampValue(value);
-
-
-  if (!timestamp) {
-    return "";
-  }
-
-
-  return new Intl.DateTimeFormat(
-    "en-NG",
-    {
-      day: "numeric",
-      month: "short",
-      year: "numeric"
-    }
-  ).format(
-    new Date(timestamp)
-  );
-
-}
-
-
-function escapeHTML(value) {
-
-  return String(value)
-
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-
-}
-
-
-/* =========================================================
-   SLIDE MENU
-========================================================= */
-
-const menuButton =
-  $("menuButton");
-
-const menuOverlay =
-  $("menuOverlay");
-
-
-function openMenu() {
-
-  document.body.classList.add(
-    "menu-open"
-  );
-
-  menuOverlay.classList.add(
-    "active"
-  );
-
-}
-
-
-function closeMenu() {
-
-  document.body.classList.remove(
-    "menu-open"
-  );
-
-  menuOverlay.classList.remove(
-    "active"
-  );
-
-}
-
-
-menuButton.addEventListener(
-  "click",
-  openMenu
-);
-
-
-/*
-   Clicking the blurred area closes
-   the menu.
-*/
-
-menuOverlay.addEventListener(
-  "click",
-  event => {
-
-    if (
-      event.target ===
-      menuOverlay
-    ) {
-
-      closeMenu();
-
-    }
-
-  }
-);
-
-
-/*
-   Escape closes menu.
-*/
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if (
-      event.key === "Escape"
-    ) {
-
-      closeMenu();
-
-    }
-
-  }
-);
-
-
-/*
-   When a menu link is clicked,
-   close menu first.
-*/
-
-document
-  .querySelectorAll(
-    ".menu-item[href]"
-  )
-  .forEach(item => {
-
-    item.addEventListener(
-      "click",
-      () => {
-
-        closeMenu();
-
-      }
-    );
-
-  });
-
-
-/* =========================================================
-   FIREBASE USER
-========================================================= */
-
-async function loadUser(user) {
-
-  const userRef =
-    doc(
-      db,
-      "users",
-      user.uid
-    );
-
-
-  const snapshot =
-    await getDoc(
-      userRef
-    );
-
-
-  const data =
-    snapshot.exists()
-      ? snapshot.data()
-      : {};
-
-
-  /*
-    User information comes
-    from Firebase.
-  */
-
-  const name =
-
-    data.name ||
-
-    data.displayName ||
-
-    user.displayName ||
-
-    "Account";
-
-
-  const balance =
-
-    data.walletBalance ??
-
-    data.balance ??
-
-    data.wallet?.balance ??
-
-    0;
-
-
-  const currency =
-    data.currency ||
-    "NGN";
-
-
-  $("userName")
-    .textContent =
-    name;
-
-
-  $("avatarInitials")
-    .textContent =
-    getInitials(name);
-
-
-  $("walletBalance")
-    .textContent =
-    formatMoney(
-      balance,
-      currency
-    );
-
-
-  $("currencyButton")
-    .textContent =
-    currency === "NGN"
-      ? "₦"
-      : currency;
-
-
-  /*
-    Support information.
-  */
-
-  const whatsapp =
-
-    data.whatsapp ||
-
-    data.whatsappNumber ||
-
-    "";
-
-
-  const telegram =
-
-    data.telegram ||
-
-    data.telegramUsername ||
-
-    "";
-
-
-  const email =
-
-    data.supportEmail ||
-
-    user.email ||
-
-    "";
-
-
-  if (whatsapp) {
-
-    const number =
-      String(whatsapp)
-        .replace(/[^\d+]/g, "")
-        .replace(/^\+/, "");
-
-
-    $("whatsappLink").href =
-      "https://wa.me/" +
-      number;
-
-  }
-
-
-  else {
-
-    $("whatsappLink")
-      .addEventListener(
-        "click",
-        event => {
-
-          event.preventDefault();
-
-          showToast(
-            "WhatsApp is not configured yet."
-          );
-
-        }
-      );
-
-  }
-
-
-  if (telegram) {
-
-    $("telegramLink").href =
-      "https://t.me/" +
-      String(telegram)
-        .replace(/^@/, "");
-
-  }
-
-
-  else {
-
-    $("telegramLink")
-      .addEventListener(
-        "click",
-        event => {
-
-          event.preventDefault();
-
-          showToast(
-            "Telegram is not configured yet."
-          );
-
-        }
-      );
-
-  }
-
-
-  if (email) {
-
-    $("supportEmail").href =
-      "mailto:" + email;
-
-    $("supportEmailText")
-      .textContent =
-      email;
-
-  }
-
-}
-
-
-/* =========================================================
-   ORDERS FROM FIREBASE
-========================================================= */
-
-async function loadOrders(user) {
-
-  const ordersQuery =
-    query(
-
-      collection(
-        db,
-        "orders"
-      ),
-
-      where(
-        "userId",
-        "==",
-        user.uid
-      )
-
-    );
-
-
-  const snapshot =
-    await getDocs(
-      ordersQuery
-    );
-
-
-  const orders =
-    snapshot.docs.map(
-      item => ({
-
-        id: item.id,
-
-        ...item.data()
-
-      })
-    );
-
-
-  orders.sort(
-    (a, b) =>
-
-      timestampValue(
-        b.createdAt
-      )
-
-      -
-
-      timestampValue(
-        a.createdAt
-      )
-  );
-
-
-  $("purchaseCount")
-    .textContent =
-    orders.length;
-
-
-  if (!orders.length) {
-
-    $("ordersEmpty")
-      .style.display =
-      "flex";
-
-    $("ordersList")
-      .style.display =
-      "none";
-
-    return;
-
-  }
-
-
-  $("ordersEmpty")
-    .style.display =
-    "none";
-
-  $("ordersList")
-    .style.display =
-    "flex";
-
-
-  $("ordersList").innerHTML =
-
-    orders
-      .slice(0, 5)
-      .map(order => {
-
-        const product =
-
-          order.productName ||
-
-          order.product ||
-
-          order.itemName ||
-
-          "Order";
-
-
-        const status =
-
-          order.status ||
-
-          "Processing";
-
-
-        const date =
-          formatDate(
-            order.createdAt
-          );
-
-
-        return `
-
-          <article class="order-item">
-
-            <div>
-
-              <div class="order-name">
-                ${escapeHTML(product)}
-              </div>
-
-              <div class="order-date">
-                ${escapeHTML(
-                  date || "Recent order"
-                )}
-              </div>
-
-            </div>
-
-            <span class="order-status">
-              ${escapeHTML(status)}
-            </span>
-
-          </article>
-
-        `;
-
-      })
-      .join("");
-
-}
-
-
-/* =========================================================
-   INVENTORY FROM FIREBASE
-========================================================= */
-
-async function loadInventory() {
-
-  const snapshot =
-    await getDocs(
-      collection(
-        db,
-        "inventory"
-      )
-    );
-
-
-  let total = 0;
-
-  let logs = 0;
-
-  let tools = 0;
-
-
-  snapshot.forEach(
-    item => {
-
-      const data =
-        item.data();
-
-
-      const status =
-        String(
-          data.status ||
-          "available"
-        ).toLowerCase();
-
-
-      if (
-
-        status !== "available" &&
-
-        status !== "in_stock" &&
-
-        status !== "active"
-
-      ) {
-
+  <!-- ========== MAIN ========== -->
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          No
+        </div>
+        <button class="topbar-btn" title="Theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+        <button class="topbar-btn" title="Notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        </button>
+        <div class="avatar" id="userAvatar">DD</div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <!-- Welcome -->
+      <div class="welcome">
+        <h1>Welcome back, <span id="userName">User</span> 👋</h1>
+        <p>Here's what's going on with your account</p>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-label">Wallet balance</div>
+          <div class="stat-value green" id="walletBalance">₦0</div>
+          <a href="#" class="stat-link">View history →</a>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total purchases</div>
+          <div class="stat-value" id="totalPurchases">0</div>
+          <a href="#" class="stat-link">View orders →</a>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Available inventory</div>
+          <div class="stat-value" id="inventoryTotal">0</div>
+          <div class="stat-sub" id="inventoryBreakdown">0 logs · 0 tools</div>
+        </div>
+      </div>
+
+      <!-- Quick actions -->
+      <div class="section-header">
+        <h2 class="section-title">Quick actions</h2>
+      </div>
+      <div class="quick-actions">
+        <a href="#" class="action-card" data-action="buy-logs">
+          <div class="action-icon blue">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05"/><path d="M12 22.08V12"/></svg>
+          </div>
+          <div class="action-title">Buy Logs</div>
+          <div class="action-desc">Social media accounts, VPNs, proxies, etc.</div>
+        </a>
+        <a href="#" class="action-card" data-action="buy-tools">
+          <div class="action-icon purple">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="action-title">Buy Tools</div>
+          <div class="action-desc">Updates &amp; pictures</div>
+        </a>
+        <a href="#" class="action-card" data-action="top-up">
+          <div class="action-icon green">
+            <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/><circle cx="16" cy="14" r="1.5" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="action-title">Top Up Wallet</div>
+          <div class="action-desc">Add funds to your balance</div>
+        </a>
+        <a href="#" class="action-card" data-action="support">
+          <div class="action-icon orange">
+            <svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/></svg>
+          </div>
+          <div class="action-title">Get Support</div>
+          <div class="action-desc">Open a support ticket</div>
+        </a>
+      </div>
+
+      <!-- Recent orders -->
+      <div class="section-header">
+        <h2 class="section-title">Recent orders</h2>
+        <a href="#" class="section-link">View all</a>
+      </div>
+      <div class="empty-card" id="recentOrders">
+        <div class="empty-icon">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        </div>
+        <div class="empty-title">No orders yet</div>
+        <div class="empty-desc">Your purchases will appear here</div>
+      </div>
+
+      <!-- Coming soon -->
+      <div class="section-header">
+        <h2 class="section-title">Coming soon</h2>
+      </div>
+      <div class="coming-soon">
+        <div class="soon-card">
+          <div class="soon-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <span class="soon-label">SMS Numbers</span>
+          <span class="soon-badge">Soon</span>
+        </div>
+        <div class="soon-card">
+          <div class="soon-icon">
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <span class="soon-label">SME Boosting</span>
+          <span class="soon-badge">Soon</span>
+        </div>
+      </div>
+
+      <!-- Help -->
+      <div class="help-card">
+        <div class="help-title">Need quick help?</div>
+        <div class="help-desc">Reach support directly if you want a faster response outside tickets.</div>
+        <a href="https://wa.me/" target="_blank" rel="noopener" class="help-btn whatsapp">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          Chat on WhatsApp
+        </a>
+        <a href="https://t.me/" target="_blank" rel="noopener" class="help-btn telegram">
+          <svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+          Open Telegram
+        </a>
+        <a href="mailto:support@temmysocials.com" class="help-email">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+          support@temmysocials.com
+        </a>
+      </div>
+    </main>
+  </div>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCbCBQNB2zvaq-zoCNh81EdbE7_PsnKDBI",
+      authDomain: "dammysocials-2b126.firebaseapp.com",
+      projectId: "dammysocials-2b126",
+      storageBucket: "dammysocials-2b126.firebasestorage.app",
+      messagingSenderId: "1052998476146",
+      appId: "1:1052998476146:web:46ecb610aa1a23f8a0bdeb",
+      measurementId: "G-TBFDQZMGXS"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const authLoading = document.getElementById('authLoading');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebarClose = document.getElementById('sidebarClose');
+    const signOutBtn = document.getElementById('signOutBtn');
+
+    // ========== AUTH GUARD ==========
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = 'login.html';
         return;
-
       }
 
-
-      const quantity =
-
-        Number(
-
-          data.quantity ??
-
-          data.stock ??
-
-          1
-
-        ) || 0;
-
-
-      total +=
-        quantity;
-
-
-      const type =
-        String(
-
-          data.type ??
-
-          data.category ??
-
-          ""
-
-        ).toLowerCase();
-
-
-      if (
-        type.includes("log")
-      ) {
-
-        logs += quantity;
-
-      }
-
-
-      if (
-        type.includes("tool")
-      ) {
-
-        tools += quantity;
-
-      }
-
-    }
-  );
-
-
-  $("inventoryCount")
-    .textContent =
-    total;
-
-
-  $("logsCount")
-    .textContent =
-    logs;
-
-
-  $("toolsCount")
-    .textContent =
-    tools;
-
-}
-
-
-/* =========================================================
-   SIGN OUT
-========================================================= */
-
-$("signOutButton")
-  .addEventListener(
-    "click",
-    async () => {
+      authLoading.classList.add('hidden');
 
       try {
+        const userRef = doc(db, 'users', user.uid);
+        const userSnap = await getDoc(userRef);
 
+        let displayName = user.displayName || user.email?.split('@')[0] || 'User';
+        let balance = 0;
+        let totalPurchases = 0;
+        let logsCount = 0;
+        let toolsCount = 0;
+        let initials = 'U';
+
+        if (userSnap.exists()) {
+          const data = userSnap.data();
+          displayName = data.name || data.displayName || displayName;
+          balance = data.balance ?? data.walletBalance ?? 0;
+          totalPurchases = data.totalPurchases ?? 0;
+          logsCount = data.logsCount ?? 0;
+          toolsCount = data.toolsCount ?? 0;
+        }
+
+        const parts = displayName.trim().split(/\s+/);
+        if (parts.length >= 2) {
+          initials = (parts[0][0] + parts[1][0]).toUpperCase();
+        } else {
+          initials = displayName.substring(0, 2).toUpperCase();
+        }
+
+        document.getElementById('userName').textContent = displayName;
+        document.getElementById('userAvatar').textContent = initials;
+        document.getElementById('walletBalance').textContent = '₦' + Number(balance).toLocaleString();
+        document.getElementById('totalPurchases').textContent = totalPurchases;
+        document.getElementById('inventoryTotal').textContent = logsCount + toolsCount;
+        document.getElementById('inventoryBreakdown').textContent = `${logsCount} logs · ${toolsCount} tools`;
+
+      } catch (err) {
+        console.warn('Could not load user profile from Firebase:', err);
+        const name = user.displayName || user.email?.split('@')[0] || 'User';
+        document.getElementById('userName').textContent = name;
+        document.getElementById('userAvatar').textContent = name.substring(0, 2).toUpperCase();
+      }
+    });
+
+    // ========== SIDEBAR ==========
+    function openSidebar() {
+      sidebar.classList.add('open');
+      sidebarOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    menuToggle.addEventListener('click', openSidebar);
+    sidebarClose.addEventListener('click', closeSidebar);
+    sidebarOverlay.addEventListener('click', closeSidebar);
+
+    document.querySelectorAll('.nav-item[data-page]').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (window.innerWidth <= 900) closeSidebar();
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        item.classList.add('active');
+      });
+    });
+
+    // ========== SIGN OUT ==========
+    signOutBtn.addEventListener('click', async () => {
+      try {
         await signOut(auth);
-
-        closeMenu();
-
-        window.location.href =
-          "login.html";
-
+        window.location.href = 'login.html';
+      } catch (err) {
+        console.error('Sign out error:', err);
       }
-
-      catch (error) {
-
-        console.error(error);
-
-        showToast(
-          "Unable to sign out."
-        );
-
-      }
-
-    }
-  );
-
-
-/* =========================================================
-   OTHER BUTTONS
-========================================================= */
-
-$("notificationButton")
-  .addEventListener(
-    "click",
-    () => {
-
-      window.location.href =
-        "notifications.html";
-
-    }
-  );
-
-
-$("avatarButton")
-  .addEventListener(
-    "click",
-    () => {
-
-      window.location.href =
-        "profile.html";
-
-    }
-  );
-
-
-$("historyButton")
-  .addEventListener(
-    "click",
-    () => {
-
-      window.location.href =
-        "transactions.html";
-
-    }
-  );
-
-
-$("ordersButton")
-  .addEventListener(
-    "click",
-    () => {
-
-      window.location.href =
-        "orders.html";
-
-    }
-  );
-
-
-$("viewAllOrders")
-  .addEventListener(
-    "click",
-    () => {
-
-      window.location.href =
-        "orders.html";
-
-    }
-  );
-
-
-/* =========================================================
-   QUICK ACTIONS
-========================================================= */
-
-document
-  .querySelectorAll(
-    ".action-card"
-  )
-  .forEach(button => {
-
-    button.addEventListener(
-      "click",
-      () => {
-
-        const action =
-          button.dataset.action;
-
-
-        if (
-          action === "logs"
-        ) {
-
-          window.location.href =
-            "logs.html";
-
-        }
-
-
-        if (
-          action === "tools"
-        ) {
-
-          window.location.href =
-            "tools.html";
-
-        }
-
-
-        if (
-          action === "wallet"
-        ) {
-
-          window.location.href =
-            "wallet.html";
-
-        }
-
-
-        if (
-          action === "support"
-        ) {
-
-          window.location.href =
-            "support.html";
-
-        }
-
-      }
-    );
-
-  });
-
-
-/* =========================================================
-   AUTH STATE
-========================================================= */
-
-onAuthStateChanged(
-  auth,
-  async user => {
-
-    if (!user) {
-
-      $("userName")
-        .textContent =
-        "Account";
-
-      $("avatarInitials")
-        .textContent =
-        "--";
-
-      $("walletBalance")
-        .textContent =
-        "₦0";
-
-      return;
-
-    }
-
-
-    try {
-
-      await Promise.all([
-
-        loadUser(user),
-
-        loadOrders(user),
-
-        loadInventory()
-
-      ]);
-
-    }
-
-    catch (error) {
-
-      console.error(
-        "Firebase dashboard error:",
-        error
-      );
-
-      showToast(
-        "Some dashboard data could not be loaded."
-      );
-
-    }
-
-  }
-);
-
-</script>
-
+    });
+  </script>
 </body>
 </html>
