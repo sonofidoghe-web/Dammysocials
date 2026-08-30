@@ -669,7 +669,7 @@
 
 
 <!-- Toast -->
-<div id="toast" class="toast fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:max-w-sm translate-y-24 opacity-0 text-white text-sm px-4 py-2.5 rounded-xl z-[999] break-words" style="background:#c0392b"></div>
+<div id="toast" class="toast fixed top-4 left-4 right-4 sm:left-auto sm:right-4 sm:max-w-sm -translate-y-24 opacity-0 text-white text-sm px-4 py-2.5 rounded-xl z-[999] break-words" style="background:#c0392b"></div>
 
 <!-- Watchdog: catches the case where the module script below fails to even
      start (e.g. Firebase CDN blocked, network failure) — this classic script
@@ -749,9 +749,9 @@ const initials = (name, email) => {
 function showToast(msg) {
   const t = $("#toast");
   t.textContent = msg;
-  t.classList.remove("translate-y-24", "opacity-0");
+  t.classList.remove("-translate-y-24", "opacity-0");
   clearTimeout(t._hideTimer);
-  t._hideTimer = setTimeout(() => t.classList.add("translate-y-24", "opacity-0"), 6000);
+  t._hideTimer = setTimeout(() => t.classList.add("-translate-y-24", "opacity-0"), 6000);
 }
 
 // ---------- global error visibility ----------
@@ -1186,10 +1186,11 @@ function closePayFlow() {
 }
 
 async function cancelPayFlow() {
+  // close immediately and synchronously — never let a network call block this
+  closePayFlow();
   if (pay.txnRef && !pay.resolved) {
     try { await updateDoc(pay.txnRef, { status: "cancelled" }); } catch (e) {}
   }
-  closePayFlow();
 }
 
 $("#pay-cancel-btn-1").addEventListener("click", cancelPayFlow);
@@ -1206,7 +1207,12 @@ $$(".pay-method-option").forEach(btn => {
       showToast("Coming soon — please use Bank Transfer for now");
       return;
     }
-    await selectBankTransfer();
+    try {
+      await selectBankTransfer();
+    } catch (e) {
+      console.error("selectBankTransfer failed:", e);
+      showToast("Bank transfer setup failed: " + (e.code || e.message || "unknown error"));
+    }
   });
 });
 
