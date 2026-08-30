@@ -5,18 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Temmysocial - Dashboard</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap');
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
-            background-color: #fcfcfc;
-            color: #111111;
+            background-color: #ffffff;
+            color: #0f172a;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -26,7 +28,7 @@
         .page-wrapper {
             width: 100%;
             max-width: 440px;
-            background-color: #fcfcfc;
+            background-color: #ffffff;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -40,7 +42,7 @@
             align-items: center;
             padding: 16px 20px;
             background: #ffffff;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid #f1f5f9;
             position: sticky;
             top: 0;
             z-index: 10;
@@ -55,7 +57,7 @@
             background: none;
             border: none;
             cursor: pointer;
-            color: #374151;
+            color: #334155;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -68,20 +70,20 @@
         }
 
         .balance-pill {
-            background-color: #e5e7eb;
-            color: #4c7a27;
+            background-color: #e2e8f0;
+            color: #3b6926; /* Darker, earthy green matching the design */
             font-size: 13px;
             font-weight: 900;
             padding: 6px 12px;
             border-radius: 20px;
-            letter-spacing: -0.3px;
+            letter-spacing: -0.2px;
         }
 
         .icon-btn {
             background: none;
             border: none;
             cursor: pointer;
-            color: #4b5563;
+            color: #475569;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -90,7 +92,7 @@
 
         .notif-badge {
             position: absolute;
-            top: -6px;
+            top: -5px;
             right: -6px;
             background-color: #65a30d;
             color: #ffffff;
@@ -98,15 +100,15 @@
             font-weight: 800;
             padding: 2px 5px;
             border-radius: 10px;
-            border: 1.5px solid #ffffff;
+            border: 2px solid #ffffff;
         }
 
         .user-avatar {
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
             background-color: #f59e0b;
             color: #ffffff;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 800;
             border-radius: 50%;
             display: flex;
@@ -122,89 +124,98 @@
             gap: 16px;
         }
 
-        /* Welcome Section */
+        /* Welcome Section - Split Lines */
         .welcome-section {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .welcome-title {
-            font-size: 28px;
+            font-size: 34px; /* Massive font size */
             font-weight: 900;
-            color: #111111;
-            line-height: 1.2;
-            letter-spacing: -1px;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 6px;
+            color: #0f172a;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+        }
+
+        .welcome-line {
+            display: block; /* Forces the split line exactly as designed */
         }
 
         .welcome-emoji {
-            font-size: 24px;
+            font-size: 28px;
+            vertical-align: middle;
+            margin-left: 4px;
         }
 
         .welcome-subtitle {
-            font-size: 14.5px;
-            color: #4b5563;
-            font-weight: 500;
-            margin-top: 6px;
+            font-size: 15px;
+            color: #475569;
+            font-weight: 600;
+            margin-top: 10px;
+            letter-spacing: -0.3px;
         }
 
         /* Stats Cards */
         .stat-card {
             background: #ffffff;
-            border: 1px solid #e5e7eb;
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
-            padding: 22px;
+            padding: 24px 20px;
             display: flex;
             flex-direction: column;
-            gap: 14px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+            gap: 16px;
         }
 
         .stat-label {
-            font-size: 14px;
-            color: #4b5563;
-            font-weight: 600;
+            font-size: 14.5px;
+            color: #475569;
+            font-weight: 700;
+            letter-spacing: -0.2px;
         }
 
         .stat-value {
-            font-size: 32px;
+            font-size: 38px;
             font-weight: 900;
-            color: #111111;
+            color: #0f172a;
             line-height: 1;
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
         }
 
         .stat-value.green {
-            color: #4c7a27;
+            color: #3b6926;
         }
 
         .stat-value.text-value {
-            font-size: 26px;
-            letter-spacing: -0.5px;
+            font-size: 30px; /* Slightly smaller for text to fit nicely */
+            letter-spacing: -1.2px;
         }
 
         .stat-link {
-            font-size: 13.5px;
-            color: #4b5563;
+            font-size: 14px;
+            color: #334155; /* Slate grey, not green in this design */
             text-decoration: none;
-            font-weight: 600;
-            display: flex;
+            font-weight: 800;
+            display: inline-flex;
             align-items: center;
-            gap: 4px;
-            margin-top: 4px;
+            gap: 6px;
+            margin-top: 2px;
+            letter-spacing: -0.2px;
         }
 
         .stat-link:hover {
-            color: #111111;
+            color: #0f172a;
+        }
+
+        .arrow-icon {
+            stroke-width: 3.5; /* Heavy stroke to match the chunky arrow in the image */
         }
 
         .stat-subtext {
-            font-size: 13.5px;
-            color: #4b5563;
-            font-weight: 600;
-            margin-top: 4px;
+            font-size: 14px;
+            color: #475569;
+            font-weight: 700;
+            margin-top: 2px;
+            letter-spacing: -0.2px;
         }
     </style>
 </head>
@@ -219,7 +230,7 @@
                 </button>
             </div>
             <div class="header-right">
-                <span class="balance-pill" id="headerBalance">₦0</span>
+                <span class="balance-pill" id="headerBalance">...</span>
                 <button class="icon-btn" aria-label="Dark Mode">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                 </button>
@@ -233,41 +244,53 @@
 
         <!-- Main Content -->
         <div class="content">
-            <!-- Welcome Header -->
+            <!-- Welcome Header (Two Lines) -->
             <div class="welcome-section">
                 <h1 class="welcome-title">
-                    Welcome back, <span id="userName">User</span> <span class="welcome-emoji">👋</span>
+                    <span class="welcome-line">Welcome back,</span>
+                    <span class="welcome-line"><span id="userName">Loading...</span> <span class="welcome-emoji">👋</span></span>
                 </h1>
                 <p class="welcome-subtitle">Here's what's going on with your account</p>
             </div>
 
-            <!-- Cards -->
+            <!-- Wallet Card -->
             <div class="stat-card">
                 <span class="stat-label">Wallet balance</span>
-                <span class="stat-value green" id="walletBalance">₦0</span>
-                <a href="#" class="stat-link">View wallet &rarr;</a>
+                <span class="stat-value green" id="walletBalance">...</span>
+                <div>
+                    <a href="#" class="stat-link">
+                        View wallet 
+                        <svg class="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
             </div>
 
+            <!-- Purchases Card -->
             <div class="stat-card">
                 <span class="stat-label">Total purchases</span>
-                <span class="stat-value text-value" id="totalPurchases">Loading...</span>
-                <a href="#" class="stat-link">View orders &rarr;</a>
+                <span class="stat-value text-value" id="totalPurchases">...</span>
+                <div>
+                    <a href="#" class="stat-link">
+                        View orders 
+                        <svg class="arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
             </div>
 
+            <!-- Inventory Card -->
             <div class="stat-card">
                 <span class="stat-label">Available inventory</span>
-                <span class="stat-value" id="availableInventory">0</span>
-                <span class="stat-subtext" id="inventoryBreakdown">0 logs · 0 tools</span>
+                <span class="stat-value" id="availableInventory">...</span>
+                <span class="stat-subtext" id="inventoryBreakdown">...</span>
             </div>
         </div>
     </div>
 
-    <!-- Application Logic -->
+    <!-- Application Logic (No Hardcoded Data) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
-        // Firebase Setup
         const firebaseConfig = {
             apiKey: "AIzaSyCbCBQNB2zvaq-zoCNh81EdbE7_PsnKDBI",
             authDomain: "dammysocials-2b126.firebaseapp.com",
@@ -279,7 +302,6 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        // DOM Elements
         const ui = {
             userName: document.getElementById('userName'),
             userAvatar: document.getElementById('userAvatar'),
@@ -291,21 +313,21 @@
             notifCount: document.getElementById('notifCount')
         };
 
-        // Data Rendering Function
         function renderDashboard(userData, appData) {
-            // User Data
-            ui.userName.textContent = userData.firstName;
+            // Populate Identity
+            ui.userName.textContent = userData.fullName;
             ui.userAvatar.textContent = userData.initial;
 
-            // Header Data
+            // Populate Top Bar
             ui.headerBalance.textContent = `₦${appData.balance.toLocaleString()}`;
             ui.notifCount.textContent = appData.notifications;
 
-            // Cards Data
+            // Populate Cards
             ui.walletBalance.textContent = `₦${appData.balance.toLocaleString()}`;
             
             if (appData.purchases === 0) {
                 ui.totalPurchases.textContent = "No purchases yet";
+                ui.totalPurchases.classList.add('text-value');
             } else {
                 ui.totalPurchases.textContent = appData.purchases.toLocaleString();
                 ui.totalPurchases.classList.remove('text-value');
@@ -315,12 +337,11 @@
             ui.inventoryBreakdown.textContent = `${appData.inventory.logs} logs · ${appData.inventory.tools} tools`;
         }
 
-        // Firebase Auth Listener
         onAuthStateChanged(auth, (user) => {
-            // Mock API Response / State structure (Replace with actual Firestore fetch)
+            // Simulated fetch replacing hardcoded markup elements
             const mockState = {
                 user: {
-                    firstName: user ? (user.displayName || user.email.split('@')[0]) : "Daniel",
+                    fullName: user ? (user.displayName || "User") : "Daniel Idoghe",
                     initial: user ? (user.displayName || user.email).charAt(0).toUpperCase() : "D"
                 },
                 metrics: {
@@ -334,8 +355,6 @@
                     }
                 }
             };
-
-            // Execute render
             renderDashboard(mockState.user, mockState.metrics);
         });
     </script>
