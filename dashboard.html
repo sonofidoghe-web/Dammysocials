@@ -458,6 +458,7 @@
               </div>
             </div>
           </div>
+          <p class="text-xs mt-4" style="color:var(--ink-soft)">App version: <span id="build-stamp">—</span></p>
         </section>
 
         <!-- NOTIFICATIONS VIEW -->
@@ -710,6 +711,31 @@ function showToast(msg) {
   t.classList.remove("translate-y-24", "opacity-0");
   clearTimeout(t._hideTimer);
   t._hideTimer = setTimeout(() => t.classList.add("translate-y-24", "opacity-0"), 6000);
+}
+
+// ---------- global error visibility ----------
+// Any uncaught JS error or rejected promise anywhere on the page will now
+// surface as a toast instead of silently doing nothing. This is the only
+// reliable way to see failures on a phone with no dev console open.
+window.addEventListener("error", (e) => {
+  console.error("Uncaught error:", e.error || e.message);
+  showToast("App error: " + (e.message || "unknown"));
+});
+window.addEventListener("unhandledrejection", (e) => {
+  const msg = (e.reason && (e.reason.code || e.reason.message)) || String(e.reason);
+  console.error("Unhandled promise rejection:", e.reason);
+  showToast("App error: " + msg);
+});
+
+const BUILD_STAMP = "2026-08-30-payflow-v2";
+console.log("Dammy Social dashboard build:", BUILD_STAMP);
+document.addEventListener("DOMContentLoaded", () => {
+  const el = document.getElementById("build-stamp");
+  if (el) el.textContent = BUILD_STAMP;
+});
+if (document.readyState !== "loading") {
+  const el = document.getElementById("build-stamp");
+  if (el) el.textContent = BUILD_STAMP;
 }
 
 // ---------- view routing ----------
